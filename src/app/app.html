@@ -1,0 +1,28 @@
+<ion-menu [content]="content" hideWhen="core">
+  <ion-header showWhen="android, windows">
+    <ion-toolbar>
+      <ion-title>Bali Support Centre</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list-header showWhen="ios">
+        Bali Support Centre
+    </ion-list-header>
+    <ion-list>
+      <button menuClose ion-item *ngFor="let page of pages" (click)="openPage(page)">
+        {{page.title | uppercase}}
+      </button>
+      <button menuClose ion-item *ngFor="let page of cmsPages" (click)="openPage(page)">
+        {{page.name | uppercase}}
+      </button>
+      <button menuClose ion-item *ngFor="let page of loginPage" (click)="openPage(page)">
+        {{page.title | uppercase}}
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

@@ -1,0 +1,33 @@
+<ion-header hideWhen="core">
+  <page-bsc-header ></page-bsc-header>
+</ion-header>
+
+<ion-content>
+
+	<page-bsc-header showWhen="core"></page-bsc-header>
+
+	<h2 [innerHTML]='serviceDetails.title' hideWhen='core' class='mobile-sub-header'></h2>
+	<h2 [innerHTML]='serviceDetails.title' showWhen='core' class="core-sub-header"></h2>
+
+	<br>
+
+	<ion-grid>
+		<ion-row class='details-row'>
+			<ion-col style='min-width: 300px;'>
+				<img src={{serviceDetails.image_name}} style="align-items: center; align-content: center;">
+			</ion-col>
+			<ion-col style='min-width: 300px;'>
+				<p class="details" [innerHTML]='serviceDetails.description'></p>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<div style="text-align: center;">
+		<button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
+	</div>
+
+	<br>
+
+	<page-bsc-footer></page-bsc-footer>
+
+</ion-content>

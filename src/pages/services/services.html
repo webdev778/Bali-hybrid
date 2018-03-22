@@ -1,0 +1,36 @@
+<ion-header hideWhen="core">
+  <page-bsc-header ></page-bsc-header>
+</ion-header>
+
+<ion-content>
+
+	<page-bsc-header showWhen="core"></page-bsc-header>
+
+	<h2 hideWhen='core' class="mobile-sub-header">OUR SERVICES</h2>
+  <h2 showWhen='core' class="core-sub-header">OUR SERVICES</h2>
+
+  <h6 class="placeholder" [hidden]="bundleServices.length > 0">No Services Found</h6>
+
+	<ion-grid>
+        <ion-row showWhen="core" class='service-row'>
+            <ion-col col-4  class="flexgrid-core" *ngFor="let data of bundleServices">
+                  <img src={{data.image_name}} class="services-img">
+                  <button ion-button full (click)="moveToServiceDetails(data)">
+                    {{data.title}}
+                  </button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row hideWhen="core" class='service-row'>
+            <ion-col class="flexgrid-mobile" *ngFor="let data of bundleServices">
+                  <img src={{data.image_name}} class="services-img">
+                  <button ion-button full (click)="moveToServiceDetails(data)">
+                    {{data.title}}
+                  </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+	<page-bsc-footer></page-bsc-footer>
+
+</ion-content>

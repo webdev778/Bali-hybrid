@@ -1,0 +1,88 @@
+
+
+<ion-header hideWhen="core">
+  <page-bsc-header ></page-bsc-header>
+</ion-header>
+
+<ion-content no-bounce>
+
+  <page-bsc-header showWhen="core"></page-bsc-header>
+
+    <img src="assets/imgs/banner2.png" width="100%">
+
+    <br>
+    <br>
+
+    <ion-grid>
+      <ion-row align-items-stretch>
+        <ion-col>
+          <h3 style="text-align: center!important; font-size: 40px; font-weight: 400">Support Pass</h3>
+          
+          <h5 style="text-align: center!important">Must be purchased prior to Bali arrival.</h5>
+          
+          <p showWhen="core" style="text-align: center!important; margin-left: 15%; margin-right: 15%;">{{textSupport}}</p>
+          <p hideWhen="core" style="text-align: center!important; margin-left: 5%; margin-right: 5%;">{{textSupport}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <h3 style="text-align: center!important; font-size: 30px">Our <span style="color: #62a830 ">Services</span> </h3>
+
+    <h6 class="placeholder" [hidden]="bundleServices.length > 0">No Services Found</h6>
+
+    <ion-grid style='margin-left: 5%; margin-right: 5%; width: 90%'>
+        <ion-row showWhen="core" style="text-align: center; display: flex; justify-content: center;">
+            <ion-col col-4  class="flexgrid" *ngFor="let data of bundleServices">
+                  <img src={{data.image_name}} class="services-img">
+                  <button ion-button full (click)="moveToServiceDetails(data)">
+                    {{data.title}}
+                  </button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row hideWhen="core" style="display: flex; justify-content: center; text-align: center;">
+            <ion-col class="flexgrid" *ngFor="let data of bundleServices">
+                  <img src={{data.image_name}} class="services-img">
+                  <button ion-button full (click)="moveToServiceDetails(data)">
+                    {{data.title}}
+                  </button>
+            </ion-col>
+        </ion-row>
+
+        <br>
+        <br>
+
+        <ion-row style="background:#547d88; text-align: center;">
+          <ion-col class="flexgrid">
+
+            <img src="assets/imgs/user-icon.png">
+            <h3 class="customPara">Adult</h3>
+            <p class="customPara">18 Years of Age.</p>
+          </ion-col>
+          <ion-col class="flexgrid">
+
+            <img src="assets/imgs/family-icon.png">
+            
+            <h3 class="customPara">Family</h3>
+            <p class="customPara">includes (2) Adults and (2) Children under 18 Years old.</p>
+
+          </ion-col>
+          <ion-col class="flexgrid">
+
+             <img src="assets/imgs/child-icon.png" >
+            
+             <h3 class="customPara">Additional Children</h3>
+             <p class="customPara">$ AUD per Child</p>
+
+          </ion-col>
+        </ion-row>
+        
+        <div style="text-align: center;">
+          <img src="assets/imgs/bx-shadow.png" class="centerImage">
+        </div>
+    </ion-grid>
+
+
+    <page-bsc-footer></page-bsc-footer>
+
+</ion-content>

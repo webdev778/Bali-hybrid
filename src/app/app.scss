@@ -1,0 +1,81 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+.mobile-sub-header {
+		background: #547d88;
+		text-align: center;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		color: #ffff;
+		height: 50px;
+		vertical-align: middle;
+		padding-top: 12px
+}
+
+.form-item {
+		border-radius: 3px; 
+		padding-top: 0px; 
+		padding-bottom: 0px;
+		padding-left: 0px;
+		padding-right: 0px;
+}
+
+.form-row {
+	display: flex; 
+	justify-content: center; 
+	padding-left: 5%; 
+	padding-right: 5%; 
+	padding-top: 20px;
+}
+
+.form-grid {
+	background-color: #f0f0f0; 
+	margin-left: 10%; 
+	margin-right: 10%; 
+	width: 80%; 
+	margin-top: 20px; 
+	margin-bottom: 15px
+}
+
+.core-sub-header {
+		background-color: #547d88;
+		text-align: center;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		color: #ffff;
+		height: 140px;
+		padding-top: 55px;
+		font-weight: 600;
+		font-size: 30px;
+		background-image: url('../assets/imgs/background.png');
+}
+
+.placeholder {
+	color: #a0a0a0;
+	margin-top: 30px;
+	text-align: center;
+	font-size: 20px;
+}
+
+
+.class-text-area {
+	resize: none;
+    overflow: hidden;
+    min-height: 50px;
+    max-height: 100px;
+}
+
+

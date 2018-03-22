@@ -1,0 +1,41 @@
+<ion-header hideWhen="core">
+  <page-bsc-header ></page-bsc-header>
+</ion-header>
+
+<ion-content>
+
+	<page-bsc-header showWhen="core"></page-bsc-header>
+
+	<h2 hideWhen='core' class='mobile-sub-header'>VACCINATIONS</h2>
+    <h2 showWhen='core' class='core-sub-header'>VACCINATIONS</h2>
+
+	<h6 class="placeholder" [hidden]="arrayHospitals.length > 0">No Hospitals Found</h6>
+
+	<br>
+
+	<ion-grid>
+        <ion-row class='flex-row' *ngFor="let hospitals of arrayHospitals">
+            <ion-col col-12 class="flexgrid" >
+                    <h2 [innerHTML]="hospitals.name"></h2>
+                    <h5> <img src="assets/imgs/location-pin.png"> Adress : {{hospitals.address}}</h5>
+                    <h5> <img src="assets/imgs/email.png"> Email : {{hospitals.email}}</h5>
+                    <h5> <img src="assets/imgs/telephone.png"> Phone : {{hospitals.phone}}</h5>
+                    <h5>Speciality : {{hospitals.speciality}}</h5>   
+            </ion-col>
+            <ion-col col-12>
+                <button class="button-map" ion-button color='primary' full (click)='buttonShowOnMapPressed(hospitals)'>Show On Map</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <br>
+
+	<div style="text-align: center;">
+		<button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
+	</div>
+
+    <br>
+
+	<page-bsc-footer></page-bsc-footer>
+
+</ion-content>

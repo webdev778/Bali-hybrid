@@ -1,0 +1,38 @@
+<ion-header hideWhen="core">
+  <page-bsc-header ></page-bsc-header>
+</ion-header>
+
+<ion-content>
+
+  <page-bsc-header showWhen="core"></page-bsc-header>
+
+  <h2 hideWhen='core' class="mobile-sub-header">TODAY IN BALI</h2>
+  <h2 showWhen='core' class="core-sub-header">TODAY IN BALI</h2>
+
+  <br>
+
+  <h6 >Your daily update on all the essential information for Bali Travellers</h6>
+
+  <br>
+
+  	<ion-grid>
+        <ion-row showWhen="core" style="text-align: center; display: flex; justify-content: center;padding-left: 10%; padding-right: 10%">
+            <ion-col col-4  class="flexgrid-core" *ngFor="let page of pages">
+                  <button ion-button full (click)="moveToDetails(page)">
+                    {{page.name}}
+                  </button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row hideWhen="core" style="display: flex; justify-content: center; text-align: center;">
+            <ion-col class="flexgrid-mobile" *ngFor="let page of pages">
+                  <button ion-button full (click)="moveToDetails(page)">
+                    {{page.name}}
+                  </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+  <page-bsc-footer></page-bsc-footer>
+
+</ion-content>

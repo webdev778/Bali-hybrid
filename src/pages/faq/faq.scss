@@ -1,0 +1,43 @@
+page-faq {
+
+	.header {
+		background: #547d88;
+		color: #ffffff;
+		position: relative;
+
+		h5{
+		    font-size: 20px;
+		    font-weight: 600;
+		}
+		.item-md h2{
+			text-transform: capitalize;
+		}
+		.icon-arrow{
+			position: absolute;
+		    right: 5px;
+		    height: 100%;
+		    width: 30px;
+
+		}
+	}
+
+	.answer-col {
+		text-align: left; 
+		min-width: 40px; 
+		max-width: 45px; 
+		padding-left: 5px; 
+		padding-top: 2px;
+	}
+
+	.answer {
+		    font-size: 15px;
+		    font-weight: 500;
+	}
+
+	.faq-grid {
+		padding-left: 5%;
+		padding-right: 5%;
+		padding-top: 20px;
+	}
+	
+}

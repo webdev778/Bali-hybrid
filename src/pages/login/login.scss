@@ -1,0 +1,43 @@
+page-login {
+	.form-col {
+		min-width: 300px;
+		max-width: 500px;
+
+		h6 {
+			text-align: center;
+		}
+	}
+
+	.sub-button {
+		color: #62a830;
+		font-size: 22px;
+		cursor: pointer;
+	}
+
+	.form-panel{
+		background-color: #fff;
+	    padding: 4rem;
+	    margin: 2rem 0;
+	}
+	.form-panel .form-item{
+		box-shadow: 0 0 0 1px #d2d1d1;
+	}
+
+	.form-header {
+		color: #547d88;
+		height: 60px;
+		text-align: center;
+		padding-top: 0px;
+		margin-right: 10%;
+		margin-left: 10%;
+		font-size: 25px;
+		margin-bottom: 0px;
+	}
+
+}
+
+ion-app.md [padding-left]{
+			padding-left: 0;
+}
+
+

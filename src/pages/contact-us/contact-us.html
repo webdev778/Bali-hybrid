@@ -1,0 +1,111 @@
+<ion-header hideWhen="core">
+  <page-bsc-header ></page-bsc-header>
+</ion-header>
+
+<ion-content style='background-color: #f0f0f0'>
+
+	<page-bsc-header showWhen="core"></page-bsc-header>
+
+	<h2 hideWhen='core' class="mobile-sub-header">CONTACT US</h2>
+	<h2 showWhen='core' class="core-sub-header">CONTACT US</h2>
+	
+
+	<ion-grid class='contact-grid'>
+		<ion-row class='contact-row'>
+			<ion-col class='contact-col'>
+
+				<h5> <img src="assets/imgs/location-color.png" class="icon-image">OFFICE :</h5>
+				<p>{{bundleDetails.office_address}}</p>
+
+				<h5> <img src="assets/imgs/telephone-color.png" class="icon-image">CALL US :</h5>
+				<p>{{bundleDetails.phone}}</p>
+
+				<h5> <img src="assets/imgs/email-color.png" class="icon-image"> EMAIL US :</h5>
+				<p>{{bundleDetails.email}}</p>
+
+				<div style="text-align: center;">
+					<button class="button-map" ion-button color='primary' full (click)='buttonShowOnMapPressed()'>Show On Map</button>
+				</div>
+
+			</ion-col>
+
+			<ion-col class='contact-col'>
+					<h6 class="form-header">SEND ENQUIRY</h6>
+					<div class="form-panel">
+						<br>
+						<form #enquiryForm="ngForm" novalidate>
+						    <ion-list no-lines>
+						      <ion-item class="form-item">
+						        <ion-input [(ngModel)]="bundleEnquiry.first_name" name="first_name" type="text" #first_name="ngModel" spellcheck="false" autocapitalize="off" required placeholder="First Name">
+						        </ion-input>
+						      </ion-item>
+						      <p ion-text [hidden]="first_name.valid || submittedEnquiry == false" color="danger" padding-left>
+						        Enter First Name
+						      </p>
+
+						      <br>
+
+						      <ion-item class="form-item">
+						        <ion-input [(ngModel)]="bundleEnquiry.last_name" name="last_name" type="text" #last_name="ngModel" spellcheck="false" autocapitalize="off" required placeholder="Last Name">
+						        </ion-input>
+						      </ion-item>
+						      <p ion-text [hidden]="last_name.valid || submittedEnquiry == false" color="danger" padding-left>
+						        Enter Last Name
+						      </p>
+
+						      <br>
+
+						      	<ion-item class="form-item">
+							        <ion-input [(ngModel)]="bundleEnquiry.phone" name="phone" type="tel" #phone="ngModel" spellcheck="false" autocapitalize="off" required placeholder="Phone">
+							        </ion-input>
+						      	</ion-item>
+							      <p ion-text [hidden]="phone.valid || submittedEnquiry == false" color="danger" padding-left>
+							        Phone is required
+							      </p>
+
+							      <br>
+
+							      <ion-item class="form-item">
+							        <ion-input [(ngModel)]="bundleEnquiry.email" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email placeholder="Email">
+							        </ion-input>
+							      </ion-item>
+							      <p ion-text [hidden]="email.valid || submittedEnquiry == false" color="danger" padding-left>
+							        Enter a valid email
+							      </p>
+
+							      <br>
+
+							      <ion-item class="form-item">
+							        <ion-input [(ngModel)]="bundleEnquiry.subject" name="subject" type="text" #subject="ngModel" spellcheck="false" autocapitalize="off" required placeholder="Subject">
+							        </ion-input>
+							      </ion-item>
+							      <p ion-text [hidden]="subject.valid || submittedEnquiry == false" color="danger" padding-left>
+							        Enter Subject
+							      </p>
+
+							      <br>
+
+							      <ion-item class="form-item">
+							        <ion-textarea [(ngModel)]="bundleEnquiry.message" name="message" type="text" #message="ngModel" spellcheck="false" autocapitalize="off" required class="class-text-area" placeholder="Message">
+							        </ion-textarea>
+							      </ion-item>
+							      <p ion-text [hidden]="message.valid || submittedEnquiry == false" color="danger" padding-left>
+							        Enter Message
+							      </p>
+
+							</ion-list >
+
+						    <ion-row responsive-sm>
+						      <ion-col>
+						        <button ion-button (click)="buttonSendPressed(enquiryForm)" type="submit" block>Send</button>
+						      </ion-col>
+						    </ion-row>
+						</form>
+					</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<page-bsc-footer></page-bsc-footer>
+
+</ion-content>

@@ -1,0 +1,153 @@
+<ion-header hideWhen="core">
+  <page-bsc-header ></page-bsc-header>
+</ion-header>
+
+<ion-content style='background-color: #f0f0f0'>
+
+	<page-bsc-header showWhen="core"></page-bsc-header>
+
+	<ion-grid [hidden]="isLogIn" class='form-grid'>
+
+		<h5 class="form-header">{{headerText}}</h5>
+
+		<ion-row class='form-row' [hidden]='!selectLogin'>
+			<ion-col class='form-col'>
+				<div class="form-panel">
+					<form #loginForm="ngForm" novalidate>
+					    <ion-list no-lines>
+					      <ion-item class='form-item'>
+					        <ion-input [(ngModel)]="loginData.email" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email placeholder='Email'>
+					        </ion-input>
+					      </ion-item>
+					      <p ion-text [hidden]="email.valid || submittedLogin == false" color="danger" padding-left>
+					        Enter a valid email
+					      </p>
+
+					      <br>
+
+					      <ion-item class='form-item'>
+					        <ion-input [(ngModel)]="loginData.password" name="password" type="password" #password="ngModel" required placeholder='Password'>
+					        </ion-input>
+					      </ion-item>
+					      <p ion-text [hidden]="password.valid || submittedLogin == false" color="danger" padding-left>
+					        Password is required
+					      </p>
+					    </ion-list>
+
+					    <ion-row responsive-sm>
+					      <ion-col>
+					        <button ion-button (click)="buttonLoginPressed(loginForm)" type="submit" full>Login</button>
+					      </ion-col>
+					    </ion-row>
+	  				</form>
+	  			</div>
+  				<h6>No Account? <span class="sub-button" (click)='createAccountPressed()'>Create One!</span></h6>
+
+			</ion-col>
+		</ion-row>
+
+		<ion-row class='form-row' [hidden]='selectLogin'>
+			<ion-col class='form-col'>
+				<div class="form-panel">
+					<form #signupForm="ngForm" novalidate>
+					    <ion-list no-lines>
+					    	<ion-item class='form-item'>
+						        <ion-input [(ngModel)]="signupData.first_name" name="firstName" type="text" #firstName="ngModel" spellcheck="false" autocapitalize="off" required placeholder='First Name' >
+						        </ion-input>
+					      	</ion-item>
+						      <p ion-text [hidden]="firstName.valid || submittedSignup == false" color="danger" padding-left>
+						        First Name is required
+						      </p>
+
+						      <br>
+
+						    <ion-item class='form-item'>
+						        <ion-input [(ngModel)]="signupData.last_name" name="lastName" type="text" #lastName="ngModel" spellcheck="false" autocapitalize="off" required placeholder='Last Name'>
+						        </ion-input>
+					      	</ion-item>
+						      <p ion-text [hidden]="lastName.valid || submittedSignup == false" color="danger" padding-left>
+						        First Name is required
+						      </p>
+
+						      <br>
+
+						     <ion-item class='form-item'>
+						        <ion-input [(ngModel)]="signupData.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off" required placeholder='Username'>
+						        </ion-input>
+					      	</ion-item>
+						      <p ion-text [hidden]="username.valid || submittedSignup == false" color="danger" padding-left>
+						        Username is required
+						      </p>
+
+						      <br>
+
+						    <ion-item class='form-item'>
+						        <ion-input [(ngModel)]="signupData.phone" name="phone" type="tel" #phone="ngModel" spellcheck="false" autocapitalize="off" required placeholder='Phone'>
+						        </ion-input>
+					      	</ion-item>
+						      <p ion-text [hidden]="phone.valid || submittedSignup == false" color="danger" padding-left>
+						        Phone is required
+						      </p>
+
+						      <br>
+
+						      <ion-item class='form-item'>
+						        <ion-input [(ngModel)]="signupData.email" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email placeholder='Email'>
+						        </ion-input>
+						      </ion-item>
+						      <p ion-text [hidden]="email.valid || submittedSignup == false" color="danger" padding-left>
+						        Enter a valid email
+						      </p>
+
+						      <br>
+
+						      <ion-item class='form-item'>
+						        <ion-input [(ngModel)]="signupData.password" name="password" type="password" #password="ngModel" required placeholder='Password'>
+						        </ion-input>
+						      </ion-item>
+						      <p ion-text [hidden]="password.valid || submittedSignup == false" color="danger" padding-left>
+						        Password is required
+						      </p>
+
+						      <br>
+
+							    <ion-item class='form-item'>
+							        <ion-input [(ngModel)]="signupData.confirm_password" name="confirm_password" type="password" #confirm_password="ngModel" required placeholder='Confirm Password'>
+							        </ion-input>
+							    </ion-item>
+							      <p ion-text [hidden]="passwordMatched == true || submittedSignup == false " color="danger" padding-left>
+							        Password does not match
+							      </p>
+
+							      <br>
+
+							    <ion-item class='form-item'>
+								  	<ion-select [(ngModel)]="signupData.gender" name='gender' #gender="ngModel" required placeholder='Gender'>
+								  		<ion-option value="0">Male</ion-option>
+								    	<ion-option value="1">Female</ion-option>
+								   		<ion-option value="2">Transgender</ion-option>
+									</ion-select>
+								</ion-item>
+								<p ion-text [hidden]="signupData.gender != '' || submittedSignup == false " color="danger" padding-left>
+							        Select gender
+							    </p>
+
+						</ion-list>
+
+					    <ion-row responsive-sm>
+					      <ion-col>
+					        <button ion-button (click)="buttonSignupPressed(signupForm)" type="submit" block>Sign Up</button>
+					      </ion-col>
+					    </ion-row>
+	  				</form>
+  				</div>
+
+  				<h6>Alreday have an account <span class="sub-button" (click)="setLoginPressed()">Login</span></h6>
+
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<page-bsc-footer></page-bsc-footer>
+
+</ion-content>

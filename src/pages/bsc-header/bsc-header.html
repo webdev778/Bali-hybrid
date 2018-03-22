@@ -1,0 +1,58 @@
+<!--
+  Generated template for the BscHeaderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-navbar hideWhen="core">
+        <ion-grid>
+          <ion-row >
+            <ion-col col-2>
+                <button ion-button menuToggle>
+                  <ion-icon name="menu"></ion-icon>
+                 </button>
+            </ion-col>
+            <ion-col col-8 >
+              <img src="assets/imgs/logo.png" align="left" style="margin-top: 9px" />
+            </ion-col>
+            <!-- <ion-col col-4>
+              <img src="assets/imgs/smart-trav-logo.png" align="right"/>
+            </ion-col> -->
+          </ion-row>
+         </ion-grid>
+</ion-navbar>
+
+<ion-grid showWhen="core" style="background:#547d88">
+      <ion-row>
+        <ion-col>
+          <img src="assets/imgs/logo.png" align="left" class="vericalCenter"/>
+        </ion-col>
+        <ion-col>
+          <img src="assets/imgs/smart-trav-logo.png" align="right"/>
+        </ion-col>
+      </ion-row>
+</ion-grid>
+
+<ion-grid showWhen="core" class='bsc-header'>
+      <ion-row style="text-align: center; display: flex; justify-content: center;">
+        <ion-col>
+          <ion-row>
+            <ion-col *ngFor="let page of pages">
+              <button ion-button class="header-button" color='primary' item-left full (click)="openPage(page)">{{page.title}}</button>
+            </ion-col>
+            <ion-col *ngFor="let page of cmsPages">
+              <button ion-button class="header-button" color='primary' item-left full (click)="openPage(page)">{{page.name}}</button>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+
+        <ion-col col-2>
+          <ion-row>
+            <ion-col *ngFor="let page of loginPage">
+              <button ion-button class="header-button" item-left full color='login' (click)="openPage(page)">{{page.title}}</button>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+</ion-grid>
