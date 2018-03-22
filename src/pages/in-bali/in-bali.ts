@@ -34,7 +34,7 @@ export class InBaliPage {
             {name: 'Exchange Rate', icon: 'exchange-rate', page: ExchangeRatePage},
             {name: 'Volcano Status', icon: 'volcano-status', page: VolcanoStatusPage},
             {name: 'Vaccinations', icon: 'vaccinations', page: VaccinationPage},
-            {name: 'Bank(s)', icon: 'vaccinations', page: PageBankPage},
+            {name: 'Banks', icon: 'vaccinations', page: PageBankPage},
     ];
 
     this.getBaliCMSPages()

@@ -15,8 +15,12 @@ export let PUBLIC_HEADER = {
 }
 
 
+
+
 // Constants for Web Services
-export let BASE_URL = "http://192.168.0.36/BaliTours/public/api/";
+// export let BASE_URL = "http://192.168.0.36/BaliTours/public/api/";
+export let BASE_URL = "http://13.210.183.126/bali-web/public/index.php/api/";
+
 
 // Login Page
 export let SERVICE_URL_LOGIN = BASE_URL+"login";
