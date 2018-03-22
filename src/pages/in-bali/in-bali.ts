@@ -6,6 +6,7 @@ import { VolcanoStatusPage } from '../volcano-status/volcano-status';
 import { VaccinationPage } from '../vaccination/vaccination';
 import { RestProvider } from '../../providers/rest/rest';
 import { AboutUsPage } from '../about-us/about-us';
+import { PageBankPage } from '../page-bank/page-bank';
 
 /**
  * Generated class for the InBaliPage page.
@@ -33,6 +34,7 @@ export class InBaliPage {
             {name: 'Exchange Rate', icon: 'exchange-rate', page: ExchangeRatePage},
             {name: 'Volcano Status', icon: 'volcano-status', page: VolcanoStatusPage},
             {name: 'Vaccinations', icon: 'vaccinations', page: VaccinationPage},
+            {name: 'Bank(s)', icon: 'vaccinations', page: PageBankPage},
     ];
 
     this.getBaliCMSPages()

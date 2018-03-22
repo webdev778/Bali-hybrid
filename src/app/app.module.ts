@@ -24,6 +24,8 @@ import { ExchangeRatePage } from '../pages/exchange-rate/exchange-rate';
 import { VolcanoStatusPage } from '../pages/volcano-status/volcano-status';
 import { VaccinationPage } from '../pages/vaccination/vaccination';
 import { CommonMapPage } from '../pages/common-map/common-map';
+import { PageBankPage } from '../pages/page-bank/page-bank';
+import { PageAtmsPage } from '../pages/page-atms/page-atms';
 
 import { BscHeaderPage } from '../pages/bsc-header/bsc-header';
 import { BscFooterPage } from '../pages/bsc-footer/bsc-footer';
@@ -54,6 +56,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     BscHeaderPage,
     BscFooterPage,
     CommonMapPage,
+    PageBankPage,
+    PageAtmsPage,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +84,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     BscHeaderPage,
     BscFooterPage,
     CommonMapPage,
+    PageBankPage,
+    PageAtmsPage,
   ],
   providers: [
     StatusBar,

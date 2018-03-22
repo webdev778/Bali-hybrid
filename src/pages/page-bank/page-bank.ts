@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { RestProvider } from '../../providers/rest/rest';
+import { CommonMapPage } from '../common-map/common-map';
 
 /**
  * Generated class for the PageBankPage page.
@@ -15,11 +17,46 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PageBankPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+	bundleData : {data: any};
+	arrayBanks : any[] = [];
+
+  constructor(	public navCtrl: NavController, 
+  				public navParams: NavParams,
+  				public rest: RestProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PageBankPage');
+    this.getBanks()
+  }
+
+  buttonBackPressed() {
+    this.navCtrl.pop();
+  }
+
+  getBanks() {
+  	this.rest.getBanks()
+         .subscribe(
+            responseData => this.bundleData = <{data : any}> responseData,
+            err => console.log(err),
+            () => {
+              console.log(this.bundleData)
+              this.arrayBanks = this.bundleData.data
+            }
+           );
+  }
+
+  buttonShowOnMapPressed(bank) {
+    var markerArray : Array<any> = [];
+    var marker = {latitude: '', longitude: '', label: ''};
+
+    marker.latitude = bank.lat
+    marker.longitude = bank.long
+    marker.label = bank.bankname
+
+    markerArray.push(marker);
+
+    this.navCtrl.push(CommonMapPage, markerArray);
   }
 
 }
