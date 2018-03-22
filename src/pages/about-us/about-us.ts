@@ -20,9 +20,11 @@ export class AboutUsPage {
 
 	bundleDetails: {data: any};
   pageContents : any[];
+  isPushed = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public rest: RestProvider) {
     this.page = this.navParams.get('data')
+    this.isPushed = this.navParams.get('isPushed')
     this.getPageContent(this.page);
   }
 
@@ -31,7 +33,9 @@ export class AboutUsPage {
   }
 
   buttonBackPressed() {
-    this.navCtrl.pop();
+    if (this.isPushed) {
+      this.navCtrl.pop();
+    }
   }
 
   getPageContent(page) {

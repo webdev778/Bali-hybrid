@@ -16,7 +16,9 @@ import { PUBLIC_HEADER,
          SERVICE_URL_PUT_QUERY,
          SERVICE_URL_VOLCANO_STATUS,
          SERVICE_URL_HOSPITALS,
-         SERVICE_URL_IN_BALI_PAGES } from '../constants/constants';
+         SERVICE_URL_IN_BALI_PAGES,
+         SERVICE_URL_BANKS,
+         SERVICE_URL_ATMS } from '../constants/constants';
 
 
 
@@ -123,6 +125,16 @@ export class RestProvider {
    getBaliPages(): Observable<{ }> {
 
       return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_IN_BALI_PAGES);
+   }
+
+   getAtms(): Observable<{ }> {
+
+      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_ATMS);
+   }
+
+   getBanks(): Observable<{ }> {
+
+      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_BANKS);
    }
 
    getVolcanoStatus(): Observable<{ }> {

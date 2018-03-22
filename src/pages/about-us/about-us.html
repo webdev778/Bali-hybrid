@@ -20,7 +20,7 @@
   <br>
 
   <div style="text-align: center;">
-    <button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
+    <button ion-button color='primary' outline (click)='buttonBackPressed()' *ngIf='isPushed'>Back</button>
   </div>
 
   <br>

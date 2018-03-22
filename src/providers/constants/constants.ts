@@ -43,6 +43,8 @@ export let SERVICE_URL_PUT_QUERY = BASE_URL+"putQuery";
 export let SERVICE_URL_IN_BALI_PAGES = BASE_URL+"getTodayinBali";
 export let SERVICE_URL_VOLCANO_STATUS = BASE_URL+"getVolcanoStatus";
 export let SERVICE_URL_HOSPITALS = BASE_URL+"getHospitals";
+export let SERVICE_URL_BANKS = BASE_URL+"getBanks";
+export let SERVICE_URL_ATMS = BASE_URL+"getAtms";
 
 
 

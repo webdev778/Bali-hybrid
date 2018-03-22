@@ -17,7 +17,7 @@ page-login {
 	.form-panel{
 		background-color: #fff;
 	    padding: 4rem;
-	    margin: 2rem 0;
+	    margin-bottom: 2rem ;
 	}
 	.form-panel .form-item{
 		box-shadow: 0 0 0 1px #d2d1d1;
@@ -36,8 +36,11 @@ page-login {
 
 }
 
-ion-app.md [padding-left]{
-			padding-left: 0;
+ion-app.md [padding-left].text-md-danger{
+	padding-left: 0;
+	margin-left: 0px;
+	margin-top: 5px;
+    margin-bottom: 0;
 }
 
 
