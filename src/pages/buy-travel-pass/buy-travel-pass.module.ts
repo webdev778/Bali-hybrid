@@ -4,7 +4,7 @@ import { BuyTravelPassPage } from './buy-travel-pass';
 
 @NgModule({
   declarations: [
-    BuyTravelPassPage,
+    
   ],
   imports: [
     IonicPageModule.forChild(BuyTravelPassPage),

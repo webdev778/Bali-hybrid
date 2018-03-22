@@ -4,7 +4,7 @@ import { InBaliPage } from './in-bali';
 
 @NgModule({
   declarations: [
-    InBaliPage,
+    
   ],
   imports: [
     IonicPageModule.forChild(InBaliPage),

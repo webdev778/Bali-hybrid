@@ -4,7 +4,7 @@ import { ExchangeRatePage } from './exchange-rate';
 
 @NgModule({
   declarations: [
-    ExchangeRatePage,
+    
   ],
   imports: [
     IonicPageModule.forChild(ExchangeRatePage),

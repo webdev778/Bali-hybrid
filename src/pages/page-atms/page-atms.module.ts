@@ -4,7 +4,7 @@ import { PageAtmsPage } from './page-atms';
 
 @NgModule({
   declarations: [
-    PageAtmsPage,
+    
   ],
   imports: [
     IonicPageModule.forChild(PageAtmsPage),

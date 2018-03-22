@@ -4,7 +4,7 @@ import { PageBankPage } from './page-bank';
 
 @NgModule({
   declarations: [
-    PageBankPage,
+    
   ],
   imports: [
     IonicPageModule.forChild(PageBankPage),

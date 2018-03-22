@@ -4,7 +4,7 @@ import { BscFooterPage } from './bsc-footer';
 
 @NgModule({
   declarations: [
-    BscFooterPage,
+    
   ],
   imports: [
     IonicPageModule.forChild(BscFooterPage),

@@ -4,7 +4,7 @@ import { CommonMapPage } from './common-map';
 
 @NgModule({
   declarations: [
-    CommonMapPage,
+    
   ],
   imports: [
     IonicPageModule.forChild(CommonMapPage),

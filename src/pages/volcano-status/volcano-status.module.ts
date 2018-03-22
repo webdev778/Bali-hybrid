@@ -4,7 +4,7 @@ import { VolcanoStatusPage } from './volcano-status';
 
 @NgModule({
   declarations: [
-    VolcanoStatusPage,
+    
   ],
   imports: [
     IonicPageModule.forChild(VolcanoStatusPage),

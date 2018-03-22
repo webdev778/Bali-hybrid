@@ -4,7 +4,7 @@ import { BscHeaderPage } from './bsc-header';
 
 @NgModule({
   declarations: [
-    BscHeaderPage,
+    
   ],
   imports: [
     IonicPageModule.forChild(BscHeaderPage),
