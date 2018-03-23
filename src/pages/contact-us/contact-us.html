@@ -36,7 +36,7 @@
 						<form #enquiryForm="ngForm" novalidate>
 						    <ion-list no-lines>
 						      <ion-item class="form-item">
-						        <ion-input [(ngModel)]="bundleEnquiry.first_name" name="first_name" type="text" #first_name="ngModel" spellcheck="false" autocapitalize="off" required placeholder="First Name">
+						        <ion-input [(ngModel)]="bundleEnquiry.first_name" name="first_name" type="text" #first_name="ngModel" spellcheck="false" autocapitalize="off" required placeholder="* First Name">
 						        </ion-input>
 						      </ion-item>
 						      <p ion-text [hidden]="first_name.valid || submittedEnquiry == false" color="danger" padding-left>
@@ -46,7 +46,7 @@
 						      <br>
 
 						      <ion-item class="form-item">
-						        <ion-input [(ngModel)]="bundleEnquiry.last_name" name="last_name" type="text" #last_name="ngModel" spellcheck="false" autocapitalize="off" required placeholder="Last Name">
+						        <ion-input [(ngModel)]="bundleEnquiry.last_name" name="last_name" type="text" #last_name="ngModel" spellcheck="false" autocapitalize="off" required placeholder="* Last Name">
 						        </ion-input>
 						      </ion-item>
 						      <p ion-text [hidden]="last_name.valid || submittedEnquiry == false" color="danger" padding-left>
@@ -56,7 +56,7 @@
 						      <br>
 
 						      	<ion-item class="form-item">
-							        <ion-input [(ngModel)]="bundleEnquiry.phone" name="phone" type="tel" #phone="ngModel" spellcheck="false" autocapitalize="off" required placeholder="Phone">
+							        <ion-input [(ngModel)]="bundleEnquiry.phone" name="phone" type="tel" #phone="ngModel" spellcheck="false" autocapitalize="off" required placeholder="* Phone">
 							        </ion-input>
 						      	</ion-item>
 							      <p ion-text [hidden]="phone.valid || submittedEnquiry == false" color="danger" padding-left>
@@ -66,7 +66,7 @@
 							      <br>
 
 							      <ion-item class="form-item">
-							        <ion-input [(ngModel)]="bundleEnquiry.email" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email placeholder="Email">
+							        <ion-input [(ngModel)]="bundleEnquiry.email" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email placeholder="* Email">
 							        </ion-input>
 							      </ion-item>
 							      <p ion-text [hidden]="email.valid || submittedEnquiry == false" color="danger" padding-left>
@@ -76,7 +76,7 @@
 							      <br>
 
 							      <ion-item class="form-item">
-							        <ion-input [(ngModel)]="bundleEnquiry.subject" name="subject" type="text" #subject="ngModel" spellcheck="false" autocapitalize="off" required placeholder="Subject">
+							        <ion-input [(ngModel)]="bundleEnquiry.subject" name="subject" type="text" #subject="ngModel" spellcheck="false" autocapitalize="off" required placeholder="* Subject">
 							        </ion-input>
 							      </ion-item>
 							      <p ion-text [hidden]="subject.valid || submittedEnquiry == false" color="danger" padding-left>
@@ -86,12 +86,14 @@
 							      <br>
 
 							      <ion-item class="form-item">
-							        <ion-textarea [(ngModel)]="bundleEnquiry.message" name="message" type="text" #message="ngModel" spellcheck="false" autocapitalize="off" required class="class-text-area" placeholder="Message">
+							        <ion-textarea [(ngModel)]="bundleEnquiry.message" name="message" type="text" #message="ngModel" spellcheck="false" autocapitalize="off" required class="class-text-area" placeholder="* Message">
 							        </ion-textarea>
 							      </ion-item>
 							      <p ion-text [hidden]="message.valid || submittedEnquiry == false" color="danger" padding-left>
 							        Enter Message
 							      </p>
+
+							      <p class="check-text">* All fields are mandatory</p>
 
 							</ion-list >
 

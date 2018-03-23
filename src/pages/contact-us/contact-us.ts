@@ -32,7 +32,8 @@ export class ContactUsPage {
                 public navParams: NavParams, 
                 public rest: RestProvider, 
                 public platform: Platform,
-                public loadingController: LoadingController) {
+                public loadingController: LoadingController,
+                public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -85,13 +86,31 @@ export class ContactUsPage {
 
     this.rest.sendQuery(query)
        .subscribe(
-           responseData => console.log(responseData),
+           responseData => this.checkStatus(responseData),
            err => loader.dismiss(),
            () => {
              loader.dismiss()
-             this.bundleEnquiry = { first_name: '', last_name: '', phone: '', email: '', subject: '', message: ''}
            }
          );
   }
+
+  checkStatus(bundle) {
+      if (bundle.status == 200) {
+        this.bundleEnquiry = { first_name: '', last_name: '', phone: '', email: '', subject: '', message: ''}
+        this.presentAlert(bundle.api_message)
+      }else {
+        this.presentAlert(bundle.api_message)
+      }
+
+    }
+
+    presentAlert(message) {
+      let alert = this.alertCtrl.create({
+        title: '',
+        subTitle: message,
+        buttons: ['OK']
+      });
+      alert.present();
+    }
 
 }

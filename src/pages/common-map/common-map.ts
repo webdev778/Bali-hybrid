@@ -36,8 +36,8 @@ export class CommonMapPage {
   	console.log('Initializing Map....')
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      minZoom: 5,
-      maxZoom: 16,
+      minZoom: 4,
+      maxZoom: 30,
     });
 
     var bounds = new google.maps.LatLngBounds();
