@@ -1,8 +1,9 @@
 page-services {
 	.flexgrid-core{
-  		min-width: 250px;
+  		
       margin-top: 40px;
       margin-bottom: 40px;
+
 
 	    .services-img {
 	      
@@ -11,10 +12,9 @@ page-services {
   }
 
   .flexgrid-mobile{
-      min-width: 250px;
-
+      
       .services-img {
-        
+
       }
 
   }
@@ -26,7 +26,8 @@ page-services {
   		padding-left: 10%; 
   		padding-right: 10%; 
   		padding-top: 20px; 
-  		padding-bottom: 20px
+  		padding-bottom: 20px;
+      
   	}
 
  	 .customPara {
