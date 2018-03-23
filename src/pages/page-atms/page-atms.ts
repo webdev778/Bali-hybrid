@@ -23,6 +23,8 @@ export class PageAtmsPage {
   constructor(	public navCtrl: NavController, 
   				public navParams: NavParams,
   				public rest: RestProvider) {
+
+    this.getAtms()
   }
 
   ionViewDidLoad() {

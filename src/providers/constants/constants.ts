@@ -19,7 +19,7 @@ export let PUBLIC_HEADER = {
 
 // Constants for Web Services
 // export let BASE_URL = "http://192.168.0.36/BaliTours/public/api/";
-export let BASE_URL = "http://admin.balisupport.tk/index.php/api/";
+export let BASE_URL = "http://admin.balisupport.tk/api/";
 
 
 // Login Page
