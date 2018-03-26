@@ -23,7 +23,7 @@ export class AboutUsPage {
   isPushed = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public rest: RestProvider) {
-    this.page = this.navParams.get('data')
+    this.page = JSON.parse(this.navParams.get('data'))
     this.isPushed = this.navParams.get('isPushed')
     this.getPageContent(this.page);
   }

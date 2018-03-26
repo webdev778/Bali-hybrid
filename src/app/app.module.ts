@@ -61,7 +61,25 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {}, {
+        links: [
+          { component: HomePage, name: 'Home', segment: 'home' },
+          { component: ServicesPage, name: 'ServicesPage', segment: 'services' },
+          { component: ContactUsPage, name: 'ContactUsPage', segment: 'contactus' },
+          { component: InBaliPage, name: 'InBaliPage', segment: 'todayinbali' },
+          { component: FaqPage, name: 'FaqPage', segment: 'faq' },
+          { component: BuyTravelPassPage, name: 'BuyTravelPassPage', segment: 'buytravelpass' },
+          { component: LoginPage, name: 'LoginPage', segment: 'login'},
+          { component: ServiceDetailsPage, name: 'ServiceDetailsPage', segment: 'services/:service' , defaultHistory:[ServicesPage]},
+          { component: PageBankPage, name: 'PageBankPage', segment: 'banks' , defaultHistory:[InBaliPage]},
+          { component: PageAtmsPage, name: 'PageAtmsPage', segment: 'atms' , defaultHistory:[InBaliPage]},
+          { component: ExchangeRatePage, name: 'ExchangeRatePage', segment: 'exchangerate' , defaultHistory:[InBaliPage]},
+          { component: VolcanoStatusPage, name: 'VolcanoStatusPage', segment: 'volcanostatus' , defaultHistory:[InBaliPage]},
+          { component: VaccinationPage, name: 'VaccinationPage', segment: 'vaccination' , defaultHistory:[InBaliPage]},
+          { component: AboutUsPage, name: 'AboutUsPage', segment: 'page/:data' , defaultHistory:[InBaliPage]},
+          { component: CommonMapPage, name: 'CommonMapPage', segment: 'map/:location' , defaultHistory:[HomePage]},
+        ]
+    }),
     HttpModule,
     HttpClientModule,
     IonicStorageModule.forRoot()

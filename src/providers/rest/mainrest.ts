@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+
 
 
 @Injectable()
@@ -23,7 +24,6 @@ export class MainRestProvider {
 
       console.log(SERVICE_URL)
       console.log(dataParam)
-
       return this.http.post(SERVICE_URL, dataParam,  tempHeader)
                   .map(this.extractData)
                   .catch(this.handleError);
@@ -31,11 +31,16 @@ export class MainRestProvider {
 
     firePostServiceWithoutHeader(SERVICE_URL, dataParam): Observable<{ }> {
 
+      let headers: HttpHeaders = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Access-Control-Request-Method', 'POST');
+      headers.append('Access-Control-Request-Headers', 'Content-Type');
+
       console.log('Post request without header')
       console.log(SERVICE_URL)
       console.log(dataParam)
 
-      return this.http.post(SERVICE_URL, dataParam)
+      return this.http.post(SERVICE_URL, dataParam,{headers})
                   .map(this.extractData)
                   .catch(this.handleError);
     } 

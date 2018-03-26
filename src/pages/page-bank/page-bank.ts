@@ -56,7 +56,9 @@ export class PageBankPage {
 
     markerArray.push(marker);
 
-    this.navCtrl.push(CommonMapPage, markerArray);
+    this.navCtrl.push(CommonMapPage, {
+      'location': JSON.stringify(markerArray)
+    });
   }
 
 }
