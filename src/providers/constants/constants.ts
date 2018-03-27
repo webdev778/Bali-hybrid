@@ -49,6 +49,9 @@ export let SERVICE_URL_VOLCANO_STATUS = BASE_URL+"getVolcanoStatus";
 export let SERVICE_URL_HOSPITALS = BASE_URL+"getHospitals";
 export let SERVICE_URL_BANKS = BASE_URL+"getBanks";
 export let SERVICE_URL_ATMS = BASE_URL+"getAtms";
+export let SERVICE_URL_HOLIDAYS = BASE_URL+"getHolidays";
+export let SERVICE_URL_GET_ALERTS = BASE_URL+"getAlert";
+
 
 
 
@@ -60,7 +63,10 @@ export let API_HEADER = {
 @Injectable()
 export class ConstantsProvider 
 {
+	loginTitle = 'LOGIN'
 
-	
+	constructor() {
+
+	}
 	
 }

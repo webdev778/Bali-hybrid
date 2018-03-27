@@ -26,6 +26,8 @@ import { VaccinationPage } from '../pages/vaccination/vaccination';
 import { CommonMapPage } from '../pages/common-map/common-map';
 import { PageBankPage } from '../pages/page-bank/page-bank';
 import { PageAtmsPage } from '../pages/page-atms/page-atms';
+import { PublicHolidaysPage } from '../pages/public-holidays/public-holidays';
+import { TravelAlertPage } from '../pages/travel-alert/travel-alert';
 
 import { BscHeaderPage } from '../pages/bsc-header/bsc-header';
 import { BscFooterPage } from '../pages/bsc-footer/bsc-footer';
@@ -58,6 +60,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CommonMapPage,
     PageBankPage,
     PageAtmsPage,
+    PublicHolidaysPage,
+    TravelAlertPage,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +80,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
           { component: ExchangeRatePage, name: 'ExchangeRatePage', segment: 'exchangerate' , defaultHistory:[InBaliPage]},
           { component: VolcanoStatusPage, name: 'VolcanoStatusPage', segment: 'volcanostatus' , defaultHistory:[InBaliPage]},
           { component: VaccinationPage, name: 'VaccinationPage', segment: 'vaccination' , defaultHistory:[InBaliPage]},
+          { component: PublicHolidaysPage, name: 'PublicHolidaysPage', segment: 'publicholidays' , defaultHistory:[InBaliPage]},
+          { component: TravelAlertPage, name: 'TravelAlertPage', segment: 'travelalert' , defaultHistory:[InBaliPage]},
           { component: AboutUsPage, name: 'AboutUsPage', segment: 'page/:data' , defaultHistory:[InBaliPage]},
           { component: CommonMapPage, name: 'CommonMapPage', segment: 'map/:location' , defaultHistory:[HomePage]},
         ]
@@ -104,6 +110,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CommonMapPage,
     PageBankPage,
     PageAtmsPage,
+    PublicHolidaysPage,
+    TravelAlertPage,
   ],
   providers: [
     StatusBar,

@@ -9,12 +9,11 @@ import { BuyTravelPassPage } from '../pages/buy-travel-pass/buy-travel-pass';
 import { ContactUsPage } from '../pages/contact-us/contact-us';
 import { FaqPage } from '../pages/faq/faq';
 import { InBaliPage } from '../pages/in-bali/in-bali';
-import { LoginPage } from '../pages/login/login';
 import { ServicesPage } from '../pages/services/services';
 
 import { RestProvider } from '../providers/rest/rest';
-import { CMS_PAGES } from '../providers/constants/constants';
-import { SOCIAL_LINKS } from '../providers/constants/constants';
+import { SOCIAL_LINKS, ConstantsProvider,CMS_PAGES } from '../providers/constants/constants';
+import { Storage } from '@ionic/storage';
 
 @Component({
   templateUrl: 'app.html'
@@ -30,12 +29,14 @@ export class MyApp {
 
   pages: Array<{title: string, icon: any, page: any}>;
   cmsPages : Array<{id: any, name: '', alias: '', page: any}>;
-  loginPage: Array<{title: string, icon: any, page: any}>;
+  loginPage : Array<{title: string, icon: string, page: string}>; 
 
   constructor(public platform: Platform, 
               public statusBar: StatusBar, 
               public splashScreen: SplashScreen, 
-              public rest: RestProvider) {
+              public rest: RestProvider,
+              public constantProvider: ConstantsProvider,
+              public storage: Storage) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -48,11 +49,22 @@ export class MyApp {
             {title: 'Contact Us', icon: 'contact_us', page: ContactUsPage},
     ];
 
-    this.loginPage = [{title: 'LOGIN', icon: 'log_in', page: LoginPage}];
-
     this.getCMSPages();
     this.getSocialLinks()
 
+    this.loginPage = [{title: constantProvider.loginTitle, icon: 'log_in', page: 'LoginPage'}];
+    this.checkForLogin()
+
+  }
+
+  checkForLogin() {
+     this.storage.get('is_login').then((isLogin) => {
+       if (isLogin) {
+         this.storage.get('user_data').then((userData) => {
+          this.constantProvider.loginTitle = userData.first_name
+        })
+       }
+     })
   }
 
   getCMSPages() {

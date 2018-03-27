@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
-import {ServiceDetailsPage} from '../service-details/service-details';
-
 /**
- * Generated class for the ServicesPage page.
+ * Generated class for the PublicHolidaysPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,41 +11,38 @@ import {ServiceDetailsPage} from '../service-details/service-details';
 
 @IonicPage()
 @Component({
-  selector: 'page-services',
-  templateUrl: 'services.html',
+  selector: 'page-public-holidays',
+  templateUrl: 'public-holidays.html',
 })
-export class ServicesPage {
+export class PublicHolidaysPage {
 
 	bundleData : {data : any};
-	bundleServices : any[] = [];
+	bundleHolidays : any[] = [];
 
   constructor(	public navCtrl: NavController, 
-  				public navParams: NavParams, 
+  				public navParams: NavParams,
   				public rest: RestProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ServicesPage');
-    this.getServicesList()
+    console.log('ionViewDidLoad PublicHolidaysPage');
+    this.getHolidays()
   }
 
-  moveToServiceDetails(service) {
-  		this.navCtrl.push(ServiceDetailsPage, {
-        'service': JSON.stringify(service),
-      })
- 	}
+  buttonBackPressed() {
+    this.navCtrl.pop();
+  }
 
-  getServicesList() {
-  	this.rest.getServices()
+  getHolidays() {
+  	this.rest.getHolidays()
          .subscribe(
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
               console.log(this.bundleData)
-              this.bundleServices = <any[]> this.bundleData.data;
+              this.bundleHolidays = <any[]> this.bundleData.data;
             }
            );
   }
-
 
 }

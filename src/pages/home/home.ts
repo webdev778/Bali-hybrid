@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import {ServiceDetailsPage} from '../service-details/service-details';
 
@@ -17,8 +17,7 @@ export class HomePage {
   constructor(  public navCtrl: NavController, 
                 public navParams: NavParams, 
                 public rest: RestProvider, 
-                public loadingController: LoadingController, 
-                private alertCtrl: AlertController,) {
+                public loadingController: LoadingController) {
 
     
   }

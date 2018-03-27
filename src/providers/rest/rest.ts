@@ -18,7 +18,9 @@ import { PUBLIC_HEADER,
          SERVICE_URL_HOSPITALS,
          SERVICE_URL_IN_BALI_PAGES,
          SERVICE_URL_BANKS,
-         SERVICE_URL_ATMS } from '../constants/constants';
+         SERVICE_URL_ATMS,
+         SERVICE_URL_HOLIDAYS,
+         SERVICE_URL_GET_ALERTS } from '../constants/constants';
 
 
 
@@ -122,6 +124,11 @@ export class RestProvider {
 
    // Today In Bali Page
 
+   getExchangeRatesCurrencies() {
+     
+     return this.mainRestProvider.fireGetServiceWithoutHeader('http://data.fixer.io/api/latest?access_key=c8e973e6c47c130e32f8a28d1629fef7');
+   }
+
    getBaliPages(): Observable<{ }> {
 
       return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_IN_BALI_PAGES);
@@ -140,6 +147,16 @@ export class RestProvider {
    getVolcanoStatus(): Observable<{ }> {
 
       return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_VOLCANO_STATUS);
+   }
+
+   getHolidays(): Observable<{ }> {
+
+      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_HOLIDAYS);
+   }
+
+   getAlerts(): Observable<{ }> {
+
+      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_GET_ALERTS);
    }
 
    getHospitals(): Observable<{ }> {

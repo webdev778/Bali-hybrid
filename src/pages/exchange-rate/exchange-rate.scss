@@ -1,3 +1,32 @@
 page-exchange-rate {
+	.exchange-grid {
+		padding-top: 10px;
+		padding-left: 10px;
+		padding-right: 10px;
+		padding-bottom: 10px;
+		border : 2px solid #f0f0f0;
+		margin-top: 20px;
+		margin-bottom: 0px;
+		margin-left: 10%;
+		margin-right: 10%;
+		width: 80%;
+		
+		.exchange-row {
+			display: flex; 
+			justify-content: center;
+		}
 
+		.price-field {
+			border : 2px solid #f0f0f0;
+		}
+
+		.currency-field {
+			border : 2px solid #f0f0f0;
+		}
+	}
+
+	.centerImage {
+	  	align-items: center;
+	    max-width: 80%;
+ 	 }
 }

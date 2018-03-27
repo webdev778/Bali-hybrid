@@ -9,7 +9,36 @@
 	<h2 hideWhen='core' class='mobile-sub-header'>EXCHANGE RATE</h2>
 	<h2 showWhen='core' class="core-sub-header">EXCHANGE RATE</h2>
 
-	<br>
+	<ion-grid class='exchange-grid'>
+		<ion-row class='exchange-row'>
+			<ion-col col-4>
+				<ion-input [(ngModel)]='basePrice' class='price-field' (ionChange)='convertCurrency()' name='basePrice' type="number" placeholder='Base Price'></ion-input>
+			</ion-col>
+			<ion-col col-8>
+				<ion-item class='currency-field' no-lines>
+				  	<ion-select name='baseCurrency' placeholder='Currency' [(ngModel)]='baseCurrency' (ionChange)='convertCurrency()'>
+				  		<ion-option *ngFor="let data of arrayCurrency" value={{data}}>{{data}}</ion-option>
+					</ion-select>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row class='exchange-row'>
+			<ion-col col-4>
+				<h5>{{convertedPrice}}</h5>
+			</ion-col>
+			<ion-col col-8>
+				<ion-item class='currency-field' no-lines>
+				  	<ion-select name='convertedCurrency' placeholder='Currency' [(ngModel)]='convertedCurrency' (ionChange)='convertCurrency()'>
+				  		<ion-option *ngFor="let data of arrayCurrency" value={{data}}>{{data}}</ion-option>
+					</ion-select>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<div style="text-align: center;">
+          <img src="assets/imgs/bx-shadow.png" class="centerImage">
+    </div>
 
 	<div style="text-align: center;">
 		<button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>

@@ -1,0 +1,37 @@
+<ion-header hideWhen="core">
+  <page-bsc-header ></page-bsc-header>
+</ion-header>
+
+<ion-content>
+
+  <page-bsc-header showWhen="core"></page-bsc-header>
+
+  <h2 hideWhen='core' class='mobile-sub-header'>TRAVEL ALERTS</h2>
+    <h2 showWhen='core' class='core-sub-header'>TRAVEL ALERTS</h2>
+
+  <h6 class="placeholder" [hidden]="bundleAlerts.length > 0">No Travel Alerts</h6>
+
+  <br>
+
+  <ion-grid>
+        <ion-row class='flex-row' *ngFor="let alert of bundleAlerts">
+            <ion-col col-12 class="flexgrid" >
+                    <h2 [innerHTML]="alert.title"></h2>
+                    <h5>From: {{alert.start_date}}</h5>
+                    <h5>To: {{alert.end_date}}</h5>
+                    <h5 [innerHTML]='alert.description'></h5>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <br>
+
+  <div style="text-align: center;">
+    <button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
+  </div>
+
+    <br>
+
+  <page-bsc-footer></page-bsc-footer>
+
+</ion-content>

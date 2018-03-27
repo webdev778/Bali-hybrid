@@ -50,7 +50,7 @@
         <ion-col col-2>
           <ion-row>
             <ion-col *ngFor="let page of loginPage">
-              <button ion-button class="header-button" item-left full color='login' (click)="openPage(page)">{{page.title}}</button>
+              <button ion-button class="header-button" item-left full color='login' (click)="openPage(page)">{{constantProvider.loginTitle}}</button>
             </ion-col>
           </ion-row>
         </ion-col>

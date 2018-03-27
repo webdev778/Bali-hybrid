@@ -1,0 +1,36 @@
+<ion-header hideWhen="core">
+  <page-bsc-header ></page-bsc-header>
+</ion-header>
+
+<ion-content>
+
+  <page-bsc-header showWhen="core"></page-bsc-header>
+
+  <h2 hideWhen='core' class='mobile-sub-header'>BALI PUBLIC HOLIDAYS</h2>
+    <h2 showWhen='core' class='core-sub-header'>BALI PUBLIC HOLIDAYS</h2>
+
+  <h6 class="placeholder" [hidden]="bundleHolidays.length > 0">No Public Holidays</h6>
+
+  <br>
+
+  <ion-grid>
+        <ion-row class='flex-row' *ngFor="let holiday of bundleHolidays">
+            <ion-col col-12 class="flexgrid" >
+                    <h2 [innerHTML]="holiday.title"></h2>
+                    <h5>{{holiday.holiday_on}}</h5>
+                    <h5 [innerHTML]='holiday.description'></h5>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <br>
+
+  <div style="text-align: center;">
+    <button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
+  </div>
+
+    <br>
+
+  <page-bsc-footer></page-bsc-footer>
+
+</ion-content>

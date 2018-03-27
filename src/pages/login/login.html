@@ -148,6 +148,12 @@
 		</ion-row>
 	</ion-grid>
 
+	<div [hidden]='!isLogIn' style="text-align: center;">
+		<h5>Name : <span>{{userBundle.first_name}} {{userBundle.last_name}}</span></h5>
+
+		<button ion-button (click)="buttonLogoutPressed()" outline>LOGOUT</button>
+	</div>
+
 	<page-bsc-footer></page-bsc-footer>
 
 </ion-content>

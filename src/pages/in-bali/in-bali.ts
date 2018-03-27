@@ -8,6 +8,8 @@ import { RestProvider } from '../../providers/rest/rest';
 import { AboutUsPage } from '../about-us/about-us';
 import { PageBankPage } from '../page-bank/page-bank';
 import { PageAtmsPage } from '../page-atms/page-atms';
+import { PublicHolidaysPage } from '../public-holidays/public-holidays';
+import { TravelAlertPage } from '../travel-alert/travel-alert';
 
 /**
  * Generated class for the InBaliPage page.
@@ -37,6 +39,8 @@ export class InBaliPage {
             {name: 'Vaccinations', icon: 'vaccinations', page: VaccinationPage},
             {name: 'Banks', icon: 'vaccinations', page: PageBankPage},
             {name: 'ATMS', icon: 'vaccinations', page: PageAtmsPage},
+            {name: 'Bali Public Holidays', icon: 'public-holidays', page: PublicHolidaysPage},
+            {name: 'Travel Alerts', icon: 'travel-alerts', page: TravelAlertPage},
     ];
 
     this.getBaliCMSPages()

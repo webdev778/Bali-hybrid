@@ -5,6 +5,8 @@ import { RestProvider } from '../../providers/rest/rest';
 
 import { Storage } from '@ionic/storage';
 
+import { ConstantsProvider } from '../../providers/constants/constants'
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -38,9 +40,20 @@ export class LoginPage {
 				public rest: RestProvider,
 				public loadingController: LoadingController, 
         private alertCtrl: AlertController,
-        private storage: Storage,) 
+        private storage: Storage,
+        private constantProvider: ConstantsProvider) 
   {
-  	
+  	this.checkForLogin()
+  }
+
+  checkForLogin() {
+    this.storage.get('is_login').then((isLogin) => {
+       if (isLogin) {
+             this.storage.get('user_data').then((userData) => {
+              this.userBundle = userData
+          })
+       }
+     })
   }
 
   ionViewDidLoad() {
@@ -93,6 +106,10 @@ export class LoginPage {
            );
     }
 
+  buttonUpdatePressed(form: NgForm) {
+
+    }
+
 	buttonLoginPressed(form: NgForm) {
 
 		this.submittedLogin = true
@@ -126,15 +143,28 @@ export class LoginPage {
     checkStatus(bundle) {
       if (bundle.status == 200) {
         this.userBundle =  <{ "id": '', "first_name": "", "last_name": "","username": "","email": "","status": '',"phone": "","gender": '', "created_at": '', "updated_at": '', "deleted_at": '' }> this.loginBundle.user_data
-        this.storage.set('user_data', this.userBundle);
+        this.storage.set('user_data', JSON.stringify(this.userBundle));
         this.storage.set('auth_token', this.loginBundle.data);
+        this.storage.set('is_login', true);
 
         this.isLogIn = true
+        this.constantProvider.loginTitle = this.userBundle.first_name;
 
       }else {
         this.presentAlert(bundle.api_message)
       }
 
+    }
+
+    buttonLogoutPressed() {
+      this.storage.remove('user_data');
+      this.storage.remove('auth_token');
+      this.storage.set('is_login', false);
+
+      this.isLogIn = false
+      this.constantProvider.loginTitle = 'LOGIN';
+
+      this.loginData = { email: '', password: '' };
     }
 
     presentAlert(message) {
