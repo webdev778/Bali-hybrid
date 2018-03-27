@@ -17,6 +17,9 @@ import { RestProvider } from '../../providers/rest/rest';
 export class VolcanoStatusPage {
 
 	bundleData : {data: any};
+  bundleStatus : any[] = [];
+
+
 
   constructor(	public navCtrl: NavController, 
   				public navParams: NavParams,
@@ -27,7 +30,8 @@ export class VolcanoStatusPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad VolcanoStatusPage');
     this.getVolcanoStatus()
-  }
+
+    }
 
   buttonBackPressed() {
     this.navCtrl.pop();
@@ -39,7 +43,8 @@ export class VolcanoStatusPage {
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
-              console.log(this.bundleData)
+              console.log(this.bundleData);
+              this.bundleStatus = <any[]> this.bundleData.data;
               
             }
            );

@@ -2,15 +2,35 @@
   <page-bsc-header ></page-bsc-header>
 </ion-header>
 
-<ion-content>
+<ion-content style = "background-color: #f4f6f9">
 
 	<page-bsc-header showWhen="core"></page-bsc-header>
 
 	<h2 hideWhen='core' class='mobile-sub-header'>VOLCANO STATUS</h2>
 	<h2 showWhen='core' class='core-sub-header'>VOLCANO STATUS</h2>
 
-	<br>
+	<h1 style = "text-align: center; color: blue; font-family: Arial" >Mount Agung</h1>
+	<h6 style = "text-align: center; color: #7d8187; font-family: Verdana">The Volcano Status For Today</h6>
 
+	<ion-grid class = "flexgrid">
+		<ion-row showWhen="core" style="text-align: center; display: flex; justify-content: center;">
+            <ion-col col-12  class="flexgrid-core" *ngFor="let data of bundleStatus">
+                <p class="details" [innerHTML]='data.description'></p><br>
+             <img src="assets/imgs/baliVolcano.jpg">
+            </ion-col>
+        </ion-row>
+
+
+         <ion-row hideWhen="core" class='service-row'>
+            <ion-col col-12 class="flexgrid-mobile" *ngFor="let data of bundleStatus">
+                 <p class="details" [innerHTML]='data.description'></p><br>
+                 <img src="assets/imgs/baliVolcano.jpg">
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+	
 	<div style="text-align: center;">
 		<button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
 	</div>
