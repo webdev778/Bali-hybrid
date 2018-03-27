@@ -22,7 +22,7 @@
         </ion-row>
 
         <ion-row hideWhen="core" class='service-row'>
-            <ion-col col-12 class="flexgrid-mobile" *ngFor="let data of bundleServices">
+            <ion-col class="flexgrid-mobile" *ngFor="let data of bundleServices">
                   <img src={{data.image_name}} class="services-img">
                   <button ion-button full (click)="moveToServiceDetails(data)">
                     {{data.title}}

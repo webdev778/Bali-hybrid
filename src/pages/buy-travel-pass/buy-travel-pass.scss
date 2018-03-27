@@ -20,27 +20,43 @@ page-buy-travel-pass {
 		
 	}
 
-   .button.customBtn{
-        width:150px;
-
-   }
-
-   .static-ctext{
+   .static-text{
       background:#378391;
       text-align: center;
-      font-family: Verdana;
    }
 
    .page-text{
       text-align: center;
       color: #378391;
-      font-family: Verdana;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+   }
 
+   .page-padding-text{
+      text-align: center;
+      color: #378391;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+   }
+
+   .wrapper {
+      text-align: center;
+   }
+
+   .customBtn{
+        width:200px;
    }
 
    .border-element{
       border:1pt solid #378391;
-
+      margin-top: 0px;
+      margin-bottom: 0px;
+      padding-top: 0px;
+      padding-bottom: 0px;
    }
 
 

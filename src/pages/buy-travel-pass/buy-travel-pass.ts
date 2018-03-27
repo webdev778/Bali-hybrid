@@ -10,8 +10,8 @@ import { AlertController } from 'ionic-angular';
  	templateUrl: 'buy-travel-pass.html',
  })
  export class BuyTravelPassPage {
- 	qty:any
- 	count : any[] = [0,0,0]
+
+ 	arrayTicketCount : any[] = [0,0,0]
  	unitCost : any[] = [100,200,300]
  	totalCost : any[] = [0,0,0]
  	finalCost = 0
@@ -26,7 +26,6 @@ import { AlertController } from 'ionic-angular';
 
  	ionViewDidLoad() {
  		console.log('ionViewDidLoad BuyTravelPassPage');
- 		console.log(this.count)
  	}
 
 
@@ -34,7 +33,7 @@ import { AlertController } from 'ionic-angular';
  		count++;
 
  		
- 		this.count[flag] = count;
+ 		this.arrayTicketCount[flag] = count;
  		this.totalCost[flag] = count * this.unitCost[flag]
 
  		this.getTotalCost()
@@ -43,12 +42,11 @@ import { AlertController } from 'ionic-angular';
  	decrementValue(count,flag) {
  		if (count <= 0) {
  			count=0;
- 		}
- 		else{
+ 		}else{
  			count--;
  		}
  		
- 		this.count[flag] = count;
+ 		this.arrayTicketCount[flag] = count;
  		this.totalCost[flag] = count * this.unitCost[flag]
  		
  		this.getTotalCost()
@@ -63,13 +61,13 @@ import { AlertController } from 'ionic-angular';
 
  	
  	initialiseBundle(){
-		this.bundleSaveTickets.child_ticket_quantity = this.count[0];
+		this.bundleSaveTickets.child_ticket_quantity = this.arrayTicketCount[0];
  		this.bundleSaveTickets.child_ticket_amount = this.totalCost[0];
 
- 		this.bundleSaveTickets.adult_ticket_quantity = this.count[1];
+ 		this.bundleSaveTickets.adult_ticket_quantity = this.arrayTicketCount[1];
  		this.bundleSaveTickets.adult_ticket_amount = this.totalCost[1];
 
- 		this.bundleSaveTickets.family_ticket_quantity = this.count[2];
+ 		this.bundleSaveTickets.family_ticket_quantity = this.arrayTicketCount[2];
  		this.bundleSaveTickets.famliy_ticket_amount = this.totalCost[2];
 
  		this.bundleSaveTickets.total_amount = this.finalCost;
@@ -79,18 +77,17 @@ import { AlertController } from 'ionic-angular';
  	savePressed(){
 
  		if(this.finalCost == 0){
- 			this.presentAlert();
- 		}	
- 		else{
+ 			this.presentAlertNoTickets();
+ 		}else{
 	 		this.initialiseBundle();
 	 		console.log(this.bundleSaveTickets)
 	 	}	
  	}
 
- 	presentAlert() {
+ 	presentAlertNoTickets() {
 		  let alert = this.alertCtrl.create({
-		    title: 'oops! No Tickets Chosen',
-		    subTitle: 'Choose atleast one to continue',
+		    title: 'No Tickets',
+		    subTitle: 'Please select a ticket',
 		    buttons: ['Dismiss']
 		  });
 		  alert.present();
