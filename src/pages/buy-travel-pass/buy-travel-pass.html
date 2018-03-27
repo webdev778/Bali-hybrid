@@ -9,206 +9,88 @@
 	<h2 hideWhen='core' class="mobile-sub-header">TRAVEL PASS</h2>
 	<h2 showWhen='core' class="core-sub-header">TRAVEL PASS</h2>
 
-	<br>
 
 	<ion-grid class = "selected-grid">
 		<ion-row>
 			<ion-col >
-				<h3 class="page-padding-text">Travel Pass Price</h3>
+				<h3 class="page-paddingtext">Travel Pass Price</h3>
 			</ion-col>
 		</ion-row>
 
 		<ion-row>
 			<ion-col>
-				<h6 class="page-padding-text">Must be Purchased Prior to Bali Arrival</h6>
+
+				<h6 class="page-paddingtext">Must be Purchased Prior to Bali Arrival</h6>
 			</ion-col>
 		</ion-row>
 
 		<ion-row>
 			<ion-col>
-				<h2 class="page-padding-text">Select Travel Pass Requirements</h2>
+				<h4 class="page-paddingtext">Select Travel Pass Requirements</h4>
 			</ion-col>
 		</ion-row>
 
-		<ion-row align-items: center class = "border-element">
-			<ion-col col-4 align-items: center >
-				<ion-row>
+		<ion-row  class = "box1-content" align-items: center  *ngFor="let number of indexes">
+			<ion-col col-12 align-items: center >
+				<ion-row class = "border-element1">
 					<ion-col>
-						<button float-left clear (click)="decrementValue(arrayTicketCount[0],0)">
-							<ion-icon name="remove" ></ion-icon>
-						</button>
+						<ion-row>
+							<ion-col>
+								<button class = "btn" float-left clear (click)="decrementValue(arrayTicketCount[number],number)">
+									<ion-icon name="remove" ></ion-icon>
+								</button>
+							</ion-col>
+							<ion-col class = "vertical">
+								<p>{{arrayTicketCount[number]}}</p>
+							</ion-col>
+							<ion-col>
+								<button class = "btn" clear (click)="incrementValue(arrayTicketCount[number],number)" float-right>
+									<ion-icon name="md-add" ></ion-icon>
+								</button>
+							</ion-col>
+						</ion-row>
 					</ion-col>
-
-					<ion-col>
-						<p>{{arrayTicketCount[0]}}</p>
+					<ion-col col-4 class = "static-ctext">
+						<p class = "unit-component">
+							<b>{{unitComponent[number]}}</b>
+						</p>
 					</ion-col>
-
-					<ion-col>
-						<button clear (click)="incrementValue(arrayTicketCount[0],0)" float-right>
-							<ion-icon name="md-add" ></ion-icon>
-						</button>
+					<ion-col col-4 class = "vertical">
+						<p>{{unitCost[number]}}</p>
 					</ion-col>
 				</ion-row>
 			</ion-col>
-
-			<ion-col col-4 class = "static-text">
-				<p style="color: white">
-					<b>1 Child : $</b>
-				</p>
-			</ion-col>
-
-			<ion-col col-4>
-				<p>{{unitCost[0]}}</p>
-			</ion-col>
+			<ion-row col-12>
+				<ion-col>
+					<p class="page-text">{{constraintText[number]}}</p>
+				</ion-col>
+			</ion-row >
+			<ion-row col-12>
+				<ion-col>
+					<p class="page-text">{{validityMessage}}</p>
+				</ion-col>
+			</ion-row>
 		</ion-row>
 
 		<ion-row>
 			<ion-col>
-				<p class="page-text">(Age: 0-15 years)</p>
+				<p class = "center-msg">You have selected the following Travel Pass</p>
 			</ion-col>
 		</ion-row>
 
-		<ion-row style = "padding-bottom: 60px">
+		<ion-row class = "box2-content">
 			<ion-col>
-				<p class="page-text">Valid For 60 Days on ARRIVAL</p>
-			</ion-col>
-		</ion-row>
-
-		<ion-row  class = "border-element">
-			<ion-col col-4 style = "text-align:center; justify-content: center">
-				<ion-row>
+				<ion-row class="grid-row" *ngFor="let number of indexes">
 					<ion-col>
-						<button float-left clear (click)="decrementValue(arrayTicketCount[1],1)">
-							<ion-icon name="remove" ></ion-icon>
-						</button>
+						<p>Quantity {{arrayTicketCount[number]}}</p>
 					</ion-col>
 
 					<ion-col>
-						<p>{{arrayTicketCount[1]}}</p>
+						<p>{{ticketType[number]}}</p>
 					</ion-col>
 
 					<ion-col>
-						<button clear (click)="incrementValue(arrayTicketCount[1],1)" float-right>
-							<ion-icon name="md-add" ></ion-icon>
-						</button>
-					</ion-col>
-				</ion-row>
-			</ion-col>
-
-			<ion-col col-4 class = "static-text">
-				<p style="color: white">
-					<b>1 ADULT : $</b>
-				</p>
-			</ion-col>
-
-			<ion-col col-4>
-				<p>{{unitCost[1]}}</p>
-			</ion-col>
-		</ion-row>
-
-		<ion-row>
-			<ion-col>
-				<p class="page-text">(Age: 0-15 years)</p>
-			</ion-col>
-		</ion-row>
-
-		<ion-row style = "padding-bottom: 60px">
-			<ion-col>
-				<p class="page-text">Valid For 60 Days on ARRIVAL</p>
-			</ion-col>
-		</ion-row>
-
-		<ion-row class = "border-element">
-			<ion-col col-4 style = "text-align:center; justify-content: center">
-				<ion-row>
-					<ion-col>
-						<button float-left clear (click)="decrementValue(arrayTicketCount[2],2)">
-							<ion-icon name="remove" ></ion-icon>
-						</button>
-					</ion-col>
-
-					<ion-col>
-						<p>{{arrayTicketCount[2]}}</p>
-					</ion-col>
-
-					<ion-col>
-						<button clear (click)="incrementValue(arrayTicketCount[2],2)" float-right>
-							<ion-icon name="md-add" ></ion-icon>
-						</button>
-					</ion-col>
-				</ion-row>
-			</ion-col>
-
-			<ion-col col-4 class = "static-text">
-				<p style="color: white">
-					<b>1 FAMILY : $</b>
-				</p>
-			</ion-col>
-
-			<ion-col col-4>
-				<p>{{unitCost[2]}}</p>
-			</ion-col>
-		</ion-row>
-
-		<ion-row>
-			<ion-col>
-				<p class="page-text">FAMILY: (2) Adults and (2) Children</p>
-			</ion-col>
-		</ion-row>
-
-		<ion-row style = "padding-bottom: 60px">
-			<ion-col>
-				<p class="page-text">Valid For 60 Days on ARRIVAL</p>
-			</ion-col>
-		</ion-row>
-
-		<ion-row>
-			<ion-col>
-				<p style="text-align: center; color: blue">You have selected the following Travel Pass</p>
-			</ion-col>
-		</ion-row>
-
-		<ion-row class = "border-element">
-			<ion-col>
-				<ion-row class="grid-row">
-					<ion-col>
-						<p>Quantity {{arrayTicketCount[0]}}</p>
-					</ion-col>
-
-					<ion-col>
-						<p>Child</p>
-					</ion-col>
-
-					<ion-col>
-						<p>Price ${{totalCost[0]}}</p>
-					</ion-col>
-				</ion-row>
-
-				<ion-row class="grid-row">
-					<ion-col>
-						<p>Quantity {{arrayTicketCount[1]}}</p>
-					</ion-col>
-
-					<ion-col>
-						<p>Adult</p>
-					</ion-col>
-
-					<ion-col>
-						<p>Price ${{totalCost[1]}}</p>
-					</ion-col>
-				</ion-row>
-
-				<ion-row>
-					<ion-col>
-						<p>Quantity {{arrayTicketCount[2]}}</p>
-					</ion-col>
-
-					<ion-col>
-						<p>Family</p>
-					</ion-col>
-
-					<ion-col>
-						<p>Price ${{totalCost[2]}}</p>
+						<p>Price ${{totalCost[number]}}</p>
 					</ion-col>
 				</ion-row>
 
@@ -221,20 +103,15 @@
 				</ion-row>
 			</ion-col>
 		</ion-row>
-
-		<br>
-
-		<ion-row>
-			<ion-col>
-				<button ion-button color='primary' class="customBtn" block (click)='savePressed()'>Save and Continue</button>
-			</ion-col>
-		</ion-row>
 	</ion-grid>
 	
 	<br>
 
-	<page-bsc-footer></page-bsc-footer>
-</ion-content>
+		<div class = "save-btn">
+			<button ion-button color='primary' (click)='savePressed()'>Save and Continue</button>
+		</div>
+		<page-bsc-footer></page-bsc-footer>
+	</ion-content>
 
 
 
