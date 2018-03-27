@@ -64,7 +64,7 @@ export class InBaliPage {
 
   moveToDetails(page) {
     if (page.page == undefined) {
-      this.navCtrl.push(AboutUsPage, {data: page, isPushed: true})
+      this.navCtrl.push(AboutUsPage, {'data': JSON.stringify(page), isPushed: true})
     }else{
       this.navCtrl.push(page.page)
     }

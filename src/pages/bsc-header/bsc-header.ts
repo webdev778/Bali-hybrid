@@ -7,11 +7,11 @@ import { RestProvider } from '../../providers/rest/rest';
 import { HomePage } from '../home/home';
 import { InBaliPage } from '../in-bali/in-bali';
 import { FaqPage } from '../faq/faq';
+import { LoginPage } from '../login/login';
 import { AboutUsPage } from '../about-us/about-us';
 import { ServicesPage } from '../services/services';
 import { BuyTravelPassPage } from '../buy-travel-pass/buy-travel-pass';
 import { ContactUsPage } from '../contact-us/contact-us';
-import { LoginPage } from '../login/login';
 import { CMS_PAGES } from '../../providers/constants/constants'
 
 /**
@@ -64,7 +64,7 @@ export class BscHeaderPage {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if (page.page == undefined) {
-      this.navCtrl.setRoot(AboutUsPage, {data: page, isPushed: false})
+      this.navCtrl.setRoot(AboutUsPage, {'data': JSON.stringify(page), isPushed: false})
     }else {
       this.navCtrl.setRoot(page.page)
     }

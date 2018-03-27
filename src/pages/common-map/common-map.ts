@@ -23,7 +23,8 @@ export class CommonMapPage {
  	bundleMarker : Array<{latitude: '', longitude: '', label: ''}> = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-  	this.bundleMarker = this.navParams.data
+    console.log(this.navParams.get('location'))
+  	this.bundleMarker = JSON.parse(this.navParams.get('location'))
   }
 
   ionViewDidLoad() {

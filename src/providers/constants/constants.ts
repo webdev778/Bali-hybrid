@@ -11,7 +11,7 @@ export var SOCIAL_LINKS = { facebook :'', twitter: '', google: ''};
 // public header
 
 export let PUBLIC_HEADER = {
-	'_token' : 'RBiTo3vXuK0R69g5Alw8FNLnOrN1yaqW55tydKqo'
+	
 }
 
 
