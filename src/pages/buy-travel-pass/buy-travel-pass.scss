@@ -16,32 +16,88 @@ page-buy-travel-pass {
 		text-align: center;
 		min-width: 250px;
       max-width:600px;
-      padding-bottom: 20px;
-		
+      margin-bottom: 20px;	
 	}
+
 
    .button.customBtn{
         width:150px;
 
    }
+   .page-paddingtext{
+      padding-top: 0px;
+      padding-bottom: 10px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      color: #378391;
+      justify-content: center;
+   }
+   
 
    .static-ctext{
       background:#378391;
       text-align: center;
-      font-family: Verdana;
+      vertical-align: middle;
+      justify-content: center;   
+   }
+
+   .vertical{
+      margin-top: 10px;
    }
 
    .page-text{
       text-align: center;
+      vertical-align: middle;
       color: #378391;
-      font-family: Verdana;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      
 
    }
 
-   .border-element{
+   .btn{
+      margin-top: 0px;
+      margin-top: 15px;
+      height: 25px;
+      width: 25px;
+      color: white;
+      background-color: #378391
+   }
+
+   .box1-content{
+      padding-top: 20px;
+      padding-right: 20px;
+      padding-left: 20px;
+   }
+
+   .border-element1{
       border:1pt solid #378391;
+    }
 
+   .unit-component{
+      padding-top: 10px;
+      color: white
    }
 
+   .center-msg{
+      text-align: center; 
+
+      color: blue
+   }
+
+   .box2-content{
+      border: 1pt solid #378391;
+ 
+      margin-right: 40px;
+      margin-left: 40px;
+   }
+
+   .save-btn{
+      text-align: center;
+      margin-bottom: 30px;
+
+   }
 
 }
