@@ -26,7 +26,7 @@
 
 		<ion-row>
 			<ion-col>
-				<h4 class="page-paddingtext">Select Travel Pass Requirements</h4>
+				<h3 class="page-paddingtext">Select Travel Pass Requirements</h3>
 			</ion-col>
 		</ion-row>
 
@@ -60,21 +60,16 @@
 					</ion-col>
 				</ion-row>
 			</ion-col>
-			<ion-row col-12>
-				<ion-col>
-					<p class="page-text">{{constraintText[number]}}</p>
-				</ion-col>
-			</ion-row >
-			<ion-row col-12>
-				<ion-col>
-					<p class="page-text">{{validityMessage}}</p>
-				</ion-col>
-			</ion-row>
+
+			<ion-col col-12>
+				<p class="page-text">{{constraintText[number]}}</p>
+				<p class="page-text">{{validityMessage}}</p>
+			</ion-col>
 		</ion-row>
 
 		<ion-row>
 			<ion-col>
-				<p class = "center-msg">You have selected the following Travel Pass</p>
+				<h5 class = "center-msg">You have selected the following Travel Pass</h5>
 			</ion-col>
 		</ion-row>
 
@@ -82,22 +77,22 @@
 			<ion-col>
 				<ion-row class="grid-row" *ngFor="let number of indexes">
 					<ion-col>
-						<p>Quantity {{arrayTicketCount[number]}}</p>
+						<p>Quantity <span class="green-text bold-text">{{arrayTicketCount[number]}}</span></p>
 					</ion-col>
 
 					<ion-col>
-						<p>{{ticketType[number]}}</p>
+						<h5>{{ticketType[number]}}</h5>
 					</ion-col>
 
 					<ion-col>
-						<p>Price ${{totalCost[number]}}</p>
+						<p>Price <span class="green-text bold-text">${{totalCost[number]}}</span></p>
 					</ion-col>
 				</ion-row>
 
 				<ion-row>
 					<ion-col>
 						<p>
-							<b>TOTAL PRICE : ${{finalCost}}</b>
+							<b>TOTAL PRICE : <span class="green-text bold-text">${{finalCost}}</span></b>
 						</p>
 					</ion-col>
 				</ion-row>
@@ -107,11 +102,12 @@
 	
 	<br>
 
-		<div class = "save-btn">
-			<button ion-button color='primary' (click)='savePressed()'>Save and Continue</button>
-		</div>
-		<page-bsc-footer></page-bsc-footer>
-	</ion-content>
+	<div class = "save-btn">
+		<button ion-button color='primary' (click)='savePressed()'>Save and Continue</button>
+	</div>
+	
+	<page-bsc-footer></page-bsc-footer>
+</ion-content>
 
 
 
