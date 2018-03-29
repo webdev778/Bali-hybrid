@@ -54,7 +54,6 @@ export class InBaliPage {
             err => console.log(err),
             () => {
               this.cmsPages = this.pagesData.data
-              console.log(this.cmsPages)
               for (let page of this.cmsPages) {
                 this.pages.push(page)
               }
@@ -63,7 +62,6 @@ export class InBaliPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InBaliPage');
   }
 
   moveToDetails(page) {

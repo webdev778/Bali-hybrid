@@ -36,7 +36,6 @@ import { RestProvider } from '../../providers/rest/rest';
  	}
 
  	ionViewDidLoad() {
- 		console.log('ionViewDidLoad BuyTravelPassPage');
  		// this.getTravelPassData()
  	}
 
@@ -44,7 +43,7 @@ import { RestProvider } from '../../providers/rest/rest';
  		count++;
 
  		this.arrayTicketCount[flag] = count;
- 		this.totalCost[flag] = count * this.unitCost[flag]
+ 		this.totalCost[flag] = count * this.bundleViewDescription[flag].price
 
  		this.getTotalCost()
  	}
@@ -57,7 +56,7 @@ import { RestProvider } from '../../providers/rest/rest';
  		}
  		
  		this.arrayTicketCount[flag] = count;
- 		this.totalCost[flag] = count * this.unitCost[flag]
+ 		this.totalCost[flag] = count * this.bundleViewDescription[flag].price
  		
  		this.getTotalCost()
 
@@ -109,9 +108,7 @@ import { RestProvider } from '../../providers/rest/rest';
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
-              console.log(this.bundleData)
               this.bundleViewDescription = <any[]> this.bundleData.data;
-              console.log(this.bundleViewDescription[0].description)
             }
            );
   }

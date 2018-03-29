@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef  } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 declare var google;
 
@@ -22,19 +22,15 @@ export class CommonMapPage {
 
  	bundleMarker : Array<{latitude: '', longitude: '', label: ''}> = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    console.log(this.navParams.get('location'))
+  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController) {
   	this.bundleMarker = JSON.parse(this.navParams.get('location'))
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CommonMapPage');
     this.initMap()
   }
 
   initMap() {
-
-  	console.log('Initializing Map....')
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       minZoom: 4,
@@ -45,30 +41,45 @@ export class CommonMapPage {
 
   	for (let marker of this.bundleMarker) {
 
-    		console.log('marker : ', marker)
     		let markerLat = Number(marker.latitude)
     		let markerLong = Number(marker.longitude)
     		let markerLatLng = {lat: markerLat, lng: markerLong};
 
-    		var mapMarker = new google.maps.Marker({
-              position: markerLatLng,
-              map: this.map,
-              title: 'Hello World!',
-        });
+        if((markerLat > 90)||(markerLat < -90)|| (markerLong > 180)||(markerLong < -180) || 
+          isNaN(markerLat) || isNaN(markerLong)){
+                 this.presentAlert("Not able to Locate Place");
+        }
 
-        var infowindow = new google.maps.InfoWindow({
-          content: marker.label,
-          maxWidth: 200,
-        });
+        else{
+          	var mapMarker = new google.maps.Marker({
+                  position: markerLatLng,
+                  map: this.map,
+                  title: 'Hello World!',
+            });
 
-        mapMarker.addListener('click', function() {
-          infowindow.open(this.map, mapMarker);
-        });
+            var infowindow = new google.maps.InfoWindow({
+              content: marker.label,
+              maxWidth: 200,
+            });
 
-        bounds.extend(markerLatLng);
+            mapMarker.addListener('click', function() {
+              infowindow.open(this.map, mapMarker);
+            });
+
+            bounds.extend(markerLatLng);
+        }
         this.map.fitBounds(bounds);
     }
 
   }
+
+  presentAlert(message) {
+      let alert = this.alertCtrl.create({
+        title: 'Error',
+        subTitle: message,
+        buttons: ['OK']
+      });
+      alert.present();
+    }
 
 }

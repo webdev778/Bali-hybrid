@@ -28,7 +28,6 @@ export class VolcanoStatusPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad VolcanoStatusPage');
     this.getVolcanoStatus()
 
     }
@@ -43,7 +42,6 @@ export class VolcanoStatusPage {
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
-              console.log(this.bundleData);
               this.bundleStatus = <any[]> this.bundleData.data;
               
             }

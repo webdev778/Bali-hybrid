@@ -78,7 +78,6 @@ export class MyApp {
               for ( let page of this.cmsPages ) {
                 CMS_PAGES.push(page);
               }
-              console.log(this.cmsPages)
             }
            );
   }
@@ -90,7 +89,6 @@ export class MyApp {
             responseData => this.socialLinks = responseData,
             err => console.log(err),
             () => {
-              console.log(this.socialLinks);
               SOCIAL_LINKS.facebook = this.socialLinks.facebook;
               SOCIAL_LINKS.twitter = this.socialLinks.twitter;
               SOCIAL_LINKS.google = this.socialLinks.google;

@@ -28,7 +28,6 @@ export class PageAtmsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PageAtmsPage');
   }
 
   buttonBackPressed() {
@@ -41,7 +40,6 @@ export class PageAtmsPage {
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
-              console.log(this.bundleData)
               this.arrayAtms = this.bundleData.data
             }
            );

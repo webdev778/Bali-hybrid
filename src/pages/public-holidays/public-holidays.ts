@@ -25,7 +25,6 @@ export class PublicHolidaysPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PublicHolidaysPage');
     this.getHolidays()
   }
 
@@ -39,7 +38,6 @@ export class PublicHolidaysPage {
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
-              console.log(this.bundleData)
               this.bundleHolidays = <any[]> this.bundleData.data;
             }
            );

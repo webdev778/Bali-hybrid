@@ -27,7 +27,6 @@ export class ServicesPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ServicesPage');
     this.getServicesList()
   }
 
@@ -43,7 +42,6 @@ export class ServicesPage {
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
-              console.log(this.bundleData)
               this.bundleServices = <any[]> this.bundleData.data;
             }
            );

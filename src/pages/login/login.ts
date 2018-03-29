@@ -57,7 +57,6 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
   }
 
   createAccountPressed() {
@@ -83,8 +82,7 @@ export class LoginPage {
 
 		}else {
 			this.passwordMatched = false
-			console.log('password word does not matched')
-			console.log(this.signupData.password, "!=", this.signupData.confirm_password)
+
 		}
 	}
 
@@ -134,7 +132,6 @@ export class LoginPage {
            	err => loader.dismiss(),
            	() => {
            		loader.dismiss()
-               console.log(this.loginBundle)
                this.checkStatus(this.loginBundle)
            	}
            );

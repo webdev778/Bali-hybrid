@@ -26,7 +26,6 @@ export class PageBankPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PageBankPage');
     this.getBanks()
   }
 
@@ -40,7 +39,6 @@ export class PageBankPage {
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
-              console.log(this.bundleData)
               this.arrayBanks = this.bundleData.data
             }
            );

@@ -23,8 +23,6 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
-
     this.getServicesList()
   }
 
@@ -34,7 +32,6 @@ export class HomePage {
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
-              console.log(this.bundleData)
               this.bundleServices = <any[]> this.bundleData.data;
             }
            );

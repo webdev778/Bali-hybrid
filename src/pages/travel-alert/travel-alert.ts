@@ -25,7 +25,6 @@ export class TravelAlertPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TravelAlertPage');
     this.getAlerts()
   }
 
@@ -39,7 +38,6 @@ export class TravelAlertPage {
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
-              console.log(this.bundleData)
               this.bundleAlerts = <any[]> this.bundleData.data;
             }
            );

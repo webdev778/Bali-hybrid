@@ -20,8 +20,6 @@ export class BscFooterPage {
 	socialLinks: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public rest: RestProvider) {
-    console.log('Construct BscFooterPage');
-    
     this.getSocialLinks();
   }
 
@@ -33,17 +31,14 @@ export class BscFooterPage {
 
 
   facebookPressed() {
-    console.log('open link : ', this.socialLinks.facebook)
   	window.open(this.socialLinks.facebook);
   }
 
   twitterPressed() {
-    console.log('open link : ', this.socialLinks.twitter)
   	window.open(this.socialLinks.twitter);
   }
 
   googlePressed() {
-    console.log('open link : ', this.socialLinks.google)
   	window.open(this.socialLinks.google);
   }
 

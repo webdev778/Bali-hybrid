@@ -23,8 +23,6 @@ export class FaqPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
-
     this.getFAQList()
   }
 
@@ -35,7 +33,6 @@ export class FaqPage {
             err => console.log(err),
             () => {
               this.bundleDataFAQ = this.responseData.data
-              console.log(this.bundleDataFAQ)
             }
            );
   }

@@ -29,7 +29,7 @@ export class AboutUsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AboutUsPage');
+    
   }
 
   buttonBackPressed() {
@@ -44,7 +44,6 @@ export class AboutUsPage {
             responseData => this.bundleDetails = <{data: any}> responseData,
             err => console.log(err),
             () => {
-              console.log(this.bundleDetails)
               this.pageContents = this.bundleDetails.data;
             }
            );

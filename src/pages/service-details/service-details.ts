@@ -23,14 +23,13 @@ export class ServiceDetailsPage {
   				public navParams: NavParams) {
 
   	let passedData = JSON.parse(this.navParams.get('service'))
-  	console.log('Passed Data :', passedData)
   	this.serviceDetails.title = passedData.title
   	this.serviceDetails.description = passedData.description
   	this.serviceDetails.image_name = passedData.image_name
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ServiceDetailsPage');
+   
   }
 
   buttonBackPressed() {

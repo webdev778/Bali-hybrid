@@ -37,8 +37,6 @@ export class ContactUsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ContactUsPage');
-
     this.getContactUsInfo()
   }
 
@@ -48,7 +46,6 @@ export class ContactUsPage {
             responseData => this.bundleDetails = <{}> responseData,
             err => console.log(err),
             () => {
-              console.log(this.bundleDetails)
             }
            );
   }
@@ -99,17 +96,17 @@ export class ContactUsPage {
   checkStatus(bundle) {
       if (bundle.status == 200) {
         this.bundleEnquiry = { first_name: '', last_name: '', phone: '', email: '', subject: '', message: ''}
-        this.presentAlert(bundle.api_message)
+        this.presentAlert('Thank You','Your request is submitted successfully')
       }else {
-        this.presentAlert(bundle.api_message)
+        this.presentAlert('oops!','something went wrong, Try Again!')
       }
 
     }
 
-    presentAlert(message) {
+    presentAlert(titlemsg,subtitlemsg) {
       let alert = this.alertCtrl.create({
-        title: '',
-        subTitle: message,
+        title: titlemsg,
+        subTitle: subtitlemsg,
         buttons: ['OK']
       });
       alert.present();

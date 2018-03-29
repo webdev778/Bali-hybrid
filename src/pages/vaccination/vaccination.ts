@@ -26,7 +26,6 @@ export class VaccinationPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad VaccinationPage');
 
     this.getHospitals()
   }
@@ -41,7 +40,6 @@ export class VaccinationPage {
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
-              console.log(this.bundleData)
               this.arrayHospitals = this.bundleData.data
             }
            );

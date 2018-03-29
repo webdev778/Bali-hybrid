@@ -30,7 +30,6 @@ import { PUBLIC_HEADER,
 export class RestProvider {
 
   	constructor(private mainRestProvider: MainRestProvider) {
-    	console.log('Home Service Provider')
   	}
 
     // Login Page

@@ -32,16 +32,11 @@ export class ExchangeRatePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ExchangeRatePage');
     this.getExchangeRatesCurrencies()
   }
 
   buttonBackPressed() {
     this.navCtrl.pop();
-  }
-
-  setCurrencies() {
-    console.log('Set Currencies')
   }
 
   convertCurrency() {
