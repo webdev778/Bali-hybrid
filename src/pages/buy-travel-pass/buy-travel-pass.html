@@ -30,7 +30,7 @@
 			</ion-col>
 		</ion-row>
 
-		<ion-row  class = "box1-content" align-items: center  *ngFor="let number of indexes">
+		<ion-row  class = "box1-content" align-items: center  *ngFor="let counter of bundleViewDescription; let number = index">
 			<ion-col col-12 align-items: center >
 				<ion-row class = "border-element1">
 					<ion-col>
@@ -52,18 +52,18 @@
 					</ion-col>
 					<ion-col col-4 class = "static-ctext">
 						<p class = "unit-component">
-							<b>{{unitComponent[number]}}</b>
+							<b>{{bundleViewDescription[number].title}}: $</b>
 						</p>
 					</ion-col>
 					<ion-col col-4 class = "vertical">
-						<p>{{unitCost[number]}}</p>
+						<p>{{bundleViewDescription[number].price}}</p>
 					</ion-col>
 				</ion-row>
 			</ion-col>
 
 			<ion-col col-12>
-				<p class="page-text">{{constraintText[number]}}</p>
-				<p class="page-text">{{validityMessage}}</p>
+				<p class="page-text">{{bundleViewDescription[number].description}}</p>
+				<p class="page-text">{{bundleViewDescription[number].valid_days}}</p>
 			</ion-col>
 		</ion-row>
 

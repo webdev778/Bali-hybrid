@@ -51,6 +51,7 @@ export let SERVICE_URL_BANKS = BASE_URL+"getBanks";
 export let SERVICE_URL_ATMS = BASE_URL+"getAtms";
 export let SERVICE_URL_HOLIDAYS = BASE_URL+"getHolidays";
 export let SERVICE_URL_GET_ALERTS = BASE_URL+"getAlert";
+export let SERVICE_URL_GET_TRAVEL_PASS = BASE_URL+"getTravelPasses";
 
 
 

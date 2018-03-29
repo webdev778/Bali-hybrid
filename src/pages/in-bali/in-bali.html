@@ -19,7 +19,7 @@
         <ion-row showWhen="core" style="text-align: center; display: flex; justify-content: center;padding-left: 10%; padding-right: 10%">
             <ion-col col-4  class="flexgrid-core" *ngFor="let page of pages">
                   <button ion-button full (click)="moveToDetails(page)">
-                    {{page.name}}
+                    {{page.name | uppercase}}
                   </button>
             </ion-col>
         </ion-row>
@@ -27,7 +27,7 @@
         <ion-row hideWhen="core" style="display: flex; justify-content: center; text-align: center;">
             <ion-col class="flexgrid-mobile" *ngFor="let page of pages">
                   <button ion-button full (click)="moveToDetails(page)">
-                    {{page.name}}
+                    {{page.name | uppercase}}
                   </button>
             </ion-col>
         </ion-row>

@@ -14,18 +14,18 @@
 	<ion-grid>
         <ion-row showWhen="core" class='service-row'>
             <ion-col col-4  class="flexgrid-core" *ngFor="let data of bundleServices">
-                  <img src={{data.image_name}} class="services-img">
-                  <button ion-button full (click)="moveToServiceDetails(data)">
-                    {{data.title}}
+                  <div class="services-imgwrap"><img src={{data.image_name}} class="services-img"></div>
+                  <button class="service-btn" ion-button full (click)="moveToServiceDetails(data)">
+                    {{data.title | uppercase}}
                   </button>
             </ion-col>
         </ion-row>
 
         <ion-row hideWhen="core" class='service-row'>
             <ion-col class="flexgrid-mobile" *ngFor="let data of bundleServices">
-                  <img src={{data.image_name}} class="services-img">
-                  <button ion-button full (click)="moveToServiceDetails(data)">
-                    {{data.title}}
+                  <div class="services-imgwrap"><img src={{data.image_name}} class="services-img"></div>
+                  <button class="service-btn" ion-button full (click)="moveToServiceDetails(data)">
+                    {{data.title | uppercase}}
                   </button>
             </ion-col>
         </ion-row>

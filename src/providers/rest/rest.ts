@@ -20,7 +20,8 @@ import { PUBLIC_HEADER,
          SERVICE_URL_BANKS,
          SERVICE_URL_ATMS,
          SERVICE_URL_HOLIDAYS,
-         SERVICE_URL_GET_ALERTS } from '../constants/constants';
+         SERVICE_URL_GET_ALERTS,
+         SERVICE_URL_GET_TRAVEL_PASS } from '../constants/constants';
 
 
 
@@ -162,6 +163,11 @@ export class RestProvider {
    getHospitals(): Observable<{ }> {
 
       return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_HOSPITALS);
+   }
+
+   getTravelPass(): Observable<{ }> {
+
+      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_GET_TRAVEL_PASS);
    }
 
 }

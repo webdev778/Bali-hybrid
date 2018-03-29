@@ -33,17 +33,18 @@
     <ion-grid style='margin-left: 5%; margin-right: 5%; width: 90%'>
         <ion-row showWhen="core" style="text-align: center; display: flex; justify-content: center;">
             <ion-col col-4  class="flexgrid" *ngFor="let data of bundleServices">
-                  <img src={{data.image_name}} class="services-img">
-                  <button ion-button full (click)="moveToServiceDetails(data)">
+                  <div class="services-imgwrap"><img src={{data.image_name}} class="services-img"></div>
+                  <button class="service-btn" ion-button full (click)="moveToServiceDetails(data)">
                     {{data.title}}
                   </button>
             </ion-col>
         </ion-row>
 
+
         <ion-row hideWhen="core" style="display: flex; justify-content: center; text-align: center;">
             <ion-col class="flexgrid" *ngFor="let data of bundleServices">
-                  <img src={{data.image_name}} class="services-img">
-                  <button ion-button full (click)="moveToServiceDetails(data)">
+                  <div class="services-imgwrap"><img src={{data.image_name}} class="services-img"></div>
+                  <button class="service-btn" ion-button full (click)="moveToServiceDetails(data)">
                     {{data.title}}
                   </button>
             </ion-col>

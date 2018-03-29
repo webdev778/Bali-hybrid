@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { RestProvider } from '../../providers/rest/rest';
+
+
 
  @IonicPage()
  @Component({
@@ -15,23 +18,26 @@ import { AlertController } from 'ionic-angular';
  	totalCost : any[] = [0,0,0]
  	finalCost = 0
 
- 	unitComponent = ['1 Child : $','1 Adult : $','1 Family : $']
- 	constraintText = ['(Age: 0-15 years)','(Age: 16 and over)','Family (2) Adults and (2) Children']
- 	indexes = [0,1,2]
-    validityMessage = 'Valid For 60 Days on ARRIVAL'
+ 	description = 'description';
+
     ticketType = ['Child','Adult','Family']
 
  	bundleSaveTickets = { child_ticket_quantity: 0, child_ticket_amount: 0, adult_ticket_quantity: 0, adult_ticket_amount: 0, 
  						  family_ticket_quantity: 0, famliy_ticket_amount: 0, total_amount: 0}
 
+ 	bundleViewDescription : any[] = [];
+
+ 	bundleData : {data : any};					  
+
 	constructor(	public navCtrl: NavController, 
 					public navParams: NavParams,
-					private alertCtrl: AlertController) {
+					private alertCtrl: AlertController,
+					public rest: RestProvider) {
  	}
 
  	ionViewDidLoad() {
  		console.log('ionViewDidLoad BuyTravelPassPage');
- 		console.log(this.arrayTicketCount)
+ 		// this.getTravelPassData()
  	}
 
  	incrementValue(count,flag) {
@@ -83,7 +89,7 @@ import { AlertController } from 'ionic-angular';
  		}	
  		else{
 	 		this.initialiseBundle();
-	 		console.log(this.bundleSaveTickets)
+	 		
 	 	}	
  	}
 
@@ -95,5 +101,21 @@ import { AlertController } from 'ionic-angular';
 		  });
 		  alert.present();
 	}	
+
+
+	getTravelPassData(){
+  	this.rest.getTravelPass()
+         .subscribe(
+            responseData => this.bundleData = <{data : any}> responseData,
+            err => console.log(err),
+            () => {
+              console.log(this.bundleData)
+              this.bundleViewDescription = <any[]> this.bundleData.data;
+              console.log(this.bundleViewDescription[0].description)
+            }
+           );
+  }
+
+
 
  }
