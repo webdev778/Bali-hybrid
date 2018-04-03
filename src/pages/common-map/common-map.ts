@@ -31,10 +31,9 @@ export class CommonMapPage {
   }
 
   initMap() {
-
-    this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      minZoom: 4,
-      maxZoom: 30,
+      this.map = new google.maps.Map(this.mapElement.nativeElement, {
+      minZoom: 10,
+      maxZoom: 20,
     });
 
     var bounds = new google.maps.LatLngBounds();

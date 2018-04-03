@@ -35,8 +35,7 @@
             <ion-col col-4  class="flexgrid" *ngFor="let data of bundleServices">
                   <div class="services-imgwrap"><img src={{data.image_name}} class="services-img"></div>
                   <button class="service-btn" ion-button full (click)="moveToServiceDetails(data)">
-                    {{data.title}}
-                  </button>
+                    {{data.title | uppercase}}                  </button>
             </ion-col>
         </ion-row>
 
@@ -45,7 +44,7 @@
             <ion-col class="flexgrid" *ngFor="let data of bundleServices">
                   <div class="services-imgwrap"><img src={{data.image_name}} class="services-img"></div>
                   <button class="service-btn" ion-button full (click)="moveToServiceDetails(data)">
-                    {{data.title}}
+                     {{data.title | uppercase}}
                   </button>
             </ion-col>
         </ion-row>
