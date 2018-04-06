@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { RestProvider } from '../../providers/rest/rest';
-
+import { DashboardPage } from '../dashboard/dashboard'
 import { Storage } from '@ionic/storage';
 
 import { ConstantsProvider } from '../../providers/constants/constants'
+
 
 /**
  * Generated class for the LoginPage page.
