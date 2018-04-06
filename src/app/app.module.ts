@@ -3,13 +3,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-
 import { GoogleMaps } from '@ionic-native/google-maps';
-
 import { IonicStorageModule } from '@ionic/storage';
-
-
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AboutUsPage } from '../pages/about-us/about-us';
@@ -28,15 +23,12 @@ import { PageBankPage } from '../pages/page-bank/page-bank';
 import { PageAtmsPage } from '../pages/page-atms/page-atms';
 import { PublicHolidaysPage } from '../pages/public-holidays/public-holidays';
 import { TravelAlertPage } from '../pages/travel-alert/travel-alert';
-
 import { BscHeaderPage } from '../pages/bsc-header/bsc-header';
+import { DashboardPage } from '../pages/dashboard/dashboard'
 import { BscFooterPage } from '../pages/bsc-footer/bsc-footer';
-
-
 import { RestProvider } from '../providers/rest/rest';
 import { MainRestProvider } from '../providers/rest/mainrest';
 import { ConstantsProvider } from '../providers/constants/constants';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -62,6 +54,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     PageAtmsPage,
     PublicHolidaysPage,
     TravelAlertPage,
+    DashboardPage,
   ],
   imports: [
     BrowserModule,
@@ -112,6 +105,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     PageAtmsPage,
     PublicHolidaysPage,
     TravelAlertPage,
+    DashboardPage,
   ],
   providers: [
     StatusBar,

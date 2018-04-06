@@ -1,0 +1,54 @@
+page-dashboard  {
+	.form-col {
+		min-width: 300px;
+		max-width: 700px;
+
+		h6 {
+			text-align: center;
+		}
+	}
+
+	.sub-button {
+		color: #62a830;
+		font-size: 22px;
+		cursor: pointer;
+	}
+
+	.form-panel{
+		background-color: #fff;
+	    padding: 4rem;
+	    margin-bottom: 2rem ;
+	}
+	.form-panel .form-item{
+		box-shadow: 0 0 0 1px #d2d1d1;
+	}
+
+	.form-header {
+		color: #547d88;
+		height: 60px;
+		text-align: center;
+		padding-top: 0px;
+		margin-right: 10%;
+		margin-left: 10%;
+		font-size: 25px;
+		margin-bottom: 0px;
+	}
+
+}
+
+ion-app.md [padding-left].text-md-danger{
+	padding-left: 0;
+	margin-left: 0px;
+	margin-top: 5px;
+    margin-bottom: 0;
+}
+
+
+ion-app.ios [padding-left] {
+	padding-left: 0px;
+	margin-left: 0px;
+	margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+
