@@ -31,9 +31,9 @@ export class CommonMapPage {
   }
 
   initMap() {
-      this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      minZoom: 10,
-      maxZoom: 20,
+    this.map = new google.maps.Map(this.mapElement.nativeElement, {
+      minZoom: 3,
+      maxZoom: 30,
     });
 
     var bounds = new google.maps.LatLngBounds();
@@ -53,7 +53,7 @@ export class CommonMapPage {
           	var mapMarker = new google.maps.Marker({
                   position: markerLatLng,
                   map: this.map,
-                  title: 'Hello World!',
+                  title: marker.label,
             });
 
             var infowindow = new google.maps.InfoWindow({
@@ -68,6 +68,15 @@ export class CommonMapPage {
             bounds.extend(markerLatLng);
         }
         this.map.fitBounds(bounds);
+
+        this.map.setZoom(16);
+
+        if (this.map.getZoom() < 10) {
+          
+        }else {
+          
+        }
+
     }
 
   }

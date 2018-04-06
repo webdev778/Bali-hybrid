@@ -74,7 +74,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
           { component: FaqPage, name: 'FaqPage', segment: 'faq' },
           { component: BuyTravelPassPage, name: 'BuyTravelPassPage', segment: 'buytravelpass' },
           { component: LoginPage, name: 'LoginPage', segment: 'login'},
-          { component: ServiceDetailsPage, name: 'ServiceDetailsPage', segment: 'services/:service' , defaultHistory:[ServicesPage]},
+          { component: ServiceDetailsPage, name: 'ServiceDetailsPage', segment: 'services/details/:service' , defaultHistory:[ServicesPage]},
           { component: PageBankPage, name: 'PageBankPage', segment: 'banks' , defaultHistory:[InBaliPage]},
           { component: PageAtmsPage, name: 'PageAtmsPage', segment: 'atms' , defaultHistory:[InBaliPage]},
           { component: ExchangeRatePage, name: 'ExchangeRatePage', segment: 'exchangerate' , defaultHistory:[InBaliPage]},

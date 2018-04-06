@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
 import {ServiceDetailsPage} from '../service-details/service-details';
@@ -23,7 +23,8 @@ export class ServicesPage {
 
   constructor(	public navCtrl: NavController, 
   				public navParams: NavParams, 
-  				public rest: RestProvider) {
+  				public rest: RestProvider,
+          public loadingController: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -37,11 +38,17 @@ export class ServicesPage {
  	}
 
   getServicesList() {
+
+    let loader = this.loadingController.create({
+          content: "Loading ..."
+    });
+
   	this.rest.getServices()
          .subscribe(
             responseData => this.bundleData = <{data : any}> responseData,
-            err => console.log(err),
+            err => loader.dismiss(),
             () => {
+              loader.dismiss()
               this.bundleServices = <any[]> this.bundleData.data;
             }
            );
