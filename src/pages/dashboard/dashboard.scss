@@ -34,6 +34,26 @@ page-dashboard  {
 		margin-bottom: 0px;
 	}
 
+	.sub-header {
+		background-color: #547d88;
+		/*text-align: center;*/
+		margin-top: 0px;
+		margin-bottom: 0px;
+		color: #ffff;
+		height: 140px;
+		padding-top: 10px;
+		font-weight: 600;
+		/*font-size: 30px;*/
+		background-image: url('../assets/imgs/background.png');
+		
+	}
+	.text3{
+		text-align: center;
+		font-weight: 600;
+		font-size: 30px;
+
+	}
+
 }
 
 ion-app.md [padding-left].text-md-danger{

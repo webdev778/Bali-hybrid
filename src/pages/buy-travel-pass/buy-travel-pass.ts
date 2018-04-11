@@ -36,7 +36,7 @@ import { RestProvider } from '../../providers/rest/rest';
  	}
 
  	ionViewDidLoad() {
- 		// this.getTravelPassData()
+ 		 this.getTravelPassData()
  	}
 
  	incrementValue(count,flag) {

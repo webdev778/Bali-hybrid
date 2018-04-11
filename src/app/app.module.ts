@@ -24,6 +24,7 @@ import { PageAtmsPage } from '../pages/page-atms/page-atms';
 import { PublicHolidaysPage } from '../pages/public-holidays/public-holidays';
 import { TravelAlertPage } from '../pages/travel-alert/travel-alert';
 import { BscHeaderPage } from '../pages/bsc-header/bsc-header';
+import { TimerPage } from '../pages/timer/timer'
 import { DashboardPage } from '../pages/dashboard/dashboard'
 import { BscFooterPage } from '../pages/bsc-footer/bsc-footer';
 import { RestProvider } from '../providers/rest/rest';
@@ -55,6 +56,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     PublicHolidaysPage,
     TravelAlertPage,
     DashboardPage,
+    TimerPage,
   ],
   imports: [
     BrowserModule,
@@ -106,6 +108,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     PublicHolidaysPage,
     TravelAlertPage,
     DashboardPage,
+    TimerPage,
   ],
   providers: [
     StatusBar,

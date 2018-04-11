@@ -18,8 +18,10 @@ export let PUBLIC_HEADER = {
 
 
 // Constants for Web Services
-// export let BASE_URL = "http://192.168.0.36/BaliTours/public/api/";
-export let BASE_URL = "http://admin.balisupport.tk/api/";
+
+export let BASE_URL = "http://192.168.0.24/BaliTours/public/api/";
+
+// export let BASE_URL = "http://admin.balisupport.tk/api/";
 
 
 // Login Page
@@ -65,6 +67,7 @@ export let API_HEADER = {
 export class ConstantsProvider 
 {
 	loginTitle = 'LOGIN'
+	eventDate: Date;
 
 	constructor() {
 

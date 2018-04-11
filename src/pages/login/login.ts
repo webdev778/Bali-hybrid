@@ -111,6 +111,9 @@ export class LoginPage {
 
 	buttonLoginPressed(form: NgForm) {
 
+     // this.navCtrl.push(DashboardPage);
+
+     console.log("login Pressed")
 		this.submittedLogin = true
 
 		if (form.valid) {
@@ -147,6 +150,7 @@ export class LoginPage {
 
         this.isLogIn = true
         this.constantProvider.loginTitle = this.userBundle.first_name;
+        console.log("logged in successfully")
 
       }else {
         this.presentAlert(bundle.api_message)
