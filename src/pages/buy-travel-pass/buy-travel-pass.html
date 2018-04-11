@@ -52,7 +52,7 @@
 					</ion-col>
 					<ion-col col-4 class = "static-ctext">
 						<p class = "unit-component">
-							<b>{{bundleViewDescription[number].title}}: $</b>
+							<b>1 {{bundleViewDescription[number].title}}: $</b>
 						</p>
 					</ion-col>
 					<ion-col col-4 class = "vertical">
@@ -75,13 +75,13 @@
 
 		<ion-row class = "box2-content">
 			<ion-col>
-				<ion-row class="grid-row" *ngFor="let number of indexes">
+				<ion-row class="grid-row" *ngFor="let counter of bundleViewDescription; let number = index">
 					<ion-col>
 						<p>Quantity <span class="green-text bold-text">{{arrayTicketCount[number]}}</span></p>
 					</ion-col>
 
 					<ion-col>
-						<h5>{{ticketType[number]}}</h5>
+						<h5>{{bundleViewDescription[number].title}}</h5>
 					</ion-col>
 
 					<ion-col>

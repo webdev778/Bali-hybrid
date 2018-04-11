@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-
+import {TicketStructure} from '../../providers/constants/constants'
 
 
  @IonicPage()
@@ -11,19 +10,17 @@ import { RestProvider } from '../../providers/rest/rest';
  	templateUrl: 'buy-travel-pass.html',
  })
 
+
+
+
  export class BuyTravelPassPage {
 
- 	arrayTicketCount : any[] = [0,0,0]
- 	unitCost : any[] = [100,200,300]
- 	totalCost : any[] = [0,0,0]
+ 	arrayTicketCount : any[] = []
+ 	totalCost : any[] = []
  	finalCost = 0
+ 	
 
- 	description = 'description';
-
-    ticketType = ['Child','Adult','Family']
-
- 	bundleSaveTickets = { child_ticket_quantity: 0, child_ticket_amount: 0, adult_ticket_quantity: 0, adult_ticket_amount: 0, 
- 						  family_ticket_quantity: 0, famliy_ticket_amount: 0, total_amount: 0}
+ 	bundleSaveTickets : Array<TicketStructure> = []
 
  	bundleViewDescription : any[] = [];
 
@@ -32,11 +29,12 @@ import { RestProvider } from '../../providers/rest/rest';
 	constructor(	public navCtrl: NavController, 
 					public navParams: NavParams,
 					private alertCtrl: AlertController,
-					public rest: RestProvider) {
+					public rest: RestProvider,
+					public loadingController: LoadingController,) {
  	}
 
  	ionViewDidLoad() {
- 		// this.getTravelPassData()
+ 		this.getTravelPassData()
  	}
 
  	incrementValue(count,flag) {
@@ -59,37 +57,63 @@ import { RestProvider } from '../../providers/rest/rest';
  		this.totalCost[flag] = count * this.bundleViewDescription[flag].price
  		
  		this.getTotalCost()
-
  	}
 
  	getTotalCost(){
- 		this.finalCost = this.totalCost[0] + this.totalCost[1] + this.totalCost[2];
- 		
+
+ 		this.finalCost = 0
+
+ 		for (let price of this.totalCost) {
+ 			this.finalCost = this.finalCost + price
+ 		} 		
  	}
 
 
 	initialiseBundle(){
-		this.bundleSaveTickets.child_ticket_quantity = this.arrayTicketCount[0];
- 		this.bundleSaveTickets.child_ticket_amount = this.totalCost[0];
 
- 		this.bundleSaveTickets.adult_ticket_quantity = this.arrayTicketCount[1];
- 		this.bundleSaveTickets.adult_ticket_amount = this.totalCost[1];
+		for (var count = 0 ; count < this.bundleSaveTickets.length; count++) 
+		{
+			this.bundleSaveTickets[count].ticket_id = this.bundleViewDescription[count].id
+			this.bundleSaveTickets[count].quantity = this.arrayTicketCount[count]
+			this.bundleSaveTickets[count].price = this.totalCost[count]
+		}
 
- 		this.bundleSaveTickets.family_ticket_quantity = this.arrayTicketCount[2];
- 		this.bundleSaveTickets.famliy_ticket_amount = this.totalCost[2];
+		this.sendDataToServer()
+ 	}
 
- 		this.bundleSaveTickets.total_amount = this.finalCost;
+ 	sendDataToServer() {
+
+ 		let loader = this.loadingController.create({
+	        content: "Sending ..."
+	      });
+
+	    loader.present();
+
+	    let passInfo = {user_id:'1', ticket_info: this.bundleSaveTickets}
+
+	    this.rest.purchaseTravelPass(passInfo)
+	       .subscribe(
+	           responseData => this.checkStatus(responseData),
+	           err => loader.dismiss(),
+	           () => {
+	             loader.dismiss()
+	           }
+	        );
  	}
 
  	savePressed(){
 
-		if((this.arrayTicketCount[0] == 0) && (this.arrayTicketCount[1] == 0) && (this.arrayTicketCount[2] == 0)){
- 			this.presentAlertNoTickets();
- 		}	
- 		else{
-	 		this.initialiseBundle();
-	 		
-	 	}	
+ 		for (let count of this.arrayTicketCount)
+ 		{
+ 			if (count > 0) {
+ 				this.initialiseBundle()
+
+ 				return
+ 			}
+ 		}
+
+ 		this.presentAlertNoTickets()
+ 				
  	}
 
  	presentAlertNoTickets() {
@@ -103,15 +127,48 @@ import { RestProvider } from '../../providers/rest/rest';
 
 
 	getTravelPassData(){
-  	this.rest.getTravelPass()
-         .subscribe(
-            responseData => this.bundleData = <{data : any}> responseData,
-            err => console.log(err),
-            () => {
-              this.bundleViewDescription = <any[]> this.bundleData.data;
-            }
-           );
-  }
+	  	this.rest.getTravelPass()
+	         .subscribe(
+	            responseData => this.bundleData = <{data : any}> responseData,
+	            err => console.log(err),
+	            () => {
+	              this.bundleViewDescription = <any[]> this.bundleData.data;
+
+	              for (let ticket of this.bundleViewDescription)
+	              {
+	              	this.arrayTicketCount.push(0)
+	              	this.totalCost.push(0)
+
+	              	let ticketInfo = <TicketStructure> {}
+	              	ticketInfo.price = 0
+	              	ticketInfo.quantity = 0
+	              	ticketInfo.ticket_id = 0
+
+	              	this.bundleSaveTickets.push(ticketInfo)
+	              }
+
+	            }
+	    	);
+	 }
+
+	checkStatus(bundle) {
+
+      if (bundle.status == 200) {
+        this.presentAlert('', bundle.api_message)
+      }else {
+        this.presentAlert('Error', bundle.api_message)
+      }
+
+    }
+
+    presentAlert(titlemsg,subtitlemsg) {
+      let alert = this.alertCtrl.create({
+        title: titlemsg,
+        subTitle: subtitlemsg,
+        buttons: ['OK']
+      });
+      alert.present();
+    }
 
 
 

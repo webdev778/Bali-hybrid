@@ -67,15 +67,9 @@ export class CommonMapPage {
 
             bounds.extend(markerLatLng);
         }
+
         this.map.fitBounds(bounds);
-
-        this.map.setZoom(16);
-
-        if (this.map.getZoom() < 10) {
-          
-        }else {
-          
-        }
+        this.map.setZoom(16)
 
     }
 

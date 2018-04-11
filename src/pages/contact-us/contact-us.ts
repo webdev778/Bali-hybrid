@@ -96,9 +96,9 @@ export class ContactUsPage {
   checkStatus(bundle) {
       if (bundle.status == 200) {
         this.bundleEnquiry = { first_name: '', last_name: '', phone: '', email: '', subject: '', message: ''}
-        this.presentAlert('Thank You','Your request is submitted successfully')
+        this.presentAlert('', bundle.api_message)
       }else {
-        this.presentAlert('oops!','something went wrong, Try Again!')
+        this.presentAlert('Error', bundle.api_message)
       }
 
     }

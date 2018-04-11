@@ -5,7 +5,7 @@ import { RestProvider } from '../../providers/rest/rest';
 import { DashboardPage } from '../dashboard/dashboard'
 import { Storage } from '@ionic/storage';
 
-import { ConstantsProvider } from '../../providers/constants/constants'
+import { ConstantsProvider, UserDetailsDS } from '../../providers/constants/constants'
 
 
 /**
@@ -22,7 +22,6 @@ import { ConstantsProvider } from '../../providers/constants/constants'
 })
 export class LoginPage {
 
-  isLogIn = false;
   selectLogin = true;
 
 	loginData = { email: '', password: '' };
@@ -34,7 +33,7 @@ export class LoginPage {
   headerText = 'ACCOUNT LOGIN';
 
   loginBundle = { data:'', user_data: {}, status:'', api_message : ''}
-  userBundle = { "id": '', "first_name": "", "last_name": "","username": "","email": "","status": '',"phone": "","gender": '', "created_at": '', "updated_at": '', "deleted_at": '' }
+  userBundle = <UserDetailsDS> {}
 
   constructor(	public navCtrl: NavController,
 				public navParams: NavParams, 
@@ -50,14 +49,13 @@ export class LoginPage {
   checkForLogin() {
     this.storage.get('is_login').then((isLogin) => {
        if (isLogin) {
-             this.storage.get('user_data').then((userData) => {
-              this.userBundle = userData
-          })
+           this.moveToDashboard()
        }
      })
   }
 
   ionViewDidLoad() {
+    
   }
 
   createAccountPressed() {
@@ -107,7 +105,7 @@ export class LoginPage {
 
   buttonUpdatePressed(form: NgForm) {
 
-    }
+  }
 
 	buttonLoginPressed(form: NgForm) {
 
@@ -119,7 +117,14 @@ export class LoginPage {
 		}
 	}
 
-    loginAction(login) {
+  moveToDashboard() {
+    this.storage.set('is_login', true);
+    this.navCtrl.setRoot(DashboardPage)
+    this.constantProvider.loginTitle = "Dashboard"
+    this.constantProvider.loginPage = DashboardPage
+  }
+
+  loginAction(login) {
 
     	let loader = this.loadingController.create({
         	content: "Login ..."
@@ -133,36 +138,24 @@ export class LoginPage {
            	err => loader.dismiss(),
            	() => {
            		loader.dismiss()
-               this.checkStatus(this.loginBundle)
+               this.checkStatusForLogin(this.loginBundle)
            	}
            );
-    }
+  }
 
-    checkStatus(bundle) {
+    checkStatusForLogin(bundle) {
       if (bundle.status == 200) {
-        this.userBundle =  <{ "id": '', "first_name": "", "last_name": "","username": "","email": "","status": '',"phone": "","gender": '', "created_at": '', "updated_at": '', "deleted_at": '' }> this.loginBundle.user_data
+        this.userBundle =  <UserDetailsDS> this.loginBundle.user_data
         this.storage.set('user_data', JSON.stringify(this.userBundle));
         this.storage.set('auth_token', this.loginBundle.data);
         this.storage.set('is_login', true);
 
-        this.isLogIn = true
-        this.constantProvider.loginTitle = this.userBundle.first_name;
+        this.moveToDashboard()
 
       }else {
         this.presentAlert(bundle.api_message)
       }
 
-    }
-
-    buttonLogoutPressed() {
-      this.storage.remove('user_data');
-      this.storage.remove('auth_token');
-      this.storage.set('is_login', false);
-
-      this.isLogIn = false
-      this.constantProvider.loginTitle = 'LOGIN';
-
-      this.loginData = { email: '', password: '' };
     }
 
     presentAlert(message) {

@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 
 export var CMS_PAGES : Array<{id: any, name: '', alias: '', page: any}> = [];
 export var SOCIAL_LINKS = { facebook :'', twitter: '', google: ''};
+export let GOOGLE_KEY = "AIzaSyCecgk4WWZR2HgSmSczljuNDqQaJyd8psg";
 
 
 // public header
@@ -18,8 +19,8 @@ export let PUBLIC_HEADER = {
 
 
 // Constants for Web Services
-// export let BASE_URL = "http://192.168.0.36/BaliTours/public/api/";
-export let BASE_URL = "http://admin.balisupport.tk/api/";
+export let BASE_URL = "http://192.168.0.24/BaliTours/public/api/";
+// export let BASE_URL = "http://admin.balisupport.tk/api/";
 
 
 // Login Page
@@ -51,8 +52,13 @@ export let SERVICE_URL_BANKS = BASE_URL+"getBanks";
 export let SERVICE_URL_ATMS = BASE_URL+"getAtms";
 export let SERVICE_URL_HOLIDAYS = BASE_URL+"getHolidays";
 export let SERVICE_URL_GET_ALERTS = BASE_URL+"getAlert";
-export let SERVICE_URL_GET_TRAVEL_PASS = BASE_URL+"getTravelPasses";
 
+// Buy Travle Pass Page
+export let SERVICE_URL_GET_TRAVEL_PASS = BASE_URL+"getTravelPasses";
+export let SERVICE_URL_SAVE_TRAVEL_PASS = BASE_URL+"addToCart";
+
+// Dashboard
+export let SERVICE_URL_UPDATE_DASHBOARD = BASE_URL+"updateDashboard";
 
 
 
@@ -60,12 +66,35 @@ export let API_HEADER = {
 							
 						};
 
+export interface TicketStructure  
+{ 
+	ticket_id: number, 
+	quantity: number, 
+	price: number
+}
+
+export interface UserDetailsDS
+{ 
+	"id": string, 
+	"first_name": string, 
+	"last_name": string,
+	"username": string,
+	"email": string,
+	"status": number,
+	"phone": string,
+	"gender": number, 
+	"created_at": string, 
+	"updated_at": string, 
+	"deleted_at": string
+}
+
 
 @Injectable()
 export class ConstantsProvider 
 {
 	loginTitle = 'LOGIN'
-
+	loginPage : any = 'LoginPage'
+	
 	constructor() {
 
 	}

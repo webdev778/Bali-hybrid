@@ -2,105 +2,89 @@
    <page-bsc-header ></page-bsc-header>
 </ion-header>
 <ion-content style='background-color: #f0f0f0'>
+
    <page-bsc-header showWhen="core"></page-bsc-header>
-   <h2 hideWhen='core' class="mobile-sub-header">Dashboard</h2>
-   <h2 showWhen='core' class="core-sub-header">Dashboard</h2>
-   <ion-row class='form-row'>
-      <ion-col class='form-col'>
-         <div class="form-panel">
-            <form #dashboardForm="ngForm" novalidate>
-               <ion-list no-lines>
-                  <ion-item class='form-item'>
-                     <ion-select [(ngModel)]="dashboardData.numberOfCustomers" name='totalCustomers' #numberOfCustomers="ngModel" required placeholder='Total Customers'>
-                     <ion-option value="1">1</ion-option>
-                     <ion-option value="2">2</ion-option>
-                     <ion-option value="3">3</ion-option>
-                     <ion-option value="4">4</ion-option>
-                     <ion-option value="5">5</ion-option>
-                     </ion-select>
-                  </ion-item>
-                   <p ion-text [hidden]="numberOfCustomers.valid || submittedDashboardDetails == false" color="danger" padding-left>
-                       Select Number of Customers
+
+   <h2 hideWhen='core' class="mobile-sub-header">DASHBOARD</h2>
+   <h2 showWhen='core' class="core-sub-header">DASHBOARD</h2>
+
+   <ion-grid class="dashboard-grid">
+      <ion-row class='form-row'>
+         <ion-col class='form-col'>
+            <div class="form-panel">
+               <form #dashboardForm="ngForm" novalidate>
+                  <ion-list no-lines>
+                     <ion-item class='form-item'>
+                        <ion-select [(ngModel)]="dashboardData.numberOfCustomers" name='totalCustomers' #numberOfCustomers="ngModel" required placeholder='Total Customers'>
+                        <ion-option *ngFor="let number of arrayCustomers" value={{number}}>{{number}}</ion-option>
+                        </ion-select>
+                     </ion-item>
+                     <p ion-text [hidden]="numberOfCustomers.valid || submittedDashboardDetails == false" color="danger" padding-left>
+                          Select Number of Customers
                      </p>
 
-                  <br>
-                  <ion-item class='form-item'>
-                     <ion-input [(ngModel)]="dashboardData.emergencyContanctName" #emergencyContanctName="ngModel" name="emergencycontactname" type="text" spellcheck="false" autocapitalize="off" required ngModel placeholder='Emergency Contact Name'>
-                     </ion-input>
-                  </ion-item>
-                    <p ion-text [hidden]="emergencyContanctName.valid || submittedDashboardDetails == false" color="danger" padding-left>
-                       Enter a valid Emergency Contact Name
-                     </p>
-                  
-                  <br>
+                     <br>
+                     <ion-item class='form-item'>
+                        <ion-input [(ngModel)]="dashboardData.emergencyContactName" #emergencyContactName="ngModel" name="emergencycontactname" type="text" spellcheck="false" autocapitalize="off" required ngModel placeholder='Emergency Contact Name'>
+                        </ion-input>
+                     </ion-item>
+                       <p ion-text [hidden]="emergencyContactName.valid || submittedDashboardDetails == false" color="danger" padding-left>
+                          Enter emergency contact name
+                        </p>
+                     
+                     <br>
 
-                  <ion-item class='form-item'>
-                     <ion-input [(ngModel)]="dashboardData.emergencyContanctNumber" name="emergencycontactnumber" #emergencyContanctNumber="ngModel" type="tel" required placeholder='EMergency Contact Number'>
-                     </ion-input>
-                  </ion-item>
-                    <p ion-text [hidden]="emergencyContanctNumber.valid || submittedDashboardDetails == false" color="danger" padding-left>
-                        Enter a valid Emergency Contact Number
-                     </p>
+                     <ion-item class='form-item'>
+                        <ion-input [(ngModel)]="dashboardData.emergencyContactNumber" name="emergencycontactnumber" #emergencyContactNumber="ngModel" type="tel" required placeholder='Emergency Contact Number'>
+                        </ion-input>
+                     </ion-item>
+                       <p ion-text [hidden]="emergencyContactNumber.valid || submittedDashboardDetails == false" color="danger" padding-left>
+                           Enter emergency contact number
+                        </p>
 
 
-                  <br>
-                  <br>
+                     <div class="dashboard-image-div" *ngFor="let dashboardImage of dashboardImages">
+                        <h5>{{dashboardImage.title}}</h5>
 
-                   <ion-label>Upload Passport Photograph</ion-label>
-                  <ion-item class='form-item'>
-                    
-                     <ion-input [(ngModel)]="dashboardData.imgPassport" name="passportImage" #imgPassport="ngModel" type="File" required>
-                     </ion-input>
-                  </ion-item>
-                    <p ion-text [hidden]="imgPassport.valid || submittedDashboardDetails == false" color="danger" padding-left>
-                       Upload Passport Image
-                     </p>
+                        <img class="dashboard-image" *ngIf="dashboardImage.image" [src]="dashboardImage.image"/>
 
-                  <br>
+                        <!-- <button *ngIf="dashboardImage.image" (click)="removeImage(dashboardImage)" icon-only class="custom-file-select" >Remove</button> -->                     
 
-                   <ion-label>Upload Luggage Photograph</ion-label>
-                  <ion-item class='form-item'>
-                     <ion-input  [(ngModel)]="dashboardData.imgLuggage" name="passportImage" #imgLuggage="ngModel" type="File" required>
-                     </ion-input>
-                  </ion-item>
-                    <p ion-text [hidden]="imgLuggage.valid || submittedDashboardDetails == false" color="danger" padding-left>
-                       Upload Luggage Image
-                     </p>
+                        <label *ngIf="!dashboardImage.image" class='custom-file-select'>Select Image
+                           <ion-input hidden name="name" type="File" accept="image/*" (change)='imageSelectedFromUser(dashboardImage, $event)'>
+                           </ion-input>
+                        </label>
 
-                  <br>
-
-                   <ion-label>Upload Travel Insurance Photograph</ion-label>
-                  <ion-item class='form-item'>
-                    
-                     <ion-input [(ngModel)]="dashboardData.imgTravelInsurance" name="passportImage" #imgTravelInsurance="ngModel" type="File" required>
-                     </ion-input>
-                  </ion-item>
-                    <p ion-text [hidden]="imgTravelInsurance.valid || submittedDashboardDetails == false" color="danger" padding-left>
-                       Upload Travel Insurance Image
-                     </p>
+                        <label *ngIf="dashboardImage.image" class='custom-file-select'>Change Image
+                           <ion-input hidden name="name" type="File" accept="image/*" (change)='imageSelectedFromUser(dashboardImage, $event)'>
+                           </ion-input>
+                        </label>
+                        
+                        <p ion-text [hidden]="dashboardImage.image || submittedDashboardDetails == false" color="danger" padding-left>
+                        {{dashboardImage.errorMsg}}
+                        </p>
+                        
+                     </div>                  
+                     
+                  </ion-list>
 
                   <br>
 
-                   <ion-label>Upload Doctor's Letter</ion-label>
-                  <ion-item class='form-item'>
-                    
-                     <ion-input  [(ngModel)]="dashboardData.imgDoctorLetter" name="passportImage" #imgDoctorLetter="ngModel" type="File" required>
-                     </ion-input>
-                  </ion-item>
+                  <ion-row responsive-sm>
+                     <ion-col>
+                        <button (click)="buttonSubmitDetailsPressed(dashboardForm)" ion-button type="submit" full>Submit Details</button>
+                     </ion-col>
+                  </ion-row>
 
-                    <p ion-text [hidden]="imgDoctorLetter.valid || submittedDashboardDetails == false" color="danger" padding-left>
-                       Upload Doctor's Letter
-                     </p>
+               </form>
+            </div>
+         </ion-col>
+      </ion-row>
+   </ion-grid>
 
-               </ion-list>
-               <ion-row responsive-sm>
-                  <ion-col>
-                     <button (click)="buttonSubmitDetailsPressed(dashboardForm)" ion-button type="submit" full>Submit Details</button>
-                  </ion-col>
-               </ion-row>
-            </form>
-         </div>
-      </ion-col>
-   </ion-row>
+   <div class="logout-button">
+      <button (click)="buttonLogoutPressed()" ion-button>LOGOUT</button>
+   </div>
+
    <page-bsc-footer></page-bsc-footer>
 </ion-content>

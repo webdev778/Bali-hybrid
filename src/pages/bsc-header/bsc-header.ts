@@ -51,7 +51,7 @@ export class BscHeaderPage {
             {title: 'Contact Us', icon: 'contact_us', page: ContactUsPage},
     ];
 
-    this.loginPage = [{title: constantProvider.loginTitle, icon: 'log_in', page: 'LoginPage'}];
+    this.loginPage = [{title: constantProvider.loginTitle, icon: 'log_in', page: constantProvider.loginPage}];
   }
 
 

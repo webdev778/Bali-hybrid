@@ -4,7 +4,7 @@ import { DashboardPage } from './dashboard';
 
 @NgModule({
   declarations: [
-    DashboardPage,
+    
   ],
   imports: [
     IonicPageModule.forChild(DashboardPage),
