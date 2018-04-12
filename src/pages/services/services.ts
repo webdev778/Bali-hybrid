@@ -20,6 +20,7 @@ export class ServicesPage {
 
 	bundleData : {data : any};
 	bundleServices : any[] = [];
+  isListLoaded = false
 
   constructor(	public navCtrl: NavController, 
   				public navParams: NavParams, 
@@ -43,12 +44,15 @@ export class ServicesPage {
           content: "Loading ..."
     });
 
+    // loader.present()
+
   	this.rest.getServices()
          .subscribe(
             responseData => this.bundleData = <{data : any}> responseData,
             err => loader.dismiss(),
             () => {
               loader.dismiss()
+              this.isListLoaded = true
               this.bundleServices = <any[]> this.bundleData.data;
             }
            );

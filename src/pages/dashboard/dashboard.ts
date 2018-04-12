@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
+
 /**
  * Generated class for the DashboardPage page.
  *
@@ -119,5 +120,6 @@ export class DashboardPage {
 						 }
 					 );
 	}
+
 
 }

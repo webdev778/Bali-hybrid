@@ -18,6 +18,7 @@ export class PublicHolidaysPage {
 
 	bundleData : {data : any};
 	bundleHolidays : any[] = [];
+  isListLoaded = false
 
   constructor(	public navCtrl: NavController, 
   				public navParams: NavParams,
@@ -38,6 +39,7 @@ export class PublicHolidaysPage {
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
+              this.isListLoaded = true
               this.bundleHolidays = <any[]> this.bundleData.data;
             }
            );

@@ -9,7 +9,7 @@
   <h2 hideWhen='core' class='mobile-sub-header'>TRAVEL ALERTS</h2>
     <h2 showWhen='core' class='core-sub-header'>TRAVEL ALERTS</h2>
 
-  <h6 class="placeholder" [hidden]="bundleAlerts.length > 0">No Travel Alerts</h6>
+  <h6 class="placeholder" [hidden]="bundleAlerts.length > 0 || !isListLoaded">No Travel Alerts</h6>
 
   <br>
 

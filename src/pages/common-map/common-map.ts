@@ -32,6 +32,8 @@ export class CommonMapPage {
 
   initMap() {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
+      zoom: 16,
+      center: {lat: Number(this.bundleMarker[0].latitude), lng: Number(this.bundleMarker[0].longitude)},
       minZoom: 3,
       maxZoom: 30,
     });
@@ -48,8 +50,8 @@ export class CommonMapPage {
           isNaN(markerLat) || isNaN(markerLong)){
                  this.presentAlert("Not able to Locate Place");
         }
-
-        else{
+        else
+        {
           	var mapMarker = new google.maps.Marker({
                   position: markerLatLng,
                   map: this.map,
@@ -68,8 +70,11 @@ export class CommonMapPage {
             bounds.extend(markerLatLng);
         }
 
-        this.map.fitBounds(bounds);
-        this.map.setZoom(16)
+        if (this.bundleMarker.length > 1) {
+          this.map.fitBounds(bounds);
+        }else{
+          this.map.setZoom(16)
+        }
 
     }
 

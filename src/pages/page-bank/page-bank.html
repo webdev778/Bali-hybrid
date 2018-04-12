@@ -9,7 +9,7 @@
 	<h2 hideWhen='core' class='mobile-sub-header'>BANKS</h2>
     <h2 showWhen='core' class='core-sub-header'>BANKS</h2>
 
-	<h6 class="placeholder" [hidden]="arrayBanks.length > 0">No Bank Found</h6>
+	<h6 class="placeholder" [hidden]="arrayBanks.length > 0 || !isListLoaded">No Bank Found</h6>
 
 	<br>
 
