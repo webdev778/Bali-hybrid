@@ -16,7 +16,7 @@
       <button menuClose ion-item *ngFor="let page of cmsPages" (click)="openPage(page)">
         {{page.name | uppercase}}
       </button>
-      <button menuClose ion-item *ngFor="let page of loginPage" (click)="openPage(page)">
+      <button menuClose ion-item *ngFor="let page of loginPage" (click)="openPage({page:constantProvider.loginPage})">
         {{constantProvider.loginTitle | uppercase}}
       </button>
     </ion-list>

@@ -13,24 +13,24 @@
 	<ion-grid class = "selected-grid">
 		<ion-row>
 			<ion-col >
-				<h3 class="page-paddingtext">Travel Pass Price</h3>
+				<h3 [hidden]='!ticketsSaved' class="page-paddingtext">Travel Pass Price</h3>
 			</ion-col>
 		</ion-row>
 
 		<ion-row>
 			<ion-col>
 
-				<h6 class="page-paddingtext">Must be Purchased Prior to Bali Arrival</h6>
+				<h6 [hidden]='!ticketsSaved'  class="page-paddingtext">Must be Purchased Prior to Bali Arrival</h6>
 			</ion-col>
 		</ion-row>
 
 		<ion-row>
 			<ion-col>
-				<h3 class="page-paddingtext">Select Travel Pass Requirements</h3>
+				<h3 [hidden]='!ticketsSaved' class="page-paddingtext">Select Travel Pass Requirements</h3>
 			</ion-col>
 		</ion-row>
 
-		<ion-row  class = "box1-content" align-items: center  *ngFor="let counter of bundleViewDescription; let number = index">
+		<ion-row [hidden]='!ticketsSaved' class = "box1-content" align-items: center  *ngFor="let counter of bundleViewDescription; let number = index">
 			<ion-col col-12 align-items: center >
 				<ion-row class = "border-element1">
 					<ion-col>
@@ -52,7 +52,7 @@
 					</ion-col>
 					<ion-col col-4 class = "static-ctext">
 						<p class = "unit-component">
-							<b>{{bundleViewDescription[number].title}}: $</b>
+							<b>1 {{bundleViewDescription[number].title}}: $</b>
 						</p>
 					</ion-col>
 					<ion-col col-4 class = "vertical">
@@ -67,21 +67,25 @@
 			</ion-col>
 		</ion-row>
 
-		<ion-row>
+		<ion-row [hidden]='ticketsSaved'>
 			<ion-col>
 				<h5 class = "center-msg">You have selected the following Travel Pass</h5>
 			</ion-col>
 		</ion-row>
 
-		<ion-row class = "box2-content">
+		<div class = "save-btn">
+		<button [hidden]='!ticketsSaved' ion-button color='primary' (click)='savePressed()'>Save</button>
+		</div>
+
+		<ion-row  [hidden]='ticketsSaved' class = "box2-content">
 			<ion-col>
-				<ion-row class="grid-row" *ngFor="let number of indexes">
+				<ion-row class="grid-row" *ngFor="let counter of bundleViewDescription; let number = index">
 					<ion-col>
 						<p>Quantity <span class="green-text bold-text">{{arrayTicketCount[number]}}</span></p>
 					</ion-col>
 
 					<ion-col>
-						<h5>{{ticketType[number]}}</h5>
+						<h5>{{bundleViewDescription[number].title}}</h5>
 					</ion-col>
 
 					<ion-col>
@@ -98,12 +102,31 @@
 				</ion-row>
 			</ion-col>
 		</ion-row>
+
+
+
+	<ion-row [hidden]='!paymentView'>
+	  <ion-col>
+		<ion-row>
+			<ion-col> <ion-input [(ngModel)]="cardDetails.cardNumber" #cardNumber="ngModel" name="cardNumber" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CARD NUMBER'>
+                        </ion-input></ion-col>
+		</ion-row>
+
+			<ion-row>
+				<ion-col> <ion-input [(ngModel)]="cardDetails.cvv" #cvv="ngModel" name="cvv" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CVV'>
+	                        </ion-input></ion-col>
+				<ion-col> <ion-input [(ngModel)]="cardDetails.expiry" #expiry="ngModel" name="expiry" type="text" spellcheck="false" autocapitalize="off" required ngModel placeholder='* EXPIRY DATE (MM/DD/YYYY)'>
+	                        </ion-input></ion-col>
+			</ion-row>
+		</ion-col>
+	</ion-row>
+
 	</ion-grid>
 	
 	<br>
 
-	<div class = "save-btn">
-		<button ion-button color='primary' (click)='savePressed()'>Save and Continue</button>
+	<div class = "save-btn" >
+		<button [hidden]='ticketsSaved' ion-button color='primary' (click)='continuePressed()'>Continue</button>
 	</div>
 	
 	<page-bsc-footer></page-bsc-footer>

@@ -1,10 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+
+
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+
+
 import { GoogleMaps } from '@ionic-native/google-maps';
+
 import { IonicStorageModule } from '@ionic/storage';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AboutUsPage } from '../pages/about-us/about-us';
@@ -23,9 +29,10 @@ import { PageBankPage } from '../pages/page-bank/page-bank';
 import { PageAtmsPage } from '../pages/page-atms/page-atms';
 import { PublicHolidaysPage } from '../pages/public-holidays/public-holidays';
 import { TravelAlertPage } from '../pages/travel-alert/travel-alert';
+import { DashboardPage } from '../pages/dashboard/dashboard';
+import { TicketDetailsPage } from '../pages/ticket-details/ticket-details'
 import { BscHeaderPage } from '../pages/bsc-header/bsc-header';
 import { TimerPage } from '../pages/timer/timer'
-import { DashboardPage } from '../pages/dashboard/dashboard'
 import { BscFooterPage } from '../pages/bsc-footer/bsc-footer';
 import { RestProvider } from '../providers/rest/rest';
 import { MainRestProvider } from '../providers/rest/mainrest';
@@ -57,12 +64,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TravelAlertPage,
     DashboardPage,
     TimerPage,
+    TicketDetailsPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp, {}, {
         links: [
           { component: HomePage, name: 'Home', segment: 'home' },
+          { component: DashboardPage, name: 'Dashboard', segment: 'dashboard' },
           { component: ServicesPage, name: 'ServicesPage', segment: 'services' },
           { component: ContactUsPage, name: 'ContactUsPage', segment: 'contactus' },
           { component: InBaliPage, name: 'InBaliPage', segment: 'todayinbali' },
@@ -109,6 +118,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TravelAlertPage,
     DashboardPage,
     TimerPage,
+    TicketDetailsPage
   ],
   providers: [
     StatusBar,

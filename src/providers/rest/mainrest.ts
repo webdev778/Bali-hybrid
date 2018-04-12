@@ -16,11 +16,12 @@ export class MainRestProvider {
 
     firePostServiceWithHeader(SERVICE_URL, dataParam, API_HEADER): Observable<{ }> {
 
-     
+      let headers: HttpHeaders = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Access-Control-Request-Method', 'POST');
+      headers.append('Access-Control-Request-Headers', 'Content-Type');
 
-      let tempHeader = {headers : API_HEADER};
-
-      return this.http.post(SERVICE_URL, dataParam,  tempHeader)
+      return this.http.post(SERVICE_URL, dataParam, {headers})
                   .map(this.extractData)
                   .catch(this.handleError);
     }

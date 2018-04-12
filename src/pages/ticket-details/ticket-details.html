@@ -1,0 +1,176 @@
+<ion-header hideWhen="core">
+   <page-bsc-header ></page-bsc-header>
+</ion-header>
+<ion-content style='background-color: #f0f0f0'>
+
+   <page-bsc-header showWhen="core"></page-bsc-header>
+
+
+   <h2 hideWhen='core' class="mobile-sub-header">DASHBOARD</h2>
+   <h2 showWhen='core' class="core-sub-header">DASHBOARD</h2>
+
+   <ion-grid class="dashboard-grid">
+      <ion-row class='form-row'>
+         <ion-col class='form-col'>
+            <div class="form-panel">
+               <form #dashboardForm="ngForm" novalidate>
+                  <ion-list no-lines>
+                     <!-- <ion-item class='form-item'>
+                        <ion-select [(ngModel)]="dashboardData.numberOfCustomers" name='totalCustomers' #numberOfCustomers="ngModel" required placeholder='Total Customers'>
+                        <ion-option *ngFor="let number of arrayCustomers" value={{number}}>{{number}}</ion-option>
+                        </ion-select>
+                     </ion-item>
+                     <p ion-text [hidden]="numberOfCustomers.valid || submittedDashboardDetails == false" color="danger" padding-left>
+                          Select Number of Customers
+                     </p> -->
+
+                     <br>
+                     <ion-item class='form-item'>
+                        <ion-input [(ngModel)]="dashboardData.name" #name="ngModel" name="name" type="text" spellcheck="false" autocapitalize="off" required ngModel placeholder='* Customer Name'>
+                        </ion-input>
+                     </ion-item>
+                       <p ion-text [hidden]="name.valid || submittedDashboardDetails == false" color="danger" padding-left>
+                          Enter customer name
+                        </p>
+                     
+                     <br>
+                     <ion-item class='form-item'>
+                        <ion-input [(ngModel)]="dashboardData.age" #age="ngModel" name="age" type="number" spellcheck="false" autocapitalize="off" required ngModel placeholder='* Customer Age'>
+                        </ion-input>
+                     </ion-item>
+                       <p ion-text [hidden]="age.valid || submittedDashboardDetails == false" color="danger" padding-left>
+                          Enter age of the user
+                        </p>
+                     
+                     <br>
+
+                      <ion-item class='form-item'>
+                           <ion-select [(ngModel)]="dashboardData.gender" name='gender' #gender="ngModel" required placeholder=' * Gender'>
+                              <ion-option value="0">Male</ion-option>
+                              <ion-option value="1">Female</ion-option>
+                                 <ion-option value="2">Transgender</ion-option>
+                           </ion-select>
+                        </ion-item>
+                        <p ion-text [hidden]="dashboardData.gender != '' || submittedDashboardDetails == false " color="danger" padding-left>
+                             Select gender
+                         </p>
+
+
+                         <br>
+
+                        <ion-item class="form-item">
+                             <ion-textarea [(ngModel)]="dashboardData.address" name="message" type="text" #address="ngModel" spellcheck="false" autocapitalize="off" required class="class-text-area" placeholder=" * address">
+                             </ion-textarea>
+                           </ion-item>
+                           <p ion-text [hidden]="address.valid || submittedDashboardDetails == false" color="danger" padding-left>
+                             Enter address
+                           </p> 
+
+                           <br>
+
+                            <ion-item class='form-item'>
+                        <ion-input [(ngModel)]="dashboardData.mobile" #mobile="ngModel" name="age" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* Customer Contact Number'>
+                        </ion-input>
+                     </ion-item>
+                       <p ion-text [hidden]="mobile.valid || submittedDashboardDetails == false" color="danger" padding-left>
+                          Enter Contact Number
+                        </p>
+                     
+                     <br>
+
+
+                     <ion-item class="form-item">
+                             <ion-input [(ngModel)]="dashboardData.email" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email placeholder="* Email">
+                             </ion-input>
+                           </ion-item>
+                           <p ion-text [hidden]="email.valid || submittedDashboardDetails == false" color="danger" padding-left>
+                             Enter a valid email
+                           </p>
+
+                     <br>
+
+
+
+
+
+                     <ion-item class='form-item'>
+                        <ion-input [(ngModel)]="dashboardData.emergencyContactName" #emergencyContactName="ngModel" name="emergencycontactname" type="text" spellcheck="false" autocapitalize="off" required ngModel placeholder=' * Emergency Contact Name'>
+                        </ion-input>
+                     </ion-item>
+                       <p ion-text [hidden]="emergencyContactName.valid || submittedDashboardDetails == false" color="danger" padding-left>
+                          Enter emergency contact name
+                        </p>
+                     
+                     <br>
+
+                     <ion-item class='form-item'>
+                        <ion-input [(ngModel)]="dashboardData.emergencyContactNumber" name="emergencycontactnumber" #emergencyContactNumber="ngModel" type="tel" required placeholder=' * Emergency Contact Number'>
+                        </ion-input>
+                     </ion-item>
+                       <p ion-text [hidden]="emergencyContactNumber.valid || submittedDashboardDetails == false" color="danger" padding-left>
+                           Enter emergency contact number
+                        </p>
+
+
+                     <div class="dashboard-image-div" *ngFor="let dashboardImage of dashboardImages">
+                        <h5>{{dashboardImage.title}}</h5>
+
+                        <img class="dashboard-image" *ngIf="dashboardImage.image" [src]="dashboardImage.image"/>
+
+                        <!-- <button *ngIf="dashboardImage.image" (click)="removeImage(dashboardImage)" icon-only class="custom-file-select" >Remove</button> -->                     
+
+                        <label *ngIf="!dashboardImage.image" class='custom-file-select'>Select Image
+                           <ion-input hidden name="name" type="File" accept="image/*" (change)='imageSelectedFromUser(dashboardImage, $event)'>
+                           </ion-input>
+                        </label>
+
+                        <label *ngIf="dashboardImage.image" class='custom-file-select'>Change Image
+                           <ion-input hidden name="name" type="File" accept="image/*" (change)='imageSelectedFromUser(dashboardImage, $event)'>
+                           </ion-input>
+                        </label>
+                        
+                        <p ion-text [hidden]="dashboardImage.image || submittedDashboardDetails == false" color="danger" padding-left>
+                        {{dashboardImage.errorMsg}}
+                        </p>
+                        
+                     </div>                  
+                     
+                  </ion-list>
+
+                  <br>
+
+                  <ion-row responsive-sm>
+                     <ion-col>
+                        <button (click)="buttonSubmitDetailsPressed(dashboardForm)" ion-button type="submit" full>Submit Details</button>
+                     </ion-col>
+                  </ion-row>
+
+               </form>
+            </div>
+         </ion-col>
+      </ion-row>
+   </ion-grid>
+
+   
+
+   <ion-grid class = "travelPass-grid">
+      <ion-row align-items: center  *ngFor="let counter of travelPasses; let number = index">
+
+         <ion-col col-1><p>{{travelPasses[number].serialNumber}}</p></ion-col>   
+         <ion-col col-6><p><b>Family:{{travelPasses[number].family}}, Adult:{{travelPasses[number].adult}}, Child:{{travelPasses[number].child}}</b></p></ion-col> 
+         <ion-col col-3 >
+           <button *ngIf="travelPasses[number].isActive == 1" ion-button>Activate</button>
+             <p *ngIf="travelPasses[number].isActive == 0"><label style="color: red; font-size: 15px"><b>EXPIRED</b></label></p>
+         </ion-col>
+      </ion-row>
+ </ion-grid>
+
+
+<div class="logout-button">
+      <button (click)="buttonLogoutPressed()" ion-button>LOGOUT</button>
+   </div>
+
+
+   <page-bsc-footer></page-bsc-footer>
+
+</ion-content>

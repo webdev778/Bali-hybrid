@@ -21,7 +21,9 @@ import { PUBLIC_HEADER,
          SERVICE_URL_ATMS,
          SERVICE_URL_HOLIDAYS,
          SERVICE_URL_GET_ALERTS,
-         SERVICE_URL_GET_TRAVEL_PASS } from '../constants/constants';
+         SERVICE_URL_GET_TRAVEL_PASS,
+         SERVICE_URL_SAVE_TRAVEL_PASS,
+         SERVICE_URL_UPDATE_DASHBOARD } from '../constants/constants';
 
 
 
@@ -164,9 +166,37 @@ export class RestProvider {
       return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_HOSPITALS);
    }
 
+   // By Travle Pass Page
+
    getTravelPass(): Observable<{ }> {
 
       return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_GET_TRAVEL_PASS);
+   }
+
+   purchaseTravelPass(passInfo): Observable<{ }> {
+
+     let data = {
+       'user_id': passInfo.user_id,
+       'ticket_info' : passInfo.ticket_info
+     };
+
+     let header = PUBLIC_HEADER;
+
+      return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_SAVE_TRAVEL_PASS, data, header);
+   }
+
+   // Dashboard
+
+   updateUserDashboard(userInfo): Observable<{ }> {
+
+     let data = {
+       'user_id': userInfo.user_id,
+       'passport_image' : userInfo.imgPassport
+     };
+
+     let header = PUBLIC_HEADER;
+
+      return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_UPDATE_DASHBOARD, data, header);
    }
 
 }

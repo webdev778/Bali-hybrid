@@ -10,6 +10,7 @@ import { ContactUsPage } from '../pages/contact-us/contact-us';
 import { FaqPage } from '../pages/faq/faq';
 import { InBaliPage } from '../pages/in-bali/in-bali';
 import { ServicesPage } from '../pages/services/services';
+import { DashboardPage } from '../pages/dashboard/dashboard';
 
 import { RestProvider } from '../providers/rest/rest';
 import { SOCIAL_LINKS, ConstantsProvider,CMS_PAGES } from '../providers/constants/constants';
@@ -61,7 +62,8 @@ export class MyApp {
      this.storage.get('is_login').then((isLogin) => {
        if (isLogin) {
          this.storage.get('user_data').then((userData) => {
-          this.constantProvider.loginTitle = userData.first_name
+          this.constantProvider.loginTitle = "Dashboard"
+          this.constantProvider.loginPage = DashboardPage
         })
        }
      })
