@@ -18,6 +18,7 @@ export class TravelAlertPage {
 
 	bundleData : {data : any};
 	bundleAlerts : any[] = [];
+  isListLoaded = false
 
   constructor(	public navCtrl: NavController, 
   				public navParams: NavParams,
@@ -38,6 +39,7 @@ export class TravelAlertPage {
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
+              this.isListLoaded = true
               this.bundleAlerts = <any[]> this.bundleData.data;
             }
            );

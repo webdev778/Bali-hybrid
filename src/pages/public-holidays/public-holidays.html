@@ -9,7 +9,7 @@
   <h2 hideWhen='core' class='mobile-sub-header'>BALI PUBLIC HOLIDAYS</h2>
     <h2 showWhen='core' class='core-sub-header'>BALI PUBLIC HOLIDAYS</h2>
 
-  <h6 class="placeholder" [hidden]="bundleHolidays.length > 0">No Public Holidays</h6>
+  <h6 class="placeholder" [hidden]="bundleHolidays.length > 0 || !isListLoaded">No Public Holidays</h6>
 
   <br>
 

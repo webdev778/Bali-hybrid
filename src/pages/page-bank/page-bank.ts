@@ -19,6 +19,7 @@ export class PageBankPage {
 
 	bundleData : {data: any};
 	arrayBanks : any[] = [];
+  isListLoaded = false
 
   constructor(	public navCtrl: NavController, 
   				public navParams: NavParams,
@@ -39,6 +40,7 @@ export class PageBankPage {
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
+              this.isListLoaded = true
               this.arrayBanks = this.bundleData.data
             }
            );

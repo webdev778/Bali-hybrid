@@ -9,7 +9,7 @@
 	<h2 hideWhen='core' class='mobile-sub-header'>ATMS</h2>
     <h2 showWhen='core' class='core-sub-header'>ATMS</h2>
 
-	<h6 class="placeholder" [hidden]="arrayAtms.length > 0">No ATM Found</h6>
+	<h6 class="placeholder" [hidden]="arrayAtms.length > 0 || !isListLoaded">No ATM Found</h6>
 
 	<br>
 

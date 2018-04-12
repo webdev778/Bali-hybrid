@@ -19,6 +19,7 @@ export class VaccinationPage {
 
 	bundleData : {data: any};
 	arrayHospitals : any[] = [];
+  isListLoaded = false
 
   constructor(	public navCtrl: NavController, 
   				public navParams: NavParams,
@@ -40,6 +41,7 @@ export class VaccinationPage {
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
+              this.isListLoaded = true
               this.arrayHospitals = this.bundleData.data
             }
            );

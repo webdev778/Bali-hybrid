@@ -19,6 +19,7 @@ export class PageAtmsPage {
 
 	bundleData : {data: any};
 	arrayAtms : any[] = [];
+  isListLoaded = false
 
   constructor(	public navCtrl: NavController, 
   				public navParams: NavParams,
@@ -40,6 +41,7 @@ export class PageAtmsPage {
             responseData => this.bundleData = <{data : any}> responseData,
             err => console.log(err),
             () => {
+              this.isListLoaded = true
               this.arrayAtms = this.bundleData.data
             }
            );
@@ -51,7 +53,7 @@ export class PageAtmsPage {
 
     marker.latitude = atm.lat
     marker.longitude = atm.long
-    marker.label = atm.Atmname
+    marker.label = atm.bankname
 
     markerArray.push(marker);
 
