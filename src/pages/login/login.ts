@@ -101,10 +101,6 @@ export class LoginPage {
            		loader.dismiss()
            	}
            );
-    }
-
-  buttonUpdatePressed(form: NgForm) {
-
   }
 
 	buttonLoginPressed(form: NgForm) {
@@ -148,7 +144,6 @@ export class LoginPage {
         this.userBundle =  <UserDetailsDS> this.loginBundle.user_data
         this.storage.set('user_data', JSON.stringify(this.userBundle));
         this.storage.set('auth_token', this.loginBundle.data);
-        this.storage.set('is_login', true);
 
         this.moveToDashboard()
 

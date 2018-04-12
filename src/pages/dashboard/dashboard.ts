@@ -6,6 +6,7 @@ import { RestProvider } from '../../providers/rest/rest';
 import { ConstantsProvider } from '../../providers/constants/constants'
 
 import { Storage } from '@ionic/storage';
+
 /**
  * Generated class for the DashboardPage page.
  *
@@ -46,7 +47,6 @@ export class DashboardPage {
                 private constantProvider: ConstantsProvider) {
 
     this.checkForLogin()
-    
   }
 
   checkForLogin() {

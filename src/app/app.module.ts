@@ -39,8 +39,6 @@ import { MainRestProvider } from '../providers/rest/mainrest';
 
 import { ConstantsProvider } from '../providers/constants/constants';
 
-import { File } from '@ionic-native/file';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -128,7 +126,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     RestProvider,
     MainRestProvider,
     ConstantsProvider,
-    File,
   ]
 })
 export class AppModule {}

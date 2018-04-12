@@ -48,7 +48,7 @@
 
                         <img class="dashboard-image" *ngIf="dashboardImage.image" [src]="dashboardImage.image"/>
 
-                        <!-- <button *ngIf="dashboardImage.image" (click)="removeImage(dashboardImage)" icon-only class="custom-file-select" >Remove</button> -->                     
+                        <button *ngIf="dashboardImage.image" (click)="removeImage(dashboardImage)" icon-only class="custom-file-select" >Remove</button>                     
 
                         <label *ngIf="!dashboardImage.image" class='custom-file-select'>Select Image
                            <ion-input hidden name="name" type="File" accept="image/*" (change)='imageSelectedFromUser(dashboardImage, $event)'>
