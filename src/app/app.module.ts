@@ -32,7 +32,6 @@ import { TravelAlertPage } from '../pages/travel-alert/travel-alert';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { TicketDetailsPage } from '../pages/ticket-details/ticket-details'
 import { BscHeaderPage } from '../pages/bsc-header/bsc-header';
-import { TimerPage } from '../pages/timer/timer'
 import { BscFooterPage } from '../pages/bsc-footer/bsc-footer';
 import { RestProvider } from '../providers/rest/rest';
 import { MainRestProvider } from '../providers/rest/mainrest';
@@ -63,7 +62,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     PublicHolidaysPage,
     TravelAlertPage,
     DashboardPage,
-    TimerPage,
     TicketDetailsPage
   ],
   imports: [
@@ -117,7 +115,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     PublicHolidaysPage,
     TravelAlertPage,
     DashboardPage,
-    TimerPage,
     TicketDetailsPage
   ],
   providers: [

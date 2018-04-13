@@ -106,7 +106,6 @@ export class LoginPage {
 
 	buttonLoginPressed(form: NgForm) {
 
-     console.log("login Pressed")
 		this.submittedLogin = true
 
 		if (form.valid) {
@@ -147,9 +146,6 @@ export class LoginPage {
         this.storage.set('user_data', JSON.stringify(this.userBundle));
         this.storage.set('auth_token', this.loginBundle.data);
 
-        this.isLogIn = true
-        this.constantProvider.loginTitle = this.userBundle.first_name;
-        console.log("logged in successfully")
         this.moveToDashboard()
 
       }else {

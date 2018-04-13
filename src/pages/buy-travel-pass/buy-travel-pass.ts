@@ -20,7 +20,6 @@ import { Storage } from '@ionic/storage';
  	totalCost : any[] = []
  	finalCost = 0
  	ticketsSaved = true
- 	loginStatus = true
 
  	bundleSaveTickets : Array<TicketStructure> = []
 
@@ -35,8 +34,7 @@ import { Storage } from '@ionic/storage';
 					private alertCtrl: AlertController,
 					public rest: RestProvider,
 					public loadingController: LoadingController,
-					private storage: Storage,
-					private constantProvider: ConstantsProvider) {
+					private storage: Storage) {
  	}
 
 
@@ -102,8 +100,6 @@ import { Storage } from '@ionic/storage';
 
 	    let passInfo = {user_id:'1', ticket_info: this.bundleSaveTickets}
 
-	    console.log(this.bundleSaveTickets)
-
 	    this.rest.purchaseTravelPass(passInfo)
 	       .subscribe(
 	           responseData => this.checkStatus(responseData),
@@ -117,60 +113,42 @@ import { Storage } from '@ionic/storage';
 
 
  	savePressed(){
- 		// this.ticketsSaved = false;
 
- 		// for (let count of this.arrayTicketCount)
- 		// {
- 		// 	if (count > 0) {
- 		// 		return
- 		// 	}
- 		// }
+ 		for (let count of this.arrayTicketCount)
+ 		{
+ 			if (count > 0) {
+ 				this.ticketsSaved = false;
+ 				return
+ 			}
+ 		}
 
- 		// this.presentAlertNoTickets()
- 		// this.ticketsSaved = true;
-
+ 		this.presentAlertNoTickets()
  	}
 
 
  	continuePressed(){
-		
-		this.checkForLogin()
-
+		this.checkForLogin()	
  	}
 
 	checkForLogin() {
  		this.storage.get('is_login').then((isLogin) => {
- 			console.log('islogin'+ isLogin)
- 			if (!isLogin) {
- 				this.presentAlertNotLoggedIn()
- 				this.moveToLoginPage()
- 			}
- 			else{
- 				this.paymentView = true
- 				this.makePayment()
- 			}
- 		})
- 		
+ 			if (isLogin)
+	 		{
+	 			this.paymentView = true
+	 		}
+	 		else
+	 		{
+	 			this.presentAlertNotLoggedIn()
+	 		}
+	 		
+	 	})
  	}
 
  	makePayment(){
- 		for (let count of this.arrayTicketCount)
-		 		{
-		 			if (count > 0) {
-		 				this.initialiseBundle()
-		 				return
-		 			}
-		 		}
+ 		
 	}
 
  	moveToLoginPage() {
- 		this.storage.remove('user_data');
- 		this.storage.remove('auth_token');
- 		this.storage.set('is_login', false);
-
- 		this.constantProvider.loginTitle = 'LOGIN';
- 		this.constantProvider.loginPage = 'LoginPage'
-
  		this.navCtrl.setRoot('LoginPage')
  	}
 
@@ -180,9 +158,9 @@ import { Storage } from '@ionic/storage';
 		{
 			this.arrayTicketCount[count] = 0
 			this.totalCost[count] = 0
-			this.getTotalCost()
 		}
 
+		this.finalCost = 0
  	}
 
 
@@ -190,7 +168,7 @@ import { Storage } from '@ionic/storage';
 		  let alert = this.alertCtrl.create({
 		    title: 'No Tickets',
 		    subTitle: 'Please select a ticket',
-		    buttons: ['Okay']
+		    buttons: ['OK']
 		  });
 		  alert.present();
 	}
@@ -199,8 +177,15 @@ import { Storage } from '@ionic/storage';
 	presentAlertNotLoggedIn(){
 		 let alert = this.alertCtrl.create({
 		    title: 'Not Logged In',
-		    subTitle: 'Please login to purchase passes',
-		    buttons: ['Dismiss']
+		    subTitle: 'Please login to purchase travel pass',
+		    buttons: [
+		    			{
+		    				text : 'Login',
+		    				handler: () => {
+					          this.moveToLoginPage()
+					        }
+		    			}
+		    		]
 		  });
 		  alert.present();
 	}

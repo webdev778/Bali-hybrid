@@ -4,7 +4,6 @@ import { NgForm } from '@angular/forms';
 import { RestProvider } from '../../providers/rest/rest';
 import { ConstantsProvider } from '../../providers/constants/constants'
 import { Storage } from '@ionic/storage';
-import { ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 
@@ -22,28 +21,53 @@ import { Observable } from 'rxjs/Rx';
 })
 export class DashboardPage {
 
-	dashboardData :Array <{ticketId: number,ticketType:string,isActive:number,isExpired:number,profileStatus:number,expiryDate:Date,timerValue:string}>= [
+	dashboardData :Array <{ticketId: number,ticketType:string,isActive:number,isExpired:number,profileStatus:number,expiryDate:number,timerValue:string}>= []
 
-							{ticketId: 0,ticketType:'Adult',isActive:0,isExpired:0,profileStatus:1, expiryDate:new Date('April 12, 2018 11:52:20') ,timerValue: ''},
-							{ticketId: 1,ticketType:'Child',isActive:0,isExpired:0,profileStatus:1, expiryDate:new Date('April 13, 2018 20:12:20') ,timerValue: ''},
-							{ticketId: 2,ticketType:'Family',isActive:0,isExpired:0,profileStatus:1, expiryDate:new Date('April 14, 2018 20:12:20') ,timerValue: ''},
-							{ticketId: 3,ticketType:'Child',isActive:0,isExpired:0,profileStatus:1, expiryDate:new Date('April 15, 2018 20:12:20') ,timerValue: ''}
-							
-													
-						]
-	isValid = true
-	currentTime = new Date().getTime()
-	timerData = {days:'',hours:'',minutes:'',seconds:''}
+	currentTime = Math.floor(new Date().getTime() / 1000)
+	arrayActivatedTickets = []
 
-	constructor(  public navCtrl: NavController, 
-								public navParams: NavParams,
-								public rest: RestProvider,
-								private storage: Storage,
-								private constantProvider: ConstantsProvider) {
+	constructor( 	public navCtrl: NavController, 
+					public navParams: NavParams,
+					public rest: RestProvider,
+					private storage: Storage,
+					private constantProvider: ConstantsProvider) {
 
-		//this.checkForLogin()
+		this.checkForLogin()
+		this.getTicketDataFromServer()
+	}
 
-		
+	getTicketDataFromServer() {
+		this.dashboardData = [
+			{ticketId: 1,ticketType:'Adult',isActive:1,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:52:20').getTime() / 1000),timerValue: ''},
+			{ticketId: 1,ticketType:'Child',isActive:1,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:52:20').getTime() / 1000) ,timerValue: ''},
+			{ticketId: 2,ticketType:'Family',isActive:0,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:52:20').getTime() / 1000) ,timerValue: ''},
+			{ticketId: 3,ticketType:'Child',isActive:0,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:52:20').getTime() / 1000),timerValue: ''}
+		]
+	
+		this.initialiseArrayActivatedTickets()
+	}
+
+	initialiseArrayActivatedTickets() {
+		for (let ticket of this.dashboardData)
+		{
+			if (ticket.isActive)
+			{
+				this.arrayActivatedTickets.push(ticket)
+			}
+		}
+
+		this.activateTimerToUpdateValues()
+	}
+
+	activateTimerToUpdateValues() {
+		Observable.interval(1000).subscribe((x) => {           
+			this.currentTime += 1
+
+			for (let ticket of this.arrayActivatedTickets)
+			{
+				this.getTimerValues(ticket.expiryDate - this.currentTime, ticket);
+			}
+         });
 	}
 
 	checkForLogin() {
@@ -70,19 +94,11 @@ export class DashboardPage {
 			this.moveToLoginPage()
 	}
 
-
-	 private diff: number;
-
 	
 	activateTimer(ticket){
-		ticket.isActive = 1;
- 		
- 		Observable.interval(1000).map((x) => {
-             this.diff = Math.floor((ticket.expiryDate.getTime() - new Date().getTime()) / 1000);
-         }).subscribe((x) => {           
-             this.getTimerValues(this.diff,ticket);
 
-         });
+		ticket.isActive = 1;
+		this.arrayActivatedTickets.push(ticket)
 	}
 
 	getTimerValues(time,ticket){
@@ -97,29 +113,31 @@ export class DashboardPage {
          seconds = time % 60;
 
          if(days < 0){
-             this.isValid = false
              ticket.timerValue = "Ticket Expired"
          }
          else{
-         ticket.timerValue = days+'Days'+' '+hours+'Hours'+' '+ minutes+'Minutes'+ ' '+ seconds + 'Seconds'
+         	ticket.timerValue = "<b>"+days+"</b> Days <b>"+hours+"</b> Hours <b>"+minutes+"</b> Minutes <b>"+seconds+"</b> Seconds"
          }
 
-     }
+    }
 
-     updatedashboard() {
+    convertUnixTimestampToDate(timestamp){
+    	return new Date(timestamp*1000).toUTCString()
+    }
 
-			this.dashboardData['user_id'] = 1
+    updatedashboard() {
 
-			this.rest.updateUserDashboard(this.dashboardData)
-				 .subscribe(
-						 userData => console.log(userData),
-						 err => console.log(err),
-						 () => {
-							 
-							 
-						 }
-					 );
+		this.dashboardData['user_id'] = 1
+
+		this.rest.updateUserDashboard(this.dashboardData)
+			 .subscribe(
+					 userData => console.log(userData),
+					 err => console.log(err),
+					 () => {
+						 
+						 
+					 }
+		);
 	}
-
 
 }

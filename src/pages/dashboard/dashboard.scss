@@ -1,110 +1,35 @@
 page-dashboard  {
 
-	.form-col {
-		min-width: 300px;
-		max-width: 800px;
-
-		h6 {
-			text-align: center;
-		}
-	}
-
 	.sub-button {
 		color: #62a830;
 		font-size: 22px;
 		cursor: pointer;
 	}
 
-	.form-panel{
-		background-color: #fff;
-	    padding: 4rem;
-	    margin-bottom: 2rem ;
-	}
-	.form-panel .form-item{
-		box-shadow: 0 0 0 1px #d2d1d1;
-	}
-
-	input[type='file'] {
- 	 	color: transparent;
-	}
-
-	.image-name {
-		color: green
-	}
-
-	.dashboard-image-div {
-		text-align: center;
-		margin-top: 30px;
-
-		h5 {
-			color: #62a830;
-			font-size: 18px;
-			font-weight: 400
-		}
-
-		.dashboard-image {
-			width: 100px;
-			height: 100px;
-		}
-
-		.custom-file-select {
-			cursor: pointer;
-			font-size: 13px;
-			border:1pt solid gray;
-			padding-left: 5px;
-			padding-right: 5px;
-			padding-top: 3px;
-			padding-bottom: 3px;
-			color: solid gray;
-		}
-	}
 
 	.logout-button {
 		text-align: center;
 		margin-bottom: 20px;
 	}
 
-	.dashboard-grid {
-		padding-left: 0px;
-		padding-right: 0px;
-	}
-
-	.sub-header {
-		background-color: #547d88;
-		/*text-align: center;*/
-		margin-top: 0px;
-		margin-bottom: 0px;
-		color: #ffff;
-		height: 140px;
-		padding-top: 10px;
-		font-weight: 600;
-		/*font-size: 30px;*/
-		background-image: url('../assets/imgs/background.png');
-		
-	}
-	.text3{
-		text-align: center;
-		font-weight: 600;
-		font-size: 30px;
-
-	}
-
-	.travelPass-grid{
-		max-width: 500px;
-		text-align: center;
-		align-self: center;
-		background: #FFF;
-		margin-bottom: 20px
-		/*overflow: inherit;*/
-
-	}
 
 	.flex-row {
+		background-color: #547d88;
+		min-width: 300px;
+		max-width: 500px;
 	    text-align: center; 
 	    display: flex; 
 	    justify-content: center;
 	    padding-left: 5%; 
-	    padding-right: 5%
+	    padding-right: 5%;
+	    margin-bottom: 20px;
+
+	    .form-col {
+
+			h6 {
+				text-align: center;
+			}
+		}
 	}
 
 	.button-map {
@@ -115,22 +40,18 @@ page-dashboard  {
 	    display: inline-block;
 	 }
 
-	 .img-map {
-	    padding-top: 8px;
-	    padding-bottom: 8px;
-	 }
-
 	.flexgrid{
 	  		
-  		color: #ffffff;
-  		max-width: 90%;
-  		min-width: 90%;
+		color: #ffffff;
+		max-width: 90%;
+		min-width: 90%;
 
-      background-color: #547d88;
       padding-left: 20px;
       padding-right: 20px;
       padding-top: 15px;
       padding-bottom: 15px;
+
+      margin-top: 20px;
 
       button {
 
@@ -147,29 +68,11 @@ page-dashboard  {
     		margin-bottom: 15px;
 		}
 
-		img {
-			max-width: 15px;
-			max-height: 15px;
-		}
 
 		min-width: 250px;
 
   	}
 }
 
-ion-app.md [padding-left].text-md-danger{
-	padding-left: 0;
-	margin-left: 0px;
-	margin-top: 5px;
-    margin-bottom: 0;
-}
-
-
-ion-app.ios [padding-left] {
-	padding-left: 0px;
-	margin-left: 0px;
-	margin-top: 5px;
-    margin-bottom: 0px;
-}
 
 
