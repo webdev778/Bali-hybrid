@@ -103,30 +103,40 @@
 			</ion-col>
 		</ion-row>
 
-
-
-	<ion-row [hidden]='!paymentView'>
-	  <ion-col>
-		<ion-row>
-			<ion-col> <ion-input [(ngModel)]="cardDetails.cardNumber" #cardNumber="ngModel" name="cardNumber" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CARD NUMBER'>
-                        </ion-input></ion-col>
-		</ion-row>
-
-			<ion-row>
-				<ion-col> <ion-input [(ngModel)]="cardDetails.cvv" #cvv="ngModel" name="cvv" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CVV'>
-	                        </ion-input></ion-col>
-				<ion-col> <ion-input [(ngModel)]="cardDetails.expiry" #expiry="ngModel" name="expiry" type="text" spellcheck="false" autocapitalize="off" required ngModel placeholder='* EXPIRY DATE (MM/DD/YYYY)'>
-	                        </ion-input></ion-col>
-			</ion-row>
-		</ion-col>
-	</ion-row>
-
-	</ion-grid>
+</ion-grid>
 	
 	<br>
 
 	<div class = "save-btn" >
-		<button [hidden]='ticketsSaved' ion-button color='primary' (click)='continuePressed()'>Continue</button>
+		<button [hidden]='ticketsSaved || paymentView' ion-button color='primary' (click)='continuePressed()'>Continue</button>
+	</div>
+
+
+	<ion-grid class = "selected-grid2" [hidden]='!paymentView'>
+	   	<ion-row class = "grid-row">
+				<ion-col > <ion-input [(ngModel)]="cardDetails.cardNumber" #cardNumber="ngModel" name="cardNumber" type="tel" spellcheck="false"  pInputText (keypress)="validateCard($event)" maxlength="19"  autocapitalize="off" required ngModel placeholder='* CARD NUMBER'>
+	                        </ion-input></ion-col>
+
+	            <ion-col col-2>{{cardType}}</ion-col>
+
+			</ion-row>
+
+				<ion-row class = "grid-row">
+					<ion-col> <ion-input [(ngModel)]="cardDetails.cvv" #cvv="ngModel"  pInputText (keypress)="onlyNumberKey($event)" maxlength="4" name="cvv" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CVV'>
+		                        </ion-input></ion-col>
+						<ion-col>
+						<ion-input [(ngModel)]="cardDetails.mm" #mm="ngModel"  name="mm" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* MM'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" >
+			            </ion-input>
+			        </ion-col>
+			        <ion-col>
+		                <ion-input [(ngModel)]="cardDetails.yy" #yy="ngModel" name="yy" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* YY'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" >
+		                </ion-input>
+		            	</ion-col>
+				</ion-row>
+			</ion-grid>
+
+	<div class = "save-btn" >
+		<button [hidden]='!paymentView' ion-button color='primary' (click)='makePayment()'>Proceed to pay</button>
 	</div>
 	
 	<page-bsc-footer></page-bsc-footer>

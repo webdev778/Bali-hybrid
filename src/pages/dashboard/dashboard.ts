@@ -6,6 +6,7 @@ import { ConstantsProvider } from '../../providers/constants/constants'
 import { Storage } from '@ionic/storage';
 import { ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { TicketDetailsPage} from '../ticket-details/ticket-details';
 
 
 /**
@@ -104,6 +105,10 @@ export class DashboardPage {
          ticket.timerValue = days+'Days'+' '+hours+'Hours'+' '+ minutes+'Minutes'+ ' '+ seconds + 'Seconds'
          }
 
+     }
+
+     buttonDetailsPressed(){
+     	this.navCtrl.push(TicketDetailsPage)
      }
 
      updatedashboard() {

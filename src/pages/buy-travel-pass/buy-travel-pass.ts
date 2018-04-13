@@ -20,7 +20,9 @@ import { Storage } from '@ionic/storage';
  	totalCost : any[] = []
  	finalCost = 0
  	ticketsSaved = true
+ 	summaryView = true
  	loginStatus = true
+ 	cardType = ''
 
  	bundleSaveTickets : Array<TicketStructure> = []
 
@@ -28,7 +30,7 @@ import { Storage } from '@ionic/storage';
 
  	bundleData : {data : any};
 
- 	cardDetails = {cardNumber:'',cvv:0,expiry:'' }					  
+ 	cardDetails = {cardNumber:'',cvv:'',mm:'',yy:'' }					  
 
 	constructor(	public navCtrl: NavController, 
 					public navParams: NavParams,
@@ -117,17 +119,19 @@ import { Storage } from '@ionic/storage';
 
 
  	savePressed(){
- 		// this.ticketsSaved = false;
+ 		this.ticketsSaved = false;
+ 		this.summaryView = false;
 
- 		// for (let count of this.arrayTicketCount)
- 		// {
- 		// 	if (count > 0) {
- 		// 		return
- 		// 	}
- 		// }
 
- 		// this.presentAlertNoTickets()
- 		// this.ticketsSaved = true;
+ 		for (let count of this.arrayTicketCount)
+ 		{
+ 			if (count > 0) {
+ 				return
+ 			}
+ 		}
+
+ 		this.presentAlertNoTickets()
+ 		this.ticketsSaved = true;
 
  	}
 
@@ -143,17 +147,18 @@ import { Storage } from '@ionic/storage';
  			console.log('islogin'+ isLogin)
  			if (!isLogin) {
  				this.presentAlertNotLoggedIn()
- 				this.moveToLoginPage()
+ 				
  			}
  			else{
  				this.paymentView = true
- 				this.makePayment()
  			}
  		})
  		
  	}
 
  	makePayment(){
+
+ 		console.log(this.cardDetails);
  		for (let count of this.arrayTicketCount)
 		 		{
 		 			if (count > 0) {
@@ -200,7 +205,13 @@ import { Storage } from '@ionic/storage';
 		 let alert = this.alertCtrl.create({
 		    title: 'Not Logged In',
 		    subTitle: 'Please login to purchase passes',
-		    buttons: ['Dismiss']
+		     buttons: [{ text : 'Login',
+		    			handler: ()=>{
+		    				console.log('login button on alert pressed')
+		    				this.moveToLoginPage()
+		    			}
+
+					}]
 		  });
 		  alert.present();
 	}
@@ -242,6 +253,64 @@ import { Storage } from '@ionic/storage';
 
     }
 
+    onlyNumberKey(event) {
+    	return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+	}
+
+
+	validateCard(event) {
+		
+		if(this.cardDetails.cardNumber.length == 4) {
+			this.getCardType(this.cardDetails.cardNumber)
+		}
+		if(this.cardDetails.cardNumber.length < 4) {
+			this.cardType = ''
+		}
+
+		return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+	}
+
+	 
+	getCardType(number) {
+	 	
+	 	var re = new RegExp("^4");
+	    if (number.match(re) != null)
+	    	this.cardType = 'VISA'
+        
+
+	    if (/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/.test(number)) 
+	    	this.cardType = 'MasterCard'
+
+	    re = new RegExp("^3[47]");
+	    if (number.match(re) != null)
+	    	this.cardType = 'Amex'
+
+	 
+	    re = new RegExp("^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)");
+	    if (number.match(re) != null)
+	    	this.cardType = 'Discover'
+
+
+	    re = new RegExp("^36");
+	    if (number.match(re) != null)
+	    	this.cardType = 'Diners'
+
+	    
+	    re = new RegExp("^30[0-5]");
+	    if (number.match(re) != null)
+	    	this.cardType = 'Diners- Carte Blanche'
+
+	    
+	    re = new RegExp("^35(2[89]|[3-8][0-9])");
+	    if (number.match(re) != null)
+	    		this.cardType = 'JCB'
+
+
+	    re = new RegExp("^(4026|417500|4508|4844|491(3|7))");
+	    if (number.match(re) != null)
+	    	console.log("Visaxxx");
+
+	}
 
     presentAlert(titlemsg,subtitlemsg) {
       let alert = this.alertCtrl.create({
