@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
@@ -28,6 +28,8 @@ import { CMS_PAGES, ConstantsProvider } from '../../providers/constants/constant
 })
 export class BscHeaderPage {
 
+  @Input() header;
+
   bundlePagesData : {data : any};
 
   pages: Array<{title: string, icon: any, page: any}>;
@@ -52,8 +54,8 @@ export class BscHeaderPage {
     ];
 
     this.loginPage = [{title: constantProvider.loginTitle, icon: 'log_in', page: constantProvider.loginPage}];
-  }
 
+  }
 
   getCMSPages() {
     this.cmsPages = CMS_PAGES;

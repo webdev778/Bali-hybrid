@@ -1,28 +1,31 @@
 <ion-header hideWhen="core">
    <page-bsc-header ></page-bsc-header>
 </ion-header>
-<ion-content style='background-color: #f0f0f0'>
+
+<ion-content>
 
    <page-bsc-header showWhen="core"></page-bsc-header>
 
    <h2 hideWhen='core' class="mobile-sub-header">DASHBOARD</h2>
    <h2 showWhen='core' class="core-sub-header">DASHBOARD</h2>
 
-   <br><br>
-      <ion-grid>
+
+    <ion-grid class='flexgrid'>
+
         <ion-row class='flex-row' *ngFor="let ticket of dashboardData;">
-            <ion-col col-12 class="flexgrid" >
+            <ion-col col-12 class="form-col" >
                     <h2>Ticket Id: {{ticket.ticketId}}</h2>
                     <h5> Ticket Type : {{ticket.ticketType}}</h5>
-                    <h5> Ticket Expiry : {{ticket.expiryDate}}</h5>
+                    <h5 *ngIf="ticket.isActive">Expiry Date: {{convertUnixTimestampToDate(ticket.expiryDate)}}</h5>
             </ion-col>
             <ion-col col-12>
-                <button *ngIf="ticket.profileStatus == 1" class="button-map" ion-button color='primary' full (click)="buttonDetailsPressed()">VIEW PROFILE</button>
-                   <button *ngIf="ticket.profileStatus == 0" class="button-map" color='primary' full  (click)="buttonDetailsPressed()" ion-button>UPDATE PROFILE</button>
 
-                    <button *ngIf = "ticket.isActive == 0" class="button-map" ion-button color='primary' full 
+                <button *ngIf="ticket.profileStatus" class="button-map" (click)="buttonProfileressed()" ion-button color='primary' full >VIEW PROFILE</button>
+                <button *ngIf="!ticket.profileStatus" class="button-map" (click)="buttonProfileressed()" color='primary' full  ion-button>UPDATE PROFILE</button>
+                
+                <button *ngIf = "!ticket.isActive" class="button-map" ion-button color='primary' full 
                        (click)="activateTimer(ticket)">Activate Ticket</button>
-                    <p *ngIf="ticket.isActive == 1">Timer:{{ticket.timerValue}}</p>
+                <p *ngIf="ticket.isActive" [innerHTML]='ticket.timerValue'></p>
             </ion-col>
         </ion-row>
     </ion-grid>
@@ -30,7 +33,7 @@
 
     <div class="logout-button">
           <button (click)="buttonLogoutPressed()" ion-button>LOGOUT</button>
-       </div>
+    </div>
 
     <page-bsc-footer></page-bsc-footer>
 </ion-content>

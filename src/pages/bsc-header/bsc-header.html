@@ -34,10 +34,18 @@
         <ion-col>
           <ion-row>
             <ion-col *ngFor="let page of pages">
-              <button ion-button class="header-button" color='primary' item-left full (click)="openPage(page)">{{page.title}}</button>
+
+              <button *ngIf='header==page.title' ion-button class="header-button" color='primary' item-left full (click)="openPage(page)">{{page.title}}</button>
+
+              <button *ngIf='header!=page.title' ion-button class="header-button" color='light' clear item-left full (click)="openPage(page)">{{page.title}}</button>
+
             </ion-col>
             <ion-col *ngFor="let page of cmsPages">
-              <button ion-button class="header-button" color='primary' item-left full (click)="openPage(page)">{{page.name}}</button>
+
+              <button *ngIf='header==page.name' ion-button class="header-button" color='primary' item-left full (click)="openPage(page)">{{page.name}}</button>
+
+              <button *ngIf='header!=page.name' ion-button class="header-button" color='light' clear item-left full (click)="openPage(page)">{{page.name}}</button>
+
             </ion-col>
           </ion-row>
         </ion-col>

@@ -191,7 +191,6 @@ export class RestProvider {
 
      let data = {
        'user_id': userInfo.user_id,
-       'passport_image' : userInfo.imgPassport
      };
 
      let header = PUBLIC_HEADER;

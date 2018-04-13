@@ -32,13 +32,14 @@ import { TravelAlertPage } from '../pages/travel-alert/travel-alert';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { TicketDetailsPage } from '../pages/ticket-details/ticket-details'
 import { BscHeaderPage } from '../pages/bsc-header/bsc-header';
-import { TimerPage } from '../pages/timer/timer'
 import { BscFooterPage } from '../pages/bsc-footer/bsc-footer';
+import { ActivationPage } from '../pages/activation/activation'
 import { RestProvider } from '../providers/rest/rest';
 import { MainRestProvider } from '../providers/rest/mainrest';
 import { ConstantsProvider } from '../providers/constants/constants';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
 
 @NgModule({
   declarations: [
@@ -63,8 +64,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     PublicHolidaysPage,
     TravelAlertPage,
     DashboardPage,
-    TimerPage,
-    TicketDetailsPage
+    TicketDetailsPage,
+    ActivationPage
   ],
   imports: [
     BrowserModule,
@@ -88,6 +89,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
           { component: TravelAlertPage, name: 'TravelAlertPage', segment: 'travelalert' , defaultHistory:[InBaliPage]},
           { component: AboutUsPage, name: 'AboutUsPage', segment: 'page/:data' , defaultHistory:[InBaliPage]},
           { component: CommonMapPage, name: 'CommonMapPage', segment: 'map/:location' , defaultHistory:[HomePage]},
+          { component: ActivationPage, name: 'ActivationPage', segment: 'activation/:data'},
         ]
     }),
     HttpModule,
@@ -117,8 +119,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     PublicHolidaysPage,
     TravelAlertPage,
     DashboardPage,
-    TimerPage,
-    TicketDetailsPage
+    TicketDetailsPage,
+    ActivationPage
   ],
   providers: [
     StatusBar,

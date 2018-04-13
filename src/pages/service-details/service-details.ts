@@ -22,7 +22,7 @@ export class ServiceDetailsPage {
   constructor(	public navCtrl: NavController, 
   				public navParams: NavParams) {
 
-  	let passedData = JSON.parse(this.navParams.get('service'))
+    let passedData = JSON.parse(this.navParams.get('service'))
   	this.serviceDetails.title = passedData.title
   	this.serviceDetails.description = passedData.description
   	this.serviceDetails.image_name = passedData.image_name

@@ -70,8 +70,8 @@ export class TicketDetailsPage {
 		
 	}
 
-	buttonLogoutPressed() {
-			this.moveToLoginPage()
+	buttonBackPressed() {
+			this.navCtrl.pop();
 	}
 
 	moveToLoginPage() {
