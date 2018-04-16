@@ -19,7 +19,6 @@
 
 		<ion-row>
 			<ion-col>
-
 				<h6 [hidden]='!ticketsSaved'  class="page-paddingtext">Must be Purchased Prior to Bali Arrival</h6>
 			</ion-col>
 		</ion-row>
@@ -30,21 +29,21 @@
 			</ion-col>
 		</ion-row>
 
-		<ion-row [hidden]='!ticketsSaved' class = "box1-content" align-items: center  *ngFor="let counter of bundleViewDescription; let number = index">
+		<ion-row [hidden]='!ticketsSaved' class = "box1-content" align-items: center  *ngFor="let ticket of bundleViewDescription">
 			<ion-col col-12 align-items: center >
 				<ion-row class = "border-element1">
 					<ion-col>
 						<ion-row>
 							<ion-col>
-								<button class = "btn" float-left clear (click)="decrementValue(arrayTicketCount[number],number)">
+								<button class = "btn" float-left clear (click)="decrementValue(ticket)">
 									<ion-icon name="remove" ></ion-icon>
 								</button>
 							</ion-col>
 							<ion-col class = "vertical">
-								<p>{{arrayTicketCount[number]}}</p>
+								<p>{{ticket.quantity}}</p>
 							</ion-col>
 							<ion-col>
-								<button class = "btn" clear (click)="incrementValue(arrayTicketCount[number],number)" float-right>
+								<button class = "btn" clear (click)="incrementValue(ticket)" float-right>
 									<ion-icon name="md-add" ></ion-icon>
 								</button>
 							</ion-col>
@@ -52,18 +51,18 @@
 					</ion-col>
 					<ion-col col-4 class = "static-ctext">
 						<p class = "unit-component">
-							<b>1 {{bundleViewDescription[number].title}}: $</b>
+							<b>1 {{ticket.title}}: $</b>
 						</p>
 					</ion-col>
 					<ion-col col-4 class = "vertical">
-						<p>{{bundleViewDescription[number].price}}</p>
+						<p>{{ticket.price}}</p>
 					</ion-col>
 				</ion-row>
 			</ion-col>
 
 			<ion-col col-12>
-				<p class="page-text">{{bundleViewDescription[number].description}}</p>
-				<p class="page-text">{{bundleViewDescription[number].valid_days}}</p>
+				<p class="page-text">{{ticket.description}}</p>
+				<p class="page-text">{{ticket.valid_days}}</p>
 			</ion-col>
 		</ion-row>
 
@@ -79,17 +78,17 @@
 
 		<ion-row  [hidden]='ticketsSaved' class = "box2-content">
 			<ion-col>
-				<ion-row class="grid-row" *ngFor="let counter of bundleViewDescription; let number = index">
+				<ion-row class="grid-row" *ngFor="let ticket of bundleSaveTickets">
 					<ion-col>
-						<p>Quantity <span class="green-text bold-text">{{arrayTicketCount[number]}}</span></p>
+						<p>Quantity <span class="green-text bold-text">{{ticket.quantity}}</span></p>
 					</ion-col>
 
 					<ion-col>
-						<h5>{{bundleViewDescription[number].title}}</h5>
+						<h5>{{ticket.ticket_type}}</h5>
 					</ion-col>
 
 					<ion-col>
-						<p>Price <span class="green-text bold-text">${{totalCost[number]}}</span></p>
+						<p>Price <span class="green-text bold-text">${{ticket.price}}</span></p>
 					</ion-col>
 				</ion-row>
 
@@ -103,37 +102,41 @@
 			</ion-col>
 		</ion-row>
 
-</ion-grid>
-	
-	<br>
+	</ion-grid>
+
+	<div class = "save-btn" >
+		<button [hidden]='ticketsSaved' ion-button color='primary' (click)='editPressed()'>Edit Tickets</button>
+	</div>
 
 	<div class = "save-btn" >
 		<button [hidden]='ticketsSaved || paymentView' ion-button color='primary' (click)='continuePressed()'>Continue</button>
 	</div>
 
-
 	<ion-grid class = "selected-grid2" [hidden]='!paymentView'>
 	   	<ion-row class = "grid-row">
-				<ion-col > <ion-input [(ngModel)]="cardDetails.cardNumber" #cardNumber="ngModel" name="cardNumber" type="tel" spellcheck="false"  pInputText (keypress)="validateCard($event)" maxlength="19"  autocapitalize="off" required ngModel placeholder='* CARD NUMBER'>
-	                        </ion-input></ion-col>
+			<ion-col>
+				<ion-input [(ngModel)]="cardDetails.cardNumber" #cardNumber="ngModel" name="cardNumber" type="tel" spellcheck="false"  pInputText (keypress)="validateCard($event)" maxlength="19"  autocapitalize="off" required ngModel placeholder='* CARD NUMBER'>
+	            </ion-input>
+	        </ion-col>
+		</ion-row>
 
-	            <ion-col col-2>{{cardType}}</ion-col>
+		<ion-row class = "grid-row">
+			<ion-col> 
+				<ion-input [(ngModel)]="cardDetails.cvv" #cvv="ngModel"  pInputText (keypress)="onlyNumberKey($event)" maxlength="4" name="cvv" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CVV'>
+                </ion-input>
+            </ion-col>
 
-			</ion-row>
+			<ion-col>
+				<ion-input [(ngModel)]="cardDetails.mm" #mm="ngModel"  name="mm" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* MM'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" >
+	            </ion-input>
+	        </ion-col>
 
-				<ion-row class = "grid-row">
-					<ion-col> <ion-input [(ngModel)]="cardDetails.cvv" #cvv="ngModel"  pInputText (keypress)="onlyNumberKey($event)" maxlength="4" name="cvv" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CVV'>
-		                        </ion-input></ion-col>
-						<ion-col>
-						<ion-input [(ngModel)]="cardDetails.mm" #mm="ngModel"  name="mm" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* MM'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" >
-			            </ion-input>
-			        </ion-col>
-			        <ion-col>
-		                <ion-input [(ngModel)]="cardDetails.yy" #yy="ngModel" name="yy" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* YY'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" >
-		                </ion-input>
-		            	</ion-col>
-				</ion-row>
-			</ion-grid>
+	        <ion-col>
+                <ion-input [(ngModel)]="cardDetails.yy" #yy="ngModel" name="yy" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* YY'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" >
+                </ion-input>
+            </ion-col>
+		</ion-row>
+	</ion-grid>
 
 	<div class = "save-btn" >
 		<button [hidden]='!paymentView' ion-button color='primary' (click)='makePayment()'>Proceed to pay</button>

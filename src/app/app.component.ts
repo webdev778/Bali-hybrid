@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -37,7 +37,8 @@ export class MyApp {
               public splashScreen: SplashScreen, 
               public rest: RestProvider,
               public constantProvider: ConstantsProvider,
-              public storage: Storage) {
+              public storage: Storage,
+              private alertCtrl: AlertController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -113,7 +114,39 @@ export class MyApp {
     if (page.page == undefined) {
       this.nav.setRoot(AboutUsPage, {'data': JSON.stringify(page), isPushed: false})
     }else {
-      this.nav.setRoot(page.page)
+      if (page.page == BuyTravelPassPage)
+      {
+        this.checkLoginForTravelPass(page)
+      }else
+      {
+        this.nav.setRoot(page.page)
+      }
     }
+  }
+
+  checkLoginForTravelPass(page) {
+    this.storage.get('is_login').then((isLogin) => {
+      if (!isLogin) {
+        this.presentAlertNotLoggedIn()
+      }
+      else{
+        this.nav.setRoot(page.page)
+      }
+    })
+  }
+
+  presentAlertNotLoggedIn(){
+    let alert = this.alertCtrl.create({
+      title: 'Not Logged In',
+
+      subTitle: 'Please login to purchase travel pass',
+      buttons: [
+      {
+        text : 'Ok',
+      }
+      ]
+
+    });
+    alert.present();
   }
 }

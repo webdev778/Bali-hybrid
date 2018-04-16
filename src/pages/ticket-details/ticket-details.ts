@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, normalizeURL } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { RestProvider } from '../../providers/rest/rest';
 import { ConstantsProvider } from '../../providers/constants/constants'
@@ -12,17 +12,7 @@ import { Storage } from '@ionic/storage';
 })
 export class TicketDetailsPage {
 
-	dashboardData = {  
-											numberOfCustomers: 0, 
-											name:'',
-											age:'',
-											gender:'',
-											address:'',
-											email:'',
-											mobile:'',
-											emergencyContactName: '', 
-											emergencyContactNumber: '', 
-									}
+	dashboardData = { numberOfCustomers: 0, name:'', age:'', gender:'', address:'', email:'', mobile:'', emergencyContactName: '', emergencyContactNumber: ''}
 
 	dashboardImages: Array<{title: string, image: any, errorMsg: string}> = [
 

@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GoogleMaps } from '@ionic-native/google-maps';
 
 import { IonicStorageModule } from '@ionic/storage';
+import { Stripe } from '@ionic-native/stripe';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -39,6 +40,7 @@ import { MainRestProvider } from '../providers/rest/mainrest';
 import { ConstantsProvider } from '../providers/constants/constants';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { StripeProvider } from '../providers/stripe/stripe';
 
 
 @NgModule({
@@ -130,6 +132,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     RestProvider,
     MainRestProvider,
     ConstantsProvider,
+    Stripe,
+    StripeProvider,
   ]
 })
 export class AppModule {}

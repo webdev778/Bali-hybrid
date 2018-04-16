@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-import {TicketStructure} from '../../providers/constants/constants';
-import { ConstantsProvider } from '../../providers/constants/constants';
+import { TicketStructure, TravellersInfoDS } from '../../providers/constants/constants';
+import { StripeProvider } from '../../providers/stripe/stripe';
 import { Storage } from '@ionic/storage';
 
 
@@ -16,15 +16,10 @@ import { Storage } from '@ionic/storage';
 export class BuyTravelPassPage {
 
 	paymentView = false
-	arrayTicketCount : any[] = []
-	totalCost : any[] = []
-	finalCost = 0
 	ticketsSaved = true
 
-	summaryView = true
-	loginStatus = true
 	cardType = ''
-
+	finalCost = 0
 
 	bundleSaveTickets : Array<TicketStructure> = []
 
@@ -32,14 +27,17 @@ export class BuyTravelPassPage {
 
 	bundleData : {data : any};
 
-	cardDetails = {cardNumber:'',cvv:'',mm:'',yy:'' }					  
+	cardDetails = {cardNumber:'',cvv:'',mm:'',yy:'' }
+
+	arrayTravellers : Array<TravellersInfoDS> = []			  
 
 	constructor(	public navCtrl: NavController, 
 		public navParams: NavParams,
 		private alertCtrl: AlertController,
 		public rest: RestProvider,
 		public loadingController: LoadingController,
-		private storage: Storage) {
+		private storage: Storage,
+		private stripe: StripeProvider) {
 	}
 
 
@@ -48,27 +46,17 @@ export class BuyTravelPassPage {
 	}
 
 
-	incrementValue(count,flag) {
-		count++;
-
-		this.arrayTicketCount[flag] = count;
-		this.totalCost[flag] = count * this.bundleViewDescription[flag].price
-
-		this.getTotalCost()
+	incrementValue(ticket) {
+		ticket.quantity++;
 	}
 
 
-	decrementValue(count,flag) {
-		if (count <= 0) {
-			count=0;
+	decrementValue(ticket) {
+		if (ticket.quantity <= 0) {
+			ticket.quantity=0;
 		}else{
-			count--;
+			ticket.quantity--;
 		}
-
-		this.arrayTicketCount[flag] = count;
-		this.totalCost[flag] = count * this.bundleViewDescription[flag].price
-
-		this.getTotalCost()
 	}
 
 
@@ -76,8 +64,8 @@ export class BuyTravelPassPage {
 
 		this.finalCost = 0
 
-		for (let price of this.totalCost) {
-			this.finalCost = this.finalCost + price
+		for (let ticket of this.bundleSaveTickets) {
+			this.finalCost = this.finalCost + ticket.price
 		} 		
 	}
 
@@ -87,11 +75,11 @@ export class BuyTravelPassPage {
 		for (var count = 0 ; count < this.bundleSaveTickets.length; count++) 
 		{
 			this.bundleSaveTickets[count].ticket_id = this.bundleViewDescription[count].id
-			this.bundleSaveTickets[count].quantity = this.arrayTicketCount[count]
-			this.bundleSaveTickets[count].price = this.totalCost[count]
+			this.bundleSaveTickets[count].quantity = this.bundleViewDescription[count].quantity
+			this.bundleSaveTickets[count].price = this.bundleViewDescription[count].quantity * this.bundleViewDescription[count].price
 		}
 
-		this.sendDataToServer()
+		this.getTotalCost()
 	}
 
 
@@ -119,13 +107,12 @@ export class BuyTravelPassPage {
 
 	savePressed(){
 
-		this.ticketsSaved = false;
-		this.summaryView = false;
-		for (let count of this.arrayTicketCount)
+		for (let ticket of this.bundleViewDescription)
 		{
-			if (count > 0) {
+			if (ticket.quantity > 0) {
 
 				this.ticketsSaved = false;
+				this.initialiseBundle()
 				return
 			}
 		}
@@ -134,6 +121,10 @@ export class BuyTravelPassPage {
 		this.presentAlertNoTickets()
 	}
 
+	editPressed() {
+		this.paymentView = false
+		this.ticketsSaved = true
+	}
 
 	continuePressed(){
 		this.checkForLogin()	
@@ -141,11 +132,8 @@ export class BuyTravelPassPage {
 
 	checkForLogin() {
 		this.storage.get('is_login').then((isLogin) => {
-
-			console.log('islogin'+ isLogin)
 			if (!isLogin) {
 				this.presentAlertNotLoggedIn()
-
 			}
 			else{
 				this.paymentView = true
@@ -155,15 +143,7 @@ export class BuyTravelPassPage {
 	}
 
 	makePayment(){
-
-		console.log(this.cardDetails);
-		for (let count of this.arrayTicketCount)
-		{
-			if (count > 0) {
-				this.initialiseBundle()
-				return
-			}
-		}
+		this.sendDataToServer()
 	}
 
 	moveToLoginPage() {
@@ -172,10 +152,9 @@ export class BuyTravelPassPage {
 
 
 	resetValues(){
-		for (var count = 0 ; count < this.bundleSaveTickets.length; count++) 
+		for (let ticket of this.bundleSaveTickets) 
 		{
-			this.arrayTicketCount[count] = 0
-			this.totalCost[count] = 0
+			ticket = <TicketStructure> {}
 		}
 
 		this.finalCost = 0
@@ -221,15 +200,9 @@ export class BuyTravelPassPage {
 
 				for (let ticket of this.bundleViewDescription)
 				{
-					this.arrayTicketCount.push(0)
-					this.totalCost.push(0)
-
-					let ticketInfo = <TicketStructure> {}
-					ticketInfo.price = 0
-					ticketInfo.quantity = 0
-					ticketInfo.ticket_id = 0
-
-					this.bundleSaveTickets.push(ticketInfo)
+					ticket['quantity'] = 0
+					
+					this.bundleSaveTickets.push(<TicketStructure> {ticket_type: ticket.title})
 				}
 
 			}
@@ -265,45 +238,9 @@ export class BuyTravelPassPage {
 	}
 
 
-	getCardType(number) {
-
-		var re = new RegExp("^4");
-		if (number.match(re) != null)
-			this.cardType = 'VISA'
-
-
-		if (/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/.test(number)) 
-			this.cardType = 'MasterCard'
-
-		re = new RegExp("^3[47]");
-		if (number.match(re) != null)
-			this.cardType = 'Amex'
-
-
-		re = new RegExp("^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)");
-		if (number.match(re) != null)
-			this.cardType = 'Discover'
-
-
-		re = new RegExp("^36");
-		if (number.match(re) != null)
-			this.cardType = 'Diners'
-
-
-		re = new RegExp("^30[0-5]");
-		if (number.match(re) != null)
-			this.cardType = 'Diners- Carte Blanche'
-
-
-		re = new RegExp("^35(2[89]|[3-8][0-9])");
-		if (number.match(re) != null)
-			this.cardType = 'JCB'
-
-
-		re = new RegExp("^(4026|417500|4508|4844|491(3|7))");
-		if (number.match(re) != null)
-			console.log("Visaxxx");
-
+	getCardType(cardNumber) {
+		this.cardType = String(this.stripe.getCardType(cardNumber))
+		console.log(this.stripe.getCardType(cardNumber))
 	}
 
 	presentAlert(titlemsg,subtitlemsg) {

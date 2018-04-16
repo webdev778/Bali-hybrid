@@ -21,8 +21,8 @@ export let PUBLIC_HEADER = {
 // Constants for Web Services
 
 
-export let BASE_URL = "http://192.168.0.24/BaliTours/public/api/";
-// export let BASE_URL = "http://admin.balisupport.tk/api/";
+// export let BASE_URL = "http://192.168.0.24/BaliTours/public/api/";
+export let BASE_URL = "http://admin.balisupport.tk/api/";
 
 
 
@@ -73,7 +73,15 @@ export interface TicketStructure
 { 
 	ticket_id: number, 
 	quantity: number, 
-	price: number
+	price: number,
+	ticket_type: string
+}
+
+export interface TravellersInfoDS
+{
+	name: string,
+	date_of_birth: string,
+	gender: string
 }
 
 export interface UserDetailsDS
@@ -96,9 +104,6 @@ export interface UserDetailsDS
 export class ConstantsProvider 
 {
 	loginTitle = 'LOGIN'
-
-	eventDate: Date;
-
 	loginPage : any = 'LoginPage'
 	
 	constructor() {

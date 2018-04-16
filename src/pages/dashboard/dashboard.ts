@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, normalizeURL } from 'ionic-angular';
-import { NgForm } from '@angular/forms';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { ConstantsProvider } from '../../providers/constants/constants'
 import { Storage } from '@ionic/storage';
@@ -39,10 +38,10 @@ export class DashboardPage {
 
 	getTicketDataFromServer() {
 		this.dashboardData = [
-			{ticketId: 1,ticketType:'Adult',isActive:1,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:52:20').getTime() / 1000),timerValue: ''},
-			{ticketId: 1,ticketType:'Child',isActive:1,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:52:20').getTime() / 1000) ,timerValue: ''},
-			{ticketId: 2,ticketType:'Family',isActive:0,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:52:20').getTime() / 1000) ,timerValue: ''},
-			{ticketId: 3,ticketType:'Child',isActive:0,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:52:20').getTime() / 1000),timerValue: ''}
+			{ticketId: 1,ticketType:'Adult',isActive:1,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:00:00').getTime() / 1000),timerValue: ''},
+			{ticketId: 1,ticketType:'Child',isActive:1,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:00:00').getTime() / 1000) ,timerValue: ''},
+			{ticketId: 2,ticketType:'Family',isActive:0,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:00:00').getTime() / 1000) ,timerValue: ''},
+			{ticketId: 3,ticketType:'Child',isActive:0,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:00:00').getTime() / 1000),timerValue: ''}
 		]
 	
 		this.initialiseArrayActivatedTickets()

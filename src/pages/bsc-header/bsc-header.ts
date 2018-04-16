@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import { Component, Input } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+import { Storage } from '@ionic/storage';
 
 import { HomePage } from '../home/home';
 import { InBaliPage } from '../in-bali/in-bali';
@@ -40,7 +41,9 @@ export class BscHeaderPage {
                 public navParams: NavParams, 
                 public rest: RestProvider, 
                 public loadingController: LoadingController, 
-                public constantProvider: ConstantsProvider) {
+                public constantProvider: ConstantsProvider,
+                private storage: Storage,
+                private alertCtrl: AlertController) {
 
     this.getCMSPages()
 
@@ -67,8 +70,39 @@ export class BscHeaderPage {
     if (page.page == undefined) {
       this.navCtrl.setRoot(AboutUsPage, {'data': JSON.stringify(page), isPushed: false})
     }else {
-      this.navCtrl.setRoot(page.page)
+      if (page.page == BuyTravelPassPage){
+        this.checkForLogin(page)
+      }else{
+        this.navCtrl.setRoot(page.page)
+      }
+      
     }
+  }
+
+  checkForLogin(page) {
+    this.storage.get('is_login').then((isLogin) => {
+      if (!isLogin) {
+        this.presentAlertNotLoggedIn()
+      }
+      else{
+        this.navCtrl.setRoot(page.page)
+      }
+    })
+  }
+
+  presentAlertNotLoggedIn(){
+    let alert = this.alertCtrl.create({
+      title: 'Not Logged In',
+
+      subTitle: 'Please login to purchase travel pass',
+      buttons: [
+      {
+        text : 'Ok',
+      }
+      ]
+
+    });
+    alert.present();
   }
 
 }
