@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Stripe } from '@ionic-native/stripe';
 
 /*
   Generated class for the StripeProvider provider.
@@ -10,12 +9,12 @@ import { Stripe } from '@ionic-native/stripe';
 @Injectable()
 export class StripeProvider {
 
-	constructor(private stripe: Stripe) {
-
+	constructor() {
+		
 	}
 
 	getCardType(cardNumber) {
-		return this.stripe.getCardType(cardNumber)
+		return 'visa'
 	}
 
 }

@@ -12,7 +12,7 @@
 	<ion-grid class='exchange-grid'>
 		<ion-row class='exchange-row'>
 			<ion-col col-4>
-				<ion-input [(ngModel)]='basePrice' class='price-field' (ionChange)='convertCurrency()' name='basePrice' type="number" placeholder='Base Price'></ion-input>
+				<ion-input [(ngModel)]='basePrice' class='price-field' (ionChange)='convertCurrency()' name='basePrice' type="number" min='0' placeholder='Base Price'></ion-input>
 			</ion-col>
 			<ion-col col-8>
 				<ion-item class='currency-field' no-lines>

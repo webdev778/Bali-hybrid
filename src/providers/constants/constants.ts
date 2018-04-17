@@ -79,9 +79,11 @@ export interface TicketStructure
 
 export interface TravellersInfoDS
 {
-	name: string,
+	first_name: string,
+	last_name: string,
 	date_of_birth: string,
-	gender: string
+	gender: string,
+	email: string
 }
 
 export interface UserDetailsDS

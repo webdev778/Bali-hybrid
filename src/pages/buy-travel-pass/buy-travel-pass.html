@@ -35,7 +35,7 @@
 					<ion-col>
 						<ion-row>
 							<ion-col>
-								<button class = "btn" float-left clear (click)="decrementValue(ticket)">
+								<button class = "counter-btn" float-left clear (click)="decrementValue(ticket)">
 									<ion-icon name="remove" ></ion-icon>
 								</button>
 							</ion-col>
@@ -43,7 +43,7 @@
 								<p>{{ticket.quantity}}</p>
 							</ion-col>
 							<ion-col>
-								<button class = "btn" clear (click)="incrementValue(ticket)" float-right>
+								<button class = "counter-btn" clear (click)="incrementValue(ticket)" float-right>
 									<ion-icon name="md-add" ></ion-icon>
 								</button>
 							</ion-col>
@@ -112,27 +112,95 @@
 		<button [hidden]='ticketsSaved || paymentView' ion-button color='primary' (click)='continuePressed()'>Continue</button>
 	</div>
 
+	<ion-grid [hidden]='!paymentView'>
+		<ion-row class='form-row' *ngFor='let traveller of arrayTravellers'>
+			<ion-col class='form-col'>
+				<div class="form-panel">
+					    <ion-list no-lines>
+					    	<ion-item class='form-item'>
+						        <ion-input [(ngModel)]="traveller.first_name" name="firstName" type="text" #firstName="ngModel" spellcheck="false" autocapitalize="off" required placeholder='First Name' >
+						        </ion-input>
+					      	</ion-item>
+						      <p ion-text [hidden]="traveller.first_name != '' || travellerFormSubmitted == false" color="danger" padding-left>
+						        First Name is required
+						      </p>
+
+						      <br>
+
+						    <ion-item class='form-item'>
+						        <ion-input [(ngModel)]="traveller.last_name" name="lastName" type="text" #lastName="ngModel" spellcheck="false" autocapitalize="off" required placeholder='Last Name'>
+						        </ion-input>
+					      	</ion-item>
+						      <p ion-text [hidden]="traveller.last_name != '' || travellerFormSubmitted == false" color="danger" padding-left>
+						        Last Name is required
+						      </p>
+
+						      <br>
+
+						      <ion-item class='form-item'>
+						        <ion-input [(ngModel)]="traveller.email" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email placeholder='Email'>
+						        </ion-input>
+						      </ion-item>
+						      <p ion-text [hidden]="email.valid || travellerFormSubmitted == false" color="danger" padding-left>
+						        Enter a valid email
+						      </p>
+
+						      <br>						  						    
+
+						      <ion-item class='form-item'>
+						        <ion-input [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" spellcheck="false" autocapitalize="off" value='' required ngModel type='date' placeholder='Date Of Birth'>
+						        </ion-input>
+						      </ion-item>
+						      <p ion-text [hidden]="dob.valid || travellerFormSubmitted == false" color="danger" padding-left>
+						        Enter date of birth
+						      </p>
+
+						      <br>
+
+							    <ion-item class='form-item'>
+								  	<ion-select [(ngModel)]="traveller.gender" name='gender' #gender="ngModel" required placeholder='Gender'>
+								  		<ion-option value="0">Male</ion-option>
+								    	<ion-option value="1">Female</ion-option>
+								   		<ion-option value="2">Transgender</ion-option>
+									</ion-select>
+								</ion-item>
+								<p ion-text [hidden]="traveller.gender != '' || travellerFormSubmitted == false " color="danger" padding-left>
+							        Select gender
+							    </p>
+
+						</ion-list>
+  				</div>
+			</ion-col>
+		</ion-row>
+
+		<div class = "save-btn" >
+	        <button ion-button (click)="buttonSubmitPressed()" type="submit">Submit</button>
+	    </div>
+	      
+	</ion-grid>
+
+
 	<ion-grid class = "selected-grid2" [hidden]='!paymentView'>
 	   	<ion-row class = "grid-row">
 			<ion-col>
-				<ion-input [(ngModel)]="cardDetails.cardNumber" #cardNumber="ngModel" name="cardNumber" type="tel" spellcheck="false"  pInputText (keypress)="validateCard($event)" maxlength="19"  autocapitalize="off" required ngModel placeholder='* CARD NUMBER'>
+				<ion-input [(ngModel)]="cardDetails.cardNumber" #cardNumber="ngModel" name="cardNumber" type="number" spellcheck="false" (keypress)="getCardType()" maxlength="19" min='0' autocapitalize="off" required ngModel placeholder='* CARD NUMBER'>
 	            </ion-input>
 	        </ion-col>
 		</ion-row>
 
 		<ion-row class = "grid-row">
 			<ion-col> 
-				<ion-input [(ngModel)]="cardDetails.cvv" #cvv="ngModel"  pInputText (keypress)="onlyNumberKey($event)" maxlength="4" name="cvv" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CVV'>
+				<ion-input [(ngModel)]="cardDetails.cvv" #cvv="ngModel" maxlength="4" name="cvv" type="number" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CVV' min='0'>
                 </ion-input>
             </ion-col>
 
 			<ion-col>
-				<ion-input [(ngModel)]="cardDetails.mm" #mm="ngModel"  name="mm" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* MM'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" >
+				<ion-input [(ngModel)]="cardDetails.mm" #mm="ngModel"  name="mm" type="number" spellcheck="false" autocapitalize="off" required ngModel placeholder='* MM' maxlength="2" min='0'>
 	            </ion-input>
 	        </ion-col>
 
 	        <ion-col>
-                <ion-input [(ngModel)]="cardDetails.yy" #yy="ngModel" name="yy" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* YY'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" >
+                <ion-input [(ngModel)]="cardDetails.yy" #yy="ngModel" name="yy" type="number" spellcheck="false" autocapitalize="off" required ngModel placeholder='* YY' maxlength="2" min='0'>
                 </ion-input>
             </ion-col>
 		</ion-row>

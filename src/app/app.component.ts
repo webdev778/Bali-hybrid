@@ -114,13 +114,13 @@ export class MyApp {
     if (page.page == undefined) {
       this.nav.setRoot(AboutUsPage, {'data': JSON.stringify(page), isPushed: false})
     }else {
-      if (page.page == BuyTravelPassPage)
-      {
-        this.checkLoginForTravelPass(page)
-      }else
-      {
+      // if (page.page == BuyTravelPassPage)
+      // {
+      //   this.checkLoginForTravelPass(page)
+      // }else
+      // {
         this.nav.setRoot(page.page)
-      }
+      // }
     }
   }
 

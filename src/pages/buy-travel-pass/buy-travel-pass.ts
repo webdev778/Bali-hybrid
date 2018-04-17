@@ -29,7 +29,8 @@ export class BuyTravelPassPage {
 
 	cardDetails = {cardNumber:'',cvv:'',mm:'',yy:'' }
 
-	arrayTravellers : Array<TravellersInfoDS> = []			  
+	arrayTravellers : Array<TravellersInfoDS> = []
+	travellerFormSubmitted = false		  
 
 	constructor(	public navCtrl: NavController, 
 		public navParams: NavParams,
@@ -137,10 +138,22 @@ export class BuyTravelPassPage {
 			}
 			else{
 				this.paymentView = true
+				this.initialiseArrayTraveller()
 			}
 		})
-
 	}
+
+
+	initialiseArrayTraveller() {
+
+		this.arrayTravellers = []
+
+		for (var count = 1; count <= this.bundleSaveTickets[0].quantity; count++)
+		{
+			this.arrayTravellers.push(<TravellersInfoDS> {first_name:'', last_name:'', gender:'', email:''})
+		}
+	}
+
 
 	makePayment(){
 		this.sendDataToServer()
@@ -209,6 +222,11 @@ export class BuyTravelPassPage {
 			);
 	}
 
+	buttonSubmitPressed() {
+		console.log(this.arrayTravellers)
+		this.travellerFormSubmitted = true
+	}
+
 
 	checkStatus(bundle) {
 
@@ -220,33 +238,16 @@ export class BuyTravelPassPage {
 
 	}
 
-	onlyNumberKey(event) {
-		return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
-	}
-
-
-	validateCard(event) {
-		
-		if(this.cardDetails.cardNumber.length == 4) {
-			this.getCardType(this.cardDetails.cardNumber)
-		}
-		if(this.cardDetails.cardNumber.length < 4) {
-			this.cardType = ''
-		}
-
-		return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
-	}
-
 
 	getCardType(cardNumber) {
 		this.cardType = String(this.stripe.getCardType(cardNumber))
 		console.log(this.stripe.getCardType(cardNumber))
 	}
 
-	presentAlert(titlemsg,subtitlemsg) {
+	presentAlert(title,message) {
 		let alert = this.alertCtrl.create({
-			title: titlemsg,
-			subTitle: subtitlemsg,
+			title: title,
+			subTitle: message,
 			buttons: ['OK']
 		});
 		alert.present();

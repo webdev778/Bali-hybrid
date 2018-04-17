@@ -70,11 +70,11 @@ export class BscHeaderPage {
     if (page.page == undefined) {
       this.navCtrl.setRoot(AboutUsPage, {'data': JSON.stringify(page), isPushed: false})
     }else {
-      if (page.page == BuyTravelPassPage){
-        this.checkForLogin(page)
-      }else{
+      // if (page.page == BuyTravelPassPage){
+      //   this.checkForLogin(page)
+      // }else{
         this.navCtrl.setRoot(page.page)
-      }
+      // }
       
     }
   }
