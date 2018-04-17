@@ -1,14 +1,20 @@
-<ion-header hideWhen="core">
-   <page-bsc-header ></page-bsc-header>
+<ion-header>
+  <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+
+        <ion-title>
+          <div style="text-align: center; width: 100%" >
+
+             <h2 class = "header">Customer Details</h2>
+          </div>
+        </ion-title>
+
+  </ion-navbar>
 </ion-header>
+
 <ion-content style='background-color: #f0f0f0'>
-
-   <page-bsc-header showWhen="core"></page-bsc-header>
-
-
-   <h2 hideWhen='core' class="mobile-sub-header">CUSTOMER DETAILS</h2>
-   <h2 showWhen='core' class="core-sub-header">CUSTOMER DETAILS</h2>
-
    <ion-grid class="dashboard-grid">
       <ion-row class='form-row'>
          <ion-col class='form-col'>
@@ -16,8 +22,9 @@
                <form #dashboardForm="ngForm" novalidate>
                   <ion-list no-lines>
                      <br>
+                     <p class = "para-head" [hidden] = "!dashboardData.profileStatus" ion-text color = "dark" padding-left>Name</p>
                      <ion-item class='form-item'>
-                        <ion-input [(ngModel)]="dashboardData.name" #name="ngModel" name="name" type="text" spellcheck="false" autocapitalize="off" required ngModel placeholder='* Customer Name'>
+                       <ion-input [(ngModel)]="dashboardData.name" #name="ngModel" name="name" type="text" spellcheck="false" autocapitalize="off" required ngModel placeholder='* Customer Name' disabled = "{{dashboardData.profileStatus}}">
                         </ion-input>
                      </ion-item>
                        <p ion-text [hidden]="name.valid || submittedDashboardDetails == false" color="danger" padding-left>
@@ -25,8 +32,10 @@
                         </p>
                      
                      <br>
+                     <p class = "para-head" [hidden] = "!dashboardData.profileStatus" ion-text color = "dark" padding-left>Age</p>
                      <ion-item class='form-item'>
-                        <ion-input [(ngModel)]="dashboardData.age" #age="ngModel" name="age" type="number" spellcheck="false" autocapitalize="off" required ngModel placeholder='* Customer Age'>
+                        <ion-input [(ngModel)]="dashboardData.age" #age="ngModel" name="age" type="number" spellcheck="false" autocapitalize="off" required ngModel placeholder='* Customer Age' disabled = "{{dashboardData.profileStatus}}" 
+                        (keypress)="onlyNumberKey($event)"> 
                         </ion-input>
                      </ion-item>
                        <p ion-text [hidden]="age.valid || submittedDashboardDetails == false" color="danger" padding-left>
@@ -34,9 +43,9 @@
                         </p>
                      
                      <br>
-
+                     <p class = "para-head" [hidden] = "!dashboardData.profileStatus" ion-text color = "dark" padding-left>Gender</p>
                       <ion-item class='form-item'>
-                           <ion-select [(ngModel)]="dashboardData.gender" name='gender' #gender="ngModel" required placeholder=' * Gender'>
+                           <ion-select [(ngModel)]="dashboardData.gender" name='gender' #gender="ngModel" required placeholder=' * Gender' disabled = "{{dashboardData.profileStatus}}">
                               <ion-option value="0">Male</ion-option>
                               <ion-option value="1">Female</ion-option>
                                  <ion-option value="2">Transgender</ion-option>
@@ -48,9 +57,9 @@
 
 
                          <br>
-
+                         <p class = "para-head" [hidden] = "!dashboardData.profileStatus" ion-text color = "dark" padding-left>Address</p>
                         <ion-item class="form-item">
-                             <ion-textarea [(ngModel)]="dashboardData.address" name="message" type="text" #address="ngModel" spellcheck="false" autocapitalize="off" required class="class-text-area" placeholder=" * address">
+                             <ion-textarea [(ngModel)]="dashboardData.address" name="message" type="text" #address="ngModel" spellcheck="false" autocapitalize="off" required class="class-text-area" placeholder=" * address" disabled = "{{dashboardData.profileStatus}}">
                              </ion-textarea>
                            </ion-item>
                            <p ion-text [hidden]="address.valid || submittedDashboardDetails == false" color="danger" padding-left>
@@ -58,9 +67,9 @@
                            </p> 
 
                            <br>
-
+                           <p class = "para-head"  [hidden] = "!dashboardData.profileStatus" ion-text color = "dark" padding-left>Contact Number</p>
                             <ion-item class='form-item'>
-                        <ion-input [(ngModel)]="dashboardData.mobile" #mobile="ngModel" name="age" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* Customer Contact Number'>
+                        <ion-input [(ngModel)]="dashboardData.mobile" #mobile="ngModel" name="age" type="tel" spellcheck="false" autocapitalize="off" (keypress)="onlyNumberKey($event)" required ngModel placeholder='* Customer Contact Number' disabled = "{{dashboardData.profileStatus}}">
                         </ion-input>
                      </ion-item>
                        <p ion-text [hidden]="mobile.valid || submittedDashboardDetails == false" color="danger" padding-left>
@@ -69,9 +78,9 @@
                      
                      <br>
 
-
+                     <p class = "para-head" [hidden] = "!dashboardData.profileStatus" ion-text color = "dark" padding-left>Email</p>
                      <ion-item class="form-item">
-                             <ion-input [(ngModel)]="dashboardData.email" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email placeholder="* Email">
+                             <ion-input [(ngModel)]="dashboardData.email" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email placeholder="* Email" disabled = "{{dashboardData.profileStatus}}" value="John" >
                              </ion-input>
                            </ion-item>
                            <p ion-text [hidden]="email.valid || submittedDashboardDetails == false" color="danger" padding-left>
@@ -79,8 +88,9 @@
                            </p>
 
                      <br>
+                     <p class = "para-head" [hidden] = "!dashboardData.profileStatus" ion-text color = "dark" padding-left>Emergency Contact Name</p>
                     <ion-item class='form-item'>
-                        <ion-input [(ngModel)]="dashboardData.emergencyContactName" #emergencyContactName="ngModel" name="emergencycontactname" type="text" spellcheck="false" autocapitalize="off" required ngModel placeholder=' * Emergency Contact Name'>
+                        <ion-input [(ngModel)]="dashboardData.emergencyContactName" #emergencyContactName="ngModel" name="emergencycontactname" type="text" spellcheck="false" autocapitalize="off" required ngModel placeholder=' * Emergency Contact Name' disabled = "{{dashboardData.profileStatus}}">
                         </ion-input>
                      </ion-item>
                        <p ion-text [hidden]="emergencyContactName.valid || submittedDashboardDetails == false" color="danger" padding-left>
@@ -88,9 +98,10 @@
                         </p>
                      
                      <br>
-
+                     <p class = "para-head" [hidden] = "!dashboardData.profileStatus" ion-text color = "dark" padding-left>Emergency Contact Number</p>
                      <ion-item class='form-item'>
-                        <ion-input [(ngModel)]="dashboardData.emergencyContactNumber" name="emergencycontactnumber" #emergencyContactNumber="ngModel" type="tel" required placeholder=' * Emergency Contact Number'>
+                        <ion-input [(ngModel)]="dashboardData.emergencyContactNumber" (keypress)="onlyNumberKey($event)" name="emergencycontactnumber" #emergencyContactNumber="ngModel" type="tel" required placeholder=' * Emergency Contact Number' 
+                        disabled = "{{dashboardData.profileStatus}}">
                         </ion-input>
                      </ion-item>
                        <p ion-text [hidden]="emergencyContactNumber.valid || submittedDashboardDetails == false" color="danger" padding-left>
@@ -98,7 +109,7 @@
                         </p>
 
 
-                     <div class="dashboard-image-div" *ngFor="let dashboardImage of dashboardImages">
+                     <div [hidden] = "dashboardData.profileStatus" class="dashboard-image-div" *ngFor="let dashboardImage of dashboardImages">
                         <h5>{{dashboardImage.title}}</h5>
 
                         <img class="dashboard-image" *ngIf="dashboardImage.image" [src]="dashboardImage.image"/>
@@ -127,7 +138,9 @@
 
                   <ion-row responsive-sm>
                      <ion-col>
-                        <button (click)="buttonSubmitDetailsPressed(dashboardForm)" ion-button type="submit" full>Submit Details</button>
+                        <button *ngIf = "!dashboardData.profileStatus" (click)="buttonSubmitDetailsPressed(dashboardForm)" ion-button type="submit" full>SUBMIT DETAILS</button>
+                        <button class = "edit-button" *ngIf = "dashboardData.profileStatus" (click)="buttonUpdateDetailsPressed(dashboardForm)" ion-button type="submit" full>EDIT DETAILS</button>
+
                      </ion-col>
                   </ion-row>
 
@@ -137,10 +150,7 @@
       </ion-row>
    </ion-grid>
 <div class="logout-button">
-      <button (click)="buttonBackPressed()" ion-button>Back</button>
+    <!--   <button (click)="buttonBackPressed()" ion-button>Back</button> -->
    </div>
-
-
-   <page-bsc-footer></page-bsc-footer>
 
 </ion-content>

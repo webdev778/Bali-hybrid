@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { ConstantsProvider } from '../../providers/constants/constants'
 import { Storage } from '@ionic/storage';
@@ -21,7 +21,7 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 })
 export class DashboardPage {
 
-	dashboardData :Array <{ticketId: number,ticketType:string,isActive:number,isExpired:number,profileStatus:number,expiryDate:number,timerValue:string}>= []
+	dashboardData :Array <{userId: number,userName:string,ticketType:string,isActive:number,isExpired:number,profileStatus:number,expiryDate:number,timerValue:string}>= []
 
 	currentTime = Math.floor(new Date().getTime() / 1000)
 	arrayActivatedTickets = []
@@ -30,7 +30,8 @@ export class DashboardPage {
 					public navParams: NavParams,
 					public rest: RestProvider,
 					private storage: Storage,
-					private constantProvider: ConstantsProvider) {
+					private constantProvider: ConstantsProvider,
+					private alertCtrl: AlertController,) {
 
 		this.checkForLogin()
 		this.getTicketDataFromServer()
@@ -38,10 +39,42 @@ export class DashboardPage {
 
 	getTicketDataFromServer() {
 		this.dashboardData = [
-			{ticketId: 1,ticketType:'Adult',isActive:1,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:00:00').getTime() / 1000),timerValue: ''},
-			{ticketId: 1,ticketType:'Child',isActive:1,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:00:00').getTime() / 1000) ,timerValue: ''},
-			{ticketId: 2,ticketType:'Family',isActive:0,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:00:00').getTime() / 1000) ,timerValue: ''},
-			{ticketId: 3,ticketType:'Child',isActive:0,isExpired:0,profileStatus:1, expiryDate: Math.floor(new Date('April 13, 2018 19:00:00').getTime() / 1000),timerValue: ''}
+			{	userId: 1,
+				userName:'John Dean',
+				ticketType:'Adult',
+				isActive:0,
+				isExpired:0,
+				profileStatus:1, 
+				expiryDate: Math.floor(new Date('April 17, 2018 19:52:20').getTime() / 1000),
+				timerValue: ''},
+
+				{	userId: 2,
+				userName:'Tom MacMohan',
+				ticketType:'Adult',
+				isActive:0,
+				isExpired:0,
+				profileStatus:0, 
+				expiryDate: Math.floor(new Date('April 30, 2018 19:52:20').getTime() / 1000),
+				timerValue: ''},
+
+				{	userId: 3,
+				userName:'Dwyane Bravo',
+				ticketType:'Adult',
+				isActive:0,
+				isExpired:0,
+				profileStatus:0, 
+				expiryDate: Math.floor(new Date('May 20, 2018 19:52:20').getTime() / 1000),
+				timerValue: ''},
+
+				{	userId: 4,
+				userName:'Tamara',
+				ticketType:'Child',
+				isActive:0,
+				isExpired:0,
+				profileStatus:1, 
+				expiryDate: Math.floor(new Date('May 02, 2018 19:52:20').getTime() / 1000),
+				timerValue: ''},
+
 		]
 	
 		this.initialiseArrayActivatedTickets()
@@ -95,11 +128,35 @@ export class DashboardPage {
 	}
 
 	
-	activateTimer(ticket){
+	activateTimer(ticket) {
 
-		ticket.isActive = 1;
-		this.arrayActivatedTickets.push(ticket)
+		this.presentAlertConfirmActivation(ticket)
+		
 	}
+
+
+	presentAlertConfirmActivation(ticket) {
+		let alert = this.alertCtrl.create({
+			title: 'Confirm Ticket Activation',
+
+			subTitle: 'Are you sure to activate your your ticket?',
+			buttons: [
+						{
+							text : 'Yes, I\'m sure',
+							handler: () => {
+								ticket.isActive = 1;
+								this.arrayActivatedTickets.push(ticket)
+							}
+						},
+						{
+							text: 'Dismiss'
+						}
+					  ]
+
+		});
+		alert.present();
+	}
+
 
 	getTimerValues(time,ticket){
    

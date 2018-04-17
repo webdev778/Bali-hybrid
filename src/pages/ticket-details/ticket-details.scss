@@ -1,4 +1,8 @@
 page-ticket-details {
+
+	.toolbar-background {
+    	background-color: #547d88
+ 	}
 	.form-col {
 		min-width: 300px;
 		max-width: 800px;
@@ -7,6 +11,29 @@ page-ticket-details {
 			text-align: center;
 		}
 	}
+	.para-head{
+		color: #83838c;
+		font-family: "verdana";
+		font-weight: bold
+	}
+
+	.text-input[disabled] {
+    opacity: .7;
+	}
+
+	.edit-button{
+		background-color: #547c87;
+		
+
+	}
+
+	.edit-button-md-primary.activated{
+	 	background-color: #3e5b63;
+	 }
+
+	.edit-button:hover:not(.disable-hover) {
+        background-color: #3e5b63;
+		}
 
 	.sub-button {
 		color: #62a830;
@@ -25,6 +52,10 @@ page-ticket-details {
 
 	input[type='file'] {
  	 	color: transparent;
+	}
+
+	.header{
+		color: white
 	}
 
 	.image-name {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { RestProvider } from '../../providers/rest/rest';
 import { ConstantsProvider } from '../../providers/constants/constants'
@@ -12,7 +12,8 @@ import { Storage } from '@ionic/storage';
 })
 export class TicketDetailsPage {
 
-	dashboardData = { numberOfCustomers: 0, name:'', age:'', gender:'', address:'', email:'', mobile:'', emergencyContactName: '', emergencyContactNumber: ''}
+	dashboardData = { profileStatus: true ,numberOfCustomers: 0, name:'Sagar', age:'23', gender:'0', address:'LKO', email:'sagar@gmail.com',
+						 mobile:'9876543210', emergencyContactName: 'Sumit', emergencyContactNumber: '9123456780'}
 
 	dashboardImages: Array<{title: string, image: any, errorMsg: string}> = [
 
@@ -24,16 +25,7 @@ export class TicketDetailsPage {
 	]
 
 	arrayCustomers = [1,2,3,4,5,6,7,8,9]
-
-
-	travelPasses :Array<{ serialNumber:number, family:number, adult:number, child:number, isActive:number }> = [
-			{ serialNumber : 0, family:4, adult:4, child:2, isActive:1 },
-			{ serialNumber : 1, family:3, adult:3, child:1, isActive:1 },
-			{ serialNumber : 2, family:2, adult:3, child:0, isActive:0 },
-			{ serialNumber : 3, family:6, adult:1, child:4, isActive:1 }
-		
-	  ]
-
+	
 
 	submittedDashboardDetails = false
 	
@@ -41,7 +33,8 @@ export class TicketDetailsPage {
 								public navParams: NavParams,
 								public rest: RestProvider,
 								private storage: Storage,
-								private constantProvider: ConstantsProvider) {
+								private constantProvider: ConstantsProvider,
+								public alertCtrl: AlertController) {
 
 		this.checkForLogin()
 
@@ -97,26 +90,61 @@ export class TicketDetailsPage {
 		dashBoardImage.image = null
 	}
 
+
+	buttonUpdateDetailsPressed(dashboardForm){
+		this.presentAlertConfirmEdit()
+		
+	}
+
+	presentAlertConfirmEdit() {
+		let alert = this.alertCtrl.create({
+			title: 'Are you sure?',
+
+			subTitle: 'You want to bring changes in profile?',
+			buttons: [
+						{
+							text : 'Yes, I\'m sure',
+							handler: () => {
+								this.dashboardData.profileStatus = false;
+							}
+						},
+						{
+							text: 'Dismiss'
+						}
+					  ]
+
+		});
+		alert.present();
+	}
+
+
 	buttonSubmitDetailsPressed(form: NgForm) {
 		 console.log(this.dashboardData)
+
 		if (form.valid && this.checkImageSelectionStatus())  {
 			this.submittedDashboardDetails = false;
+			this.dashboardData.profileStatus = true;
 		}else {
 			this.submittedDashboardDetails = true;
 		}
 	}
 
 	checkImageSelectionStatus() {
-		for (let image of this.dashboardImages) {
-			if (image.image) {
-				// continue
-			}else{
-				return false
-			}
-		}
+		// for (let image of this.dashboardImages) {
+		// 	if (image.image) {
+		// 		// continue
+		// 	}else{
+		// 		return false
+		// 	}
+		// }
 
 		return true
 	}
+
+	onlyNumberKey(event) {
+		return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+	}
+
 
 	updatedashboard() {
 

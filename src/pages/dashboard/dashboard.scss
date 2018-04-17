@@ -14,15 +14,12 @@ page-dashboard  {
 
 
 	.flex-row {
-		background-color: #547d88;
-		min-width: 300px;
-		max-width: 500px;
-	    text-align: center; 
+		background-color: #dce4f2;
+		   text-align: center; 
 	    display: flex; 
 	    justify-content: center;
-	    padding-left: 5%; 
-	    padding-right: 5%;
-	    margin-bottom: 20px;
+	    margin-top: 20px;
+	  
 
 	    .form-col {
 
@@ -32,26 +29,38 @@ page-dashboard  {
 		}
 	}
 
+	.heading{
+		text-align: center;
+		color: #2c487a;
+		font-size: 20px;
+		margin-top: 20px;
+
+	}
+
 	.button-map {
-	    width: 180px;
-	    height: 50px;
+	    width: 140px;
+	    height: 30px;
 	    margin-top: 20px;
 	    margin-bottom: 15px;
 	    display: inline-block;
+	    background-color: #809cce
+
 	 }
+
+	 .button-md-primary.activated{
+	 	background-color: #647da8;
+	 }
+
+	 .button-md-primary:hover:not(.disable-hover) {
+    background-color: #647da8;
+	}
 
 	.flexgrid{
 	  		
-		color: #ffffff;
+		color: #101212;
 		max-width: 90%;
 		min-width: 90%;
 
-      padding-left: 20px;
-      padding-right: 20px;
-      padding-top: 15px;
-      padding-bottom: 15px;
-
-      margin-top: 20px;
 
       button {
 

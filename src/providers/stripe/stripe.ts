@@ -14,8 +14,21 @@ export class StripeProvider {
 
 	}
 
-	getCardType(cardNumber) {
-		return this.stripe.getCardType(cardNumber)
+	getCardName(cardNumber) {
+		console.log("card type ---")
+		console.log(this.stripe.getCardType(cardNumber))
+	}
+
+	getPublishableKey(cardDetails){
+		return this.stripe.setPublishableKey('pk_test_gFlOMAZurb7qqHFteRKcoDkv');
+	}
+
+	getTokenCard(cardDetails){
+		console.log("token ---")
+		console.log(cardDetails)
+		this.stripe.createCardToken(cardDetails)
+	   .then(token => console.log(token.id))
+	   .catch(error => console.error(error));
 	}
 
 }

@@ -27,7 +27,7 @@ export class BuyTravelPassPage {
 
 	bundleData : {data : any};
 
-	cardDetails = {cardNumber:'',cvv:'',mm:'',yy:'' }
+	cardDetails =  { number: '5196190245921772',expMonth:'04' ,expYear: '35',cvc: '968'}
 
 	arrayTravellers : Array<TravellersInfoDS> = []			  
 
@@ -143,6 +143,9 @@ export class BuyTravelPassPage {
 	}
 
 	makePayment(){
+		this.stripe.getPublishableKey(this.cardDetails);
+		this.stripe.getTokenCard(this.cardDetails);
+		this.stripe.getCardName(this.cardDetails.number);
 		this.sendDataToServer()
 	}
 
@@ -225,23 +228,23 @@ export class BuyTravelPassPage {
 	}
 
 
-	validateCard(event) {
+	// validateCard(event) {
 		
-		if(this.cardDetails.cardNumber.length == 4) {
-			this.getCardType(this.cardDetails.cardNumber)
-		}
-		if(this.cardDetails.cardNumber.length < 4) {
-			this.cardType = ''
-		}
+	// 	if(this.cardDetails.number.length == 4) {
+	// 		this.getCardType(this.cardDetails.number)
+	// 	}
+	// 	if(this.cardDetails.number.length < 4) {
+	// 		this.cardType = ''
+	// 	}
 
-		return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
-	}
+	// 	return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+	// }
 
 
-	getCardType(cardNumber) {
-		this.cardType = String(this.stripe.getCardType(cardNumber))
-		console.log(this.stripe.getCardType(cardNumber))
-	}
+	// getCardType(cardNumber) {
+	// 	this.cardType = String(this.stripe.getCardType(cardNumber))
+	// 	console.log(this.stripe.getCardType(cardNumber))
+	// }
 
 	presentAlert(titlemsg,subtitlemsg) {
 		let alert = this.alertCtrl.create({
