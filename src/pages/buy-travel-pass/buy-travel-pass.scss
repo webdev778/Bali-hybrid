@@ -1,5 +1,41 @@
 page-buy-travel-pass {
 
+
+   .form-col {
+      min-width: 300px;
+      max-width: 500px;
+      background-color: #f0f0f0;
+      padding-top: 20px;
+      padding-left: 20px;
+      padding-right: 20px;
+   }
+
+   .sub-button {
+      color: #62a830;
+      font-size: 22px;
+      cursor: pointer;
+   }
+
+   .form-panel{
+      background-color: #f0f0f0;
+   }
+
+
+   .form-panel .form-item{
+      box-shadow: 0 0 0 1px #d2d1d1;
+   }
+
+   .form-header {
+      color: #547d88;
+      height: 60px;
+      text-align: center;
+      padding-top: 0px;
+      margin-right: 10%;
+      margin-left: 10%;
+      font-size: 25px;
+      margin-bottom: 0px;
+   }
+
 	.travel-grid{
  		padding-left: 5%;
  		padding-right: 5%;
@@ -71,12 +107,12 @@ page-buy-travel-pass {
       margin-bottom: 0px;
    }
 
-   .btn{
+   .counter-btn{
       margin-top: 17px;
       height: 25px;
       width: 25px;
       color: white;
-      background-color: #378391
+      background-color: #378391;
    }
 
    .box1-content{
@@ -119,11 +155,20 @@ page-buy-travel-pass {
    }
 
 
-
    .save-btn{
      text-align: center;
      margin-top: 20px;
-
+     margin-bottom: 20px;
    }
 
+}
+
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+ 
+input[type="number"] {
+    -moz-appearance: textfield;
 }

@@ -4,6 +4,7 @@ import { RestProvider } from '../../providers/rest/rest';
 import { TicketStructure, TravellersInfoDS } from '../../providers/constants/constants';
 import { StripeProvider } from '../../providers/stripe/stripe';
 import { Storage } from '@ionic/storage';
+import { NgForm } from '@angular/forms';
 
 
 @IonicPage()
@@ -17,6 +18,7 @@ export class BuyTravelPassPage {
 
 	paymentView = false
 	ticketsSaved = true
+	travellerInfoWindow = true
 
 	cardType = ''
 	finalCost = 0
@@ -29,7 +31,8 @@ export class BuyTravelPassPage {
 
 	cardDetails =  { number: '5196190245921772',expMonth:'04' ,expYear: '35',cvc: '968'}
 
-	arrayTravellers : Array<TravellersInfoDS> = []			  
+	arrayTravellers : Array<TravellersInfoDS> = []
+	travellerFormSubmitted = false		  
 
 	constructor(	public navCtrl: NavController, 
 		public navParams: NavParams,
@@ -53,14 +56,14 @@ export class BuyTravelPassPage {
 
 	decrementValue(ticket) {
 		if (ticket.quantity <= 0) {
-			ticket.quantity=0;
+			ticket.quantity = 0;
 		}else{
 			ticket.quantity--;
 		}
 	}
 
 
-	getTotalCost(){
+	getTotalCost() {
 
 		this.finalCost = 0
 
@@ -70,13 +73,14 @@ export class BuyTravelPassPage {
 	}
 
 
-	initialiseBundle(){
+	initialiseBundle() {
 
 		for (var count = 0 ; count < this.bundleSaveTickets.length; count++) 
 		{
 			this.bundleSaveTickets[count].ticket_id = this.bundleViewDescription[count].id
 			this.bundleSaveTickets[count].quantity = this.bundleViewDescription[count].quantity
-			this.bundleSaveTickets[count].price = this.bundleViewDescription[count].quantity * this.bundleViewDescription[count].price
+			this.bundleSaveTickets[count].price = this.bundleViewDescription[count].quantity * 
+												this.bundleViewDescription[count].price
 		}
 
 		this.getTotalCost()
@@ -105,7 +109,7 @@ export class BuyTravelPassPage {
 	}
 
 
-	savePressed(){
+	savePressed() {
 
 		for (let ticket of this.bundleViewDescription)
 		{
@@ -124,9 +128,11 @@ export class BuyTravelPassPage {
 	editPressed() {
 		this.paymentView = false
 		this.ticketsSaved = true
+		this.travellerFormSubmitted = true
+		this.travellerInfoWindow = true
 	}
 
-	continuePressed(){
+	continuePressed() {
 		this.checkForLogin()	
 	}
 
@@ -137,12 +143,45 @@ export class BuyTravelPassPage {
 			}
 			else{
 				this.paymentView = true
+				this.travellerInfoWindow = false
+				console.log("travellerInfoWindow " +this.travellerInfoWindow)
+				this.initialiseArrayTraveller()
 			}
 		})
-
 	}
 
-	makePayment(){
+initialiseArrayTraveller() {
+
+		this.arrayTravellers = []
+		let travellerArrayIndex = 0
+
+		while( travellerArrayIndex < this.bundleSaveTickets.length) {
+
+			for (var count = 1; count <= this.bundleSaveTickets[travellerArrayIndex].quantity ; count++) {
+
+					if(this.bundleSaveTickets[travellerArrayIndex].ticket_id == 3){
+						this.generateFamilyInputView()
+					}
+					else{
+					this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
+																	last_name:'', 
+																	gender:'', 
+																	email:'', 
+																	ticket_type: this.bundleSaveTickets[
+																							travellerArrayIndex
+																							].ticket_type,
+																	ticket_sub_type: ''
+																	})
+
+																																						  }
+					}
+				    travellerArrayIndex ++
+
+		}
+	}	
+
+
+	makePayment() {
 		this.stripe.getPublishableKey(this.cardDetails);
 		this.stripe.getTokenCard(this.cardDetails);
 		this.stripe.getCardName(this.cardDetails.number);
@@ -154,7 +193,7 @@ export class BuyTravelPassPage {
 	}
 
 
-	resetValues(){
+	resetValues() {
 		for (let ticket of this.bundleSaveTickets) 
 		{
 			ticket = <TicketStructure> {}
@@ -174,7 +213,7 @@ export class BuyTravelPassPage {
 	}
 
 
-	presentAlertNotLoggedIn(){
+	presentAlertNotLoggedIn() {
 		let alert = this.alertCtrl.create({
 			title: 'Not Logged In',
 
@@ -193,7 +232,7 @@ export class BuyTravelPassPage {
 	}
 
 
-	getTravelPassData(){
+	getTravelPassData() {
 		this.rest.getTravelPass()
 		.subscribe(
 			responseData => this.bundleData = <{data : any}> responseData,
@@ -212,6 +251,19 @@ export class BuyTravelPassPage {
 			);
 	}
 
+	
+	
+	buttonSubmitPressed(form: NgForm) {
+		console.log("in buttonSubmitted")
+		this.travellerFormSubmitted = true
+		console.log(form.valid)
+		if(form.valid){
+			this.travellerInfoWindow = true
+			console.log(this.arrayTravellers)
+		}
+	}
+
+
 
 	checkStatus(bundle) {
 
@@ -225,6 +277,41 @@ export class BuyTravelPassPage {
 
 	onlyNumberKey(event) {
 		return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+	}
+
+	generateFamilyInputView() {
+						this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
+																		last_name:'', 
+																		gender:'', 
+																		email:'', 
+																		ticket_type:'Family',
+																		ticket_sub_type: '-Adult',
+
+																	  })
+						this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
+																		last_name:'', 
+																		gender:'', 
+																		email:'', 
+																		ticket_type:'Family',
+																		ticket_sub_type: '-Adult',
+
+																	  })
+						this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
+																		last_name:'', 
+																		gender:'', 
+																		email:'', 
+																		ticket_type:'Family',
+																		ticket_sub_type: '-Child',
+
+																	  })
+						this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
+																		last_name:'', 
+																		gender:'', 
+																		email:'', 
+																		ticket_type:'Family',
+																		ticket_sub_type: '-Child',
+
+																	  })
 	}
 
 
@@ -246,10 +333,10 @@ export class BuyTravelPassPage {
 	// 	console.log(this.stripe.getCardType(cardNumber))
 	// }
 
-	presentAlert(titlemsg,subtitlemsg) {
+	presentAlert(title,message) {
 		let alert = this.alertCtrl.create({
-			title: titlemsg,
-			subTitle: subtitlemsg,
+			title: title,
+			subTitle: message,
 			buttons: ['OK']
 		});
 		alert.present();

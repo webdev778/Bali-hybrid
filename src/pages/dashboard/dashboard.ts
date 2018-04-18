@@ -21,7 +21,8 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 })
 export class DashboardPage {
 
-	dashboardData :Array <{userId: number,userName:string,ticketType:string,isActive:number,isExpired:number,profileStatus:number,expiryDate:number,timerValue:string}>= []
+	dashboardData :Array <{userId: number,userName:string,ticketType:string,
+		isActive:number,isExpired:number,profileStatus:number,expiryDate:number,timerValue:string}>= []
 
 	currentTime = Math.floor(new Date().getTime() / 1000)
 	arrayActivatedTickets = []
@@ -173,7 +174,8 @@ export class DashboardPage {
              ticket.timerValue = "Ticket Expired"
          }
          else{
-         	ticket.timerValue = "<b>"+days+"</b> Days <b>"+hours+"</b> Hours <b>"+minutes+"</b> Minutes <b>"+seconds+"</b> Seconds"
+         	ticket.timerValue = "<b>"+days+"</b> Days <b>"+hours+"</b> Hours <b>"+minutes+"</b> Minutes <b>"+
+         						seconds+"</b> Seconds"
          }
 
     }

@@ -79,9 +79,13 @@ export interface TicketStructure
 
 export interface TravellersInfoDS
 {
-	name: string,
+	first_name: string,
+	last_name: string,
 	date_of_birth: string,
-	gender: string
+	gender: string,
+	email: string,
+	ticket_type: string,
+	ticket_sub_type: string
 }
 
 export interface UserDetailsDS
@@ -98,7 +102,6 @@ export interface UserDetailsDS
 	"updated_at": string, 
 	"deleted_at": string
 }
-
 
 @Injectable()
 export class ConstantsProvider 

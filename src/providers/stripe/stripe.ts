@@ -10,8 +10,8 @@ import { Stripe } from '@ionic-native/stripe';
 @Injectable()
 export class StripeProvider {
 
-	constructor(private stripe: Stripe) {
-
+	constructor(private stripe:Stripe) {
+		
 	}
 
 	getCardName(cardNumber) {
@@ -29,6 +29,7 @@ export class StripeProvider {
 		this.stripe.createCardToken(cardDetails)
 	   .then(token => console.log(token.id))
 	   .catch(error => console.error(error));
+
 	}
 
 }
