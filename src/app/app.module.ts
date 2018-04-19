@@ -39,9 +39,6 @@ import { MainRestProvider } from '../providers/rest/mainrest';
 import { ConstantsProvider } from '../providers/constants/constants';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { StripeProvider } from '../providers/stripe/stripe';
-import { Stripe } from '@ionic-native/stripe';
-
 
 @NgModule({
   declarations: [
@@ -132,8 +129,6 @@ import { Stripe } from '@ionic-native/stripe';
     RestProvider,
     MainRestProvider,
     ConstantsProvider,
-    StripeProvider,
-    Stripe
   ]
 })
 export class AppModule {}

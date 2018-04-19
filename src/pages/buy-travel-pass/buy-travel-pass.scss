@@ -16,6 +16,10 @@ page-buy-travel-pass {
       cursor: pointer;
    }
 
+   .ticket-summary{
+      background-color: #f0f0f0
+   }
+
    .form-panel{
       background-color: #f0f0f0;
    }
@@ -79,16 +83,24 @@ page-buy-travel-pass {
    }
    .page-paddingtext{
       padding-top: 0px;
-      padding-bottom: 10px;
       margin-top: 0px;
       margin-bottom: 0px;
-      color: #378391;
+      color: #0a5877;
+      justify-content: center;
+   }
+   
+   .page-lastpaddingtext{
+      padding-top: 0px;
+      padding-bottom: 10px;
+      margin-top: 0px;
+      margin-bottom: 10px;
+      color: #0a5877;
       justify-content: center;
    }
    
 
    .static-ctext{
-      background:#378391;
+      background:#2f606e;
       text-align: center;
       margin-top: 0px;
       margin-bottom: 0px;
@@ -112,7 +124,7 @@ page-buy-travel-pass {
       height: 25px;
       width: 25px;
       color: white;
-      background-color: #378391;
+      background-color: #2f606e;
    }
 
    .box1-content{
@@ -125,6 +137,7 @@ page-buy-travel-pass {
 
    .border-element1{
       border:1pt solid #378391;
+      background-color: #f0f0f0
 
     }
 

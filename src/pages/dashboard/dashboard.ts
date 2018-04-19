@@ -46,7 +46,7 @@ export class DashboardPage {
 				isActive:0,
 				isExpired:0,
 				profileStatus:1, 
-				expiryDate: Math.floor(new Date('April 17, 2018 19:52:20').getTime() / 1000),
+				expiryDate: Math.floor(new Date('April 30, 2018 19:52:20').getTime() / 1000),
 				timerValue: ''},
 
 				{	userId: 2,
@@ -54,7 +54,7 @@ export class DashboardPage {
 				ticketType:'Adult',
 				isActive:0,
 				isExpired:0,
-				profileStatus:0, 
+				profileStatus:1, 
 				expiryDate: Math.floor(new Date('April 30, 2018 19:52:20').getTime() / 1000),
 				timerValue: ''},
 

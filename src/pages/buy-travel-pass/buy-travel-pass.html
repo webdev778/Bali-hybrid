@@ -25,7 +25,7 @@
 
 		<ion-row>
 			<ion-col>
-				<h3 [hidden]='!ticketsSaved' class="page-paddingtext">Select Travel Pass Requirements</h3>
+				<h3 [hidden]='!ticketsSaved' class="page-lastpaddingtext">Select Travel Pass Requirements</h3>
 			</ion-col>
 		</ion-row>
 
@@ -77,18 +77,22 @@
 		</div>
 
 		<ion-row  [hidden]='ticketsSaved' class = "box2-content">
-			<ion-col>
-				<ion-row class="grid-row" *ngFor="let ticket of bundleSaveTickets">
+			<ion-col class = "ticket-summary">
+				<ion-row class="grid-row" *ngFor="let ticket of bundleSaveTickets" [hidden] = "ticket.quantity == 0">
 					<ion-col>
-						<p>Quantity <span class="green-text bold-text">{{ticket.quantity}}</span></p>
-					</ion-col>
+						<ion-row >
+							<ion-col>
+								<p>Quantity <span class="green-text bold-text">{{ticket.quantity}}</span></p>
+							</ion-col>
 
-					<ion-col>
-						<h5>{{ticket.ticket_type}}</h5>
-					</ion-col>
+							<ion-col>
+								<h5 >{{ticket.ticket_type}}</h5>
+							</ion-col>
 
-					<ion-col>
-						<p>Price <span class="green-text bold-text">${{ticket.price}}</span></p>
+							<ion-col>
+								<p>Price <span class="green-text bold-text">${{ticket.price}}</span></p>
+							</ion-col>
+						</ion-row>
 					</ion-col>
 				</ion-row>
 
@@ -112,7 +116,8 @@
 		<button [hidden]='ticketsSaved || paymentView' ion-button color='primary' (click)='continuePressed()'>Continue</button>
 	</div>
 
-	<h5 style="text-align: center; color: red;" [hidden] = 'travellerInfoWindow'>Please Fill The Customer Details Travelling to Bali</h5>
+	<h5 style="text-align: center; text-align: center;color: #ef2222cc;margin-top: 60px;
+margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult ticket details</h5>
 
 	<form #ticketDetailsEntry="ngForm" novalidate>
 	<ion-grid [hidden]= 'travellerInfoWindow'>
@@ -121,7 +126,7 @@
 				<div class="form-panel">
 					
 					    <ion-list no-lines>
-					    	<p><b>Ticket Type :</b> {{traveller.ticket_type}} {{traveller.ticket_sub_type}}</p>
+					    	<p><b>Ticket Type :</b> {{traveller.ticket_type}}</p>
 					    	<ion-item class='form-item'>
 						        <ion-input [(ngModel)]="traveller.first_name" name="firstName" type="text" #firstName="ngModel" spellcheck="false" autocapitalize="off" required placeholder='First Name' >
 						        </ion-input>
@@ -208,14 +213,14 @@
 
 			<ion-col>
 
-				<ion-input [(ngModel)]="cardDetails.expMonth" #expMonth="ngModel"  name="mm" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* MM'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" >
+				<ion-input [(ngModel)]="cardDetails.exp_month" #exp_month="ngModel"  name="mm" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* MM'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" >
 
 	            </ion-input>
 	        </ion-col>
 
 	        <ion-col>
 
-                <ion-input [(ngModel)]="cardDetails.expYear" #expYear="ngModel" name="yy" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* YY'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" >
+                <ion-input [(ngModel)]="cardDetails.exp_year" #exp_year="ngModel" name="yy" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* YY'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" >
 
                 </ion-input>
             </ion-col>

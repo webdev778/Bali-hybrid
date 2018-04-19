@@ -21,8 +21,8 @@ export let PUBLIC_HEADER = {
 // Constants for Web Services
 
 
-export let BASE_URL = "http://192.168.0.24/BaliTours/public/api/";
-// export let BASE_URL = "http://admin.balisupport.tk/api/";
+// export let BASE_URL = "http://192.168.0.24/BaliTours/public/api/";
+export let BASE_URL = "http://admin.balisupport.tk/api/";
 
 
 
@@ -59,6 +59,8 @@ export let SERVICE_URL_GET_ALERTS = BASE_URL+"getAlert";
 // Buy Travle Pass Page
 export let SERVICE_URL_GET_TRAVEL_PASS = BASE_URL+"getTravelPasses";
 export let SERVICE_URL_SAVE_TRAVEL_PASS = BASE_URL+"addToCart";
+export let SERVICE_URL_MAKE_PAYMENT= BASE_URL+"makepayment";
+
 
 // Dashboard
 export let SERVICE_URL_UPDATE_DASHBOARD = BASE_URL+"updateDashboard";
@@ -74,7 +76,8 @@ export interface TicketStructure
 	ticket_id: number, 
 	quantity: number, 
 	price: number,
-	ticket_type: string
+	ticket_type: string,
+	ticket_details: any,
 }
 
 export interface TravellersInfoDS
@@ -85,7 +88,6 @@ export interface TravellersInfoDS
 	gender: string,
 	email: string,
 	ticket_type: string,
-	ticket_sub_type: string
 }
 
 export interface UserDetailsDS

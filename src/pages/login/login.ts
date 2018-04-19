@@ -105,7 +105,6 @@ export class LoginPage {
   }
 
 	buttonLoginPressed(form: NgForm) {
-
 		this.submittedLogin = true
 
 		if (form.valid) {

@@ -23,7 +23,8 @@ import { PUBLIC_HEADER,
          SERVICE_URL_GET_ALERTS,
          SERVICE_URL_GET_TRAVEL_PASS,
          SERVICE_URL_SAVE_TRAVEL_PASS,
-         SERVICE_URL_UPDATE_DASHBOARD } from '../constants/constants';
+         SERVICE_URL_UPDATE_DASHBOARD,
+         SERVICE_URL_MAKE_PAYMENT } from '../constants/constants';
 
 
 
@@ -177,12 +178,16 @@ export class RestProvider {
 
      let data = {
        'user_id': passInfo.user_id,
-       'ticket_info' : passInfo.ticket_info
+       'token' : passInfo.token,
+       'ticket_bundle': passInfo.ticket_bundle,
+       'card_bundle' : passInfo.card_details,
+       'total_cost' : passInfo.total_cost
+
      };
 
      let header = PUBLIC_HEADER;
 
-      return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_SAVE_TRAVEL_PASS, data, header);
+      return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_MAKE_PAYMENT, data, header);
    }
 
    // Dashboard

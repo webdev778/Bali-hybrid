@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { TicketStructure, TravellersInfoDS } from '../../providers/constants/constants';
-import { StripeProvider } from '../../providers/stripe/stripe';
 import { Storage } from '@ionic/storage';
 import { NgForm } from '@angular/forms';
 
@@ -29,7 +28,7 @@ export class BuyTravelPassPage {
 
 	bundleData : {data : any};
 
-	cardDetails =  { number: '5196190245921772',expMonth:'04' ,expYear: '35',cvc: '968'}
+	cardDetails =  { number: '5196190245921772',exp_month:'04' ,exp_year: '35',cvc: '968'}
 
 	arrayTravellers : Array<TravellersInfoDS> = []
 	travellerFormSubmitted = false		  
@@ -39,8 +38,7 @@ export class BuyTravelPassPage {
 		private alertCtrl: AlertController,
 		public rest: RestProvider,
 		public loadingController: LoadingController,
-		private storage: Storage,
-		private stripe: StripeProvider) {
+		private storage: Storage,) {
 	}
 
 
@@ -81,31 +79,10 @@ export class BuyTravelPassPage {
 			this.bundleSaveTickets[count].quantity = this.bundleViewDescription[count].quantity
 			this.bundleSaveTickets[count].price = this.bundleViewDescription[count].quantity * 
 												this.bundleViewDescription[count].price
+			this.bundleSaveTickets[count].ticket_details = []
 		}
-
+	
 		this.getTotalCost()
-	}
-
-
-	sendDataToServer() {
-
-		let loader = this.loadingController.create({
-			content: "Sending ..."
-		});
-
-		loader.present();
-
-		let passInfo = {user_id:'1', ticket_info: this.bundleSaveTickets}
-
-		this.rest.purchaseTravelPass(passInfo)
-		.subscribe(
-			responseData => this.checkStatus(responseData),
-			err => loader.dismiss(),
-			() => {
-				loader.dismiss()
-				this.resetValues()
-			}
-			);
 	}
 
 
@@ -128,11 +105,12 @@ export class BuyTravelPassPage {
 	editPressed() {
 		this.paymentView = false
 		this.ticketsSaved = true
-		this.travellerFormSubmitted = true
+		this.travellerFormSubmitted = false
 		this.travellerInfoWindow = true
 	}
 
 	continuePressed() {
+		console.log("travellerformsubmitted " + this.travellerFormSubmitted )
 		this.checkForLogin()	
 	}
 
@@ -143,50 +121,34 @@ export class BuyTravelPassPage {
 			}
 			else{
 				this.paymentView = true
-				this.travellerInfoWindow = false
+				this.travellerInfoWindow = true
 				console.log("travellerInfoWindow " +this.travellerInfoWindow)
 				this.initialiseArrayTraveller()
 			}
 		})
 	}
 
-initialiseArrayTraveller() {
+
+	initialiseArrayTraveller() {
 
 		this.arrayTravellers = []
-		let travellerArrayIndex = 0
+		let adultIndex = 0
 
-		while( travellerArrayIndex < this.bundleSaveTickets.length) {
+		
+			for (var count = 1; count <= this.bundleSaveTickets[adultIndex].quantity ; count++) {
 
-			for (var count = 1; count <= this.bundleSaveTickets[travellerArrayIndex].quantity ; count++) {
-
-					if(this.bundleSaveTickets[travellerArrayIndex].ticket_id == 3){
-						this.generateFamilyInputView()
-					}
-					else{
-					this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
+				this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
 																	last_name:'', 
 																	gender:'', 
 																	email:'', 
 																	ticket_type: this.bundleSaveTickets[
-																							travellerArrayIndex
+																							adultIndex
 																							].ticket_type,
-																	ticket_sub_type: ''
-																	})
-
-																																						  }
-					}
-				    travellerArrayIndex ++
-
-		}
+																  })
+					this.travellerInfoWindow = false
+			}
 	}	
 
-
-	makePayment() {
-		this.stripe.getPublishableKey(this.cardDetails);
-		this.stripe.getTokenCard(this.cardDetails);
-		this.stripe.getCardName(this.cardDetails.number);
-		this.sendDataToServer()
-	}
 
 	moveToLoginPage() {
 		this.navCtrl.setRoot('LoginPage')
@@ -205,9 +167,8 @@ initialiseArrayTraveller() {
 
 	presentAlertNoTickets() {
 		let alert = this.alertCtrl.create({
-			title: 'No Tickets',
-			subTitle: 'Please select a ticket',
-			buttons: ['OK']
+			title: 'Please select a ticket to continue',
+			buttons: ['Okay']
 		});
 		alert.present();
 	}
@@ -260,13 +221,63 @@ initialiseArrayTraveller() {
 		if(form.valid){
 			this.travellerInfoWindow = true
 			console.log(this.arrayTravellers)
+			this.addAdultInformation()
+
+			// this.bundleSaveTickets[0].ticket_details = this.arrayTravellers
 		}
+	}
+
+	addAdultInformation() {
+		for (let ticket of this.bundleSaveTickets) {
+			if( ticket.ticket_id == 1 ) {
+				ticket.ticket_details = this.arrayTravellers
+			}
+		}
+
+	}
+
+
+	makePayment() {
+
+		console.log(this.bundleSaveTickets)
+		this.sendDataToServer()
+	}
+
+
+	sendDataToServer() {
+
+		let loader = this.loadingController.create({
+			content: "Sending ..."
+		});
+
+		loader.present();
+
+		let passInfo = {
+							user_id:'1',
+							token: '12345',
+							ticket_bundle: this.bundleSaveTickets, 
+							card_bundle: this.cardDetails, 
+							total_cost: this.finalCost 
+					    }
+
+		console.log(passInfo)
+
+		this.rest.purchaseTravelPass(passInfo)
+		.subscribe(
+			responseData => this.checkStatus(responseData),
+			err => loader.dismiss(),
+			() => {
+				loader.dismiss()
+				this.resetValues()
+			}
+			);
 	}
 
 
 
 	checkStatus(bundle) {
-
+        
+        console.log("response from server "+ bundle);
 		if (bundle.status == 200) {
 			this.presentAlert('', bundle.api_message)
 		}else {
@@ -279,59 +290,7 @@ initialiseArrayTraveller() {
 		return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
 	}
 
-	generateFamilyInputView() {
-						this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
-																		last_name:'', 
-																		gender:'', 
-																		email:'', 
-																		ticket_type:'Family',
-																		ticket_sub_type: '-Adult',
 
-																	  })
-						this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
-																		last_name:'', 
-																		gender:'', 
-																		email:'', 
-																		ticket_type:'Family',
-																		ticket_sub_type: '-Adult',
-
-																	  })
-						this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
-																		last_name:'', 
-																		gender:'', 
-																		email:'', 
-																		ticket_type:'Family',
-																		ticket_sub_type: '-Child',
-
-																	  })
-						this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
-																		last_name:'', 
-																		gender:'', 
-																		email:'', 
-																		ticket_type:'Family',
-																		ticket_sub_type: '-Child',
-
-																	  })
-	}
-
-
-	// validateCard(event) {
-		
-	// 	if(this.cardDetails.number.length == 4) {
-	// 		this.getCardType(this.cardDetails.number)
-	// 	}
-	// 	if(this.cardDetails.number.length < 4) {
-	// 		this.cardType = ''
-	// 	}
-
-	// 	return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
-	// }
-
-
-	// getCardType(cardNumber) {
-	// 	this.cardType = String(this.stripe.getCardType(cardNumber))
-	// 	console.log(this.stripe.getCardType(cardNumber))
-	// }
 
 	presentAlert(title,message) {
 		let alert = this.alertCtrl.create({
