@@ -17,22 +17,20 @@ export class BuyTravelPassPage {
 
 	paymentView = false
 	ticketsSaved = true
+	confirmTicket = true
 	travellerInfoWindow = true
+	travellerFormSubmitted = false		
 
 	cardType = ''
 	finalCost = 0
 
 	bundleSaveTickets : Array<TicketStructure> = []
-
 	bundleViewDescription : any[] = [];
-
 	bundleData : {data : any};
-
-	cardDetails =  { number: '5196190245921772',exp_month:'04' ,exp_year: '35',cvc: '968'}
-
+	cardDetails = { number: '',exp_month:'' ,exp_year: '',cvc: ''}
 	arrayTravellers : Array<TravellersInfoDS> = []
-	travellerFormSubmitted = false		  
-
+	bundlePaymentData = {name:'', contact:'', address:''}
+	
 	constructor(	public navCtrl: NavController, 
 		public navParams: NavParams,
 		private alertCtrl: AlertController,
@@ -41,16 +39,13 @@ export class BuyTravelPassPage {
 		private storage: Storage,) {
 	}
 
-
 	ionViewDidLoad() {
 		this.getTravelPassData()
 	}
 
-
 	incrementValue(ticket) {
 		ticket.quantity++;
 	}
-
 
 	decrementValue(ticket) {
 		if (ticket.quantity <= 0) {
@@ -59,7 +54,6 @@ export class BuyTravelPassPage {
 			ticket.quantity--;
 		}
 	}
-
 
 	getTotalCost() {
 
@@ -70,7 +64,6 @@ export class BuyTravelPassPage {
 		} 		
 	}
 
-
 	initialiseBundle() {
 
 		for (var count = 0 ; count < this.bundleSaveTickets.length; count++) 
@@ -78,13 +71,12 @@ export class BuyTravelPassPage {
 			this.bundleSaveTickets[count].ticket_id = this.bundleViewDescription[count].id
 			this.bundleSaveTickets[count].quantity = this.bundleViewDescription[count].quantity
 			this.bundleSaveTickets[count].price = this.bundleViewDescription[count].quantity * 
-												this.bundleViewDescription[count].price
+			this.bundleViewDescription[count].price
 			this.bundleSaveTickets[count].ticket_details = []
 		}
-	
+		
 		this.getTotalCost()
 	}
-
 
 	savePressed() {
 
@@ -111,6 +103,7 @@ export class BuyTravelPassPage {
 
 	continuePressed() {
 		console.log("travellerformsubmitted " + this.travellerFormSubmitted )
+		console.log(this.bundleSaveTickets)
 		this.checkForLogin()	
 	}
 
@@ -123,11 +116,21 @@ export class BuyTravelPassPage {
 				this.paymentView = true
 				this.travellerInfoWindow = true
 				console.log("travellerInfoWindow " +this.travellerInfoWindow)
-				this.initialiseArrayTraveller()
+
+				for (let ticket of this.bundleSaveTickets) {
+					if( ticket.ticket_id == 1 ) {
+						if( ticket.quantity == 0 ) {
+							this.sendTicketDetailsToServer()
+						}
+						else{
+							this.initialiseArrayTraveller()
+						}
+						break	
+					}
+				}
 			}
 		})
 	}
-
 
 	initialiseArrayTraveller() {
 
@@ -135,25 +138,23 @@ export class BuyTravelPassPage {
 		let adultIndex = 0
 
 		
-			for (var count = 1; count <= this.bundleSaveTickets[adultIndex].quantity ; count++) {
+		for (var count = 1; count <= this.bundleSaveTickets[adultIndex].quantity ; count++) {
 
-				this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
-																	last_name:'', 
-																	gender:'', 
-																	email:'', 
-																	ticket_type: this.bundleSaveTickets[
-																							adultIndex
-																							].ticket_type,
-																  })
-					this.travellerInfoWindow = false
-			}
+			this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
+				last_name:'', 
+				gender:'', 
+				email:'', 
+				ticket_type: this.bundleSaveTickets[
+				adultIndex
+				].ticket_type,
+			})
+			this.travellerInfoWindow = false
+		}
 	}	
-
 
 	moveToLoginPage() {
 		this.navCtrl.setRoot('LoginPage')
 	}
-
 
 	resetValues() {
 		for (let ticket of this.bundleSaveTickets) 
@@ -164,15 +165,13 @@ export class BuyTravelPassPage {
 		this.finalCost = 0
 	}
 
-
 	presentAlertNoTickets() {
 		let alert = this.alertCtrl.create({
-			title: 'Please select a ticket to continue',
+			subTitle: 'Please select a ticket to continue',
 			buttons: ['Okay']
 		});
 		alert.present();
 	}
-
 
 	presentAlertNotLoggedIn() {
 		let alert = this.alertCtrl.create({
@@ -191,7 +190,6 @@ export class BuyTravelPassPage {
 		});
 		alert.present();
 	}
-
 
 	getTravelPassData() {
 		this.rest.getTravelPass()
@@ -212,8 +210,6 @@ export class BuyTravelPassPage {
 			);
 	}
 
-	
-	
 	buttonSubmitPressed(form: NgForm) {
 		console.log("in buttonSubmitted")
 		this.travellerFormSubmitted = true
@@ -222,8 +218,7 @@ export class BuyTravelPassPage {
 			this.travellerInfoWindow = true
 			console.log(this.arrayTravellers)
 			this.addAdultInformation()
-
-			// this.bundleSaveTickets[0].ticket_details = this.arrayTravellers
+			this.sendTicketDetailsToServer()
 		}
 	}
 
@@ -231,20 +226,17 @@ export class BuyTravelPassPage {
 		for (let ticket of this.bundleSaveTickets) {
 			if( ticket.ticket_id == 1 ) {
 				ticket.ticket_details = this.arrayTravellers
+				break
 			}
 		}
 
 	}
 
-
 	makePayment() {
-
-		console.log(this.bundleSaveTickets)
-		this.sendDataToServer()
+		this.sendPaymentDetailsToServer()
 	}
 
-
-	sendDataToServer() {
+	sendTicketDetailsToServer() {
 
 		let loader = this.loadingController.create({
 			content: "Sending ..."
@@ -253,12 +245,11 @@ export class BuyTravelPassPage {
 		loader.present();
 
 		let passInfo = {
-							user_id:'1',
-							token: '12345',
-							ticket_bundle: this.bundleSaveTickets, 
-							card_bundle: this.cardDetails, 
-							total_cost: this.finalCost 
-					    }
+			user_id:'1',
+			token: '12345',
+			ticket_bundle: this.bundleSaveTickets, 
+			total_cost: this.finalCost 
+		}
 
 		console.log(passInfo)
 
@@ -274,10 +265,9 @@ export class BuyTravelPassPage {
 	}
 
 
-
 	checkStatus(bundle) {
-        
-        console.log("response from server "+ bundle);
+		
+		console.log("response from server "+ bundle);
 		if (bundle.status == 200) {
 			this.presentAlert('', bundle.api_message)
 		}else {
@@ -286,17 +276,55 @@ export class BuyTravelPassPage {
 
 	}
 
-	onlyNumberKey(event) {
+	sendPaymentDetailsToServer(){
+
+		let loader = this.loadingController.create({
+			content: "Sending ..."
+		});
+
+		// loader.present();
+
+		let passInfo = {
+			user_id:'1',
+			token: '12345',
+			billing_info: this.bundlePaymentData, 
+			card_details: this.cardDetails 
+		}
+
+
+		console.log(passInfo)
+
+		// this.rest.purchaseTravelPass(passInfo)
+		// .subscribe(
+		// 	responseData => this.checkStatus(responseData),
+		// 	err => loader.dismiss(),
+		// 	() => {
+		// 		loader.dismiss()
+		// 		this.resetValues()
+		// 	}
+		// 	);
+	}
+
+	validateCard(event) {
 		return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
 	}
 
 
+	onlyNumberKey(event) {
+		return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+	}
+
+	bookTicketsPressed(){
+		console.log(this.bundleSaveTickets)
+		this.sendTicketDetailsToServer()
+		this.confirmTicket = false
+	}
 
 	presentAlert(title,message) {
 		let alert = this.alertCtrl.create({
 			title: title,
 			subTitle: message,
-			buttons: ['OK']
+			buttons: ['Okay']
 		});
 		alert.present();
 	}

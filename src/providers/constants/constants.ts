@@ -15,9 +15,6 @@ export let PUBLIC_HEADER = {
 	
 }
 
-
-
-
 // Constants for Web Services
 
 
@@ -60,6 +57,7 @@ export let SERVICE_URL_GET_ALERTS = BASE_URL+"getAlert";
 export let SERVICE_URL_GET_TRAVEL_PASS = BASE_URL+"getTravelPasses";
 export let SERVICE_URL_SAVE_TRAVEL_PASS = BASE_URL+"addToCart";
 export let SERVICE_URL_MAKE_PAYMENT= BASE_URL+"makepayment";
+export let SERVICE_URL_PLACE_ORDER= BASE_URL+"placeorder";
 
 
 // Dashboard
