@@ -40,41 +40,47 @@ export class DashboardPage {
 
 	getTicketDataFromServer() {
 		this.dashboardData = [
-			{	userId: 1,
+			{	
+				userId: 1,
 				userName:'John Dean',
 				ticketType:'Adult',
 				isActive:0,
 				isExpired:0,
 				profileStatus:1, 
 				expiryDate: Math.floor(new Date('April 30, 2018 19:52:20').getTime() / 1000),
-				timerValue: ''},
+				timerValue: ''
+			},
 
-				{	userId: 2,
+			{	
+				userId: 2,
 				userName:'Tom MacMohan',
 				ticketType:'Adult',
 				isActive:0,
 				isExpired:0,
 				profileStatus:1, 
 				expiryDate: Math.floor(new Date('April 30, 2018 19:52:20').getTime() / 1000),
-				timerValue: ''},
+				timerValue: ''
+			},
 
-				{	userId: 3,
+			{	userId: 3,
 				userName:'Dwyane Bravo',
 				ticketType:'Adult',
 				isActive:0,
 				isExpired:0,
 				profileStatus:0, 
 				expiryDate: Math.floor(new Date('May 20, 2018 19:52:20').getTime() / 1000),
-				timerValue: ''},
+				timerValue: ''
+			},
 
-				{	userId: 4,
+			{	userId: 4,
 				userName:'Tamara',
 				ticketType:'Child',
 				isActive:0,
 				isExpired:0,
 				profileStatus:1, 
 				expiryDate: Math.floor(new Date('May 02, 2018 19:52:20').getTime() / 1000),
-				timerValue: ''},
+				timerValue: ''
+			},
 
 		]
 	

@@ -212,79 +212,78 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 	</form>
 
 
-	<ion-grid class = "selected-grid2" [hidden]='!paymentView || !travellerInfoWindow'>
-		
-		<ion-row class = "grid-row">
-			<ion-col>
-				<h4 class = "payment-title">Fill details for Payment</h4>
-	        </ion-col>
-		</ion-row>
 
-		<ion-row class = "grid-row">
-			<ion-col>
-				
-				<ion-input [(ngModel)]="bundlePaymentData.name" #name="ngModel" name="name" type="text" spellcheck="false"     autocapitalize="off" required ngModel placeholder='* Name'>
+	<ion-grid class='form-grid' [hidden]='!paymentView || !travellerInfoWindow'>
 
-	            </ion-input>
-	        </ion-col>
-		</ion-row>
-
-			<ion-row class = "grid-row">
-			<ion-col>
-
-				<ion-input [(ngModel)]="bundlePaymentData.contact" #contact="ngModel" pInputText (keypress)="validateCard($event)" maxlength="19" name="contact" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* Contact Number'>
-
-	            </ion-input>
-	        </ion-col>
-		</ion-row>
-
-			<ion-row class = "grid-row">
-			<ion-col>
-
-				<ion-input [(ngModel)]="bundlePaymentData.address" #address="ngModel" name="address" type="text-area" spellcheck="false"     autocapitalize="off" required ngModel placeholder='* Address'>
-
-	            </ion-input>
-	        </ion-col>
-		</ion-row>
-
-		
-	   	<ion-row class = "grid-row">
-			<ion-col>
-
-				<ion-input [(ngModel)]="cardDetails.number" #number="ngModel" name="cardNumber" type="tel" spellcheck="false"  pInputText (keypress)="validateCard($event)" maxlength="19"  autocapitalize="off" required ngModel placeholder='* CARD NUMBER'>
-
-	            </ion-input>
-	        </ion-col>
-		</ion-row>
-
-		<ion-row class = "grid-row">
-			<ion-col> 
-
-				<ion-input [(ngModel)]="cardDetails.cvc" #cvc="ngModel"  pInputText (keypress)="onlyNumberKey($event)" maxlength="4" name="cvc" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CVC'>
-
-                </ion-input>
-            </ion-col>
-
-			<ion-col>
-
-				<ion-input [(ngModel)]="cardDetails.exp_month" #exp_month="ngModel"  name="mm" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* MM'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" >
-
-	            </ion-input>
-	        </ion-col>
-
-	        <ion-col>
-
-                <ion-input [(ngModel)]="cardDetails.exp_year" #exp_year="ngModel" name="yy" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* YY'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" >
-
-                </ion-input>
-            </ion-col>
-		</ion-row>
-		
-		<ion-row class = "payment-btn">
-			
-				<button ion-button color='primary' (click)='makePayment()'>Proceed to pay</button>
+		<h5 class = "payment-title"> Please Enter Payment Details </h5>
+		<ion-row class = "form-row">
+			<ion-col class = "form-col">
+				<div class="form-panel">
+					<form #paymentDetailsEntry="ngForm" novalidate>
+						<ion-list>
+							<ion-item class='form-item'>
+								<ion-input [(ngModel)]="bundlePaymentData.name" #name="ngModel" name="name" type="text" spellcheck="false"     autocapitalize="off" required ngModel placeholder='* NAME'></ion-input>
+							</ion-item>
+							<p ion-text [hidden]="name.valid || paymentFormSubmitted == false" color="danger" padding-left>
+								Name is required
+							</p>
+							<br>
+							<ion-item class='form-item'>
+								<ion-input [(ngModel)]="bundlePaymentData.contact" #contact="ngModel" pInputText (keypress)="validateCard($event)" maxlength="19" name="contact" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CONTACT NUMBER'></ion-input>
+							</ion-item>
+							<p ion-text [hidden]="contact.valid || paymentFormSubmitted == false" color="danger" padding-left>
+								Contact Number is required
+							</p>
+							<br>
+							<ion-item class='form-item'>
+								<ion-input [(ngModel)]="bundlePaymentData.address" #address="ngModel" name="address" type="text-area" spellcheck="false"     autocapitalize="off" required ngModel placeholder='* ADDRESS'></ion-input>
+							</ion-item>
+							<p ion-text [hidden]="address.valid || paymentFormSubmitted == false" color="danger" padding-left>
+								Address is required
+							</p>
+							<br>
+							<ion-item class='form-item'>
+								<ion-input [(ngModel)]="cardDetails.number" #number="ngModel" name="cardNumber" type="tel" spellcheck="false"  pInputText (keypress)="validateCard($event)" maxlength="19"  autocapitalize="off" required ngModel placeholder='* CARD NUMBER'></ion-input>
+							</ion-item>
+							<p ion-text [hidden]="number.valid || paymentFormSubmitted == false" color="danger" padding-left>
+								Card Number is required
+							</p>
+							<br>
+							<ion-item class='form-item'>
+								<ion-input [(ngModel)]="cardDetails.cvc" #cvc="ngModel"  pInputText (keypress)="onlyNumberKey($event)" maxlength="4" name="cvc" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CVC'></ion-input>
+							</ion-item>
+							<p ion-text [hidden]="cvc.valid || paymentFormSubmitted == false" color="danger" padding-left>
+								CVC number is required
+							</p>
+							<br>
+							<ion-item class='form-item'>
+								<ion-input [(ngModel)]="cardDetails.exp_month" #exp_month="ngModel"  name="mm" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* MM'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" ></ion-input>
+							</ion-item>
+							<p ion-text [hidden]="exp_month.valid || paymentFormSubmitted == false" color="danger" padding-left>
+								Expiry Month of card is required
+							</p>
+							<br>
+							<ion-item class='form-item'>
+								<ion-input [(ngModel)]="cardDetails.exp_year" #exp_year="ngModel" name="yy" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* YY'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" ></ion-input>
+							</ion-item>
+							<p ion-text [hidden]="exp_year.valid || paymentFormSubmitted == false" color="danger" padding-left>
+								Expiry Year of card is required
+							</p>
+							<br>
+						</ion-list>
+						<ion-row class = "payment-btn">
+							<ion-col>
+								<button ion-button color='primary' (click)='makePayment(paymentDetailsEntry)'>Proceed to pay</button>
+							</ion-col>
+						</ion-row>
+					</form>
+				</div>
+			</ion-col>
 		</ion-row>
 	</ion-grid>
+
+
+	
 
 		
 	<page-bsc-footer></page-bsc-footer>

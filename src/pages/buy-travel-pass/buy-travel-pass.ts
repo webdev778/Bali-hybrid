@@ -19,7 +19,8 @@ export class BuyTravelPassPage {
 	ticketsSaved = true
 	confirmTicket = true
 	travellerInfoWindow = true
-	travellerFormSubmitted = false		
+	travellerFormSubmitted = false
+	paymentFormSubmitted = false		
 
 	cardType = ''
 	finalCost = 0
@@ -56,7 +57,6 @@ export class BuyTravelPassPage {
 	}
 
 	getTotalCost() {
-
 		this.finalCost = 0
 
 		for (let ticket of this.bundleSaveTickets) {
@@ -65,9 +65,7 @@ export class BuyTravelPassPage {
 	}
 
 	initialiseBundle() {
-
-		for (var count = 0 ; count < this.bundleSaveTickets.length; count++) 
-		{
+		for (var count = 0 ; count < this.bundleSaveTickets.length; count++) {
 			this.bundleSaveTickets[count].ticket_id = this.bundleViewDescription[count].id
 			this.bundleSaveTickets[count].quantity = this.bundleViewDescription[count].quantity
 			this.bundleSaveTickets[count].price = this.bundleViewDescription[count].quantity * 
@@ -79,9 +77,7 @@ export class BuyTravelPassPage {
 	}
 
 	savePressed() {
-
-		for (let ticket of this.bundleViewDescription)
-		{
+		for (let ticket of this.bundleViewDescription) {
 			if (ticket.quantity > 0) {
 
 				this.ticketsSaved = false;
@@ -116,40 +112,35 @@ export class BuyTravelPassPage {
 				this.paymentView = true
 				this.travellerInfoWindow = true
 				console.log("travellerInfoWindow " +this.travellerInfoWindow)
-
-				for (let ticket of this.bundleSaveTickets) {
-					if( ticket.ticket_id == 1 ) {
-						if( ticket.quantity == 0 ) {
-							this.sendTicketDetailsToServer()
-						}
-						else{
-							this.initialiseArrayTraveller()
-						}
-						break	
-					}
+				let adultTicket = this.bundleSaveTickets[ this.bundleSaveTickets.findIndex(obj=> obj.ticket_id === 1) ]
+				if( adultTicket.quantity == 0 ) {
+					this.sendTicketDetailsToServer()
+				}
+				else {
+					this.initialiseArrayTraveller()
 				}
 			}
 		})
 	}
 
 	initialiseArrayTraveller() {
-
 		this.arrayTravellers = []
 		let adultIndex = 0
+ 
+		let adultTicket = this.bundleSaveTickets[ this.bundleSaveTickets.findIndex(obj=> obj.ticket_id === 1) ]
 
-		
-		for (var count = 1; count <= this.bundleSaveTickets[adultIndex].quantity ; count++) {
+			for(var count =1 ; count <= adultTicket.quantity ; count ++){
+							this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
+																			last_name:'', 
+																			gender:'', 
+																			email:'', 
+																			ticket_type: this.bundleSaveTickets[
+																			adultIndex
+																			].ticket_type,
+																		})
+							this.travellerInfoWindow = false
+						}
 
-			this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
-				last_name:'', 
-				gender:'', 
-				email:'', 
-				ticket_type: this.bundleSaveTickets[
-				adultIndex
-				].ticket_type,
-			})
-			this.travellerInfoWindow = false
-		}
 	}	
 
 	moveToLoginPage() {
@@ -198,7 +189,6 @@ export class BuyTravelPassPage {
 			err => console.log(err),
 			() => {
 				this.bundleViewDescription = <any[]> this.bundleData.data;
-
 				for (let ticket of this.bundleViewDescription)
 				{
 					ticket['quantity'] = 0
@@ -223,21 +213,20 @@ export class BuyTravelPassPage {
 	}
 
 	addAdultInformation() {
-		for (let ticket of this.bundleSaveTickets) {
-			if( ticket.ticket_id == 1 ) {
-				ticket.ticket_details = this.arrayTravellers
-				break
-			}
-		}
-
+		let adultTicket = this.bundleSaveTickets[ this.bundleSaveTickets.findIndex(obj=> obj.ticket_id === 1) ]
+		adultTicket.ticket_details = this.arrayTravellers
 	}
 
-	makePayment() {
+	makePayment(form: NgForm) {
+		console.log( "payment details button ")
+		this.paymentFormSubmitted = true
+		console.log(form.valid)
+		if(form.valid){
 		this.sendPaymentDetailsToServer()
+		}
 	}
 
 	sendTicketDetailsToServer() {
-
 		let loader = this.loadingController.create({
 			content: "Sending ..."
 		});
@@ -266,7 +255,6 @@ export class BuyTravelPassPage {
 
 
 	checkStatus(bundle) {
-		
 		console.log("response from server "+ bundle);
 		if (bundle.status == 200) {
 			this.presentAlert('', bundle.api_message)
@@ -277,7 +265,6 @@ export class BuyTravelPassPage {
 	}
 
 	sendPaymentDetailsToServer(){
-
 		let loader = this.loadingController.create({
 			content: "Sending ..."
 		});
