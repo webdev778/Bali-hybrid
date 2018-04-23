@@ -12,20 +12,16 @@ import { Storage } from '@ionic/storage';
 })
 export class TicketDetailsPage {
 
-	dashboardData = { profileStatus: true ,numberOfCustomers: 0, name:'Sagar', age:'23', gender:'0', address:'LKO', email:'sagar@gmail.com',
-						 mobile:'9876543210', emergencyContactName: 'Sumit', emergencyContactNumber: '9123456780'}
+	dashboardData = { profileStatus: true ,numberOfCustomers: 0, name:'Sagar', age:'23', gender:'0', address:'LKO', 
+					  email:'sagar@gmail.com',mobile:'9876543210', emergencyContactName: 'Sumit', 
+					  emergencyContactNumber: '9123456780'}
 
 	dashboardImages: Array<{title: string, image: any, errorMsg: string}> = [
-
-		{  title: 'Upload Passport Photograph', image: null, errorMsg: 'Select Passport Image'  }  ,
-		{  title: 'Upload Luggage Photograph', image: null, errorMsg: 'Select Luggage Image'  }  ,
-		{  title: 'Upload Travel Insurance Photograph', image: null, errorMsg: 'Select Travel Insurance Image'  }  ,
-		{  title: 'Upload Doctor\'s Letter', image: null, errorMsg: 'Select Doctor\'s Letter Image'  }  ,
-
+		{  title: 'Upload Passport Photograph', image: null, errorMsg: 'Select Passport Image'  },
+		{  title: 'Upload Luggage Photograph', image: null, errorMsg: 'Select Luggage Image'  },
+		{  title: 'Upload Travel Insurance Photograph', image: null, errorMsg: 'Select Travel Insurance Image'  },
+		{  title: 'Upload Doctor\'s Letter', image: null, errorMsg: 'Select Doctor\'s Letter Image'  }
 	]
-
-	arrayCustomers = [1,2,3,4,5,6,7,8,9]
-	
 
 	submittedDashboardDetails = false
 	
@@ -37,8 +33,6 @@ export class TicketDetailsPage {
 								public alertCtrl: AlertController) {
 
 		this.checkForLogin()
-
-		
 	}
 
 	checkForLogin() {
@@ -49,10 +43,6 @@ export class TicketDetailsPage {
 		 })
 	}
 
-	ionViewDidLoad() {
-		
-	}
-
 	buttonBackPressed() {
 			this.navCtrl.pop();
 	}
@@ -61,45 +51,35 @@ export class TicketDetailsPage {
 		this.storage.remove('user_data');
 		this.storage.remove('auth_token');
 		this.storage.set('is_login', false);
-
 		this.constantProvider.loginTitle = 'LOGIN';
 		this.constantProvider.loginPage = 'LoginPage'
-
 		this.navCtrl.setRoot('LoginPage')
 	}
 
-
 	imageSelectedFromUser( dashBoardImage,$event) {
-
 		console.log($event.target.files[0])
 		console.log(dashBoardImage)
 
 		if ($event.target.files[0]) {
 			let reader = new FileReader();
-
 			reader.onload = (event:any) => {
 				dashBoardImage.image = event.target.result;
 			}
-
 			reader.readAsDataURL($event.target.files[0]);
-		}
-		
+		}		
 	}
 
 	removeImage(dashBoardImage) {
 		dashBoardImage.image = null
 	}
 
-
 	buttonUpdateDetailsPressed(dashboardForm){
-		this.presentAlertConfirmEdit()
-		
+		this.presentAlertConfirmEdit()		
 	}
 
 	presentAlertConfirmEdit() {
 		let alert = this.alertCtrl.create({
 			title: 'Are you sure?',
-
 			subTitle: 'You want to bring changes in profile?',
 			buttons: [
 						{
@@ -117,7 +97,6 @@ export class TicketDetailsPage {
 		alert.present();
 	}
 
-
 	buttonSubmitDetailsPressed(form: NgForm) {
 		 console.log(this.dashboardData)
 
@@ -130,13 +109,13 @@ export class TicketDetailsPage {
 	}
 
 	checkImageSelectionStatus() {
-		// for (let image of this.dashboardImages) {
-		// 	if (image.image) {
-		// 		// continue
-		// 	}else{
-		// 		return false
-		// 	}
-		// }
+		for (let image of this.dashboardImages) {
+			if (image.image) {
+				
+			}else{
+				return false
+			}
+		}
 
 		return true
 	}
@@ -145,11 +124,8 @@ export class TicketDetailsPage {
 		return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
 	}
 
-
 	updatedashboard() {
-
-			this.dashboardData['user_id'] = 1
-
+		this.dashboardData['user_id'] = 1
 			this.rest.updateUserDashboard(this.dashboardData)
 				 .subscribe(
 						 userData => console.log(userData),

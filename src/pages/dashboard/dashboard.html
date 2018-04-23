@@ -1,38 +1,34 @@
 <ion-header hideWhen="core">
-   <page-bsc-header ></page-bsc-header>
+  <page-bsc-header ></page-bsc-header>
 </ion-header>
 
 <ion-content>
 
-   <page-bsc-header showWhen="core"></page-bsc-header>
+  <page-bsc-header header='Today In Bali' showWhen="core"></page-bsc-header>
 
-   <h2 hideWhen='core' class="mobile-sub-header">DASHBOARD</h2>
-   <h2 showWhen='core' class="core-sub-header">DASHBOARD</h2>
+  <h2 hideWhen='core' class="mobile-sub-header">DASHBOARD</h2>
+  <h2 showWhen='core' class="core-sub-header">DASHBOARD</h2>
 
-    <h3 class="heading"> Available Tickets </h3>
+  <br>
 
-    <p> 
+    <ion-grid>
+        <ion-row showWhen="core" style="text-align: center; display: flex; justify-content: center;padding-left: 10%; padding-right: 10%">
+            <ion-col col-4  class="flexgrid-core" *ngFor="let page of dashoboardSubPages">
+                  <button ion-button full (click)="moveToPage(page)">
+                    {{page.name | uppercase}}
+                  </button>
+            </ion-col>
+        </ion-row>
 
-    <ion-grid class='flexgrid'>
-        <ion-row class='service-row'>
-            <ion-col col-3 class="flexgrid-core" *ngFor="let ticket of dashboardData;">
-                    <h4>Ticket Holder: {{ticket.userName}}</h4>
-                    <p><b> Ticket Type : {{ticket.ticketType}}</b>
-                    <h5 *ngIf="ticket.isActive">Expiry Date: {{convertUnixTimestampToDate(ticket.expiryDate)}}</h5>
-                    <button *ngIf="ticket.profileStatus" class="button-map" (click)="buttonProfileressed()" ion-button color='primary' full >VIEW PROFILE</button><br>
-                    <button *ngIf="!ticket.profileStatus" class="button-map" (click)="buttonProfileressed()" color='primary' full  ion-button>UPDATE PROFILE</button>
-                    <button *ngIf = "!ticket.isActive && ticket.profileStatus" class="button-map" ion-button color='primary' full 
-                       (click)="activateTimer(ticket)">Activate Ticket</button>
-                <p *ngIf="ticket.isActive" [innerHTML]='ticket.timerValue'></p>
+        <ion-row hideWhen="core" style="display: flex; justify-content: center; text-align: center;">
+            <ion-col class="flexgrid-mobile" *ngFor="let page of dashoboardSubPages">
+                  <button ion-button full (click)="moveToPage(page)">
+                    {{page.name | uppercase}}
+                  </button>
             </ion-col>
         </ion-row>
     </ion-grid>
 
+  <page-bsc-footer></page-bsc-footer>
 
-    <div class="logout-button">
-          <button (click)="buttonLogoutPressed()" ion-button>LOGOUT</button>
-    </div>
-
-    <page-bsc-footer></page-bsc-footer>
 </ion-content>
-

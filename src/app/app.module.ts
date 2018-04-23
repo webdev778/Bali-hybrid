@@ -39,6 +39,7 @@ import { MainRestProvider } from '../providers/rest/mainrest';
 import { ConstantsProvider } from '../providers/constants/constants';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { DashboardTicketsPage } from '../pages/dashboard-tickets/dashboard-tickets'
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TravelAlertPage,
     DashboardPage,
     TicketDetailsPage,
-    ActivationPage
+    ActivationPage,
+    DashboardTicketsPage
   ],
   imports: [
     BrowserModule,
@@ -89,6 +91,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
           { component: AboutUsPage, name: 'AboutUsPage', segment: 'page/:data' , defaultHistory:[InBaliPage]},
           { component: CommonMapPage, name: 'CommonMapPage', segment: 'map/:location' , defaultHistory:[HomePage]},
           { component: ActivationPage, name: 'ActivationPage', segment: 'activation/:data'},
+          { component: DashboardTicketsPage , name: 'DashboardTicketsPage', segment: 'dashboard/dashboardtickets', defaultHistory: [DashboardPage]}
         ]
     }),
     HttpModule,
@@ -119,7 +122,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TravelAlertPage,
     DashboardPage,
     TicketDetailsPage,
-    ActivationPage
+    ActivationPage,
+    DashboardTicketsPage
   ],
   providers: [
     StatusBar,

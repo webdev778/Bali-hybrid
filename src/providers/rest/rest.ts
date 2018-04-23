@@ -189,6 +189,23 @@ export class RestProvider {
       return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_PLACE_ORDER, data, header);
    }
 
+   makeTravelPassPayment(paymentInfo): Observable<{ }> {
+
+      let data = {
+       'user_id': paymentInfo.user_id,
+       'token' : paymentInfo.token,
+       'order_id': paymentInfo.order_id,
+       'billing_info' : paymentInfo.billing_info,
+       'card_details' : paymentInfo.card_details 
+
+     };
+
+     let header = PUBLIC_HEADER;
+
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_MAKE_PAYMENT, data, header);
+   }
+
+
    // Dashboard
 
    updateUserDashboard(userInfo): Observable<{ }> {

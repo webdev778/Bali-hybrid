@@ -178,7 +178,6 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 
 						      <ion-item class='form-item'>
 						    
-						        <ion-label>Date</ion-label>
  									 <ion-datetime displayFormat="MMM DD, YYYY" ion-datetime [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" placeholder= "Date Of Birth" value= ""></ion-datetime>
 							 </ion-item>
 							  <p ion-text [hidden]="dob.valid || travellerFormSubmitted == false" color="danger" padding-left>
@@ -229,9 +228,9 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 							</p>
 							<br>
 							<ion-item class='form-item'>
-								<ion-input [(ngModel)]="bundlePaymentData.contact" #contact="ngModel" pInputText (keypress)="validateCard($event)" maxlength="19" name="contact" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CONTACT NUMBER'></ion-input>
+								<ion-input [(ngModel)]="bundlePaymentData.phone" #phone="ngModel" pInputText (keypress)="validateCard($event)" maxlength="19" name="contact" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CONTACT NUMBER'></ion-input>
 							</ion-item>
-							<p ion-text [hidden]="contact.valid || paymentFormSubmitted == false" color="danger" padding-left>
+							<p ion-text [hidden]="phone.valid || paymentFormSubmitted == false" color="danger" padding-left>
 								Contact Number is required
 							</p>
 							<br>
