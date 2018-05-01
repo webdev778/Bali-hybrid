@@ -1,8 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, AlertController } from 'ionic-angular';
+import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
 import { HomePage } from '../pages/home/home';
 import { AboutUsPage } from '../pages/about-us/about-us';
 import { BuyTravelPassPage } from '../pages/buy-travel-pass/buy-travel-pass';
@@ -11,7 +10,6 @@ import { FaqPage } from '../pages/faq/faq';
 import { InBaliPage } from '../pages/in-bali/in-bali';
 import { ServicesPage } from '../pages/services/services';
 import { DashboardPage } from '../pages/dashboard/dashboard';
-
 import { RestProvider } from '../providers/rest/rest';
 import { SOCIAL_LINKS, ConstantsProvider,CMS_PAGES } from '../providers/constants/constants';
 import { Storage } from '@ionic/storage';
@@ -23,7 +21,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
-
+  isLogin:boolean;
   socialLinks: any;
 
   bundlePagesData : {data : any};
@@ -37,8 +35,7 @@ export class MyApp {
               public splashScreen: SplashScreen, 
               public rest: RestProvider,
               public constantProvider: ConstantsProvider,
-              public storage: Storage,
-              private alertCtrl: AlertController) {
+              public storage: Storage) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -61,13 +58,18 @@ export class MyApp {
 
   checkForLogin() {
      this.storage.get('is_login').then((isLogin) => {
+       
+       console.log("hello" + this.isLogin)
        if (isLogin) {
-         this.storage.get('user_data').then((userData) => {
+          this.storage.get('user_data').then((userData) => {
+          this.constantProvider.isLogin = true  
           this.constantProvider.loginTitle = "Dashboard"
           this.constantProvider.loginPage = DashboardPage
+          debugger
         })
        }
      })
+    
   }
 
   getCMSPages() {
@@ -114,39 +116,24 @@ export class MyApp {
     if (page.page == undefined) {
       this.nav.setRoot(AboutUsPage, {'data': JSON.stringify(page), isPushed: false})
     }else {
-      // if (page.page == BuyTravelPassPage)
-      // {
-      //   this.checkLoginForTravelPass(page)
-      // }else
-      // {
-        this.nav.setRoot(page.page)
-      // }
+      this.nav.setRoot(page.page)
     }
   }
 
-  checkLoginForTravelPass(page) {
-    this.storage.get('is_login').then((isLogin) => {
-      if (!isLogin) {
-        this.presentAlertNotLoggedIn()
-      }
-      else{
-        this.nav.setRoot(page.page)
-      }
-    })
+  moveToLoginPage() {
+    this.storage.remove('user_data');
+    this.storage.remove('auth_token');
+    this.storage.set('is_login', false);
+    this.constantProvider.isLogin = false
+    this.constantProvider.loginTitle = 'LOGIN';
+    this.constantProvider.loginPage = 'LoginPage'
+    this.isLogin = false
+    this.nav.setRoot('LoginPage')
+   
   }
 
-  presentAlertNotLoggedIn(){
-    let alert = this.alertCtrl.create({
-      title: 'Not Logged In',
-
-      subTitle: 'Please login to purchase travel pass',
-      buttons: [
-      {
-        text : 'Ok',
-      }
-      ]
-
-    });
-    alert.present();
-  }
+  logoutPressed() {
+    
+    this.moveToLoginPage()
+}
 }

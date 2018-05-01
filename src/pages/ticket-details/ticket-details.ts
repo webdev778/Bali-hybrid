@@ -20,16 +20,13 @@ export class TicketDetailsPage {
 	userInfoBundle = { profileStatus: false ,firstName:'', lastName:'', dob:'',
 					  gender:'', address:'', email:'',mobile:'', emergencyContactName: '', 
 					  emergencyContactNumber: '', isActive: 0}
-					  				  
-	passports: Array<{image: any}> = [{image: null}]
-	luggagess: Array<{image:any}> = [{image: null}]
-	insurance: Array<{image:any}> = [{image: null}]
-	doctors_letter: Array<{image:any}> = [{image: null}]
 
-	passportBundle : Array<any> = []
-	luggageBundle : Array<any> = []
-	insuranceBundle : Array<any> = []
-	doctorLetterBundle : Array<any> =[]
+	arrayDashboardImages: Array<{title: string, image: Array<any>, errorMsg: string}> = [
+		{ title: 'Upload Passport Photograph', image: [], errorMsg: 'Select Passport Image' },
+		{ title: 'Upload Luggage Photograph', image: [], errorMsg: 'Select Luggage Image' },
+		{ title: 'Upload Travel Insurance Photograph', image: [], errorMsg: 'Select Travel Insurance Image' },
+		{ title: 'Upload Doctor\'s Letter', image: [], errorMsg: 'Select Doctor\'s Letter Image' }
+	]
 
 	submittedDashboardDetails = false
 	
@@ -58,8 +55,6 @@ export class TicketDetailsPage {
 					this.requestBundle.user_id = JSON.parse(user_data).id;
 					this.storage.get('auth_token').then((authToken) => {
 						this.requestBundle.token = authToken;
-						console.log("local data")
-						console.log(this.requestBundle)
 						this.getTicketInformationFromServer()
 					});
 				});
@@ -81,58 +76,21 @@ export class TicketDetailsPage {
 	}
 
 
-	imageLuggageSelectedFromUser( dashBoardImage,$event) {
-		if ($event.target.files[0]) {
+	imageSelectedFromUser(dashBoardImage,$event) {
+
+		for (var count = 0; count < $event.target.files.length; count++) {
 			let reader = new FileReader();
 			reader.onload = (event:any) => {
-				dashBoardImage.image = event.target.result;
+				dashBoardImage.image.push(event.target.result)
 			}
-			reader.readAsDataURL($event.target.files[0]);
-		}		
-		this.luggagess.push({ image: null})
-	
+
+			reader.readAsDataURL($event.target.files[count]);
+		}			
 	}
 
-	imageInsuranceSelectedFromUser( dashBoardImage,$event) {
-		if ($event.target.files[0]) {
-			let reader = new FileReader();
-			reader.onload = (event:any) => {
-				dashBoardImage.image = event.target.result;
-			}
-			reader.readAsDataURL($event.target.files[0]);
-		}		
-		this.insurance.push({ image: null})
-	
-	}
 
-	imageDoctorsLetterSelectedFromUser( dashBoardImage,$event) {
-		if ($event.target.files[0]) {
-			let reader = new FileReader();
-			reader.onload = (event:any) => {
-				dashBoardImage.image = event.target.result;
-			}
-			reader.readAsDataURL($event.target.files[0]);
-		}		
-		this.doctors_letter.push({ image: null})
-	
-	}
-
-	imagePassportSelectedFromUser( dashBoardImage,$event) {
-		if ($event.target.files[0]) {
-			let reader = new FileReader();
-			reader.onload = (event:any) => {
-				dashBoardImage.image = event.target.result;
-			}
-			reader.readAsDataURL($event.target.files[0]);
-		}		
-		this.passports.push({ image: null})
-
-	}
-
-	
-
-	removeImage(dashBoardImage) {
-		dashBoardImage.image = null
+	removeImage(image,arrayImage) {
+		arrayImage.splice(arrayImage.indexOf(image), 1)
 	}
 
 	buttonUpdateDetailsPressed(dashboardForm){
@@ -161,26 +119,6 @@ export class TicketDetailsPage {
 			content: "Sending ..."
 		});
 
-		for (let data of this.passports) {
-			this.passportBundle.push(data.image)
-		}
-		for (let data of this.luggagess) {
-			this.luggageBundle.push(data.image)
-		}
-		for (let data of this.insurance) {
-			this.insuranceBundle.push(data.image)
-		}
-		for (let data of this.doctors_letter) {
-			this.doctorLetterBundle.push(data.image)
-		}
-
-
-
-		this.passportBundle.pop()
-		this.luggageBundle.pop()
-		this.insuranceBundle.pop()
-		this.doctorLetterBundle.pop()
-
 		loader.present()
 
 		let gender = 0
@@ -194,9 +132,7 @@ export class TicketDetailsPage {
 		else {
 			gender = null
 		}
-
-		console.log("local data")
-		console.log(this.requestBundle)
+		
 		let passInfo = {
 			user_id:this.requestBundle.user_id,
 			token: this.requestBundle.token,
@@ -210,15 +146,13 @@ export class TicketDetailsPage {
 			gender: gender,
 			emergency_contact_name: this.userInfoBundle.emergencyContactName,
 			emergency_contact_phone: this.userInfoBundle.emergencyContactNumber,
-			passports: this.passportBundle,
-			luggagess: this.luggageBundle,
-			insuarance: this.insuranceBundle,
-			doctors_letter: this.doctorLetterBundle,
+			passports: this.arrayDashboardImages[0].image,
+			luggagess: this.arrayDashboardImages[1].image,
+			insuarance: this.arrayDashboardImages[2].image,
+			doctors_letter: this.arrayDashboardImages[3].image,
 
 		}
 		
-		console.log(passInfo)
-
 		this.rest.updateTicketInfo(passInfo)
 		.subscribe(
 			responseData => this.checkStatus(responseData),
@@ -255,10 +189,6 @@ export class TicketDetailsPage {
 			err => loader.dismiss(),
 			() => {
 					this.bundleTicketDescription = <any> this.bundleTicketInfoData.ticket_info;
-					
-					console.log("data recieved from server")
-					console.log(this.bundleTicketDescription)
-
 					this.userInfoBundle.firstName = this.bundleTicketDescription.first_name;
 					this.userInfoBundle.lastName = this.bundleTicketDescription.last_name;
 					this.userInfoBundle.dob = this.bundleTicketDescription.date_of_birth;
@@ -268,7 +198,17 @@ export class TicketDetailsPage {
 					this.userInfoBundle.mobile = this.bundleTicketDescription.phone;
 					this.userInfoBundle.isActive = this.bundleTicketDescription.is_active;
 ​					this.userInfoBundle.address = this.bundleTicketDescription.address;
-					this.userInfoBundle.profileStatus = this.bundleTicketDescription.is_complete
+
+					if (this.bundleTicketDescription.is_complete == 1){
+						this.userInfoBundle.profileStatus = true
+					}else{
+						this.userInfoBundle.profileStatus = false
+					}
+
+					this.arrayDashboardImages[0].image = this.constantProvider.convertArrayImageUrlToData(this.bundleTicketDescription.passports)
+					this.arrayDashboardImages[1].image = this.constantProvider.convertArrayImageUrlToData(this.bundleTicketDescription.luggagess) 
+					this.arrayDashboardImages[2].image = this.constantProvider.convertArrayImageUrlToData(this.bundleTicketDescription.insuarance) 
+					this.arrayDashboardImages[3].image = this.constantProvider.convertArrayImageUrlToData(this.bundleTicketDescription.doctors_letter) 
 
 					if(this.bundleTicketDescription.gender == 0) {
 						this.userInfoBundle.gender = "Male"
@@ -294,6 +234,7 @@ export class TicketDetailsPage {
 		});
 		alert.present();
 	}
+
 }
 
 

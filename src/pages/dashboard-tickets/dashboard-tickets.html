@@ -4,6 +4,7 @@
 
 <ion-content style = "">
 
+
    <page-bsc-header showWhen="core"></page-bsc-header>
 
    <h2 hideWhen='core' class="mobile-sub-header">AVAILABLE TICKETS</h2>
@@ -13,6 +14,7 @@
 
    <ion-grid class='flexgrid' hideWhen="core">
       <ion-row class='service-row'>
+
         <ion-col col-3 class="flexgrid-mobile" *ngFor="let ticket of bundleTicketsToShow;">
           <h3 class = "mobile-text" *ngIf="ticket.first_name">{{ticket.first_name | uppercase}} {{ticket.last_name | uppercase}}</h3>
           
@@ -31,7 +33,6 @@
           (click)="activateTimer(ticket)">ACTIVATE TICKET</button>
           
           <p style = "margin-top: -10px" *ngIf="ticket.is_active" [innerHTML]='ticket.timer_value'></p>
-      
       </ion-col>
   </ion-row>
 </ion-grid>
@@ -73,7 +74,9 @@
               
             </ion-col>
              <ion-col>
+
                     <button *ngIf = "ticket.is_complete && !ticket.is_active" class="button-activate-ticket"  (click)="activateTimer(ticket)">ACTIVATE TICKET</button>
+
                     <p *ngIf = "!ticket.is_complete" class = "placeholder-text">please update profile</p>
           <p *ngIf="ticket.is_active" [innerHTML]='ticket.timer_value'></p>
             </ion-col>

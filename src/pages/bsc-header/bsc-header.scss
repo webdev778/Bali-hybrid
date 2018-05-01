@@ -34,15 +34,25 @@ page-bsc-header {
     background:#62a830;
   }
 
-  .header-login{
-    float: left;
-    max-width: 120px;
-    display: inline-block;
-  }
+ 
+  // .header-logout {
+  //   color: #f7f3fb;
+  //   background-color: #547d88;
+  //   font-weight: bolder;
+  //   font-size: 15px;
+  // }
 
   .header-logout {
-    float: right;
-    width: 60px;
+     background-color: #547d88;
+     color: white
+  }
+
+  .logout-col{
+    text-align: right
+  }
+
+  .right-img {
+    margin-right: -20px;
   }
 
 }

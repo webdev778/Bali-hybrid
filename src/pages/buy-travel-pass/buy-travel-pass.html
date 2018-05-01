@@ -136,7 +136,7 @@
 		<button [hidden]='ticketsSaved || paymentView' ion-button color='primary' (click)='continuePressed()'>Continue</button>
 	</div>
 
-	<h5 style="text-align: center; text-align: center;color: #527a85;margin-top: -100px;
+	<h5 style="text-align: center; text-align: center;color: #527a85;margin-top: -80px;
 margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult ticket details</h5>
 
 	<form #ticketDetailsEntry="ngForm" novalidate>
@@ -180,7 +180,7 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 						      <ion-item class='form-item'>
 						    
  				
-                		      <ion-input placeholder="DATE OF BIRTH" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date"  [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" placeholder= "Date Of Birth" value= ""></ion-input>
+                		      <ion-input placeholder="DATE OF BIRTH" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date"  [(ngModel)]="traveller.date_of_birth" max = "01/01/2001" name="dob" #dob="ngModel" placeholder= "Date Of Birth" value= ""></ion-input>
                 		      </ion-item>
 							  <p ion-text [hidden]="dob.valid || travellerFormSubmitted == false" color="danger" padding-left>
 						        Enter date of birth
@@ -212,10 +212,7 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 	</ion-grid>
 	</form>
 
-
-
 	<ion-grid class='form-grid' [hidden]='!paymentView || !travellerInfoWindow'>
-
 		<h5 class = "payment-title"> Please Enter Payment Details </h5>
 		<ion-row class = "form-row">
 			<ion-col class = "form-col">

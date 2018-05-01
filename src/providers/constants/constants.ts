@@ -2,6 +2,8 @@
 
 import { Injectable } from '@angular/core';
 
+import { MainRestProvider } from '../rest/mainrest';
+
 // Global Variables
 
 export var CMS_PAGES : Array<{id: any, name: '', alias: '', page: any}> = [];
@@ -128,11 +130,38 @@ export class ConstantsProvider
 {
 	loginTitle = 'LOGIN'
 	loginPage : any = 'LoginPage'
+	isLogin = false
 	
-	constructor() {
+	constructor(private mainRest: MainRestProvider) {
 
 	}
 
-	
-	
+
+	convertArrayImageUrlToData(arrayImageUrl) {
+		var imageArray = []
+
+		for(let imageUrl of arrayImageUrl){
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET',imageUrl, true);
+			xhr.responseType = 'blob';
+			xhr.onload = function(e) {
+			  if (this.status == 200) {
+			    var myBlob = this.response;
+
+			    var reader = new FileReader();
+			 	reader.readAsDataURL(myBlob); 
+			 	reader.onloadend = function() {
+			 		imageArray.push(reader.result)
+			 	}
+
+			    // myBlob is now the blob that the object URL pointed to.
+			  }
+			};
+			xhr.send();	
+		}
+
+		return imageArray
+	}
+
 }
+	

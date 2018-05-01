@@ -24,9 +24,16 @@
           <img src="assets/imgs/logo.png" align="left" class="vericalCenter"/>
         </ion-col>
         <ion-col>
-          <img src="assets/imgs/smart-trav-logo.png" align="right"/>
+          <img class = "right-img" src="assets/imgs/smart-trav-logo.png" align="right"/>
         </ion-col>
+        <button *ngIf = "constantProvider.isLogin" class="header-logout" item-left full  (click)="logoutPressed()">Logout<img  src="assets/imgs/Logout.png" ></button>
       </ion-row>
+
+     <!--  <ion-row>
+        <ion-col class = "logout-col">
+          <button *ngIf = "constantProvider.isLogin" class="header-logout" item-left full  (click)="logoutPressed()">Logout</button>
+        </ion-col>
+      </ion-row> -->
 </ion-grid>
 
 <ion-grid showWhen="core" class='bsc-header'>
@@ -54,7 +61,7 @@
           <ion-row>
             <ion-col *ngFor="let page of loginPage">
               <button ion-button class="header-login" item-left full color='login' (click)="openPage({page:constantProvider.loginPage})">{{constantProvider.loginTitle}}</button>
-              <button *ngIf = "isLogin" ion-button class="header-logout" item-left full color='logout' (click)="logoutPressed()">Logout</button>
+             
             </ion-col>
           </ion-row>
         </ion-col>

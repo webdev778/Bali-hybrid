@@ -1,21 +1,13 @@
-<ion-header>
-  <ion-navbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
-
-        <ion-title>
-          <div style="text-align: center; width: 100%" >
-
-             <h2 class = "header">Customer Details</h2>
-          </div>
-        </ion-title>
-
-  </ion-navbar>
+<ion-header hideWhen="core">
+  <page-bsc-header ></page-bsc-header>
 </ion-header>
 
 <ion-content>
-   <ion-grid [hidden] = "userInfoBundle.profileStatus" class="dashboard-grid">
+   <page-bsc-header showWhen="core"></page-bsc-header>
+   <h2 hideWhen='core' class="mobile-sub-header">CUSTOMER DETAILS</h2>
+   <h2 showWhen='core' class="core-sub-header">CUSTOMER DETAILS</h2>
+
+   <ion-grid class="dashboard-grid">
       <ion-row class='form-row'>
          <ion-col class='form-col'>
             <div class="form-panel">
@@ -24,21 +16,23 @@
                      <br>
                      <p class = "para-head" ion-text color = "dark" padding-left>First Name</p>
                      <ion-item class='form-item'>
-                       <ion-input [(ngModel)]="userInfoBundle.firstName" #firstName="ngModel" name="firstName" type="text" spellcheck="false" autocapitalize="off" required ngModel>
+
+                       <ion-input [(ngModel)]="userInfoBundle.firstName" disabled={{userInfoBundle.profileStatus}} #firstName="ngModel" name="firstName" type="text" spellcheck="false" autocapitalize="off" required ngModel>
                         </ion-input>
-                     </ion-item>
-                      
+                     </ion-item>                    
                      <br>
                      <p class = "para-head" ion-text color = "dark" padding-left>Last Name</p>
                      <ion-item class='form-item'>
-                       <ion-input [(ngModel)]="userInfoBundle.lastName" #lastName="ngModel" name="lastName" type="text" spellcheck="false" autocapitalize="off" required ngModel>
+
+                       <ion-input [(ngModel)]="userInfoBundle.lastName" disabled="{{userInfoBundle.profileStatus}}" #lastName="ngModel" name="lastName" type="text" spellcheck="false" autocapitalize="off" required ngModel>
                         </ion-input>
                      </ion-item>
                        
                      <br>
+
                <p class = "para-head" ion-text color = "dark" padding-left>Date of Birth</p>
                     <ion-item class='form-item'>
-                      <ion-input placeholder="" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="userInfoBundle.dob" name="dob" #dob="ngModel" value= ""></ion-input>
+                      <ion-input placeholder="" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="userInfoBundle.dob" disabled="{{userInfoBundle.profileStatus}}" name="dob" #dob="ngModel" value= ""></ion-input>
                     </ion-item>
                    
                       
@@ -47,22 +41,27 @@
                      <p class = "para-head" ion-text color = "dark" padding-left>Gender</p>
                       <ion-item class='form-item'>
                            <ion-select [(ngModel)]="userInfoBundle.gender" name='gender' #gender="ngModel" required>
+
                               <ion-option value="Male">Male</ion-option>
                               <ion-option value="Female">Female</ion-option>
                                  <ion-option value="Transgender">Transgender</ion-option>
                            </ion-select>
-                        </ion-item>
+
+                      </ion-item>
+
                          <br>
+
                          <p class = "para-head" ion-text color = "dark" padding-left>Address</p>
                         <ion-item class="form-item">
-                             <ion-textarea [(ngModel)]="userInfoBundle.address" name="message" type="text" #address="ngModel" spellcheck="false" autocapitalize="off" required class="class-text-area">
+                             <ion-textarea [(ngModel)]="userInfoBundle.address" disabled="{{userInfoBundle.profileStatus}}" name="message" type="text" #address="ngModel" spellcheck="false" autocapitalize="off" required class="class-text-area">
                              </ion-textarea>
                            </ion-item>
                          
                            <br>
                             <p class = "para-head" ion-text color = "dark" padding-left>Contact Number</p>
                             <ion-item class='form-item'>
-                        <ion-input [(ngModel)]="userInfoBundle.mobile" #mobile="ngModel" name="age" type="tel" spellcheck="false" autocapitalize="off" (keypress)="onlyNumberKey($event)" required ngModel>
+
+                        <ion-input [(ngModel)]="userInfoBundle.mobile" #mobile="ngModel" disabled="{{userInfoBundle.profileStatus}}" name="age" type="tel" spellcheck="false" autocapitalize="off" (keypress)="onlyNumberKey($event)" required ngModel>
                         </ion-input>
                      </ion-item>
                       
@@ -70,7 +69,8 @@
                      <br>
                       <p class = "para-head" ion-text color = "dark" padding-left>Email Id</p>
                      <ion-item class="form-item">
-                             <ion-input [(ngModel)]="userInfoBundle.email" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email value="John" >
+
+                             <ion-input [(ngModel)]="userInfoBundle.email" disabled="{{userInfoBundle.profileStatus}}" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email value="John" >
                              </ion-input>
                            </ion-item>
                           
@@ -78,96 +78,41 @@
                      <br>
                       <p class = "para-head" ion-text color = "dark" padding-left>Emergency Contact Name</p>
                     <ion-item class='form-item'>
-                        <ion-input [(ngModel)]="userInfoBundle.emergencyContactName" #emergencyContactName="ngModel" name="emergencycontactname" type="text" spellcheck="false" autocapitalize="off" required ngModel>
+
+                        <ion-input [(ngModel)]="userInfoBundle.emergencyContactName" disabled="{{userInfoBundle.profileStatus}}" #emergencyContactName="ngModel" name="emergencycontactname" type="text" spellcheck="false" autocapitalize="off" required ngModel>
                         </ion-input>
                      </ion-item>
                 
                      <br>
                      <p class = "para-head" ion-text color = "dark" padding-left>Emergency Contact Number</p>
                      <ion-item class='form-item'>
-                        <ion-input [(ngModel)]="userInfoBundle.emergencyContactNumber" (keypress)="onlyNumberKey($event)" name="emergencycontactnumber" #emergencyContactNumber="ngModel" type="tel" required>
+
+                        <ion-input [(ngModel)]="userInfoBundle.emergencyContactNumber" disabled="{{userInfoBundle.profileStatus}}" (keypress)="onlyNumberKey($event)" name="emergencycontactnumber" #emergencyContactNumber="ngModel" type="tel" required>
                         </ion-input>
                      </ion-item>
                     
                     <br>
 
-                    <p class = "para-head" ion-text color = "dark" padding-left>Add Passport Image</p>
-                  
+                      <div class="dashboard-image-div" *ngFor="let dashboardImage of arrayDashboardImages">
+                          <h5>{{dashboardImage.title}}</h5>
 
-                     <div [hidden] = "userInfoBundle.profileStatus" class="dashboard-image-div" *ngFor="let dashboardImage of passports">
-                      
-                        <img class="dashboard-image" *ngIf="dashboardImage.image" [src]="dashboardImage.image"/>
+                          <div *ngFor="let image of dashboardImage.image">
+                            <img class="dashboard-image" [src]="image"/>
+                            <button [hidden] = "userInfoBundle.profileStatus" (click)="removeImage(image,dashboardImage.image)" icon-only class="custom-file-select" >Remove</button>  
+                          </div>
 
-                        <label *ngIf="!dashboardImage.image" class='custom-file-select'>Add Image
-                           <ion-input hidden name="name" type="File" accept="image/*" (change)='imagePassportSelectedFromUser(dashboardImage, $event)'>
-                           </ion-input>
-                        </label>
+                                             
 
-                        <label *ngIf="dashboardImage.image" class='custom-file-select'>Change Image
-                           <ion-input hidden name="name" type="File" accept="image/*" (change)='imagePassportSelectedFromUser(dashboardImage, $event)'>
-                           </ion-input>
-                        </label>
-                        
-                     </div> 
-
-                    <p class = "para-head" ion-text color = "dark" padding-left>Add Insurance Image</p>
-           
-
-                     <div [hidden] = "userInfoBundle.profileStatus" class="dashboard-image-div" *ngFor="let dashboardImage of insurance">
-                      
-                        <img class="dashboard-image" *ngIf="dashboardImage.image" [src]="dashboardImage.image"/>
-
-                        <label *ngIf="!dashboardImage.image" class='custom-file-select'>Add Image
-                           <ion-input hidden name="name" type="File" accept="image/*" (change)='imageInsuranceSelectedFromUser(dashboardImage, $event)'>
-                           </ion-input>
-                        </label>
-
-                        <label *ngIf="dashboardImage.image" class='custom-file-select'>Change Image
-                           <ion-input hidden name="name" type="File" accept="image/*" (change)='imageInsuranceSelectedFromUser(dashboardImage, $event)'>
-                           </ion-input>
-                        </label>
-                        
-                     </div> 
-                     <p class = "para-head" ion-text color = "dark" padding-left>Add Luggage Images</p>
-                  
-
-                     <div [hidden] = "userInfoBundle.profileStatus" class="dashboard-image-div" *ngFor="let dashboardImage of luggagess">
-                      
-                        <img class="dashboard-image" *ngIf="dashboardImage.image" [src]="dashboardImage.image"/>
-
-                        <label *ngIf="!dashboardImage.image" class='custom-file-select'>Add Image
-                           <ion-input hidden name="name" type="File" accept="image/*" (change)='imageLuggageSelectedFromUser(dashboardImage, $event)'>
-                           </ion-input>
-                        </label>
-
-                        <label *ngIf="dashboardImage.image" class='custom-file-select'>Change Image
-                           <ion-input hidden name="name" type="File" accept="image/*" (change)='imageLuggageSelectedFromUser(dashboardImage, $event)'>
-                           </ion-input>
-                        </label>
-                        
-                     </div> 
-
-                    <p class = "para-head" ion-text color = "dark" padding-left>Add Doctor's Letter</p>
-                  
-
-                     <div [hidden] = "userInfoBundle.profileStatus" class="dashboard-image-div" *ngFor="let dashboardImage of doctors_letter">
-                      
-                        <img class="dashboard-image" *ngIf="dashboardImage.image" [src]="dashboardImage.image"/>
-
-                        <label *ngIf="!dashboardImage.image" class='custom-file-select'>Add Image
-                           <ion-input hidden name="name" type="File" accept="image/*" (change)='imageDoctorsLetterSelectedFromUser(dashboardImage, $event)'>
-                           </ion-input>
-                        </label>
-
-                        <label *ngIf="dashboardImage.image" class='custom-file-select'>Change Image
-                           <ion-input hidden name="name" type="File" accept="image/*" (change)='imageDoctorsLetterSelectedFromUser(dashboardImage, $event)'>
-                           </ion-input>
-                        </label>
-                        
-                     </div> 
-
-
-
+                          <label class='custom-file-select' [hidden] = "userInfoBundle.profileStatus">Select Image
+                             <ion-input multiple hidden name="name" type="file" accept="image/*" (change)='imageSelectedFromUser(dashboardImage, $event)'>
+                             </ion-input>
+                          </label>
+                          
+                          <!-- <p ion-text [hidden]="dashboardImage.image.length != 0 || submittedDashboardDetails == false" color="danger" padding-left>
+                          {{dashboardImage.errorMsg}}
+                          </p> -->
+                          
+                    </div>
                   </ion-list>
 
                   <br>
@@ -182,110 +127,11 @@
             </div>
          </ion-col>
       </ion-row>
-   </ion-grid>
-
-  <ion-grid [hidden] = "!userInfoBundle.profileStatus" class="dashboard-grid" >
-      <ion-row class='form-row'>
-         <ion-col class='form-col'>
-            <div class="form-panel">
-               <form #dashboardForm="ngForm" novalidate>
-                  <ion-list no-lines>
-                     <br>
-                     <p class = "para-head" ion-text color = "dark" padding-left>First Name</p>
-                     <ion-item class='form-item'>
-                       <p>{{userInfoBundle.firstName}}</p>
-                     </ion-item>
-                     
-                     <br>
-                      <p class = "para-head"  ion-text color = "dark" padding-left>Last Name</p>
-                     <ion-item class='form-item'>
-                      <p>{{userInfoBundle.lastName}}</p>
-
-                     </ion-item>
-                      
-                     
-                     <br>
-
-                     <p class = "para-head" ion-text color = "dark" padding-left>Date of Birth</p>
-              
-                    <ion-item class='form-item'>
-                      <p>{{userInfoBundle.dob}}</p>
-                    </ion-item>
-                   
-                     <br>
-                     <p class = "para-head"  ion-text color = "dark" padding-left>Gender</p>
-                      <ion-item class='form-item'>
-                           <p>{{userInfoBundle.gender}}</p>
-                        </ion-item>
-                         <br>
-                         <p class = "para-head"  ion-text color = "dark" padding-left>Address</p>
-                        <ion-item class="form-item">
-                           <p>{{userInfoBundle.address}}</p>
-                           </ion-item>
-                        
-                           <br>
-                           <p class = "para-head"   ion-text color = "dark" padding-left>Contact Number</p>
-                            <ion-item class='form-item'>
-                           <p>{{userInfoBundle.mobile}}</p>
-                     </ion-item>
-                 
-                     
-                     <br>
-
-                     <p class = "para-head"  ion-text color = "dark" padding-left>Email</p>
-                     <ion-item class="form-item">
-                         <p>{{userInfoBundle.email}}</p>
-                           </ion-item>
-                         
-                     <br>
-                     <p class = "para-head" ion-text color = "dark" padding-left>Emergency Contact Name</p>
-                    <ion-item class='form-item'>
-                      <p>{{userInfoBundle.emergencyContactName}}</p>
-                     </ion-item>
-                       <p ion-text [hidden]="emergencyContactName.valid || submittedDashboardDetails == false" color="danger" padding-left>
-                          Enter emergency contact name
-                        </p>
-                     
-                     <br>
-                     <p class = "para-head"  ion-text color = "dark" padding-left>Emergency Contact Number</p>
-                     <ion-item class='form-item'>
-                        <p>{{userInfoBundle.emergencyContactNumber}}</p>
-                     </ion-item>
-                   </ion-list>
-                    <ion-row responsive-sm>
-                     <ion-col>
-                        <button class = "edit-button" *ngIf = "userInfoBundle.profileStatus && !userInfoBundle.isActive" (click)="buttonUpdateDetailsPressed(dashboardForm)" ion-button outline type="submit" >EDIT DETAILS</button>
-                     </ion-col>
-                  </ion-row>
-
-               </form>
-            </div>
-         </ion-col>
-      </ion-row>
-<!-- 
-                    <p class = "para-head" ion-text color = "dark" padding-left>Passport Photos Available :</p>
-                  
-
-                     <div [hidden] = "userInfoBundle.profileStatus" class="dashboard-image-div" *ngFor="let dashboardImage of doctors_letter">
-                      
-                        <img class="dashboard-image" *ngIf="dashboardImage.image" [src]="dashboardImage.image"/>
-
-                        <label *ngIf="!dashboardImage.image" class='custom-file-select'>Add Image
-                           <ion-input hidden name="name" type="File" accept="image/*" (change)='imageDoctorsLetterSelectedFromUser(dashboardImage, $event)'>
-                           </ion-input>
-                        </label>
-
-                        <label *ngIf="dashboardImage.image" class='custom-file-select'>Change Image
-                           <ion-input hidden name="name" type="File" accept="image/*" (change)='imageDoctorsLetterSelectedFromUser(dashboardImage, $event)'>
-                           </ion-input>
-                        </label>
-                        
-                     </div>  -->
 
    </ion-grid>
 
-</ion-content>
-
-
-
-  <!-- <button *ngIf="dashboardImage.image" (click)="removeImage(dashboardImage)" icon-only class="custom-file-select" >Remove</button> -->                     
+  <div style="text-align: center; margin-bottom: 20px; margin-top: 20px">
+    <button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
+  </div>
+  <page-bsc-footer></page-bsc-footer>
+</ion-content>                    

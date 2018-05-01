@@ -24,21 +24,21 @@ import { CMS_PAGES, ConstantsProvider } from '../../providers/constants/constant
  @Injectable()
  @IonicPage()
  @Component({
-   selector: 'page-bsc-header',
-   templateUrl: 'bsc-header.html',
+     selector: 'page-bsc-header',
+     templateUrl: 'bsc-header.html',
  })
- export class BscHeaderPage {
+export class BscHeaderPage {
 
-   @Input() header;
+ @Input() header;
 
-   bundlePagesData : {data : any};
-   isLogin = false
+ bundlePagesData : {data : any};
+ isLogin = false
 
-   pages: Array<{title: string, icon: any, page: any}>;
-   cmsPages : Array<{id: any, name: '', alias: '', page: any}>;
-   loginPage : Array<{title: string, icon: string, page: string}>; 
+ pages: Array<{title: string, icon: any, page: any}>;
+ cmsPages : Array<{id: any, name: '', alias: '', page: any}>;
+ loginPage : Array<{title: string, icon: string, page: string}>; 
 
-   constructor(  public navCtrl: NavController, 
+ constructor(  public navCtrl: NavController, 
      public navParams: NavParams, 
      public rest: RestProvider, 
      public loadingController: LoadingController, 
@@ -58,76 +58,69 @@ import { CMS_PAGES, ConstantsProvider } from '../../providers/constants/constant
      ];
 
      this.loginPage = [{title: constantProvider.loginTitle, icon: 'log_in', page: constantProvider.loginPage}];
-     if( constantProvider.loginTitle == "Dashboard" ) {
-       this.isLogin = true
-     }
-     else {
-       this.isLogin =false
-     }
-   }
+     
+ }
 
-   getCMSPages() {
-     this.cmsPages = CMS_PAGES;
-   }
+     getCMSPages() {
+         this.cmsPages = CMS_PAGES;
+     }
 
-   openPage(page) {
+     openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if (page.page == undefined) {
-      this.navCtrl.setRoot(AboutUsPage, {'data': JSON.stringify(page), isPushed: false})
+        this.navCtrl.setRoot(AboutUsPage, {'data': JSON.stringify(page), isPushed: false})
     }else {
       // if (page.page == BuyTravelPassPage){
       //   this.checkForLogin(page)
       // }else{
-        this.navCtrl.setRoot(page.page)
+          this.navCtrl.setRoot(page.page)
       // }
       
+      }
     }
-  }
 
-  checkForLogin(page) {
+    checkForLogin(page) {
     this.storage.get('is_login').then((isLogin) => {
-      if (!isLogin) {
-        this.presentAlertNotLoggedIn()
-      }
-      else{
-        this.navCtrl.setRoot(page.page)
-      }
+        if (!isLogin) {
+            this.presentAlertNotLoggedIn()
+        }
+        else{
+            this.navCtrl.setRoot(page.page)
+        }
     })
-  }
+    }
 
-  presentAlertNotLoggedIn(){
-    let alert = this.alertCtrl.create({
-      title: 'Not Logged In',
-
-      subTitle: 'Please login to purchase travel pass',
-      buttons: [
-      {
-        text : 'Ok',
-      }
-      ]
-
-  });
-    alert.present();
-}
-
-
-
-
-moveToLoginPage() {
+    moveToLoginPage() {
     this.storage.remove('user_data');
     this.storage.remove('auth_token');
     this.storage.set('is_login', false);
 
     this.constantProvider.loginTitle = 'LOGIN';
     this.constantProvider.loginPage = 'LoginPage'
+    this.constantProvider.isLogin = false;
 
     this.navCtrl.setRoot('LoginPage')
-}
+    }
 
-logoutPressed() {
+    logoutPressed() {
     this.moveToLoginPage()
-}
+    }
 
+
+    presentAlertNotLoggedIn(){
+    let alert = this.alertCtrl.create({
+        title: 'Not Logged In',
+
+        subTitle: 'Please login to purchase travel pass',
+        buttons: [
+        {
+            text : 'Ok',
+        }
+        ]
+
+    });
+    alert.present();
+    }
 
 }

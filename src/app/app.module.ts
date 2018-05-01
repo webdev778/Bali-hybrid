@@ -99,7 +99,8 @@ import { ViewProfilePage } from '../pages/view-profile/view-profile'
           { component: ActivationPage, name: 'ActivationPage', segment: 'activation/:data'},
           { component: DashboardTicketsPage , name: 'DashboardTicketsPage', segment: 'dashboard/dashboardtickets', defaultHistory: [DashboardPage]},
           { component: ViewProfilePage , name: 'ViewProfilePage', segment: 'dashboard/viewprofile', defaultHistory: [DashboardPage]},
-          { component: OrderHistoryPage , name: 'OrderHistoryPage', segment: 'dashboard/orderhistory', defaultHistory: [DashboardPage]}
+          { component: OrderHistoryPage , name: 'OrderHistoryPage', segment: 'dashboard/orderhistory', defaultHistory: [DashboardPage]},
+          { component: TicketDetailsPage , name: 'TicketDetailsPage', segment: 'dashboard/dashboardtickets/ticketdetails/:ticket', defaultHistory: [DashboardPage,DashboardTicketsPage]}
     ]}),
     HttpModule,
     HttpClientModule,

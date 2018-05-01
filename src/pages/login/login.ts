@@ -122,6 +122,7 @@ export class LoginPage {
     this.navCtrl.setRoot(page)
     this.constantProvider.loginTitle = "Dashboard"
     this.constantProvider.loginPage = DashboardPage
+    this.constantProvider.isLogin = true
   }
 
 
