@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController, LoadingController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-import { ConstantsProvider } from '../../providers/constants/constants'
+import { ConstantsProvider, TicketToShowStructure } from '../../providers/constants/constants'
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Rx';
 import { TicketDetailsPage} from '../ticket-details/ticket-details';
@@ -14,83 +14,52 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
-@Component({
-	selector: 'page-dashboard-tickets',
-	templateUrl: 'dashboard-tickets.html',
-})
-export class DashboardTicketsPage {
+ @IonicPage()
+ @Component({
+ 	selector: 'page-dashboard-tickets',
+ 	templateUrl: 'dashboard-tickets.html',
+ })
+ export class DashboardTicketsPage {
 
-	dashboardData :Array <{userId: number,userName:string,ticketType:string,
-		isActive:number,isExpired:number,profileStatus:number,expiryDate:number,timerValue:string}>= []
+ 	TIMER
+ 	timerSubscription
 
-	currentTime = Math.floor(new Date().getTime() / 1000)
-	arrayActivatedTickets = []
+ 	bundleData:{ticket_info:any}
+ 	bundleTicketDescription: any[] = [];
+ 	bundleTicketsToShow: Array<TicketToShowStructure> = []
 
-	constructor( 	public navCtrl: NavController, 
-					public navParams: NavParams,
-					public rest: RestProvider,
-					private storage: Storage,
-					private constantProvider: ConstantsProvider,
-					private alertCtrl: AlertController,) {
+ 	currentTime = 0
+ 	arrayActivatedTickets = []
 
+ 	isListLoaded = false
+ 	expiryDate : { expiry_date:any }
+ 	requestBundle = {user_id: '', token: ''}
+ 	timerView = false
+
+ 	constructor( 	
+ 		public navCtrl: NavController, 
+ 		public navParams: NavParams,
+ 		public rest: RestProvider,
+ 		private storage: Storage,
+ 		private constantProvider: ConstantsProvider,
+ 		private alertCtrl: AlertController,
+ 		public loadingController: LoadingController,) {
+ 	}
+
+	ionViewWillEnter(){
 		this.checkForLogin()
-		this.getTicketDataFromServer()
 	}
 
-	getTicketDataFromServer() {
-		this.dashboardData = [
-			{	
-				userId: 1,
-				userName:'John Dean',
-				ticketType:'Adult',
-				isActive:1,
-				isExpired:0,
-				profileStatus:1, 
-				expiryDate: Math.floor(new Date('April 30, 2018 19:52:20').getTime() / 1000),
-				timerValue: ''
-			},
-
-			{	
-				userId: 2,
-				userName:'Tom MacMohan',
-				ticketType:'Adult',
-				isActive:0,
-				isExpired:0,
-				profileStatus:1, 
-				expiryDate: Math.floor(new Date('April 30, 2018 19:52:20').getTime() / 1000),
-				timerValue: ''
-			},
-
-			{	userId: 3,
-				userName:'Dwyane Bravo',
-				ticketType:'Adult',
-				isActive:0,
-				isExpired:0,
-				profileStatus:0, 
-				expiryDate: Math.floor(new Date('May 20, 2018 19:52:20').getTime() / 1000),
-				timerValue: ''
-			},
-
-			{	userId: 4,
-				userName:'Tamara',
-				ticketType:'Child',
-				isActive:0,
-				isExpired:0,
-				profileStatus:1, 
-				expiryDate: Math.floor(new Date('May 02, 2018 19:52:20').getTime() / 1000),
-				timerValue: ''
-			},
-
-		]
-	
-		this.initialiseArrayActivatedTickets()
+	ionViewDidLeave() {
+		if ( this.timerSubscription ) {
+			this.timerSubscription.unsubscribe();
+		}
+		
 	}
 
 	initialiseArrayActivatedTickets() {
-		for (let ticket of this.dashboardData)
-		{
-			if (ticket.isActive)
+		for (let ticket of this.bundleTicketsToShow) {
+			if (ticket.is_active)
 			{
 				this.arrayActivatedTickets.push(ticket)
 			}
@@ -100,22 +69,32 @@ export class DashboardTicketsPage {
 	}
 
 	activateTimerToUpdateValues() {
-		Observable.interval(1000).subscribe((x) => {           
+		this.TIMER = Observable.interval(1000)
+		this.timerSubscription = this.TIMER.subscribe((x) => {           
 			this.currentTime += 1
 
-			for (let ticket of this.arrayActivatedTickets)
-			{
-				this.getTimerValues(ticket.expiryDate - this.currentTime, ticket);
+			for (let ticket of this.arrayActivatedTickets) {
+				this.getTimerValues(ticket.expiry_date - this.currentTime, ticket);
 			}
-         });
+		});
 	}
 
 	checkForLogin() {
 		this.storage.get('is_login').then((isLogin) => {
-			 if (!isLogin) {
-					 this.moveToLoginPage()
-			 }
-		 })
+			if (!isLogin) {
+				this.moveToLoginPage()
+			}
+			else {
+				this.storage.get('user_data').then((user_data) => {
+					this.requestBundle.user_id = JSON.parse(user_data).id;
+					this.storage.get('auth_token').then((authToken) => {
+						this.requestBundle.token = authToken;
+
+						this.sendTicketsRequestToServer()  
+					});
+				});
+			}
+		})
 	}
 
 	moveToLoginPage() {
@@ -129,39 +108,59 @@ export class DashboardTicketsPage {
 		this.navCtrl.setRoot('LoginPage')
 	}
 
-	buttonLogoutPressed() {
-		this.moveToLoginPage()
-	}
-
 	activateTimer(ticket) {
-
 		this.presentAlertConfirmActivation(ticket)
-		
 	}
 
 	presentAlertConfirmActivation(ticket) {
 		let alert = this.alertCtrl.create({
 			title: 'Confirm Ticket Activation',
-
 			subTitle: 'Are you sure to activate your your ticket?',
 			buttons: [
-						{
-							text : 'Yes, I\'m sure',
-							handler: () => {
-								ticket.isActive = 1;
-								this.arrayActivatedTickets.push(ticket)
-							}
-						},
-						{
-							text: 'Dismiss'
-						}
-					  ]
+			{
+				text : 'Yes, I\'m sure',
+				handler: () => {
+
+					this.getTicketExpiryTime(ticket)
+				}
+			},
+			{
+				text: 'Dismiss'
+			}
+			]
 
 		});
+
 		alert.present();
 	}
 
-	getTimerValues(time,ticket){
+	getTicketExpiryTime(ticket) {
+		console.log("In the getExpiry Function")
+		let loader = this.loadingController.create({
+			content: "Sending ..."
+		});
+
+		let requestBundle = {
+			user_id:this.requestBundle.user_id,
+			token: this.requestBundle.token,
+			ticket_id: ticket.ticket_id
+		}
+
+		this.rest.getExpiryTime(requestBundle)
+		.subscribe(
+			responseData => this.expiryDate = <{expiry_date : any}> responseData,
+			err => loader.dismiss(),
+			() => {
+				let expDate = <any> this.expiryDate.expiry_date;
+				this.timerView = true
+				console.log(expDate)
+				ticket.is_active = 1;
+				ticket.expiry_date = expDate 
+				this.arrayActivatedTickets.push(ticket)
+			})
+	}
+
+	getTimerValues(time,ticket) {
 		var days, hours, minutes, seconds;
 		days = Math.floor(time / 86400);
 		time -= days * 86400;
@@ -172,34 +171,83 @@ export class DashboardTicketsPage {
 		seconds = time % 60;
 
 		if(days < 0){
-			ticket.timerValue = "Ticket Expired"
+			ticket.timer_value = "Ticket Expired"
 		}
 		else{
-			ticket.timerValue = "<b>"+days+"</b> Days <b>"+hours+"</b> Hours <b>"+minutes+"</b> Minutes <b>"+
-								seconds+"</b> Seconds"
+			ticket.timer_value = "<b>"+days+"</b> Days <b>"+hours+"</b> Hours <b>"+minutes+"</b> Minutes <b>"+
+			seconds+"</b> Seconds"
 		}
 	}
 
-     buttonProfileressed() {
-     	this.navCtrl.push(TicketDetailsPage)
-     }
-
-
-    convertUnixTimestampToDate(timestamp){
-    	return new Date(timestamp*1000).toUTCString()
-    }
-
-    updatedashboard() {
-		this.dashboardData['user_id'] = 1
-		this.rest.updateUserDashboard(this.dashboardData)
-			 .subscribe(
-					 userData => console.log(userData),
-					 err => console.log(err),
-					 () => {
-						 
-						 
-					 }
-		);
+	buttonProfilePressed(ticket) {
+		this.navCtrl.push(TicketDetailsPage,{'ticket': JSON.stringify(ticket)})
 	}
+
+
+	convertUnixTimestampToDate(timestamp) {
+		return new Date(timestamp*1000).toUTCString()
+	}
+
+	sendTicketsRequestToServer() {
+		let loader = this.loadingController.create({
+			content: "Sending ..."
+		});
+
+		this.rest.getTicketsForDashboard(this.requestBundle)
+		.subscribe(
+			responseData => this.bundleData = <{ticket_info : any}> responseData,
+			err => loader.dismiss(),
+			() => {
+				this.bundleTicketDescription = <any[]> this.bundleData.ticket_info;
+				this.bundleTicketsToShow = []
+				this.currentTime = 0
+
+				for (let ticket of this.bundleTicketDescription) {   
+					if(ticket.ticket_type == 1) {
+						ticket.ticket_type = 'Adult'
+					}
+					if(ticket.ticket_type == 2) {
+						ticket.ticket_type = 'Child'
+					}
+					if(ticket.ticket_type == 3) {
+						ticket.ticket_type = 'Family'
+					}
+
+					this.bundleTicketsToShow.push(<TicketToShowStructure> {
+						ticket_id:ticket.ticket_id,
+						first_name:ticket.first_name, 
+						last_name:ticket.last_name,
+						ticket_type:ticket.ticket_type,
+						is_active:ticket.is_active,
+						is_complete:ticket.is_complete,
+						travel_pass_code :ticket.travel_pass_code,
+						expiry_date:ticket.expiry_date,
+						timer_value:'', 
+						current_date:ticket.current_date,
+
+					})
+				}
+				if(this.bundleTicketsToShow.length > 0) {
+				this.isListLoaded = true	
+				this.currentTime = this.bundleTicketsToShow[0].current_date
+				}
+				this.initialiseArrayActivatedTickets()
+			}
+			);
+	}
+
+	buttonBackPressed() {
+		this.navCtrl.pop();
+	}
+
+	presentAlert(title,message) {
+		let alert = this.alertCtrl.create({
+			title: title,
+			subTitle: message,
+			buttons: ['Okay']
+		});
+		alert.present();
+	}
+
 
 }

@@ -40,6 +40,7 @@ import { ConstantsProvider } from '../providers/constants/constants';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DashboardTicketsPage } from '../pages/dashboard-tickets/dashboard-tickets'
+import { PaymentStatusPage } from '../pages/payment-status/payment-status'
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { DashboardTicketsPage } from '../pages/dashboard-tickets/dashboard-ticke
     DashboardPage,
     TicketDetailsPage,
     ActivationPage,
-    DashboardTicketsPage
+    DashboardTicketsPage,
+    PaymentStatusPage
   ],
   imports: [
     BrowserModule,
@@ -123,7 +125,8 @@ import { DashboardTicketsPage } from '../pages/dashboard-tickets/dashboard-ticke
     DashboardPage,
     TicketDetailsPage,
     ActivationPage,
-    DashboardTicketsPage
+    DashboardTicketsPage,
+    PaymentStatusPage
   ],
   providers: [
     StatusBar,

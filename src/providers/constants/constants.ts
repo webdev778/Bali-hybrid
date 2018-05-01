@@ -2,6 +2,8 @@
 
 import { Injectable } from '@angular/core';
 
+import { MainRestProvider } from '../rest/mainrest';
+
 // Global Variables
 
 export var CMS_PAGES : Array<{id: any, name: '', alias: '', page: any}> = [];
@@ -18,10 +20,12 @@ export let PUBLIC_HEADER = {
 // Constants for Web Services
 
 
-export let BASE_URL = "http://192.168.0.27/BaliTours/public/api/";
+export let BASE_URL = "http://192.168.0.22/BaliTours/public/api/";
 // export let BASE_URL = "http://admin.balisupport.tk/api/";
 
+//Authenticate User
 
+export let SERVICE_URL_AUTHENTICATE_USER = BASE_URL + "authenticateUser"
 
 // Login Page
 export let SERVICE_URL_LOGIN = BASE_URL+"login";
@@ -62,8 +66,10 @@ export let SERVICE_URL_PLACE_ORDER= BASE_URL+"placeorder";
 
 // Dashboard
 export let SERVICE_URL_UPDATE_DASHBOARD = BASE_URL+"updateDashboard";
-
-
+export let SERVICE_URL_GET_TICKETS = BASE_URL + "gettickets";
+export let SERVICE_URL_UPDATE_TICKET_PROFILE = BASE_URL + "updateTicketInfo";
+export let SERVICE_URL_GET_TICKET_INFORMATION = BASE_URL + "getTicketInformation";
+export let SERVICE_URL_ACTIVATE_TICKET = BASE_URL + "activateTicket";
 
 export let API_HEADER = {
 							
@@ -103,14 +109,56 @@ export interface UserDetailsDS
 	"deleted_at": string
 }
 
+export interface TicketToShowStructure
+{ 
+	"ticket_id":number,
+	"first_name":string, 
+	"last_name":string,
+	"ticket_type" :string,
+	"is_active":number,
+	"is_complete":number,
+	"travel_pass_code" :number,
+	"expiry_date":number,
+	"timer_value":string, 
+	"current_date":number
+}
+
+
+
 @Injectable()
 export class ConstantsProvider 
 {
 	loginTitle = 'LOGIN'
 	loginPage : any = 'LoginPage'
 	
-	constructor() {
+	constructor(private mainRest: MainRestProvider) {
 
 	}
-	
+
+	convertArrayImageUrlToData(arrayImageUrl) {
+		var imageArray = []
+
+		for(let imageUrl of arrayImageUrl){
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET',imageUrl, true);
+			xhr.responseType = 'blob';
+			xhr.onload = function(e) {
+			  if (this.status == 200) {
+			    var myBlob = this.response;
+
+			    var reader = new FileReader();
+			 	reader.readAsDataURL(myBlob); 
+			 	reader.onloadend = function() {
+			 		imageArray.push(reader.result)
+			 	}
+
+			    // myBlob is now the blob that the object URL pointed to.
+			  }
+			};
+			xhr.send();	
+		}
+
+		return imageArray
+	}
 }
+	

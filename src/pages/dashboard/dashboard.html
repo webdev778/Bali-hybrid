@@ -4,30 +4,34 @@
 
 <ion-content>
 
-  <page-bsc-header header='Today In Bali' showWhen="core"></page-bsc-header>
+  <page-bsc-header header='dashboard' showWhen="core"></page-bsc-header>
 
   <h2 hideWhen='core' class="mobile-sub-header">DASHBOARD</h2>
   <h2 showWhen='core' class="core-sub-header">DASHBOARD</h2>
 
   <br>
 
-    <ion-grid>
-        <ion-row showWhen="core" style="text-align: center; display: flex; justify-content: center;padding-left: 10%; padding-right: 10%">
-            <ion-col col-4  class="flexgrid-core" *ngFor="let page of dashoboardSubPages">
-                  <button ion-button full (click)="moveToPage(page)">
-                    {{page.name | uppercase}}
-                  </button>
-            </ion-col>
-        </ion-row>
+  <ion-grid>
+    <ion-row showWhen="core" style="text-align: center; display: flex; justify-content: center;padding-left: 10%; padding-right: 10%">
+      <ion-col col-4  class="flexgrid-core" *ngFor="let page of dashoboardSubPages">
+        <button ion-button full (click)="moveToPage(page)">
+          {{page.name | uppercase}}
+        </button>
+      </ion-col>
+    </ion-row>
 
-        <ion-row hideWhen="core" style="display: flex; justify-content: center; text-align: center;">
-            <ion-col class="flexgrid-mobile" *ngFor="let page of dashoboardSubPages">
-                  <button ion-button full (click)="moveToPage(page)">
-                    {{page.name | uppercase}}
-                  </button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+    <ion-row hideWhen="core" style="display: flex; justify-content: center; text-align: center;">
+      <ion-col class="flexgrid-mobile" *ngFor="let page of dashoboardSubPages">
+        <button ion-button full (click)="moveToPage(page)">
+          {{page.name | uppercase}}
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="logout-button">
+    <button (click)="buttonLogoutPressed()" outline ion-button>LOGOUT</button>
+  </div>
 
   <page-bsc-footer></page-bsc-footer>
 

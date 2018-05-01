@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { RestProvider } from '../../providers/rest/rest';
-import { DashboardPage } from '../dashboard/dashboard'
+import { DashboardPage } from '../dashboard/dashboard';
+import { BuyTravelPassPage } from '../buy-travel-pass/buy-travel-pass'
 import { Storage } from '@ionic/storage';
 
 import { ConstantsProvider, UserDetailsDS } from '../../providers/constants/constants'
@@ -50,7 +51,7 @@ export class LoginPage {
   checkForLogin() {
     this.storage.get('is_login').then((isLogin) => {
        if (isLogin) {
-           this.moveToDashboard()
+           this.moveToPage(DashboardPage)
        }
      })
   }
@@ -89,7 +90,7 @@ export class LoginPage {
 	signupAction(signup) {
 
     	let loader = this.loadingController.create({
-        content: "Sign up ..."
+        content: "Signing up ..."
       });
 
       loader.present();
@@ -100,6 +101,8 @@ export class LoginPage {
            	err => loader.dismiss(),
            	() => {
            		loader.dismiss()
+              this.presentAlertSignUp()
+              
            	}
            );
   }
@@ -113,12 +116,13 @@ export class LoginPage {
 		}
 	}
 
-  moveToDashboard() {
+  moveToPage(page) {
     this.storage.set('is_login', true);
-    this.navCtrl.setRoot(DashboardPage)
+    this.navCtrl.setRoot(page)
     this.constantProvider.loginTitle = "Dashboard"
     this.constantProvider.loginPage = DashboardPage
   }
+
 
   loginAction(login) {
 
@@ -142,11 +146,15 @@ export class LoginPage {
     checkStatusForLogin(bundle) {
       if (bundle.status == 200) {
         this.userBundle =  <UserDetailsDS> this.loginBundle.user_data
+        console.log(this.userBundle)
         this.storage.set('user_data', JSON.stringify(this.userBundle));
         this.storage.set('auth_token', this.loginBundle.data);
-
-        this.moveToDashboard()
-
+        if (this.navParams.get('lastPage') == 'buyTravelPassPage') {
+          this.moveToPage(BuyTravelPassPage)
+        }
+        else {
+          this.moveToPage(DashboardPage)
+        }
       }else {
         this.presentAlert(bundle.api_message)
       }
@@ -161,5 +169,23 @@ export class LoginPage {
       });
       alert.present();
     }
+
+   presentAlertSignUp() {
+    let alert = this.alertCtrl.create({
+      title: '',
+
+      subTitle: 'Registration Successful, please check your inbox',
+      buttons: [
+      {
+        text : 'Okay',
+        handler: () => {
+          this.navCtrl.setRoot(LoginPage)
+        }
+      }
+      ]
+
+    });
+    alert.present()
+  }
 
 }

@@ -24,7 +24,12 @@ import { PUBLIC_HEADER,
          SERVICE_URL_GET_TRAVEL_PASS,
          SERVICE_URL_PLACE_ORDER,
          SERVICE_URL_UPDATE_DASHBOARD,
-         SERVICE_URL_MAKE_PAYMENT } from '../constants/constants';
+         SERVICE_URL_MAKE_PAYMENT,
+         SERVICE_URL_GET_TICKETS,
+         SERVICE_URL_UPDATE_TICKET_PROFILE,
+         SERVICE_URL_GET_TICKET_INFORMATION,
+         SERVICE_URL_ACTIVATE_TICKET,
+         SERVICE_URL_AUTHENTICATE_USER } from '../constants/constants';
 
 
 
@@ -189,6 +194,20 @@ export class RestProvider {
       return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_PLACE_ORDER, data, header);
    }
 
+   getTicketsForDashboard(userInfo): Observable<{ }>  {
+
+     let data = {
+       'user_id': userInfo.user_id,
+       'token' : userInfo.token
+     };
+
+     let header = PUBLIC_HEADER;
+
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_GET_TICKETS, data, header);
+
+
+   }
+
    makeTravelPassPayment(paymentInfo): Observable<{ }> {
 
       let data = {
@@ -207,6 +226,73 @@ export class RestProvider {
 
 
    // Dashboard
+
+   updateTicketInfo(ticketInfo): Observable<{ }> {
+
+      let data = {
+        'user_id':ticketInfo.user_id,
+        'token': ticketInfo.token,
+        'ticket_id': ticketInfo.ticket_id,
+        'first_name':  ticketInfo.first_name,
+        'last_name': ticketInfo.last_name,
+        'date_of_birth': ticketInfo.date_of_birth,
+        'email': ticketInfo.email,
+        'phone': ticketInfo.phone,
+        'address': ticketInfo.address,
+        'gender': ticketInfo.gender,
+        'emergency_contact_name': ticketInfo.emergency_contact_name,
+        'emergency_contact_phone': ticketInfo.emergency_contact_phone,
+        'passports': ticketInfo.passports,
+        'luggagess': ticketInfo.luggagess,
+        'insuarance': ticketInfo.insuarance,
+        'doctors_letter': ticketInfo.doctors_letter
+
+     };
+     
+     let header = PUBLIC_HEADER;
+
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_UPDATE_TICKET_PROFILE, data, header);
+   }
+
+
+   sendAuthRequest(info): Observable<{ }> {
+     let data = {
+       'user_id' : info.user_id,
+       'signupcode' : info.signupcode
+     } 
+     
+     let header = PUBLIC_HEADER;
+
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_AUTHENTICATE_USER, data, header);
+
+   }
+
+   getTicketInformation(ticketInfo): Observable<{ }> {
+         
+      let data = {
+        'user_id': ticketInfo.user_id,
+        'token': ticketInfo.token,
+        'ticket_id': ticketInfo.ticket_id,
+    };
+
+     let header = PUBLIC_HEADER;
+
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_GET_TICKET_INFORMATION, data, header);
+   }
+
+   getExpiryTime(requestBundle): Observable<{ }> {
+
+     let data = {
+        'user_id': requestBundle.user_id,
+        'token': requestBundle.token,
+        'ticket_id': requestBundle.ticket_id,
+    };
+
+     let header = PUBLIC_HEADER;
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_ACTIVATE_TICKET, data, header);
+   }
+   
+
 
    updateUserDashboard(userInfo): Observable<{ }> {
 

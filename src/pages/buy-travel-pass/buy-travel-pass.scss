@@ -4,10 +4,9 @@ page-buy-travel-pass {
    .form-col {
       min-width: 300px;
       max-width: 500px;
-      background-color: #a8b7bc;
-      padding-top: 20px;
-      padding-left: 20px;
-      padding-right: 20px;
+      background-color: white;
+      padding: 4rem;
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
    }
 
    .payment-title {
@@ -21,20 +20,28 @@ page-buy-travel-pass {
    }
 
    .form-grid{
-      background-color: white;
+      margin-left: 10%;
+      margin-right: 10%;
+      width: 80%;
+      margin-top: -120px;
+      margin-bottom: 20px;
+      background-color: white
    }
 
    .ticket-summary{
-      background-color: #b4c4c9;
+      background-color: #fff;
       margin-top: -30px;
+      // border: solid 1px #d1caca;
+     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   }
+
+   .form-panel .form-item{
+      box-shadow: 0 0 0 1px #d2d1d1;
    }
 
 
-   .form-panel{
-      padding-bottom: 20px;
-      padding-top: 20px;
-      
-   }
+
+
 
 	.travel-grid{
  		padding-left: 5%;
@@ -70,7 +77,8 @@ page-buy-travel-pass {
 		text-align: center;
       min-width: 250px;
       max-width: 600px;
-      padding-top: 20px;
+      margin-top: 30px;
+     
 	}
    .selected-grid2{
       min-width: 250px;
@@ -152,8 +160,9 @@ page-buy-travel-pass {
    }
 
    .border-element1{
-      // border:1pt solid #378391;
-      background-color: #b4c4c9;
+       border: solid 1px #c2c2c2;
+       background-color: white;
+       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     }
 
