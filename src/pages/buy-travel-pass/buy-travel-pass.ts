@@ -4,6 +4,7 @@ import { RestProvider } from '../../providers/rest/rest';
 import { TicketStructure, TravellersInfoDS } from '../../providers/constants/constants';
 import { Storage } from '@ionic/storage';
 import { NgForm } from '@angular/forms';
+import { PaymentStatusPage } from '../payment-status/payment-status';
 
 
 @IonicPage()
@@ -26,6 +27,7 @@ export class BuyTravelPassPage {
 	finalCost = 0
 	orderId = 0
 
+	requestBundle = {user_id: '', token: ''}
 	bundleTicketsForServer : Array<TicketStructure> = []
 	bundleSaveTickets : Array<TicketStructure> = []
 	bundleViewDescription : any[] = [];
@@ -33,7 +35,8 @@ export class BuyTravelPassPage {
 	cardDetails = { number: '',exp_month:'' ,exp_year: '',cvc: ''}
 	arrayTravellers : Array<TravellersInfoDS> = []
 	bundlePaymentData = {name:'', phone:'', address:''}
-	
+	orderDetails: {order_no: '' ,transaction_id: ''}
+
 	constructor(	public navCtrl: NavController, 
 		public navParams: NavParams,
 		private alertCtrl: AlertController,
@@ -110,6 +113,14 @@ export class BuyTravelPassPage {
 				this.presentAlertNotLoggedIn()
 			}
 			else{
+				this.storage.get('user_data').then((user_data) => {
+					this.requestBundle.user_id = JSON.parse(user_data).id;
+					this.storage.get('auth_token').then((authToken) => {
+						this.requestBundle.token = authToken;
+
+						
+					});
+				});
 
 				for (let ticket of this.bundleViewDescription) {
 					if (ticket.quantity > 0) {
@@ -127,6 +138,8 @@ export class BuyTravelPassPage {
 		})
 	}
 
+
+
 	initialiseArrayTraveller() {
 		this.arrayTravellers = []
 		let adultIndex = 0
@@ -135,19 +148,21 @@ export class BuyTravelPassPage {
 
 		for(var count =1 ; count <= adultTicket.quantity ; count ++){
 			this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
-				last_name:'', 
-				gender:'', 
-				email:'', 
-				ticket_type: this.bundleSaveTickets[
-				adultIndex
-				].ticket_type,
-			})
+															last_name:'', 
+															gender:'', 
+															email:'', 
+															ticket_type: this.bundleSaveTickets[
+															adultIndex
+															].ticket_type,
+														})
 			this.travellerInfoWindow = false
 		}
 	}	
 
 	moveToLoginPage() {
-		this.navCtrl.setRoot('LoginPage')
+		this.navCtrl.push('LoginPage',{
+        'lastPage': 'buyTravelPassPage'
+      })
 	}
 
 	resetValues() {
@@ -169,7 +184,7 @@ export class BuyTravelPassPage {
 
 	presentAlertNotLoggedIn() {
 		let alert = this.alertCtrl.create({
-			title: 'Not Logged In',
+			title: '',
 
 			subTitle: 'Please login to purchase travel pass',
 			buttons: [
@@ -231,7 +246,7 @@ export class BuyTravelPassPage {
 
 	sendTicketDetailsToServer() {
 		let loader = this.loadingController.create({
-			content: "Sending ..."
+			content: "Please Wait ..."
 		});
 
 		this.createTicketBundleForServer()
@@ -239,8 +254,8 @@ export class BuyTravelPassPage {
 		loader.present()
 
 		let passInfo = {
-			user_id:'1',
-			token: '12345',
+			user_id:this.requestBundle.user_id,
+			token: this.requestBundle.token,
 			ticket_bundle: this.bundleTicketsForServer, 
 			total_cost: this.finalCost 
 		}
@@ -270,31 +285,29 @@ export class BuyTravelPassPage {
 	checkTicketStatus(bundle) {
 		if (bundle.status == 200) {
 			this.orderId = bundle.order_id
-			this.presentAlert('Success', bundle.order_id)
 		}else {
-			this.presentAlert('Error', bundle.api_message)
+			this.presentAlert('Something Went Wrong', bundle.api_message)
 		}
 
 	}
 
 	sendPaymentDetailsToServer(){
 		let loader = this.loadingController.create({
-			content: "Sending ..."
+			content: "Making Payment ..."
 		});
 
 		loader.present();
 
 
 		let paymentInfo = {
-			user_id:'1',
+			user_id:this.requestBundle.user_id,
 			order_id: this.orderId,
-			token: '12345',
+			token: this.requestBundle.token,
 			billing_info: this.bundlePaymentData, 
 			card_details: this.cardDetails 
 		}
 
 		console.log(paymentInfo.order_id)
-
 		console.log("Payment-Info :" + paymentInfo)
 
 		this.rest.makeTravelPassPayment(paymentInfo)
@@ -309,9 +322,11 @@ export class BuyTravelPassPage {
 
 	checkPaymentStatus(bundle) {
 		if (bundle.status == 200) {
-			this.presentAlert('Success', bundle.order_id)
+			this.orderDetails = bundle.order_details
+			console.log(this.orderDetails)
+			this.navCtrl.push(PaymentStatusPage,{'order-details': JSON.stringify(this.orderDetails)})
 		}else {
-			this.presentAlert('Error', bundle.api_message)
+			this.presentAlert('Something Went Wrong', bundle.api_message)
 		}
 
 	}
@@ -335,7 +350,12 @@ export class BuyTravelPassPage {
 		let alert = this.alertCtrl.create({
 			title: title,
 			subTitle: message,
-			buttons: ['Okay']
+			buttons: [
+						{
+							text : 'Okay',
+						}
+					]
+			
 		});
 		alert.present();
 	}

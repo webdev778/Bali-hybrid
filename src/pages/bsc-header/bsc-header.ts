@@ -21,50 +21,56 @@ import { CMS_PAGES, ConstantsProvider } from '../../providers/constants/constant
  * Ionic pages and navigation.
  */
 
-@Injectable()
-@IonicPage()
-@Component({
-  selector: 'page-bsc-header',
-  templateUrl: 'bsc-header.html',
-})
-export class BscHeaderPage {
+ @Injectable()
+ @IonicPage()
+ @Component({
+   selector: 'page-bsc-header',
+   templateUrl: 'bsc-header.html',
+ })
+ export class BscHeaderPage {
 
-  @Input() header;
+   @Input() header;
 
-  bundlePagesData : {data : any};
+   bundlePagesData : {data : any};
+   isLogin = false
 
-  pages: Array<{title: string, icon: any, page: any}>;
-  cmsPages : Array<{id: any, name: '', alias: '', page: any}>;
-  loginPage : Array<{title: string, icon: string, page: string}>; 
+   pages: Array<{title: string, icon: any, page: any}>;
+   cmsPages : Array<{id: any, name: '', alias: '', page: any}>;
+   loginPage : Array<{title: string, icon: string, page: string}>; 
 
-  constructor(  public navCtrl: NavController, 
-                public navParams: NavParams, 
-                public rest: RestProvider, 
-                public loadingController: LoadingController, 
-                public constantProvider: ConstantsProvider,
-                private storage: Storage,
-                private alertCtrl: AlertController) {
+   constructor(  public navCtrl: NavController, 
+     public navParams: NavParams, 
+     public rest: RestProvider, 
+     public loadingController: LoadingController, 
+     public constantProvider: ConstantsProvider,
+     private storage: Storage,
+     private alertCtrl: AlertController) {
 
-    this.getCMSPages()
+     this.getCMSPages()
 
-    this.pages = [
-            {title: 'Home', icon: 'home', page: HomePage},
-            {title: 'Today In Bali', icon: 'today_in_bali', page: InBaliPage},
-            {title: 'FAQ', icon: 'faq', page: FaqPage},
-            {title: 'Our Services', icon: 'our_services', page: ServicesPage},
-            {title: 'Buy Travel Pass', icon: 'buy_travel_pass', page: BuyTravelPassPage},
-            {title: 'Contact Us', icon: 'contact_us', page: ContactUsPage},
-    ];
+     this.pages = [
+     {title: 'Home', icon: 'home', page: HomePage},
+     {title: 'Today In Bali', icon: 'today_in_bali', page: InBaliPage},
+     {title: 'FAQ', icon: 'faq', page: FaqPage},
+     {title: 'Our Services', icon: 'our_services', page: ServicesPage},
+     {title: 'Buy Travel Pass', icon: 'buy_travel_pass', page: BuyTravelPassPage},
+     {title: 'Contact Us', icon: 'contact_us', page: ContactUsPage},
+     ];
 
-    this.loginPage = [{title: constantProvider.loginTitle, icon: 'log_in', page: constantProvider.loginPage}];
+     this.loginPage = [{title: constantProvider.loginTitle, icon: 'log_in', page: constantProvider.loginPage}];
+     if( constantProvider.loginTitle == "Dashboard" ) {
+       this.isLogin = true
+     }
+     else {
+       this.isLogin =false
+     }
+   }
 
-  }
+   getCMSPages() {
+     this.cmsPages = CMS_PAGES;
+   }
 
-  getCMSPages() {
-    this.cmsPages = CMS_PAGES;
-  }
-
-  openPage(page) {
+   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if (page.page == undefined) {
@@ -101,8 +107,27 @@ export class BscHeaderPage {
       }
       ]
 
-    });
+  });
     alert.present();
-  }
+}
+
+
+
+
+moveToLoginPage() {
+    this.storage.remove('user_data');
+    this.storage.remove('auth_token');
+    this.storage.set('is_login', false);
+
+    this.constantProvider.loginTitle = 'LOGIN';
+    this.constantProvider.loginPage = 'LoginPage'
+
+    this.navCtrl.setRoot('LoginPage')
+}
+
+logoutPressed() {
+    this.moveToLoginPage()
+}
+
 
 }

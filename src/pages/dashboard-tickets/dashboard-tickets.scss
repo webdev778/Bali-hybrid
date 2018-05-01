@@ -11,17 +11,20 @@ page-dashboard-tickets  {
 		text-align: center;
 		margin-bottom: 20px;
 	}
+	
+	.placeholder-text {
+		color: #c2c2c2;
 
+	}
 
 	.flex-row {
 		background-color: #dce4f2;
-		   text-align: center; 
-	    display: flex; 
-	    justify-content: center;
-	    margin-top: 20px;
-	  
-
-	    .form-col {
+		text-align: center; 
+		display: flex; 
+		justify-content: center;
+		margin-top: 20px;
+		
+		.form-col {
 
 			h6 {
 				text-align: center;
@@ -38,33 +41,46 @@ page-dashboard-tickets  {
 	}
 
 	.button-map {
-	    width: 140px;
-	    height: 30px;
-	    margin-top: 20px;
-	    margin-bottom: 15px;
-	    display: inline-block;
-	    background-color: #809cce
+		width: 140px;
+		height: 30px;
+		 margin-top: 10px;
+		 margin-bottom: 20px;
+		display: inline-block;
+		background-color: #809cce
 
-	 }
+	}
 
-	 .button-md-primary.activated{
-	 	background-color: #647da8;
-	 }
+	.button-map-2{
+		background-color: white;
+		margin-top: 15px;
+		color: #63a722;
+		font-size: 13px;
+	}
 
-	 .button-md-primary:hover:not(.disable-hover) {
-    background-color: #647da8;
+	.button-activate-ticket{
+		background-color: white;
+		margin-top: 15px;
+		color: #63a722;
+		font-size: 13px;
+		font-weight: bold;
+	}
+
+	.button-md-primary.activated{
+		background-color: #647da8;
+	}
+
+	.button-md-primary:hover:not(.disable-hover) {
+		background-color: #647da8;
 	}
 
 	.flexgrid{
-	  		
 		color: #101212;
-		
 		min-width: 100%;
+		background-color: red
+		
+		button {
 
-
-      button {
-
-      }
+		}
 
 		h2 {
 			margin-top: 5px;
@@ -74,34 +90,62 @@ page-dashboard-tickets  {
 			margin-top: 15px;
 			padding-left: 5px;
 			padding-right: 5px;
-    		margin-bottom: 15px;
+			margin-bottom: 15px;
 		}
 
 
 		min-width: 250px;
 
-  	}
+	}
 
-  	.service-row {
-  		text-align: center; 
-  		display: flex; 
-  		justify-content: center; 
-  		padding-left: 10%; 
-  		padding-right: 10%; 
+	.flexgrid-2{
+		max-width: 900px;
+		padding: 2rem;
+		
+		margin-top: 30px;
+		margin-bottom: 30px;
+		color: #527a85
+	}
+
+	.flexgrid-row-head{	
+		background-color: #469594;
+		color: white;
+		margin-bottom: 3px;
+		padding-left: 10px;
+		box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		margin-top: -10px;
+		height: 50px;
+	}
+
+	.service-row {
+		text-align: center; 
+		display: flex; 
+		justify-content: center; 
   		padding-top: 20px; 
   		padding-bottom: 20px;
+  		background-color: white
   	}
 
-  	.flexgrid-core{
+  	.flexgrid-row{
+  		margin-bottom: 1px;
+  		background-color: white;
+  		padding-left: 10px;
+  		box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 2px 1px 0 rgba(0, 0, 0, 0.19);
+  	}
+
+  	.flexgrid-mobile{
+  		margin-top: 15px;
+  		margin-bottom: 10px;
+  		min-width: 300px;
+    	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);;
+  		margin-right: 20px;
+  		margin-left: 20px;
+  		min-height: 250px;	
+  		background-color: #f0f0f1;	
   		
-      margin-top: 40px;
-      margin-bottom: 40px;
-      min-width: 300px;
-      background-color: #b4c4c9;
-   	  margin-right: 10px;
-   	  min-height: 250px;
+  	}
+
+  	.mobile-text {
+  		color: #527c88
   	}
 }
-
-
-

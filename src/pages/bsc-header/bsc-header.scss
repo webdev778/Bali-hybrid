@@ -23,6 +23,7 @@ page-bsc-header {
   }
 
   .header-button {
+    color:white
   }
 
   .login {
@@ -31,6 +32,17 @@ page-bsc-header {
 
   .bsc-header {
     background:#62a830;
+  }
+
+  .header-login{
+    float: left;
+    max-width: 120px;
+    display: inline-block;
+  }
+
+  .header-logout {
+    float: right;
+    width: 60px;
   }
 
 }

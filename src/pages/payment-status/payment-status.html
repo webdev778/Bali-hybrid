@@ -1,0 +1,34 @@
+<!--
+  Generated template for the PaymentStatusPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header hideWhen="core">
+</ion-header>
+
+<ion-content>
+
+
+	<h3 hideWhen='core' class='mobile-sub-header'>Your Order Has Been Recieved</h3>
+    <h3 showWhen='core' class='core-sub-header'>Your Order Has Been Recieved</h3>
+
+	<br>
+
+	<ion-grid>
+        <ion-row class='flex-row'>
+            <ion-col col-12 class="flexgrid" >
+                  	<h2>THANK YOU FOR YOUR PURCHASE</h2>
+                    <P>Your Order ID is : <b>{{orderDetails.order_no}}</b></P>
+                    <P>Your Transaction ID is : <b>{{orderDetails.transaction_id}}</b></P>
+                  	<h5>You will receive an order confirmation email with details of your order</h5>
+            </ion-col>
+            <ion-col col-12>
+                <button class="button-map" ion-button color='primary' full (click) = "moveToDashboard()">Go to Dashoard</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <br>
+
+</ion-content>
