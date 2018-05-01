@@ -29,7 +29,8 @@ import { PUBLIC_HEADER,
          SERVICE_URL_UPDATE_TICKET_PROFILE,
          SERVICE_URL_GET_TICKET_INFORMATION,
          SERVICE_URL_ACTIVATE_TICKET,
-         SERVICE_URL_AUTHENTICATE_USER } from '../constants/constants';
+         SERVICE_URL_AUTHENTICATE_USER,
+         SERVICE_URL_VIEW_ORDER_HISTORY } from '../constants/constants';
 
 
 
@@ -195,7 +196,6 @@ export class RestProvider {
    }
 
    getTicketsForDashboard(userInfo): Observable<{ }>  {
-
      let data = {
        'user_id': userInfo.user_id,
        'token' : userInfo.token
@@ -204,8 +204,17 @@ export class RestProvider {
      let header = PUBLIC_HEADER;
 
      return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_GET_TICKETS, data, header);
+   }
 
+   requestOrderHistory(userInfo): Observable<{ }>  {
+     let data = {
+       'user_id': userInfo.user_id,
+       'token' : userInfo.token
+     };
 
+     let header = PUBLIC_HEADER;
+
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_VIEW_ORDER_HISTORY, data, header);
    }
 
    makeTravelPassPayment(paymentInfo): Observable<{ }> {

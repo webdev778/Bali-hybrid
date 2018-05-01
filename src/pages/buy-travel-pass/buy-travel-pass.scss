@@ -16,7 +16,6 @@ page-buy-travel-pass {
       font-weight: bold;
       position: relative;
       text-align: center;
-      // margin-bottom: -5px
    }
 
    .form-grid{
@@ -39,16 +38,11 @@ page-buy-travel-pass {
       box-shadow: 0 0 0 1px #d2d1d1;
    }
 
-
-
-
-
 	.travel-grid{
  		padding-left: 5%;
  		padding-right: 5%;
  		height: 100%;
    	text-align: center;
-
 	}
 
    .bar-text{
@@ -80,13 +74,12 @@ page-buy-travel-pass {
       max-width: 600px;
       margin-top: 10px;     
 	}
+
    .selected-grid2{
       min-width: 250px;
       max-width: 600px;
       background-color: #577f8a;
-      min-height: 1000px
-      ;
-     
+      min-height: 1000px;  
    }
 
    .payment-btn{
@@ -100,12 +93,11 @@ page-buy-travel-pass {
       font-weight: 500;
    }
 
-
-   .button.customBtn{
+   .button.customBtn {
         width:150px;
-
    }
-   .page-paddingtext{
+
+   .page-paddingtext {
       padding-top: 0px;
       margin-top: 0px;
       margin-bottom: 0px;
@@ -113,26 +105,25 @@ page-buy-travel-pass {
       justify-content: center;
    }
    
-   .page-lastpaddingtext{
+   .page-lastpaddingtext {
       padding-top: 0px;
       margin-top: 0px;
       color: #0a5877;
       justify-content: center;
    }
    
-
-   .static-ctext{
+   .static-ctext {
       background:#39807f;
       text-align: center;
       margin-top: 0px;
       margin-bottom: 0px;
    }
 
-   .vertical{
+   .vertical {
      
    }
 
-   .page-text{
+   .page-text {
       text-align: center;
       color: #378391;
       padding-top: 0px;
@@ -141,7 +132,7 @@ page-buy-travel-pass {
       margin-bottom: 0px;
    }
 
-   .counter-btn{
+   .counter-btn {
       margin-top: 20px;
       height: 20px;
       width: 20px;
@@ -151,11 +142,11 @@ page-buy-travel-pass {
       margin-right: 5px;
    }
 
-   .counter-col{
+   .counter-col {
       padding: 0px
    }
 
-   .box1-content{
+   .box1-content {
       padding-top: 5px;
       padding-right: 20px;
       padding-left: 20px;
@@ -163,10 +154,9 @@ page-buy-travel-pass {
       margin-bottom: 5px;
    }
 
-   .border-element1{
-       // border: solid 1px #c2c2c2;
-       background-color: white;
-       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   .border-element1 {
+      background-color: white;
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     }
 
@@ -188,27 +178,19 @@ page-buy-travel-pass {
       margin-right: 20px;
 
       .type-para {
-
       }
    }
 
    ion-input{
       background-color: white;
-
-
    }
-
-   
-
 
    .save-btn{
      text-align: center;
      margin-top: 20px;
      margin-bottom: 20px;
    }
-
 }
-
 
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;

@@ -59,8 +59,7 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 
 	initialiseArrayActivatedTickets() {
 		for (let ticket of this.bundleTicketsToShow) {
-			if (ticket.is_active)
-			{
+			if (ticket.is_active) {
 				this.arrayActivatedTickets.push(ticket)
 			}
 		}
@@ -175,7 +174,7 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 		}
 		else{
 			ticket.timer_value = "<b>"+days+"</b> Days <b>"+hours+"</b> Hours <b>"+minutes+"</b> Minutes <b>"+
-			seconds+"</b> Seconds"
+			seconds+"</b> Seconds left"
 		}
 	}
 

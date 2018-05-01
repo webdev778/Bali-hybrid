@@ -4,10 +4,61 @@
 
 <ion-content>
 
+
 	<page-bsc-header showWhen="core"></page-bsc-header>
 	<h2 hideWhen='core' class="mobile-sub-header">ORDERS</h2>
   	<h2 showWhen='core' class="core-sub-header">ORDERS</h2>	
-  	<p style = "text-align: center;color: grey">Order History Will be Visible Here</p>
+  	
+  	<ion-grid class='flexgrid-2' showWhen="core">
+
+          <ion-row class = "flexgrid-row-head">
+            
+            <ion-col class="form-col" >
+                    <p>ORDER ID</p>
+            </ion-col>
+            
+            <ion-col>        
+                      <p>ORDER NUMBER</p>
+            </ion-col>
+           
+            <ion-col>
+               <p>NAME</p>
+            </ion-col>
+             
+             <ion-col>
+                  <p>DATE AND TIME</p>
+            </ion-col>
+            <ion-col>
+            	<p>TICKETS PURCHASED</p>
+           </ion-col>
+        </ion-row>
+    
+      <ion-row class = "flexgrid-row" *ngFor = "let order of bundleOrderList;" >
+            
+            <ion-col class="form-col" >
+                    <p>{{order.order_id}}</p>
+            </ion-col>
+            
+            <ion-col>        
+                      <p>{{order.order_no}}</p>
+            </ion-col>
+           
+            <ion-col>
+               <p>{{order.name}}</p>
+            </ion-col>
+             
+             <ion-col>
+                  <p>{{order.order_date.date}}</p>
+            </ion-col>
+            <ion-col>
+              <p>{{order.ticket_info}}</p>
+           </ion-col>
+       </ion-row>
+    </ion-grid>
+  <div style="text-align: center; margin-bottom: 20px;">
+    <button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
+  </div>
+
 	<page-bsc-footer></page-bsc-footer>
 
 </ion-content>

@@ -65,7 +65,6 @@ export class MyApp {
           this.constantProvider.isLogin = true  
           this.constantProvider.loginTitle = "Dashboard"
           this.constantProvider.loginPage = DashboardPage
-          debugger
         })
        }
      })

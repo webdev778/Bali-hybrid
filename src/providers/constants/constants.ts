@@ -10,7 +10,6 @@ export var CMS_PAGES : Array<{id: any, name: '', alias: '', page: any}> = [];
 export var SOCIAL_LINKS = { facebook :'', twitter: '', google: ''};
 export let GOOGLE_KEY = "AIzaSyCecgk4WWZR2HgSmSczljuNDqQaJyd8psg";
 
-
 // public header
 
 export let PUBLIC_HEADER = {
@@ -18,7 +17,6 @@ export let PUBLIC_HEADER = {
 }
 
 // Constants for Web Services
-
 
 export let BASE_URL = "http://192.168.0.22/BaliTours/public/api/";
 // export let BASE_URL = "http://admin.balisupport.tk/api/";
@@ -70,13 +68,13 @@ export let SERVICE_URL_GET_TICKETS = BASE_URL + "gettickets";
 export let SERVICE_URL_UPDATE_TICKET_PROFILE = BASE_URL + "updateTicketInfo";
 export let SERVICE_URL_GET_TICKET_INFORMATION = BASE_URL + "getTicketInformation";
 export let SERVICE_URL_ACTIVATE_TICKET = BASE_URL + "activateTicket";
+export let SERVICE_URL_VIEW_ORDER_HISTORY = BASE_URL + "viewOrderHistory";
 
-export let API_HEADER = {
-							
-						};
 
-export interface TicketStructure  
-{ 
+export let API_HEADER = { 	
+							};
+
+export interface TicketStructure { 
 	ticket_id: number, 
 	quantity: number, 
 	price: number,
@@ -84,8 +82,7 @@ export interface TicketStructure
 	ticket_details: any,
 }
 
-export interface TravellersInfoDS
-{
+export interface TravellersInfoDS {
 	first_name: string,
 	last_name: string,
 	date_of_birth: string,
@@ -93,9 +90,37 @@ export interface TravellersInfoDS
 	email: string,
 	ticket_type: string,
 }
+// "data": [
+//         {
+            
+//             "order_date": {
+//                 "date": "2018-05-01 09:45:07.000000",
+//                 "timezone_type": 3,
+//                 "timezone": "UTC"
+//             },
+//             "ticket_info": [
+//                 {
+//                     "travel_passid": 1,
+//                     "quantity": 2
+//                 },
+//                 {
+//                     "travel_passid": 2,
+//                     "quantity": 1
+//                 }
+       
 
-export interface UserDetailsDS
-{ 
+export interface OrderHistoryStructure {
+	"order_id": string,
+    "order_no": string,
+    "user_id": number,
+    "amount": number,
+    "name": string,
+    "transaction_id": string,
+    "order_date": any
+    "ticket_info" : any
+}
+
+export interface UserDetailsDS { 
 	"id": string, 
 	"first_name": string, 
 	"last_name": string,
@@ -109,8 +134,7 @@ export interface UserDetailsDS
 	"deleted_at": string
 }
 
-export interface TicketToShowStructure
-{ 
+export interface TicketToShowStructure { 
 	"ticket_id":number,
 	"first_name":string, 
 	"last_name":string,
@@ -123,11 +147,8 @@ export interface TicketToShowStructure
 	"current_date":number
 }
 
-
-
 @Injectable()
-export class ConstantsProvider 
-{
+export class ConstantsProvider {
 	loginTitle = 'LOGIN'
 	loginPage : any = 'LoginPage'
 	isLogin = false
@@ -135,7 +156,6 @@ export class ConstantsProvider
 	constructor(private mainRest: MainRestProvider) {
 
 	}
-
 
 	convertArrayImageUrlToData(arrayImageUrl) {
 		var imageArray = []
@@ -152,9 +172,7 @@ export class ConstantsProvider
 			 	reader.readAsDataURL(myBlob); 
 			 	reader.onloadend = function() {
 			 		imageArray.push(reader.result)
-			 	}
-
-			    // myBlob is now the blob that the object URL pointed to.
+			 	} 
 			  }
 			};
 			xhr.send();	
