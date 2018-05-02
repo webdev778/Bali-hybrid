@@ -223,7 +223,7 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 						expiry_date:ticket.expiry_date,
 						timer_value:'', 
 						current_date:ticket.current_date,
-
+						is_open:true
 					})
 				}
 				if(this.bundleTicketsToShow.length > 0) {
@@ -246,6 +246,10 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 			buttons: ['Okay']
 		});
 		alert.present();
+	}
+
+	toggleSection(ticket) {
+		ticket.is_open = !ticket.is_open
 	}
 
 

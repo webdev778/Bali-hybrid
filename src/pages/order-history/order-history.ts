@@ -22,7 +22,7 @@ export class OrderHistoryPage {
 	bundleData : {data : any};
  	bundleOrderDescription: any[] = [];
  	bundleOrderList: Array<OrderHistoryStructure> = []
-
+ 	
 	constructor( 	
 		public navCtrl: NavController, 
 		public navParams: NavParams,
@@ -78,9 +78,9 @@ export class OrderHistoryPage {
 						this.bundleOrderList = []
 					
 
-						for (let ticket of this.bundleOrderDescription) { 
+						for(let order of this.bundleOrderDescription) { 
 							var tktInfo = ''
-							let ticketInfo = ticket.ticket_info
+							let ticketInfo = order.ticket_info
 
 							for( let info of ticketInfo ) {
 								if (info.travel_passid == 1) {
@@ -94,21 +94,29 @@ export class OrderHistoryPage {
 								}
 							}
 
+							let dateTime = (order.order_date.date.split('.'))[0]
+							dateTime = dateTime + " " + order.order_date.timezone
+
 							this.bundleOrderList.push(<OrderHistoryStructure> {
-																				order_id: ticket.order_id,
-																				order_no: ticket.order_no,
-																			    user_id: ticket.user_id,
-																			    amount: ticket.amount,
-																			    name: ticket.name,
-																			    transaction_id: ticket.transaction_id,
-																			    order_date: ticket.order_date,
-																			    ticket_info : tktInfo
+																				order_id: order.order_id,
+																				order_no: order.order_no,
+																			    user_id: order.user_id,
+																			    amount: order.amount,
+																			    name: order.name,
+																			    transaction_id: order.transaction_id,
+																			    order_date: dateTime,
+																			    ticket_info : tktInfo,
+																			    is_open : true
 																				})
 						}
 
 						console.log(this.bundleOrderList)
 				}
 		)
+	}
+
+	toggleSection(order) {
+		order.is_open = !order.is_open
 	}
 
 	buttonBackPressed() {

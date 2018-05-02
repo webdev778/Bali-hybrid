@@ -18,8 +18,8 @@ export let PUBLIC_HEADER = {
 
 // Constants for Web Services
 
-export let BASE_URL = "http://192.168.0.22/BaliTours/public/api/";
-// export let BASE_URL = "http://admin.balisupport.tk/api/";
+// export let BASE_URL = "http://192.168.0.22/BaliTours/public/api/";
+export let BASE_URL = "http://admin.balisupport.tk/api/";
 
 //Authenticate User
 
@@ -69,7 +69,7 @@ export let SERVICE_URL_UPDATE_TICKET_PROFILE = BASE_URL + "updateTicketInfo";
 export let SERVICE_URL_GET_TICKET_INFORMATION = BASE_URL + "getTicketInformation";
 export let SERVICE_URL_ACTIVATE_TICKET = BASE_URL + "activateTicket";
 export let SERVICE_URL_VIEW_ORDER_HISTORY = BASE_URL + "viewOrderHistory";
-
+export let SERVICE_URL_VIEW_PROFILE = BASE_URL + "viewProfile";
 
 export let API_HEADER = { 	
 							};
@@ -90,24 +90,6 @@ export interface TravellersInfoDS {
 	email: string,
 	ticket_type: string,
 }
-// "data": [
-//         {
-            
-//             "order_date": {
-//                 "date": "2018-05-01 09:45:07.000000",
-//                 "timezone_type": 3,
-//                 "timezone": "UTC"
-//             },
-//             "ticket_info": [
-//                 {
-//                     "travel_passid": 1,
-//                     "quantity": 2
-//                 },
-//                 {
-//                     "travel_passid": 2,
-//                     "quantity": 1
-//                 }
-       
 
 export interface OrderHistoryStructure {
 	"order_id": string,
@@ -118,6 +100,7 @@ export interface OrderHistoryStructure {
     "transaction_id": string,
     "order_date": any
     "ticket_info" : any
+    "is_open":boolean
 }
 
 export interface UserDetailsDS { 
@@ -144,7 +127,8 @@ export interface TicketToShowStructure {
 	"travel_pass_code" :number,
 	"expiry_date":number,
 	"timer_value":string, 
-	"current_date":number
+	"current_date":number,
+	"is_open":boolean
 }
 
 @Injectable()

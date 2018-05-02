@@ -30,7 +30,8 @@ import { PUBLIC_HEADER,
          SERVICE_URL_GET_TICKET_INFORMATION,
          SERVICE_URL_ACTIVATE_TICKET,
          SERVICE_URL_AUTHENTICATE_USER,
-         SERVICE_URL_VIEW_ORDER_HISTORY } from '../constants/constants';
+         SERVICE_URL_VIEW_ORDER_HISTORY,
+         SERVICE_URL_VIEW_PROFILE } from '../constants/constants';
 
 
 
@@ -215,6 +216,17 @@ export class RestProvider {
      let header = PUBLIC_HEADER;
 
      return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_VIEW_ORDER_HISTORY, data, header);
+   }
+
+   requestUserProfile(userInfo): Observable<{ }>  {
+     let data = {
+       'user_id': userInfo.user_id,
+       'token' : userInfo.token
+     };
+
+     let header = PUBLIC_HEADER;
+
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_VIEW_PROFILE, data, header);
    }
 
    makeTravelPassPayment(paymentInfo): Observable<{ }> {

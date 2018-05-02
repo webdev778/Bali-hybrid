@@ -28,13 +28,17 @@
              <ion-col>
                   <p>DATE AND TIME</p>
             </ion-col>
+           
             <ion-col>
-            	<p>TICKETS PURCHASED</p>
+              <p>TICKETS PURCHASED</p>
+           </ion-col> 
+          
+           <ion-col>
+              <p>AMOUNT</p>
            </ion-col>
         </ion-row>
     
       <ion-row class = "flexgrid-row" *ngFor = "let order of bundleOrderList;" >
-            
             <ion-col class="form-col" >
                     <p>{{order.order_id}}</p>
             </ion-col>
@@ -48,16 +52,58 @@
             </ion-col>
              
              <ion-col>
-                  <p>{{order.order_date.date}}</p>
+                  <p>{{order.order_date}} {{order.order_date.timezone}}</p>
             </ion-col>
             <ion-col>
               <p>{{order.ticket_info}}</p>
            </ion-col>
-       </ion-row>
-    </ion-grid>
+            <ion-col>
+              <p>{{order.amount}}</p>
+           </ion-col>
+      </ion-row>
+  </ion-grid>
+  
+
+<ion-list>
+   <ion-grid class='flexgrid' hideWhen="core">
+     <ion-item no-lines *ngFor="let order of bundleOrderList" text-wrap>
+           <ion-row class= "sub-header" (click)="toggleSection(order)">
+             <ion-col>
+              <h3 style=" margin-top: 5px">{{order.name | uppercase}}</h3>
+            </ion-col>
+            <ion-col col-1 class="icon-arrow">
+                  <img src="assets/imgs/down-arrow.png" *ngIf="order.is_open" >
+                  <img src="assets/imgs/arrow-up.png" *ngIf="!order.is_open" >
+                  </ion-col>
+          </ion-row>
+         <ion-row [hidden]="order.is_open" class = "toggle-content">
+              <ion-col>
+                <ion-row>
+                  <p class = "mobile-text"><b>ORDER ID :</b>{{order.order_id}}</p>
+                </ion-row>
+                <ion-row>
+                  <p class = "mobile-text"><b>ORDER NUMBER :</b>{{order.order_no}}</p>
+                </ion-row>
+                <ion-row>    
+                  <p class = "mobile-text"><b>ORDER DATE :</b>{{order.order_date}}</p>
+                </ion-row>
+                <ion-row>  
+                 <p class = "mobile-text"><b>TICKETS PURCHASED :</b>{{order.ticket_info }}</p>
+                </ion-row>
+                <ion-row>
+                  <p class = "mobile-text"><b>AMOUNT :</b>{{order.amount}}</p>
+                </ion-row>
+              </ion-col>
+        </ion-row>
+  </ion-item>
+ </ion-grid>
+</ion-list>
+
+
   <div style="text-align: center; margin-bottom: 20px;">
     <button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
   </div>
+
 
 	<page-bsc-footer></page-bsc-footer>
 

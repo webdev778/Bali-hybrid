@@ -1,3 +1,115 @@
 page-view-profile {
 
+	.profile-row {
+
+		width: 90%;
+		margin-right: 5%;
+		margin-left: 5%;
+		text-align: left;
+
+
+
+		h5 {
+			color: #547d88;
+			padding-top: 10px;
+			padding-left: 20px;
+			margin-left: 20px;
+			font-size: 22px;
+
+			img {
+				max-height: 20px;
+				max-width: 20px;
+				margin-right: 10px;
+				margin-bottom: 0px;
+			}
+
+		}
+
+		.check-text {
+			padding-top: 10px;
+			margin-left: 0px;
+			padding-left: 0px;
+			color: #A3A3A3;
+			text-align: left;
+		}
+	}
+
+	.form-panel{
+		background-color: #fff;
+	    padding: 1rem;
+	    padding-top: 20px;
+	    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	.form-panel .form-item{
+		box-shadow: 0 0 0 1px #d2d1d1;
+	}
+
+	.profile-col {
+		margin-top: -20px
+	}
+
+	 .profile-grid {
+	 	display: flex; 
+	 	justify-content: center;
+	 	margin-top: 50px;
+	 }
+	
+	.form-header {
+		color: #547d88;
+		height: 60px;
+		text-align: center;
+		padding-top: 10px;
+		margin-right: 10%;
+		margin-left: 10%;
+		font-size: 25px;
+		margin-bottom: 0px;
+	}
+
+	form {
+		margin-right: 10%;
+		margin-left: 10%;
+		margin-bottom: 20px;
+	}
+
+	.head-para {
+		font-weight: bold;
+		margin-bottom: 5px;
+	}	
+
+	.text-input[disabled] {
+    	opacity: 0.8;
+    	color: #564e4e
+	}
+
+	.profile-grid {
+	    margin-left: auto;
+	    margin-right: auto;
+	    width: 100%;
+	    display: -webkit-box;
+	    display: -webkit-flex;
+	    display: -ms-flexbox;
+	    display: flex;
+	    -webkit-box-orient: vertical;
+	    -webkit-box-direction: normal;
+	    -webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	    flex-direction: column;
+	    max-width: 750px;
+	}
+
+	.edit-btn {
+	    float: right;
+	    color: #2b14c5;
+	    background: white;
+	    font-size: 12px;
+	    font-weight: bold;
+	    margin-right: -10px;
+	}
 }
+
+ion-app.md [padding-left]{
+	padding-left: 0;
+}
+
+

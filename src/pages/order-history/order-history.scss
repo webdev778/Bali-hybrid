@@ -1,12 +1,18 @@
 page-order-history {
 
 .flexgrid-2{
-		max-width: 900px;
+		max-width: 80%;
 		padding: 2rem;
 		
 		margin-top: 30px;
 		margin-bottom: 30px;
 		color: #527a85
+	}
+
+	.sub-header {
+		background: #547d88;
+		color: #ffffff;
+		position: relative;
 	}
 
 	.flexgrid-row-head{	
@@ -16,7 +22,7 @@ page-order-history {
 		padding-left: 10px;
 		box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		margin-top: -10px;
-		height: 50px;
+		
 	}
 
 	.flexgrid-row{
@@ -25,4 +31,38 @@ page-order-history {
   		padding-left: 10px;
   		box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 2px 1px 0 rgba(0, 0, 0, 0.19);
   	}
+
+  	.flexgrid-mobile{
+  		margin-top: 15px;
+  		margin-bottom: 10px;
+  		min-width: 300px;
+    	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  		margin-right: 20px;
+  		margin-left: 20px;
+  		min-height: 250px;	
+  		background-color: #f0f0f1;	  		
+  	}
+
+  	.flexgrid{
+		color: #101212;
+		min-width: 100%;
+		min-width: 250px;
+	}
+
+	.toggle-content {
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		margin-top: 5px;
+		background-color: #f0f0f0
+
+	}
+
+	.icon-arrow {
+			img {
+			height: 70%;
+			width: 70%;
+		}
+	}
+
+
+
 }

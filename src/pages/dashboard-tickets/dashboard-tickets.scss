@@ -12,8 +12,8 @@ page-dashboard-tickets  {
 	}
 	
 	.placeholder-text {
-		color: #c2c2c2;
-
+		color: #7d7a7a;
+		font-size: 12px
 	}
 
 	.flex-row {
@@ -40,12 +40,9 @@ page-dashboard-tickets  {
 	}
 
 	.button-map {
-		width: 140px;
+	 	width: 150px;
 		height: 30px;
-		 margin-top: 10px;
-		 margin-bottom: 20px;
-		display: inline-block;
-		background-color: #809cce
+		background-color: #809cce;
 	}
 
 	.button-map-2{
@@ -107,8 +104,7 @@ page-dashboard-tickets  {
 		margin-bottom: 3px;
 		padding-left: 10px;
 		box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-		margin-top: -10px;
-		height: 50px;
+		
 	}
 
 	.service-row {
@@ -127,17 +123,6 @@ page-dashboard-tickets  {
   		box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 2px 1px 0 rgba(0, 0, 0, 0.19);
   	}
 
-  	.flexgrid-mobile{
-  		margin-top: 15px;
-  		margin-bottom: 10px;
-  		min-width: 300px;
-    	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);;
-  		margin-right: 20px;
-  		margin-left: 20px;
-  		min-height: 250px;	
-  		background-color: #f0f0f1;	  		
-  	}
-
   	.mobile-text {
   		color: #527c88
   	}
@@ -153,5 +138,21 @@ page-dashboard-tickets  {
   		min-height: 250px;		
   		
   	}
+
+  	.toggle-content {
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		margin-top: 5px;
+		text-align: center;
+		background-color: #d6d9da;
+
+		
+
+	}
+
+  	.sub-header {
+		background: #547d88;
+		color: #ffffff;
+		position: relative;
+	}
 
 }

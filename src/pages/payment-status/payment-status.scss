@@ -53,5 +53,29 @@ page-payment-status {
 		min-width: 250px;
 
   	}
+
+  	.core-sub-header {
+	    background-color: #469594;
+	    text-align: center;
+	    margin-top: 0px;
+	    margin-bottom: 0px;
+	    color: #ffff;
+	    height: 140px;
+	    padding-top: 55px;
+	    font-weight: 600;
+	    font-size: 30px;
+	    background-image: url("../assets/imgs/background.png");
+	}
+
+	.mobile-sub-header {
+		background: #469594;
+		text-align: center;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		color: #ffff;
+		height: 50px;
+		vertical-align: middle;
+		padding-top: 12px
+}
 }
 
