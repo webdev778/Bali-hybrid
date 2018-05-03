@@ -142,27 +142,27 @@ export class ConstantsProvider {
 	}
 
 	convertArrayImageUrlToData(arrayImageUrl) {
-		var imageArray = []
+		// var imageArray = []
 
-		for(let imageUrl of arrayImageUrl){
-			var xhr = new XMLHttpRequest();
-			xhr.open('GET',imageUrl, true);
-			xhr.responseType = 'blob';
-			xhr.onload = function(e) {
-			  if (this.status == 200) {
-			    var myBlob = this.response;
+		// for(let imageUrl of arrayImageUrl){
+		// 	var xhr = new XMLHttpRequest();
+		// 	xhr.open('GET',imageUrl, true);
+		// 	xhr.responseType = 'blob';
+		// 	xhr.onload = function(e) {
+		// 	  if (this.status == 200) {
+		// 	    var myBlob = this.response;
 
-			    var reader = new FileReader();
-			 	reader.readAsDataURL(myBlob); 
-			 	reader.onloadend = function() {
-			 		imageArray.push(reader.result)
-			 	} 
-			  }
-			};
-			xhr.send();	
-		}
+		// 	    var reader = new FileReader();
+		// 	 	reader.readAsDataURL(myBlob); 
+		// 	 	reader.onloadend = function() {
+		// 	 		imageArray.push(reader.result)
+		// 	 	} 
+		// 	  }
+		// 	};
+		// 	xhr.send();	
+		// }
 
-		return imageArray
+		return arrayImageUrl
 	}
 
 }
