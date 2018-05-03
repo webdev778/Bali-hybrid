@@ -134,7 +134,6 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 	}
 
 	getTicketExpiryTime(ticket) {
-		console.log("In the getExpiry Function")
 		let loader = this.loadingController.create({
 			content: "Sending ..."
 		});
@@ -152,7 +151,6 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 			() => {
 				let expDate = <any> this.expiryDate.expiry_date;
 				this.timerView = true
-				console.log(expDate)
 				ticket.is_active = 1;
 				ticket.expiry_date = expDate 
 				this.arrayActivatedTickets.push(ticket)

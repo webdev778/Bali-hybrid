@@ -110,7 +110,7 @@ export class OrderHistoryPage {
 																				})
 						}
 
-						console.log(this.bundleOrderList)
+						
 				}
 		)
 	}

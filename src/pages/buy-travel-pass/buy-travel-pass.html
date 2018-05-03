@@ -74,8 +74,15 @@
 		</ion-row>
 
 		<div class = "save-btn">
+		<h6 *ngIf = "noTicketChosen" style="color: red; margin-top: 0px">Please select a ticket to continue</h6>	
 		<button [hidden]='!ticketsSaved' ion-button color='primary' (click)='savePressed()'>Next</button>
 		</div>
+
+		<h6 *ngIf = "loginErrorText" class = "error-text">To Continue Please 
+			<span (click) = "moveToLoginPage()" >Login</span>
+		</h6>
+
+		
 
 		<ion-row [hidden]='ticketsSaved || paymentView'  class = "box2-content">
 
@@ -179,12 +186,13 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 
 						      <ion-item class='form-item'>
 						     				
-                		      <ion-input placeholder="DATE OF BIRTH" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date"  [(ngModel)]="traveller.date_of_birth" max = "01/01/2001" name="dob" #dob="ngModel" placeholder= "Date Of Birth" value= ""></ion-input>
-                		      </ion-item>
-							  <p ion-text [hidden]="dob.valid || travellerFormSubmitted == false" color="danger" padding-left>
-						        Enter date of birth
-						      </p>
+                		        <ion-input showWhen = "core" placeholder="DATE OF BIRTH (dd/mm/yyyy)" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" value= ""></ion-input>
 
+	                          <ion-datetime  hideWhen = "core" displayFormat="DD/MMM/YYYY" placeholder="Date Of Birth" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" value= "" max="2001-01-01"></ion-datetime>
+	                      	</ion-item>
+	                          <p ion-text [hidden]="dob.valid || travellerFormSubmitted == false" color="danger" padding-left>
+							        Enter date of birth
+						      </p>
 						      <br>
 
 							    <ion-item class='form-item'>

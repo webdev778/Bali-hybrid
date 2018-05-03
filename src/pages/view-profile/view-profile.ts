@@ -71,8 +71,6 @@ export class ViewProfilePage {
 			err => loader.dismiss(),
 			() => {
 						this.bundleOrderDescription = <any[]> this.bundleData.data;
-						console.log(this.bundleOrderDescription)
-
 						this.bundleOrder.first_name = this.bundleOrderDescription.first_name
 						this.bundleOrder.last_name = this.bundleOrderDescription.last_name
 						this.bundleOrder.email = this.bundleOrderDescription.email
