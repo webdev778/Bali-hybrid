@@ -36,6 +36,7 @@ export class BuyTravelPassPage {
 	arrayTravellers : Array<TravellersInfoDS> = []
 	bundlePaymentData = {name:'', phone:'', address:''}
 	orderDetails: {order_no: '' ,transaction_id: ''}
+	paymentErrortext =''
 
 	constructor(	public navCtrl: NavController, 
 		public navParams: NavParams,
@@ -321,12 +322,14 @@ export class BuyTravelPassPage {
 	}
 
 	checkPaymentStatus(bundle) {
+		console.log(bundle.status)
 		if (bundle.status == 200) {
 			this.orderDetails = bundle.order_details
 			console.log(this.orderDetails)
 			this.navCtrl.push(PaymentStatusPage,{'order-details': JSON.stringify(this.orderDetails)})
 		}else {
-			this.presentAlert('Something Went Wrong', bundle.api_message)
+			console.log("payment not successful")
+			this.paymentErrortext =  bundle.api_message
 		}
 
 	}

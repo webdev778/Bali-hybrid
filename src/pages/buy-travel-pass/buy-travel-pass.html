@@ -178,8 +178,7 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 						      <br>						  						    
 
 						      <ion-item class='form-item'>
-						    
- 				
+						     				
                 		      <ion-input placeholder="DATE OF BIRTH" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date"  [(ngModel)]="traveller.date_of_birth" max = "01/01/2001" name="dob" #dob="ngModel" placeholder= "Date Of Birth" value= ""></ion-input>
                 		      </ion-item>
 							  <p ion-text [hidden]="dob.valid || travellerFormSubmitted == false" color="danger" padding-left>
@@ -198,17 +197,13 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 								<p ion-text [hidden]="traveller.gender != '' || travellerFormSubmitted == false " color="danger" padding-left>
 							        Select gender
 							    </p>
-
-						</ion-list>
-					
+						</ion-list>				
   				</div>
 			</ion-col>
 		</ion-row>
-
 		<div class = "save-btn" >
 	        	<button ion-button color='primary' (click)='buttonSubmitPressed(ticketDetailsEntry)'>Submit Traveller Details</button>
-	    </div>
-	      
+	    </div>	      
 	</ion-grid>
 	</form>
 
@@ -269,6 +264,7 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 							</p>
 							<br>
 						</ion-list>
+						<p style="color: red">{{paymentErrortext}}</p>
 						<ion-row class = "payment-btn">
 							<ion-col>
 								<button ion-button color='primary' (click)='makePayment(paymentDetailsEntry)'>Proceed to pay</button>
@@ -279,11 +275,6 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 			</ion-col>
 		</ion-row>
 	</ion-grid>
-
-
-	
-
-		
 	<page-bsc-footer></page-bsc-footer>
 </ion-content>
 
