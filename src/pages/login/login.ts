@@ -23,7 +23,7 @@ import { ConstantsProvider, UserDetailsDS } from '../../providers/constants/cons
 })
 export class LoginPage {
 
-  selectLogin = true;
+  statusForView = 0
 
 	loginData = { email: '', password: '' };
 	signupData = {first_name: '',last_name: '', username: '', phone: '', email: '',
@@ -32,6 +32,9 @@ export class LoginPage {
 	submittedSignup = false;
 	passwordMatched = false;
   isLogIn = false
+
+  emailForgetPassword = ""
+  sendForgetPassword = false
 
   headerText = 'ACCOUNT LOGIN';
 
@@ -63,12 +66,12 @@ export class LoginPage {
   }
 
   createAccountPressed() {
-    this.selectLogin = false;
+    this.statusForView = 2
     this.headerText = 'ACCOUNT SIGNUP';
   }
 
   setLoginPressed() {
-    this.selectLogin = true;
+    this.statusForView = 0
     this.headerText = 'ACCOUNT LOGIN';
   }
 
@@ -162,6 +165,52 @@ export class LoginPage {
         this.loginErrorMessaage = bundle.api_message
       }
 
+    }
+
+    forgetPasswordClicked(){
+      this.statusForView = 1
+      this.sendForgetPassword = false
+      this.headerText = "RESET PASSWORD"
+    }
+
+    sendForgetPasswordClicked(form: NgForm) {
+
+      if (form.valid)
+      {
+        this.sendForgetPassword = false
+        this.sendEmailToForgetPassword()
+      }else{
+        this.sendForgetPassword = true
+      }
+
+      
+    }
+
+    sendEmailToForgetPassword()
+    {
+      let loader = this.loadingController.create({
+          content: "Sending ..."
+        });
+
+      loader.present();
+
+      this.rest.resetPassord(this.emailForgetPassword)
+         .subscribe(
+             data => this.presentAlert( <any>data["api_message"]),
+             err => loader.dismiss(),
+             () => {
+               loader.dismiss()
+             }
+           );
+    }
+
+    presentAlert(message) {
+      let alert = this.alertCtrl.create({
+        title: '',
+        subTitle: message,
+        buttons: ['OK']
+      });
+      alert.present();
     }
 
    presentAlertSignUp() {

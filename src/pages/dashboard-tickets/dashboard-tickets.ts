@@ -195,6 +195,8 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 			responseData => this.bundleData = <{ticket_info : any}> responseData,
 			err => loader.dismiss(),
 			() => {
+
+				this.isListLoaded = true
 				this.bundleTicketDescription = <any[]> this.bundleData.ticket_info;
 				this.bundleTicketsToShow = []
 				this.currentTime = 0
@@ -224,10 +226,11 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 						is_open:true
 					})
 				}
-				if(this.bundleTicketsToShow.length > 0) {
-				this.isListLoaded = true	
-				this.currentTime = this.bundleTicketsToShow[0].current_date
+
+				if(this.bundleTicketsToShow.length > 0) {	
+					this.currentTime = this.bundleTicketsToShow[0].current_date
 				}
+
 				this.initialiseArrayActivatedTickets()
 			}
 			);
