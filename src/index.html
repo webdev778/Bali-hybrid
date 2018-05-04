@@ -20,21 +20,18 @@
   <!-- cordova.js required for cordova apps (remove if not needed) -->
   <script src="cordova.js"></script>
 
-   <!-- un-comment this code to enable service worker -->
+  <!-- un-comment this code to enable service worker -->
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
-        .then(() => console.log('service worker installed'))
-        .catch(err => console.error('Error', err));
-    }
-  </script>
+      .then(() => console.log('service worker installed'))
+      .catch(err => console.error('Error', err));
+  }
+</script>
 
-  <script src="https://maps.google.com/maps/api/js?key=AIzaSyCecgk4WWZR2HgSmSczljuNDqQaJyd8psg"></script>
-  <script src="https://js.stripe.com/v3/"></script>
-
-  <link href="build/main.css" rel="stylesheet">
-
+<link href="build/main.css" rel="stylesheet">
 </head>
+
 <body>
 
   <!-- Ionic's root component and where the app will load -->
@@ -44,11 +41,11 @@
   <script src="build/polyfills.js"></script>
 
   <!-- The vendor js is generated during the build process
-       It contains all of the dependencies in node_modules -->
-  <script src="build/vendor.js"></script>
+     It contains all of the dependencies in node_modules -->
+     <script src="build/vendor.js"></script>
 
-  <!-- The main bundle js is generated during the build process -->
-  <script src="build/main.js"></script>
+     <!-- The main bundle js is generated during the build process -->
+     <script src="build/main.js"></script>
 
-</body>
-</html>
+ </body>
+ </html>

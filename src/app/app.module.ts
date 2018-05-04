@@ -43,6 +43,7 @@ import { DashboardTicketsPage } from '../pages/dashboard-tickets/dashboard-ticke
 import { PaymentStatusPage } from '../pages/payment-status/payment-status'
 import { OrderHistoryPage } from '../pages/order-history/order-history'
 import { ViewProfilePage } from '../pages/view-profile/view-profile'
+import { ResetPasswordPage } from '../pages/reset-password/reset-password'
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { ViewProfilePage } from '../pages/view-profile/view-profile'
     TravelAlertPage,
     DashboardPage,
     TicketDetailsPage,
+    ResetPasswordPage,
     ActivationPage,
     DashboardTicketsPage,
     PaymentStatusPage,
@@ -97,6 +99,7 @@ import { ViewProfilePage } from '../pages/view-profile/view-profile'
           { component: AboutUsPage, name: 'AboutUsPage', segment: 'page/:data' , defaultHistory:[InBaliPage]},
           { component: CommonMapPage, name: 'CommonMapPage', segment: 'map/:location' , defaultHistory:[HomePage]},
           { component: ActivationPage, name: 'ActivationPage', segment: 'activation/:data'},
+          { component: ResetPasswordPage, name: 'ResetPasswordPage', segment: 'resetpassword/:data'},
           { component: DashboardTicketsPage , name: 'DashboardTicketsPage', segment: 'dashboard/dashboardtickets', defaultHistory: [DashboardPage]},
           { component: ViewProfilePage , name: 'ViewProfilePage', segment: 'dashboard/viewprofile', defaultHistory: [DashboardPage]},
           { component: OrderHistoryPage , name: 'OrderHistoryPage', segment: 'dashboard/orderhistory', defaultHistory: [DashboardPage]},
@@ -131,6 +134,7 @@ import { ViewProfilePage } from '../pages/view-profile/view-profile'
     DashboardPage,
     TicketDetailsPage,
     ActivationPage,
+    ResetPasswordPage,
     DashboardTicketsPage,
     PaymentStatusPage,
     ViewProfilePage,

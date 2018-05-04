@@ -33,8 +33,6 @@ export class BuyTravelPassPage {
 	finalCost = 0
 	orderId = 0
 
-	// date
-	// dateForPicker = new Date().getTime();
 	requestBundle = {user_id: '', token: ''}
 	bundleTicketsForServer : Array<TicketStructure> = []
 	bundleSaveTickets : Array<TicketStructure> = []
@@ -48,6 +46,9 @@ export class BuyTravelPassPage {
 	loginErrorText = false
 	noTicketChosen = false
 
+	dateForPicker = new Date().getTime();
+	pickerDate = ""
+	
 	constructor(	public navCtrl: NavController, 
 					public navParams: NavParams,
 					private alertCtrl: AlertController,
@@ -55,10 +56,8 @@ export class BuyTravelPassPage {
 					public loadingController: LoadingController,
 					private storage: Storage,) {
 		
-		// this.dateForPicker = this.dateForPicker -  (31536000000*18);
-		// this.date =  new Date(this.dateForPicker)
-
-		
+		 this.dateForPicker = this.dateForPicker -  (31536000000*17);
+		 this.pickerDate =  new Date(this.dateForPicker).getFullYear() + ""
 	}
 
 	ionViewDidLoad() {
@@ -166,6 +165,7 @@ export class BuyTravelPassPage {
 															last_name:'', 
 															gender:'', 
 															email:'', 
+															date_of_birth: '',
 															ticket_type: this.bundleSaveTickets[
 															adultIndex
 															].ticket_type,
@@ -240,7 +240,6 @@ export class BuyTravelPassPage {
 			this.addAdultInformation()
 			this.sendTicketDetailsToServer()
 		}
-		this.scrollToTop()
 	}
 
 	addAdultInformation() {

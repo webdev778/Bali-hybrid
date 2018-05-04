@@ -188,9 +188,9 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 						     				
                 		        <ion-input showWhen = "core" placeholder="DATE OF BIRTH (dd/mm/yyyy)" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" value= ""></ion-input>
 
-	                          <ion-datetime  hideWhen = "core" displayFormat="DD/MMM/YYYY" placeholder="Date Of Birth" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" value= "" max="2001-01-01"></ion-datetime>
+	                          <ion-datetime  hideWhen = "core" displayFormat="DD/MMM/YYYY" placeholder="Date Of Birth" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" value= "" max= "{{pickerDate}}"></ion-datetime>
 	                      	</ion-item>
-	                          <p ion-text [hidden]="dob.valid || travellerFormSubmitted == false" color="danger" padding-left>
+	                          <p ion-text [hidden]="traveller.date_of_birth != '' || travellerFormSubmitted == false" color="danger" padding-left>
 							        Enter date of birth
 						      </p>
 						      <br>

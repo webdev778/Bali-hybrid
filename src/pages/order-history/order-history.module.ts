@@ -4,7 +4,6 @@ import { OrderHistoryPage } from './order-history';
 
 @NgModule({
   declarations: [
-    OrderHistoryPage,
   ],
   imports: [
     IonicPageModule.forChild(OrderHistoryPage),

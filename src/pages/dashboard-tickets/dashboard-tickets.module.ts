@@ -4,7 +4,6 @@ import { DashboardTicketsPage } from './dashboard-tickets';
 
 @NgModule({
   declarations: [
-    DashboardTicketsPage,
   ],
   imports: [
     IonicPageModule.forChild(DashboardTicketsPage),
