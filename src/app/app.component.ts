@@ -58,8 +58,6 @@ export class MyApp {
 
   checkForLogin() {
      this.storage.get('is_login').then((isLogin) => {
-       
-       console.log("hello" + this.isLogin)
        if (isLogin) {
           this.storage.get('user_data').then((userData) => {
           this.constantProvider.isLogin = true  

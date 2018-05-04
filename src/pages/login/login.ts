@@ -40,6 +40,7 @@ export class LoginPage {
 
   loginBundle = { data:'', user_data: {}, status:'', api_message : ''}
   userBundle = <UserDetailsDS> {}
+  loginErrorMessaage = ''
 
   constructor(	public navCtrl: NavController,
 				public navParams: NavParams, 
@@ -113,6 +114,7 @@ export class LoginPage {
 
 	buttonLoginPressed(form: NgForm) {
 		this.submittedLogin = true
+    this.loginErrorMessaage = ''
 
 		if (form.valid) {
 			this.submittedLogin = false
@@ -151,7 +153,6 @@ export class LoginPage {
     checkStatusForLogin(bundle) {
       if (bundle.status == 200) {
         this.userBundle =  <UserDetailsDS> this.loginBundle.user_data
-        console.log(this.userBundle)
         this.storage.set('user_data', JSON.stringify(this.userBundle));
         this.storage.set('auth_token', this.loginBundle.data);
         if (this.navParams.get('lastPage') == 'buyTravelPassPage') {
@@ -161,7 +162,7 @@ export class LoginPage {
           this.moveToPage(DashboardPage)
         }
       }else {
-        this.presentAlert(bundle.api_message)
+        this.loginErrorMessaage = bundle.api_message
       }
 
     }
@@ -216,7 +217,7 @@ export class LoginPage {
     let alert = this.alertCtrl.create({
       title: '',
 
-      subTitle: 'Registration Successful, please check your inbox',
+      subTitle: 'Registration Successful, please check your mail inbox',
       buttons: [
       {
         text : 'Okay',

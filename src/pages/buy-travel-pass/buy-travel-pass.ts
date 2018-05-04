@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, Content } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { TicketStructure, TravellersInfoDS } from '../../providers/constants/constants';
 import { Storage } from '@ionic/storage';
@@ -16,6 +16,12 @@ import { PaymentStatusPage } from '../payment-status/payment-status';
 
 export class BuyTravelPassPage {
 
+  @ViewChild(Content) content: Content;
+
+  scrollToTop() {
+    this.content.scrollToTop(400);
+  }
+
 	paymentView = false
 	ticketsSaved = true
 	confirmTicket = true
@@ -27,6 +33,8 @@ export class BuyTravelPassPage {
 	finalCost = 0
 	orderId = 0
 
+	// date
+	// dateForPicker = new Date().getTime();
 	requestBundle = {user_id: '', token: ''}
 	bundleTicketsForServer : Array<TicketStructure> = []
 	bundleSaveTickets : Array<TicketStructure> = []
@@ -37,13 +45,20 @@ export class BuyTravelPassPage {
 	bundlePaymentData = {name:'', phone:'', address:''}
 	orderDetails: {order_no: '' ,transaction_id: ''}
 	paymentErrortext =''
+	loginErrorText = false
+	noTicketChosen = false
 
 	constructor(	public navCtrl: NavController, 
-		public navParams: NavParams,
-		private alertCtrl: AlertController,
-		public rest: RestProvider,
-		public loadingController: LoadingController,
-		private storage: Storage,) {
+					public navParams: NavParams,
+					private alertCtrl: AlertController,
+					public rest: RestProvider,
+					public loadingController: LoadingController,
+					private storage: Storage,) {
+		
+		// this.dateForPicker = this.dateForPicker -  (31536000000*18);
+		// this.date =  new Date(this.dateForPicker)
+
+		
 	}
 
 	ionViewDidLoad() {
@@ -51,6 +66,7 @@ export class BuyTravelPassPage {
 	}
 
 	incrementValue(ticket) {
+		this.noTicketChosen = false
 		ticket.quantity++
 	}
 
@@ -77,6 +93,7 @@ export class BuyTravelPassPage {
 			this.bundleSaveTickets[count].price = this.bundleViewDescription[count].quantity * 
 			this.bundleViewDescription[count].price
 			this.bundleSaveTickets[count].ticket_details = []
+			this.scrollToTop()
 		}
 		
 		this.getTotalCost()
@@ -94,11 +111,8 @@ export class BuyTravelPassPage {
 	}
 
 	continuePressed() {
-		console.log("travellerformsubmitted " + this.travellerFormSubmitted )
-		console.log(this.bundleSaveTickets)
 		this.paymentView = true
 		this.travellerInfoWindow = true
-		console.log("travellerInfoWindow " +this.travellerInfoWindow)
 		let adultTicket = this.bundleSaveTickets[ this.bundleSaveTickets.findIndex(obj=> obj.ticket_id === 1) ]
 		if( adultTicket.quantity == 0 ) {
 			this.sendTicketDetailsToServer()
@@ -111,7 +125,7 @@ export class BuyTravelPassPage {
 	checkForLogin() {
 		this.storage.get('is_login').then((isLogin) => {
 			if (!isLogin) {
-				this.presentAlertNotLoggedIn()
+				this.loginErrorText = true
 			}
 			else{
 				this.storage.get('user_data').then((user_data) => {
@@ -133,7 +147,7 @@ export class BuyTravelPassPage {
 				}
 
 				this.ticketsSaved = true
-				this.presentAlertNoTickets()
+				this.noTicketChosen = true
 				
 			}
 		})
@@ -220,15 +234,13 @@ export class BuyTravelPassPage {
 	}
 
 	buttonSubmitPressed(form: NgForm) {
-		console.log("in buttonSubmitted")
 		this.travellerFormSubmitted = true
-		console.log(form.valid)
 		if(form.valid){
 			this.travellerInfoWindow = true
-			console.log(this.arrayTravellers)
 			this.addAdultInformation()
 			this.sendTicketDetailsToServer()
 		}
+		this.scrollToTop()
 	}
 
 	addAdultInformation() {
@@ -237,9 +249,8 @@ export class BuyTravelPassPage {
 	}
 
 	makePayment(form: NgForm) {
-		console.log( "payment details button ")
 		this.paymentFormSubmitted = true
-		console.log(form.valid)
+		
 		if(form.valid){
 			this.sendPaymentDetailsToServer()
 		}
@@ -260,8 +271,6 @@ export class BuyTravelPassPage {
 			ticket_bundle: this.bundleTicketsForServer, 
 			total_cost: this.finalCost 
 		}
-
-		console.log(passInfo)
 
 		this.rest.purchaseTravelPass(passInfo)
 		.subscribe(
@@ -308,9 +317,6 @@ export class BuyTravelPassPage {
 			card_details: this.cardDetails 
 		}
 
-		console.log(paymentInfo.order_id)
-		console.log("Payment-Info :" + paymentInfo)
-
 		this.rest.makeTravelPassPayment(paymentInfo)
 		.subscribe(
 			responseData => this.checkPaymentStatus(responseData),
@@ -322,13 +328,10 @@ export class BuyTravelPassPage {
 	}
 
 	checkPaymentStatus(bundle) {
-		console.log(bundle.status)
 		if (bundle.status == 200) {
 			this.orderDetails = bundle.order_details
-			console.log(this.orderDetails)
 			this.navCtrl.push(PaymentStatusPage,{'order-details': JSON.stringify(this.orderDetails)})
 		}else {
-			console.log("payment not successful")
 			this.paymentErrortext =  bundle.api_message
 		}
 
@@ -344,7 +347,6 @@ export class BuyTravelPassPage {
 	}
 
 	bookTicketsPressed(){
-		console.log(this.bundleSaveTickets)
 		this.sendTicketDetailsToServer()
 		this.confirmTicket = false
 	}
