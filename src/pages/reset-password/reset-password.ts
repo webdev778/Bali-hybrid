@@ -20,7 +20,6 @@ export class ResetPasswordPage {
 
   ionViewDidLoad() {
       let passedData = this.navParams.get('data');
-      console.log(passedData)
   }
 
 }

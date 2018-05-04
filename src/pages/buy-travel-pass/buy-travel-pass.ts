@@ -307,6 +307,7 @@ export class BuyTravelPassPage {
 
 		loader.present();
 
+		this.paymentErrortext = ""
 
 		let paymentInfo = {
 			user_id:this.requestBundle.user_id,

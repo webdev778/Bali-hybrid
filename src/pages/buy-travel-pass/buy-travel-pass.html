@@ -272,7 +272,11 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 							</p>
 							<br>
 						</ion-list>
-						<p style="color: red">{{paymentErrortext}}</p>
+
+						<p ion-text [hidden]="paymentErrortext == ''" color="danger" padding-left>
+								{{paymentErrortext}}
+						</p>
+
 						<ion-row class = "payment-btn">
 							<ion-col>
 								<button ion-button color='primary' (click)='makePayment(paymentDetailsEntry)'>Proceed to pay</button>

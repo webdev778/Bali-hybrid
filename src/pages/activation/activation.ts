@@ -33,9 +33,6 @@ export class ActivationPage {
         this.signupcode = signUpCode[1]
         this.user_id = loginCode[1]
 
-        console.log("signupcode "+ this.signupcode)
-        console.log("user_id" + this.user_id)
-
         this.sendAuthenticationRequest()
     }
 
@@ -63,7 +60,6 @@ export class ActivationPage {
     }
 
     checkStatus(bundle) {
-        console.log(bundle)
         this.presentAlertSignUpSuccessful(bundle.api_message)
     }
 

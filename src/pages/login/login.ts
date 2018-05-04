@@ -216,7 +216,6 @@ export class LoginPage {
    presentAlertSignUp() {
     let alert = this.alertCtrl.create({
       title: '',
-
       subTitle: 'Registration Successful, please check your mail inbox',
       buttons: [
       {

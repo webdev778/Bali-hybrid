@@ -24,7 +24,7 @@ export class PaymentStatusPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PaymentStatusPage');
+    
   }
 
   moveToDashboard(){

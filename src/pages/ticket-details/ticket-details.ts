@@ -231,8 +231,6 @@ export class TicketDetailsPage {
 
 		for(let imageUrl of arrayImageUrl){
 
-			console.log("Getting image from url : " + imageUrl)
-
 			var blob : any
 
 			this.rest.downloadImageData(imageUrl)
@@ -247,24 +245,6 @@ export class TicketDetailsPage {
 				 	} 
 	             }
 	           );
-
-			// var xhr = new XMLHttpRequest();
-			// xhr.open('GET',imageUrl, true);
-			// xhr.responseType = 'blob';
-			// xhr.onload = function(e) {
-			//   if (this.status == 200) {
-			//     var myBlob = this.response;
-
-			//     var reader = new FileReader();
-			//  	reader.readAsDataURL(myBlob); 
-			//  	reader.onloadend = function() {
-			//  		imageArray.push(reader.result)
-			//  	} 
-			//   }
-			// };
-			// xhr.send();	
-
-
 		}
 
 		return imageArray
