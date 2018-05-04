@@ -32,7 +32,9 @@ import { PUBLIC_HEADER,
          SERVICE_URL_AUTHENTICATE_USER,
          SERVICE_URL_VIEW_ORDER_HISTORY,
          SERVICE_URL_VIEW_PROFILE,
-         SERVICE_URL_FORGET_PASSWORD } from '../constants/constants';
+         SERVICE_URL_UPDATE_PROFILE,
+         SERVICE_URL_FORGET_PASSWORD,
+         SERVICE_URL_UPDATE_PASSWORD } from '../constants/constants';
 
 
 
@@ -239,6 +241,14 @@ export class RestProvider {
      return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_VIEW_PROFILE, data, header);
    }
 
+   updateProfileRecord(userInfo): Observable<{ }> {
+     console.log(userInfo)
+     let header = PUBLIC_HEADER;
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_UPDATE_PROFILE, userInfo, header);
+
+
+   }
+
    makeTravelPassPayment(paymentInfo): Observable<{ }> {
 
       let data = {
@@ -323,6 +333,10 @@ export class RestProvider {
      return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_ACTIVATE_TICKET, data, header);
    }
    
+   sendChangePassWord(passwordInfo): Observable<{ }> {
+     let header = PUBLIC_HEADER;
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_UPDATE_PASSWORD, passwordInfo, header);
+   }
 
 
    updateUserDashboard(userInfo): Observable<{ }> {

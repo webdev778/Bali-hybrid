@@ -15,7 +15,9 @@ export class ViewProfilePage {
 	bundleData : {data : any};
 	bundleOrderDescription: any;
 	bundleOrder = {first_name: '',last_name: '', username: '', phone: '', email: '', gender: '', 
-				   address: '', city:'', zipcode:'' };
+				   address: '', city:'', zip_code:'' };
+	profileText = ''
+				   
 	isDisabled = true
 	submittedForm = false
 
@@ -76,6 +78,9 @@ export class ViewProfilePage {
 						this.bundleOrder.email = this.bundleOrderDescription.email
 						this.bundleOrder.gender = this.bundleOrderDescription.gender
 						this.bundleOrder.phone = this.bundleOrderDescription.phone
+						this.bundleOrder.city = this.bundleOrderDescription.city
+						this.bundleOrder.address = this.bundleOrderDescription.address
+						this.bundleOrder.zip_code = this.bundleOrderDescription.zip_code
 				}
 		)
 	}
@@ -86,15 +91,59 @@ export class ViewProfilePage {
 
 	buttonUpdate(form: NgForm) {
 		this.submittedForm = true
-
-	    if (form.valid) {
+		console.log("buttonUpdate")
+		if (form.valid) { 	
 	      this.submittedForm = false
-	      this.isDisabled = true  
+	      this.updateProfileData()  
+	    
 	    }
+	}
+
+	updateProfileData() {
+		let loader = this.loadingController.create({
+			content: "Sending ..."
+		});
+
+		loader.present()
+		
+		let passInfo = {
+			user_id:this.requestBundle.user_id,
+			token: this.requestBundle.token,
+			first_name:	this.bundleOrder.first_name,
+			last_name: this.bundleOrder.last_name, 
+			username: this.bundleOrder.username, 
+			phone: this.bundleOrder.phone, 
+			email: this.bundleOrder.email, 
+			gender: this.bundleOrder.gender, 
+			address: this.bundleOrder.address,
+			city:this.bundleOrder.city,
+			zip_code: this.bundleOrder.zip_code
+		}
+		
+		this.rest.updateProfileRecord(passInfo)
+		.subscribe(
+			responseData => this.checkStatus(responseData),
+			err => loader.dismiss(),
+			() => {
+				loader.dismiss()
+			}
+			);
+	}
+
+	checkStatus(bundle) {
+		if (bundle.status == 200) {
+			this.isDisabled = true
+			// this.profileText = bundle.api_message
+		}else {
+			 this.profileText = bundle.api_message
+		}
+
 	}
 
 	buttonBackPressed() {
 		this.navCtrl.pop()
 	}
 
+
+	
 }

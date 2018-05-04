@@ -69,6 +69,10 @@ export let SERVICE_URL_GET_TICKET_INFORMATION = BASE_URL + "getTicketInformation
 export let SERVICE_URL_ACTIVATE_TICKET = BASE_URL + "activateTicket";
 export let SERVICE_URL_VIEW_ORDER_HISTORY = BASE_URL + "viewOrderHistory";
 export let SERVICE_URL_VIEW_PROFILE = BASE_URL + "viewProfile";
+export let SERVICE_URL_UPDATE_PROFILE = BASE_URL + "updateProfile";
+export let SERVICE_URL_UPDATE_PASSWORD = BASE_URL + "updatePassword";
+
+
 
 export let API_HEADER = { 	
 							};
