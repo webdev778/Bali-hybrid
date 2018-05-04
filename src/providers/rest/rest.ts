@@ -31,7 +31,8 @@ import { PUBLIC_HEADER,
          SERVICE_URL_ACTIVATE_TICKET,
          SERVICE_URL_AUTHENTICATE_USER,
          SERVICE_URL_VIEW_ORDER_HISTORY,
-         SERVICE_URL_VIEW_PROFILE } from '../constants/constants';
+         SERVICE_URL_VIEW_PROFILE,
+         SERVICE_URL_FORGET_PASSWORD } from '../constants/constants';
 
 
 
@@ -52,6 +53,15 @@ export class RestProvider {
       }
 
       return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_LOGIN, data);
+    }
+
+    resetPassord(email) {
+
+      let data = {
+        "email" : email,
+      }
+
+      return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_FORGET_PASSWORD, data);
     }
 
     signupUser(signupData) {
@@ -324,6 +334,13 @@ export class RestProvider {
      let header = PUBLIC_HEADER;
 
       return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_UPDATE_DASHBOARD, data, header);
+   }
+
+
+   // Download Image From URL
+
+   downloadImageData(url): Observable<{ }> {
+     return this.mainRestProvider.fireGetServiceWithoutHeader(url);
    }
 
 }

@@ -10,7 +10,7 @@
 
 		<h5 class="form-header">{{headerText}}</h5>
 
-		<ion-row class='form-row' [hidden]='!selectLogin'>
+		<ion-row class='form-row' [hidden]='statusForView != 0'>
 			<ion-col class='form-col'>
 				<div class="form-panel">
 					<form #loginForm="ngForm" novalidate>
@@ -34,6 +34,8 @@
 					      </p>
 					    </ion-list>
 
+					     <p ion-text class="text-button" padding-right (click)="forgetPasswordClicked()">forget password?</p>
+
 					    <ion-row responsive-sm>
 					      <ion-col>
 					        <button ion-button (click)="buttonLoginPressed(loginForm)" type="submit" full>Login</button>
@@ -46,7 +48,34 @@
 			</ion-col>
 		</ion-row>
 
-		<ion-row class='form-row' [hidden]='selectLogin'>
+		<ion-row class='form-row' [hidden]='statusForView != 1'>
+			<ion-col class='form-col'>
+				<div class="form-panel">
+					<form #forgetForm="ngForm" novalidate>
+					    <ion-list no-lines>
+					      <ion-item class='form-item'>
+					        <ion-input [(ngModel)]="emailForgetPassword" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email placeholder='Email'>
+					        </ion-input>
+					      </ion-item>
+					      <p ion-text [hidden]="email.valid || sendForgetPassword == false" color="danger" padding-left>
+					        Enter a valid email
+					      </p>
+
+					    </ion-list>
+
+					    <p ion-text class="text-button" padding-right (click)="setLoginPressed()">Login</p>
+
+					    <ion-row responsive-sm>
+					      <ion-col>
+					        <button ion-button (click)="sendForgetPasswordClicked(forgetForm)" type="submit" full>RESET</button>
+					      </ion-col>
+					    </ion-row>
+	  				</form>
+	  			</div>
+			</ion-col>
+		</ion-row>
+
+		<ion-row class='form-row' [hidden]='statusForView != 2'>
 			<ion-col class='form-col'>
 				<div class="form-panel">
 					<form #signupForm="ngForm" novalidate>

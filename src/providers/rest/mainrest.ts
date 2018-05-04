@@ -21,6 +21,9 @@ export class MainRestProvider {
       headers.append('Access-Control-Request-Method', 'POST');
       headers.append('Access-Control-Request-Headers', 'Content-Type');
 
+      console.log(SERVICE_URL)
+      console.log(dataParam)
+
       return this.http.post(SERVICE_URL, dataParam, {headers})
                   .map(this.extractData)
                   .catch(this.handleError);

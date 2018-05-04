@@ -22,7 +22,7 @@
 						      </ion-item>
 						      <p ion-text [hidden]="first_name.valid || submittedForm == false" color="danger" padding-left>
 							        First Name Field Cannot be Empty
-							      </p>
+							  </p>
 
 						      <br>
 						       <p class = "head-para">Last Name</p>	
@@ -32,7 +32,7 @@
 						      </ion-item>
 						      <p ion-text [hidden]="last_name.valid || submittedForm == false" color="danger" padding-left>
 							        Last Name Field Cannot be Empty
-							      </p>
+							   </p>
 
 						      <br>
 						       <p class = "head-para">Email Id</p>	
@@ -93,9 +93,9 @@
 		</ion-row>
 	</ion-grid>
 
-	  <div style="text-align: center; margin-bottom: 20px;">
-    <button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
-  </div>
+	<div class="back-button">
+    	<button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
+  	</div>
 
 	<page-bsc-footer></page-bsc-footer>
 

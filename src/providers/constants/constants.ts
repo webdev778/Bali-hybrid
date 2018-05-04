@@ -2,8 +2,6 @@
 
 import { Injectable } from '@angular/core';
 
-import { MainRestProvider } from '../rest/mainrest';
-
 // Global Variables
 
 export var CMS_PAGES : Array<{id: any, name: '', alias: '', page: any}> = [];
@@ -18,8 +16,8 @@ export let PUBLIC_HEADER = {
 
 // Constants for Web Services
 
-export let BASE_URL = "http://192.168.0.34/BaliTours/public/api/";
-// export let BASE_URL = "http://admin.balisupport.tk/api/";
+// export let BASE_URL = "http://192.168.0.34/BaliTours/public/api/";
+export let BASE_URL = "http://admin.balisupport.tk/api/";
 
 //Authenticate User
 
@@ -28,6 +26,7 @@ export let SERVICE_URL_AUTHENTICATE_USER = BASE_URL + "authenticateUser"
 // Login Page
 export let SERVICE_URL_LOGIN = BASE_URL+"login";
 export let SERVICE_URL_SIGNUP = BASE_URL+"signup";
+export let SERVICE_URL_FORGET_PASSWORD = BASE_URL+"forgetPassword"
 
 // BSC Footer
 export let SERVICE_URL_SOCIAL_LINK = BASE_URL+"getSocialLinks";
@@ -137,32 +136,8 @@ export class ConstantsProvider {
 	loginPage : any = 'LoginPage'
 	isLogin = false
 	
-	constructor(private mainRest: MainRestProvider) {
+	constructor() {
 
-	}
-
-	convertArrayImageUrlToData(arrayImageUrl) {
-		var imageArray = []
-
-		for(let imageUrl of arrayImageUrl){
-			var xhr = new XMLHttpRequest();
-			xhr.open('GET',imageUrl, true);
-			xhr.responseType = 'blob';
-			xhr.onload = function(e) {
-			  if (this.status == 200) {
-			    var myBlob = this.response;
-
-			    var reader = new FileReader();
-			 	reader.readAsDataURL(myBlob); 
-			 	reader.onloadend = function() {
-			 		imageArray.push(reader.result)
-			 	} 
-			  }
-			};
-			xhr.send();	
-		}
-
-		return imageArray
 	}
 
 }

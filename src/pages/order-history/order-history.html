@@ -4,7 +4,6 @@
 
 <ion-content>
 
-
 	<page-bsc-header showWhen="core"></page-bsc-header>
 	<h2 hideWhen='core' class="mobile-sub-header">ORDERS</h2>
   	<h2 showWhen='core' class="core-sub-header">ORDERS</h2>	
@@ -13,7 +12,7 @@
 
           <ion-row class = "flexgrid-row-head">
             
-            <ion-col class="form-col" >
+            <ion-col>
                     <p>ORDER ID</p>
             </ion-col>
             
@@ -39,7 +38,7 @@
         </ion-row>
     
       <ion-row class = "flexgrid-row" *ngFor = "let order of bundleOrderList;" >
-            <ion-col class="form-col" >
+            <ion-col >
                     <p>{{order.order_id}}</p>
             </ion-col>
             
@@ -69,7 +68,7 @@
      <ion-item no-lines *ngFor="let order of bundleOrderList" text-wrap>
            <ion-row class= "sub-header" (click)="toggleSection(order)">
              <ion-col>
-              <h3 style=" margin-top: 5px">{{order.name | uppercase}}</h3>
+              <h3 class="mobile-toggle-header">{{order.name | uppercase}}</h3>
             </ion-col>
             <ion-col col-1 class="icon-arrow">
                   <img src="assets/imgs/down-arrow.png" *ngIf="order.is_open" >

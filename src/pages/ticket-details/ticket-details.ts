@@ -205,10 +205,10 @@ export class TicketDetailsPage {
 						this.userInfoBundle.profileStatus = false
 					}
 
-					this.arrayDashboardImages[0].image = this.constantProvider.convertArrayImageUrlToData(this.bundleTicketDescription.passports)
-					this.arrayDashboardImages[1].image = this.constantProvider.convertArrayImageUrlToData(this.bundleTicketDescription.luggagess) 
-					this.arrayDashboardImages[2].image = this.constantProvider.convertArrayImageUrlToData(this.bundleTicketDescription.insuarance) 
-					this.arrayDashboardImages[3].image = this.constantProvider.convertArrayImageUrlToData(this.bundleTicketDescription.doctors_letter) 
+					this.arrayDashboardImages[0].image = this.convertArrayImageUrlToData(this.bundleTicketDescription.passports)
+					this.arrayDashboardImages[1].image = this.convertArrayImageUrlToData(this.bundleTicketDescription.luggagess) 
+					this.arrayDashboardImages[2].image = this.convertArrayImageUrlToData(this.bundleTicketDescription.insuarance) 
+					this.arrayDashboardImages[3].image = this.convertArrayImageUrlToData(this.bundleTicketDescription.doctors_letter) 
 
 					if(this.bundleTicketDescription.gender == 0) {
 						this.userInfoBundle.gender = "Male"
@@ -224,6 +224,50 @@ export class TicketDetailsPage {
 
 
 				   })
+	}
+
+	convertArrayImageUrlToData(arrayImageUrl) {
+		var imageArray = []
+
+		for(let imageUrl of arrayImageUrl){
+
+			console.log("Getting image from url : " + imageUrl)
+
+			var blob : any
+
+			this.rest.downloadImageData(imageUrl)
+			.subscribe(
+	             data => blob = data,
+	             err => console.log(err),
+	             () => {
+				    var reader = new FileReader();
+				 	reader.readAsDataURL(blob); 
+				 	reader.onloadend = function() {
+				 		imageArray.push(reader.result)
+				 	} 
+	             }
+	           );
+
+			// var xhr = new XMLHttpRequest();
+			// xhr.open('GET',imageUrl, true);
+			// xhr.responseType = 'blob';
+			// xhr.onload = function(e) {
+			//   if (this.status == 200) {
+			//     var myBlob = this.response;
+
+			//     var reader = new FileReader();
+			//  	reader.readAsDataURL(myBlob); 
+			//  	reader.onloadend = function() {
+			//  		imageArray.push(reader.result)
+			//  	} 
+			//   }
+			// };
+			// xhr.send();	
+
+
+		}
+
+		return imageArray
 	}
 
 	presentAlert(title,message) {

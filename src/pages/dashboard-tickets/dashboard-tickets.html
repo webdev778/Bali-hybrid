@@ -10,33 +10,8 @@
    <h2 hideWhen='core' class="mobile-sub-header">AVAILABLE TICKETS</h2>
    <h2 showWhen='core' class="core-sub-header">AVAILABLE TICKETS</h2>
    
-   <h6 class="placeholder" [hidden]="bundleTicketsToShow.length > 0 || isListLoaded">No Tickets Found</h6>
+   <h6 class="placeholder" [hidden]="bundleTicketsToShow.length > 0 || !isListLoaded">No Tickets Found</h6>
 
-  <!--  <ion-grid class='flexgrid' hideWhen="core">
-      <ion-row class='service-row'>
-
-        <ion-col col-3 class="flexgrid-mobile" *ngFor="let ticket of bundleTicketsToShow;">
-          <h3 class = "mobile-text" *ngIf="ticket.first_name">{{ticket.first_name | uppercase}} {{ticket.last_name | uppercase}}</h3>
-          
-          <h3 class = "placeholder-text" *ngIf="!ticket.first_name">Name not provided</h3>
-          
-          <h6 class = "mobile-text">{{ticket.ticket_type | uppercase}}</h6>
-
-          <p *ngIf="ticket.is_active">Ticket expires on {{convertUnixTimestampToDate(ticket.expiry_date)}}</p>
-          
-          <button *ngIf="ticket.is_active" class="button-map" (click)="buttonProfilePressed(ticket)" ion-button color='primary' full >VIEW PROFILE</button><br>
-          
-          <button *ngIf="!ticket.is_active || !ticket.is_complete" class="button-map" (click)="buttonProfilePressed(ticket)" color='primary' full  ion-button>UPDATE PROFILE</button><br>
-          <p *ngIf = "!ticket.is_complete" class = "placeholder-text">please update profile</p>
-          
-          <button *ngIf = "ticket.is_complete && !ticket.is_active" class="button-map" ion-button color='primary' full 
-          (click)="activateTimer(ticket)">ACTIVATE TICKET</button>
-          
-          <p style = "margin-top: -10px" *ngIf="ticket.is_active" [innerHTML]='ticket.timer_value'></p>
-      </ion-col>
-  </ion-row>
-</ion-grid>
- -->
 <ion-list>
    <ion-grid class='flexgrid' hideWhen="core">
      <ion-item no-lines *ngFor="let ticket of bundleTicketsToShow;">
@@ -45,30 +20,39 @@
               <h3 style=" margin-top: 5px" *ngIf="ticket.first_name">{{ticket.first_name | uppercase}} {{ticket.last_name | uppercase}}</h3>
                <h3 style=" margin-top: 5px" *ngIf="!ticket.first_name">Name Not Provided</h3>
             </ion-col>
+
             <ion-col col-1 class="icon-arrow">
                   <img src="assets/imgs/down-arrow.png" *ngIf="ticket.is_open" >
                   <img src="assets/imgs/arrow-up.png" *ngIf="!ticket.is_open" >
-                  </ion-col>
+            </ion-col>
           </ion-row>
+
          <ion-row [hidden]="ticket.is_open" class = "toggle-content">
               <ion-col>
                 <ion-row>
-                 <p style="color: #595a5d"><b>Ticket Type: </b>{{ticket.ticket_type | uppercase}}</p>
+                 <p class="normal-text"><b>Ticket Type: </b>{{ticket.ticket_type | uppercase}}</p>
                 </ion-row>
+
                 <ion-row *ngIf="ticket.is_active">
-                  <button  class="button-map" (click)="buttonProfilePressed(ticket)" ion-button color='primary' full >VIEW PROFILE</button><br>
+                  <ion-col>
+                    <p class="normal-text" *ngIf="ticket.is_active" [innerHTML]='ticket.timer_value'></p>
+                  </ion-col>
+
+                  <ion-col>
+                    <button  class="button-map" (click)="buttonProfilePressed(ticket)" ion-button color='primary' >VIEW PROFILE</button><br>
+                  </ion-col>
                 </ion-row>
-                <ion-row>
-                   <button *ngIf="!ticket.is_active || !ticket.is_complete" class="button-map" (click)="buttonProfilePressed(ticket)" color='primary' full  ion-button>UPDATE PROFILE</button>
-                    </ion-row>
-                <ion-row>    
-                  <p *ngIf = "!ticket.is_complete" class = "placeholder-text">please update profile</p>
-                  <button *ngIf = "ticket.is_complete && !ticket.is_active" class="button-map" ion-button color='primary' full 
-                     (click)="activateTimer(ticket)">ACTIVATE TICKET</button>
-                </ion-row>
-                <ion-row>    
-                      <p style="display: flex" *ngIf="ticket.is_active" [innerHTML]='ticket.timer_value'></p>
-                </ion-row>
+
+                <ion-row> 
+                  <ion-col>
+                    <p *ngIf = "!ticket.is_complete" class = "normal-text">please update profile</p>
+                    <button *ngIf = "ticket.is_complete && !ticket.is_active" class="button-map" ion-button color='primary'  (click)="activateTimer(ticket)">ACTIVATE TICKET</button>
+                  </ion-col>
+
+                  <ion-col>
+                    <button *ngIf="!ticket.is_active || !ticket.is_complete" class="button-map" (click)="buttonProfilePressed(ticket)" color='primary'  ion-button>UPDATE PROFILE</button>
+                  </ion-col>
+                </ion-row>                
               </ion-col>
         </ion-row>
   </ion-item>
