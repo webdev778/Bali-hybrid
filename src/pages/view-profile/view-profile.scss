@@ -50,6 +50,12 @@ page-view-profile {
 	}
 
 	.response-text {
+		color: blue;
+		font-weight: bold;
+		font-size: 15px;
+	}
+
+	.response-error-text {
 		color: red;
 		font-weight: bold;
 		font-size: 15px;

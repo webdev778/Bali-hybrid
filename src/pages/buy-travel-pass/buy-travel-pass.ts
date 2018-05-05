@@ -5,7 +5,7 @@ import { TicketStructure, TravellersInfoDS } from '../../providers/constants/con
 import { Storage } from '@ionic/storage';
 import { NgForm } from '@angular/forms';
 import { PaymentStatusPage } from '../payment-status/payment-status';
-
+import $ from "jquery";
 
 @IonicPage()
 @Component({
@@ -21,13 +21,10 @@ export class BuyTravelPassPage {
   scrollToTop() {
     this.content.scrollToTop(400);
   }
-
-	paymentView = false
-	ticketsSaved = true
-	confirmTicket = true
-	travellerInfoWindow = true
+    
 	travellerFormSubmitted = false
-	paymentFormSubmitted = false		
+	paymentFormSubmitted = false	
+    statusForView = 0	
 
 	cardType = ''
 	finalCost = 0
@@ -38,7 +35,7 @@ export class BuyTravelPassPage {
 	bundleSaveTickets : Array<TicketStructure> = []
 	bundleViewDescription : any[] = [];
 	bundleData : {data : any};
-	cardDetails = { number: '',exp_month:'' ,exp_year: '',cvc: ''}
+	cardDetails = { number: '',exp_month:null ,exp_year: '',cvc: ''}
 	arrayTravellers : Array<TravellersInfoDS> = []
 	bundlePaymentData = {name:'', phone:'', address:''}
 	orderDetails: {order_no: '' ,transaction_id: ''}
@@ -48,7 +45,7 @@ export class BuyTravelPassPage {
 
 	dateForPicker = new Date().getTime();
 	pickerDate = ""
-	
+
 	constructor(	public navCtrl: NavController, 
 					public navParams: NavParams,
 					private alertCtrl: AlertController,
@@ -61,8 +58,17 @@ export class BuyTravelPassPage {
 	}
 
 	ionViewDidLoad() {
-		this.getTravelPassData()
+		this.getTravelPassData();
 	}
+
+	// ionViewWillEnter(){
+	// 	console.log('=-=-=-=-=-=-=-=-=-=-=-');
+	// 	debugger
+	// 	$('#dtpkra').focus(function(){
+	      	
+	//       debugger
+	//   });
+	// }
 
 	incrementValue(ticket) {
 		this.noTicketChosen = false
@@ -86,6 +92,7 @@ export class BuyTravelPassPage {
 	}
 
 	initialiseBundle() {
+
 		for (var count = 0 ; count < this.bundleSaveTickets.length; count++) {
 			this.bundleSaveTickets[count].ticket_id = this.bundleViewDescription[count].id
 			this.bundleSaveTickets[count].quantity = this.bundleViewDescription[count].quantity
@@ -103,15 +110,12 @@ export class BuyTravelPassPage {
 	}
 
 	editPressed() {
-		this.paymentView = false
-		this.ticketsSaved = true
-		this.travellerFormSubmitted = false
-		this.travellerInfoWindow = true
+		this.statusForView = 0
 	}
 
 	continuePressed() {
-		this.paymentView = true
-		this.travellerInfoWindow = true
+		this.statusForView = 1
+		this.scrollToTop()
 		let adultTicket = this.bundleSaveTickets[ this.bundleSaveTickets.findIndex(obj=> obj.ticket_id === 1) ]
 		if( adultTicket.quantity == 0 ) {
 			this.sendTicketDetailsToServer()
@@ -138,20 +142,18 @@ export class BuyTravelPassPage {
 
 				for (let ticket of this.bundleViewDescription) {
 					if (ticket.quantity > 0) {
-
-						this.ticketsSaved = false
 						this.initialiseBundle()
+						this.statusForView = 1
+						this.scrollToTop()
 						return
 					}
 				}
 
-				this.ticketsSaved = true
 				this.noTicketChosen = true
 				
 			}
 		})
 	}
-
 
 
 	initialiseArrayTraveller() {
@@ -167,11 +169,13 @@ export class BuyTravelPassPage {
 															email:'', 
 															date_of_birth: '',
 															ticket_type: this.bundleSaveTickets[
-															adultIndex
-															].ticket_type,
+																			adultIndex
+																			].ticket_type,
 														})
-			this.travellerInfoWindow = false
 		}
+
+		this.statusForView = 2
+		this.scrollToTop()
 	}	
 
 	moveToLoginPage() {
@@ -180,14 +184,14 @@ export class BuyTravelPassPage {
       })
 	}
 
-	resetValues() {
-		for (let ticket of this.bundleSaveTickets) 
-		{
-			ticket = <TicketStructure> {}
-		}
+	// resetValues() {
+	// 	for (let ticket of this.bundleSaveTickets) 
+	// 	{
+	// 		ticket = <TicketStructure> {}
+	// 	}
 
-		this.finalCost = 0
-	}
+	// 	this.finalCost = 0
+	// }
 
 	presentAlertNoTickets() {
 		let alert = this.alertCtrl.create({
@@ -236,7 +240,7 @@ export class BuyTravelPassPage {
 	buttonSubmitPressed(form: NgForm) {
 		this.travellerFormSubmitted = true
 		if(form.valid){
-			this.travellerInfoWindow = true
+			console.log(form.valid)			
 			this.addAdultInformation()
 			this.sendTicketDetailsToServer()
 		}
@@ -282,6 +286,8 @@ export class BuyTravelPassPage {
 	}
 
 	createTicketBundleForServer() {
+		this.bundleTicketsForServer = []
+		console.log(this.bundleSaveTickets)
 		for( let ticket of this.bundleSaveTickets) {
 			if( ticket.quantity > 0 ) {
 				this.bundleTicketsForServer.push(ticket)
@@ -289,11 +295,11 @@ export class BuyTravelPassPage {
 		}
 	}
 
-
-
 	checkTicketStatus(bundle) {
 		if (bundle.status == 200) {
 			this.orderId = bundle.order_id
+			this.statusForView = 3
+			this.scrollToTop()
 		}else {
 			this.presentAlert('Something Went Wrong', bundle.api_message)
 		}
@@ -348,7 +354,6 @@ export class BuyTravelPassPage {
 
 	bookTicketsPressed(){
 		this.sendTicketDetailsToServer()
-		this.confirmTicket = false
 	}
 
 	presentAlert(title,message) {
@@ -364,5 +369,7 @@ export class BuyTravelPassPage {
 		});
 		alert.present();
 	}
+
+
 
 }

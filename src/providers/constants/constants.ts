@@ -1,6 +1,8 @@
 
 
 import { Injectable } from '@angular/core';
+// import{ AlertController,NavController } from 'ionic-angular';
+// import { LoginPage } from '../../pages/login/login'
 
 // Global Variables
 
@@ -141,8 +143,28 @@ export class ConstantsProvider {
 	isLogin = false
 	
 	constructor() {
-
 	}
+		
+	// presentServerAlert() {
+ //        let alert = this.alertController.create({
+ //            title: 'OOPS',
 
+ //            subTitle: "There is some technical error, please try again later",
+ //            buttons: [
+ //            {
+ //                text : 'Okay',
+ //                handler: () => {
+ //                    this.navCtrl.setRoot(LoginPage)
+ //                }
+ //            }
+ //            ]
+
+ //        });
+ //        alert.present()
+ //    }
 }
+
+
+
+
 	
