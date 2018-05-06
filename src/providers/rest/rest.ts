@@ -354,7 +354,7 @@ export class RestProvider {
    // Download Image From URL
 
    downloadImageData(url): Observable<{ }> {
-     return this.mainRestProvider.fireGetServiceWithoutHeader(url);
+     return this.mainRestProvider.fireGetServiceToDownloadImage(url);
    }
 
 }

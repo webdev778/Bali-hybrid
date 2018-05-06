@@ -44,6 +44,19 @@ export class MainRestProvider {
 
 
     fireGetServiceWithoutHeader(SERVICE_URL): Observable<{ }> {
+      
+      return this.http.get(SERVICE_URL)
+                  .map(this.extractData)
+                  .catch(this.handleError);
+    } 
+
+    fireGetServiceToDownloadImage(SERVICE_URL): Observable<{ }> {
+
+      let headers: HttpHeaders = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Access-Control-Request-Method', 'POST');
+      headers.append('Access-Control-Request-Headers', 'Content-Type');
+      
       return this.http.get(SERVICE_URL)
                   .map(this.extractData)
                   .catch(this.handleError);
