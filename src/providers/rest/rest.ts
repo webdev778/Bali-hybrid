@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-
+import { AlertController } from 'ionic-angular'
 import { MainRestProvider } from './mainrest';
 
 import { PUBLIC_HEADER,
@@ -42,7 +42,7 @@ import { PUBLIC_HEADER,
 @Injectable()
 export class RestProvider {
 
-  	constructor(private mainRestProvider: MainRestProvider) {
+  	constructor(private mainRestProvider: MainRestProvider,public alertCtrl: AlertController) {
   	}
 
     // Login Page
@@ -349,6 +349,16 @@ export class RestProvider {
       return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_UPDATE_DASHBOARD, data, header);
    }
 
+    alertServerError(loader) {
+     loader.dismiss()
+     let alert = this.alertCtrl.create({
+      title: '',
+      subTitle: 'Please check your internet connection',
+      buttons: ['Okay']
+    });
+    alert.present();
+
+    }
 
    // Download Image From URL
 

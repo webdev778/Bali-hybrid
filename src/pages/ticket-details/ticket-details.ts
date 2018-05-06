@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController,Content } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { RestProvider } from '../../providers/rest/rest';
 import { ConstantsProvider } from '../../providers/constants/constants'
@@ -11,6 +11,11 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'ticket-details.html',
 })
 export class TicketDetailsPage {
+@ViewChild(Content) content: Content;
+
+  scrollToTop() {
+    this.content.scrollToTop(400);
+  }
 
 	ticketData:any
 	bundleTicketInfoData : { ticket_info:any }
@@ -98,7 +103,7 @@ export class TicketDetailsPage {
 	}
 
 	buttonSubmitDetailsPressed(form: NgForm) {
-		
+		this.scrollToTop()
 		if (form.valid)  {
 			this.submittedDashboardDetails = false;
 			this.userInfoBundle.profileStatus = true;
@@ -156,7 +161,7 @@ export class TicketDetailsPage {
 		this.rest.updateTicketInfo(passInfo)
 		.subscribe(
 			responseData => this.checkStatus(responseData),
-			err => loader.dismiss(),
+			err => this.rest.alertServerError(loader),
 			() => {
 				loader.dismiss()
 			}
@@ -165,9 +170,9 @@ export class TicketDetailsPage {
 
 	checkStatus(bundle) {
 		if (bundle.status == 200) {
-			this.presentAlert('Success', bundle.order_id)
+			this.presentAlert(bundle.api_message)
 		}else {
-			this.presentAlert('Error', bundle.api_message)
+			this.presentAlert(bundle.api_message)
 		}
 
 	}
@@ -186,7 +191,7 @@ export class TicketDetailsPage {
 		this.rest.getTicketInformation(requestBundle)
 		.subscribe(
 			responseData => this.bundleTicketInfoData = <{ticket_info : any}> responseData,
-			err => loader.dismiss(),
+			err => this.rest.alertServerError(loader),
 			() => {
 					this.bundleTicketDescription = <any> this.bundleTicketInfoData.ticket_info;
 					this.userInfoBundle.firstName = this.bundleTicketDescription.first_name;
@@ -250,9 +255,9 @@ export class TicketDetailsPage {
 		return imageArray
 	}
 
-	presentAlert(title,message) {
+	presentAlert(message) {
 		let alert = this.alertCtrl.create({
-			title: title,
+			title: '',
 			subTitle: message,
 			buttons: ['Okay']
 		});

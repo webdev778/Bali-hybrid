@@ -32,10 +32,11 @@
 
                       <p class = "para-head" ion-text color = "dark" padding-left>Date of Birth </p>
                       <ion-item class='form-item'>
-                          <ion-input showWhen = "core" placeholder="dd/mm/yyyy" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="userInfoBundle.dob" disabled="{{userInfoBundle.profileStatus}}" name="dob" #dob="ngModel" value= ""></ion-input>
 
-                          <ion-datetime  hideWhen = "core" displayFormat="DD/MMM/YYYY" min="1900-01-01" placeholder="" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="userInfoBundle.dob" disabled="{{userInfoBundle.profileStatus}}" name="dob" #dob="ngModel" value= ""></ion-datetime>
-                      </ion-item>
+                          <ion-input id = "datepicker" placeholder="dd/mm/yyyy" class="textbox-n" type="text" [(ngModel)]="userInfoBundle.dob" disabled="{{userInfoBundle.profileStatus}}" name="dob" #dob="ngModel" value= ""></ion-input>
+
+                    </ion-item>
+
                       <br>
                       <p class = "para-head" ion-text color = "dark" padding-left>Gender</p>
                       <ion-item class='form-item'>

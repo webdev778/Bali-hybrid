@@ -78,7 +78,7 @@ import { LoginPage } from '../login/login';
         this.rest.sendChangePassWord(passInfo)
         .subscribe(
             responseData => this.checkStatus(responseData),
-            err => loader.dismiss(),
+            err => this.rest.alertServerError(loader),
             () => {
                 loader.dismiss()
 

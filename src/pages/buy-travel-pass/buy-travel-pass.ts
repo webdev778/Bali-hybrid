@@ -5,7 +5,6 @@ import { TicketStructure, TravellersInfoDS } from '../../providers/constants/con
 import { Storage } from '@ionic/storage';
 import { NgForm } from '@angular/forms';
 import { PaymentStatusPage } from '../payment-status/payment-status';
-import $ from "jquery";
 
 @IonicPage()
 @Component({
@@ -35,7 +34,7 @@ export class BuyTravelPassPage {
 	bundleSaveTickets : Array<TicketStructure> = []
 	bundleViewDescription : any[] = [];
 	bundleData : {data : any};
-	cardDetails = { number: '',exp_month:null ,exp_year: '',cvc: ''}
+	cardDetails = { number: '',exp_month:null ,exp_year: null,cvc: ''}
 	arrayTravellers : Array<TravellersInfoDS> = []
 	bundlePaymentData = {name:'', phone:'', address:''}
 	orderDetails: {order_no: '' ,transaction_id: ''}
@@ -60,15 +59,6 @@ export class BuyTravelPassPage {
 	ionViewDidLoad() {
 		this.getTravelPassData();
 	}
-
-	// ionViewWillEnter(){
-	// 	console.log('=-=-=-=-=-=-=-=-=-=-=-');
-	// 	debugger
-	// 	$('#dtpkra').focus(function(){
-	      	
-	//       debugger
-	//   });
-	// }
 
 	incrementValue(ticket) {
 		this.noTicketChosen = false
@@ -220,11 +210,17 @@ export class BuyTravelPassPage {
 	}
 
 	getTravelPassData() {
+		let loader = this.loadingController.create({
+			content: "Loading Travel Passes ..."
+		});
+		loader.present()
+
 		this.rest.getTravelPass()
 		.subscribe(
 			responseData => this.bundleData = <{data : any}> responseData,
-			err => console.log(err),
+			err => this.rest.alertServerError(loader),
 			() => {
+				loader.dismiss()
 				this.bundleViewDescription = <any[]> this.bundleData.data;
 				for (let ticket of this.bundleViewDescription)
 				{
@@ -239,8 +235,17 @@ export class BuyTravelPassPage {
 
 	buttonSubmitPressed(form: NgForm) {
 		this.travellerFormSubmitted = true
-		if(form.valid){
-			console.log(form.valid)			
+		for (let traveller of this.arrayTravellers) {
+			if(traveller.date_of_birth == '' || traveller.email == '' || traveller.first_name == '' ||
+			  traveller.last_name == '' || traveller.gender == '') {
+				
+				this.travellerFormSubmitted = true
+			}
+			else {
+				this.travellerFormSubmitted = false
+			}
+		}
+		if(!this.travellerFormSubmitted && form.valid){
 			this.addAdultInformation()
 			this.sendTicketDetailsToServer()
 		}
@@ -255,7 +260,8 @@ export class BuyTravelPassPage {
 		this.paymentFormSubmitted = true
 		
 		if(form.valid){
-			this.sendPaymentDetailsToServer()
+			this.paymentFormSubmitted = false
+			this.sendPaymentDetailsToServer()	
 		}
 	}
 
@@ -278,7 +284,7 @@ export class BuyTravelPassPage {
 		this.rest.purchaseTravelPass(passInfo)
 		.subscribe(
 			responseData => this.checkTicketStatus(responseData),
-			err => loader.dismiss(),
+			err => this.rest.alertServerError(loader),
 			() => {
 				loader.dismiss()
 			}
@@ -326,7 +332,7 @@ export class BuyTravelPassPage {
 		this.rest.makeTravelPassPayment(paymentInfo)
 		.subscribe(
 			responseData => this.checkPaymentStatus(responseData),
-			err => loader.dismiss(),
+			err => this.rest.alertServerError(loader),
 			() => {
 				loader.dismiss()
 			}

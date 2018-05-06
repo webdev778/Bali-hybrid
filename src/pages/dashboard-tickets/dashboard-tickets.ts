@@ -147,7 +147,7 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 		this.rest.getExpiryTime(requestBundle)
 		.subscribe(
 			responseData => this.expiryDate = <{expiry_date : any}> responseData,
-			err => loader.dismiss(),
+			err => this.rest.alertServerError(loader),
 			() => {
 				let expDate = <any> this.expiryDate.expiry_date;
 				this.timerView = true
@@ -177,7 +177,7 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 	}
 
 	buttonProfilePressed(ticket) {
-		this.navCtrl.push(TicketDetailsPage,{'ticket': JSON.stringify(ticket)})
+		this.navCtrl.push(TicketDetailsPage,{'ticket': JSON.stringify(ticket )})
 	}
 
 
@@ -187,15 +187,16 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 
 	sendTicketsRequestToServer() {
 		let loader = this.loadingController.create({
-			content: "Sending ..."
+			content: "fetching tickets ..."
 		});
+		loader.present()
 
 		this.rest.getTicketsForDashboard(this.requestBundle)
 		.subscribe(
 			responseData => this.bundleData = <{ticket_info : any}> responseData,
-			err => loader.dismiss(),
+			err => this.rest.alertServerError(loader),
 			() => {
-
+				loader.dismiss(),
 				this.isListLoaded = true
 				this.bundleTicketDescription = <any[]> this.bundleData.ticket_info;
 				this.bundleTicketsToShow = []

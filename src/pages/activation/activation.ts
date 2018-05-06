@@ -38,7 +38,7 @@ export class ActivationPage {
 
     sendAuthenticationRequest() {
         let loader = this.loadingController.create({
-            content: "Fetching Tickets ..."
+            content: "Authenticating your account ..."
         });
 
         loader.present()
@@ -51,7 +51,7 @@ export class ActivationPage {
         this.rest.sendAuthRequest(passInfo)
         .subscribe(
             responseData => this.checkStatus(responseData),
-            err => console.log(err),
+            err => this.rest.alertServerError(loader),
             () => {
                 loader.dismiss()
 
