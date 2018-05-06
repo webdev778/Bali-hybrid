@@ -102,16 +102,6 @@
 							<br>
 
 							<ion-item class='form-item'>
-								<ion-input [(ngModel)]="signupData.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off" required placeholder='Username'>
-								</ion-input>
-							</ion-item>
-							<p ion-text [hidden]="username.valid || submittedSignup == false" color="danger" padding-left>
-								Username is required
-							</p>
-
-							<br>
-
-							<ion-item class='form-item'>
 								<ion-input [(ngModel)]="signupData.phone" name="phone" type="tel" #phone="ngModel" spellcheck="false" autocapitalize="off" required placeholder='Phone'>
 								</ion-input>
 							</ion-item>
@@ -169,6 +159,8 @@
 								<button ion-button (click)="buttonSignupPressed(signupForm)" type="submit" block>Sign Up</button>
 							</ion-col>
 						</ion-row>
+						<p ion-text [hidden]="signUpErrorMessage == ''" color="danger" padding-left>
+					        {{signUpErrorMessage}}
 					</form>
 				</div>
 

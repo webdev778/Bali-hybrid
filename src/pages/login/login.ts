@@ -26,7 +26,7 @@ export class LoginPage {
   statusForView = 0
 
 	loginData = { email: '', password: '' };
-	signupData = {first_name: '',last_name: '', username: '', phone: '', email: '',
+	signupData = {first_name: '',last_name: '', phone: '', email: '',
                password: '', confirm_password: '',gender: ''};
 	submittedLogin = false;
 	submittedSignup = false;
@@ -41,6 +41,7 @@ export class LoginPage {
   loginBundle = { data:'', user_data: {}, status:'', api_message : ''}
   userBundle = <UserDetailsDS> {}
   loginErrorMessaage = ''
+  signUpErrorMessage = ''
 
   constructor(	public navCtrl: NavController,
 				public navParams: NavParams, 
@@ -102,14 +103,21 @@ export class LoginPage {
 
       this.rest.signupUser(signup)
          .subscribe(
-           	loginData => loginData,
+           	responseData => this.checkSignUpStatus(responseData),
            	err => loader.dismiss(),
            	() => {
            		loader.dismiss()
-              this.presentAlertSignUp()
-              
            	}
            );
+  }
+
+  checkSignUpStatus(response) {
+      if(response.status == 200) {
+        this.presentAlertSignUp(response.api_message)
+      } else {
+        this.signUpErrorMessage = response.api_message
+      }
+
   }
 
 	buttonLoginPressed(form: NgForm) {
@@ -213,10 +221,10 @@ export class LoginPage {
       alert.present();
     }
 
-   presentAlertSignUp() {
+   presentAlertSignUp(message) {
     let alert = this.alertCtrl.create({
       title: '',
-      subTitle: 'Registration Successful, please check your mail inbox',
+      subTitle: message,
       buttons: [
       {
         text : 'Okay',

@@ -70,7 +70,6 @@ export class RestProvider {
       let data = {
         "first_name" : signupData.first_name,
         "last_name" : signupData.last_name,
-        "username" : signupData.username,
         "email" : signupData.email,
         "phone" : signupData.phone,
         "gender" : signupData.gender,
@@ -357,4 +356,4 @@ export class RestProvider {
      return this.mainRestProvider.fireGetServiceToDownloadImage(url);
    }
 
-}
+  }

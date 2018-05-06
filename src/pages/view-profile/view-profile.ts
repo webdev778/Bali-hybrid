@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, LoadingController,Content } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { ConstantsProvider } from '../../providers/constants/constants';
 import { Storage } from '@ionic/storage';
@@ -11,12 +11,19 @@ import { NgForm } from '@angular/forms';
 	templateUrl: 'view-profile.html',
 })
 export class ViewProfilePage {
+@ViewChild(Content) content: Content;
+
+	scrollToTop() {
+	this.content.scrollToTop(700);
+	}
+
 	requestBundle = {user_id: '', token: ''}
 	bundleData : {data : any};
 	bundleOrderDescription: any;
 	bundleOrder = {first_name: '',last_name: '', username: '', phone: '', email: '', gender: '', 
 				   address: '', city:'', zip_code:'' };
 	profileText = ''
+	profileErrorText = ''
 				   
 	isDisabled = true
 	submittedForm = false
@@ -81,16 +88,21 @@ export class ViewProfilePage {
 						this.bundleOrder.city = this.bundleOrderDescription.city
 						this.bundleOrder.address = this.bundleOrderDescription.address
 						this.bundleOrder.zip_code = this.bundleOrderDescription.zip_code
+						loader.dismiss()
 				}
 		)
 	}
 
 	buttonEdit() {
+		this.scrollToTop()
 		this.isDisabled = false
+		this.profileText = ''
+		this.profileErrorText = ''
 	}
 
 	buttonUpdate(form: NgForm) {
 		this.submittedForm = true
+		this.scrollToTop()
 		console.log("buttonUpdate")
 		if (form.valid) { 	
 	      this.submittedForm = false
@@ -125,6 +137,7 @@ export class ViewProfilePage {
 			responseData => this.checkStatus(responseData),
 			err => loader.dismiss(),
 			() => {
+				this.scrollToTop();
 				loader.dismiss()
 			}
 			);
@@ -133,9 +146,9 @@ export class ViewProfilePage {
 	checkStatus(bundle) {
 		if (bundle.status == 200) {
 			this.isDisabled = true
-			// this.profileText = bundle.api_message
+			this.profileText = bundle.api_message
 		}else {
-			 this.profileText = bundle.api_message
+			 this.profileErrorText = bundle.api_message
 		}
 
 	}

@@ -11,26 +11,26 @@
 	<h2 showWhen='core' class="core-sub-header">TRAVEL PASS</h2>
 
 
-	<ion-grid class = "selected-grid">
+	<ion-grid class = "selected-grid" [hidden]='statusForView != 0'>
 		<ion-row>
 			<ion-col >
-				<h3 [hidden]='!ticketsSaved' class="page-paddingtext">Travel Pass Price</h3>
+				<h3 class="page-paddingtext">Travel Pass Price</h3>
 			</ion-col>
 		</ion-row>
 
 		<ion-row>
 			<ion-col>
-				<h6 [hidden]='!ticketsSaved'  class="page-paddingtext">Must be Purchased Prior to Bali Arrival</h6>
+				<h6 class="page-paddingtext">Must be Purchased Prior to Bali Arrival</h6>
 			</ion-col>
 		</ion-row>
 
 		<ion-row>
 			<ion-col>
-				<h3 [hidden]='!ticketsSaved' class="page-lastpaddingtext">Select Travel Pass Requirements</h3>
+				<h3 class="page-lastpaddingtext">Select Travel Pass Requirements</h3>
 			</ion-col>
 		</ion-row>
 
-		<ion-row [hidden]='!ticketsSaved' class = "box1-content" align-items: center  *ngFor="let ticket of bundleViewDescription">
+		<ion-row class = "box1-content" align-items: center  *ngFor="let ticket of bundleViewDescription">
 			<ion-col col-12 align-items: center >
 				<ion-row class = "border-element1">
 					<ion-col class = "counter-col">
@@ -65,26 +65,29 @@
 				<p class="page-text">{{ticket.description}}</p>
 				<p class="page-text">{{ticket.valid_days}}</p>
 			</ion-col>
-		</ion-row>
-
-		<ion-row [hidden]='ticketsSaved || paymentView'>
-			<ion-col>
-				<h5 class = "center-msg">You have selected the following Travel Pass</h5>
-			</ion-col>
-		</ion-row>
-
-		<div class = "save-btn">
-		<h6 *ngIf = "noTicketChosen" style="color: red; margin-top: 0px">Please select a ticket to continue</h6>	
-		<button [hidden]='!ticketsSaved' ion-button color='primary' (click)='savePressed()'>Next</button>
-		</div>
+		</ion-row>	
 
 		<h6 *ngIf = "loginErrorText" class = "error-text">To Continue Please 
 			<span (click) = "moveToLoginPage()" >Login</span>
 		</h6>
 
+		<div class = "save-btn">
+		<h6 *ngIf = "noTicketChosen" style="color: red; margin-top: 0px">Please select a ticket to continue</h6>	
+		<button ion-button color='primary' (click)='savePressed()'>Next</button>
+		</div>
+
 		
 
-		<ion-row [hidden]='ticketsSaved || paymentView'  class = "box2-content">
+</ion-grid>
+<ion-grid class = "selected-grid" [hidden]='statusForView != 1'>	
+
+		<ion-row>
+			<ion-col>
+				<h5 class = "center-msg">You have selected the following Travel Pass</h5>
+			</ion-col>
+		</ion-row>
+
+		<ion-row class = "box2-content">
 
 			<ion-col class = "ticket-summary">
 				<ion-row class="grid-row">
@@ -133,21 +136,22 @@
 			</ion-col>
 		</ion-row>
 
+
+			<div class = "save-btn" >
+		<button ion-button outline color='primary' (click)='editPressed()'>Edit Tickets</button>
+	</div>
+
+	<div class = "save-btn" >
+		<button ion-button color='primary' (click)='continuePressed()'>Continue</button>
+	</div>
+
 	</ion-grid>
 
-	<div class = "save-btn" >
-		<button [hidden]='ticketsSaved || paymentView' ion-button outline color='primary' (click)='editPressed()'>Edit Tickets</button>
-	</div>
 
-	<div class = "save-btn" >
-		<button [hidden]='ticketsSaved || paymentView' ion-button color='primary' (click)='continuePressed()'>Continue</button>
-	</div>
+	<h5 style="text-align: center; text-align: center;color: #527a85; margin-bottom: -10px;" [hidden]='statusForView != 2'>Please fill the adult ticket details</h5>
 
-	<h5 style="text-align: center; text-align: center;color: #527a85;margin-top: -80px;
-margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult ticket details</h5>
-
+	<ion-grid [hidden]='statusForView != 2'>
 	<form #ticketDetailsEntry="ngForm" novalidate>
-	<ion-grid [hidden]= 'travellerInfoWindow'>
 		<ion-row class='form-row' *ngFor='let traveller of arrayTravellers, let i = index'>
 			<ion-col class='form-col'>
 				<div class="form-panel">
@@ -184,17 +188,17 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 
 						      <br>						  						    
 
-						      <ion-item class='form-item'>
-						     				
-                		        <ion-input showWhen = "core" placeholder="DATE OF BIRTH (dd/mm/yyyy)" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" value= ""></ion-input>
-
-	                          <ion-datetime  hideWhen = "core" displayFormat="DD/MMM/YYYY" placeholder="Date Of Birth" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" value= "" max= "{{pickerDate}}"></ion-datetime>
+						      <ion-item class='form-item'>						     				
+                		        <ion-input placeholder="DATE OF BIRTH (dd/mm/yyyy)" class="textbox-n" type="text" onfocus="(this.type='date')" [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" value= ""></ion-input>
 	                      	</ion-item>
+
+	                      	  <!-- <ion-item class='form-item' hideWhen = "core">			
+                		      	<ion-datetime displayFormat="DD/MMM/YYYY" placeholder="Date Of Birth" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" value= "" max= "{{pickerDate}}"></ion-datetime>
+	                      	</ion-item> -->
 	                          <p ion-text [hidden]="traveller.date_of_birth != '' || travellerFormSubmitted == false" color="danger" padding-left>
 							        Enter date of birth
 						      </p>
 						      <br>
-
 							    <ion-item class='form-item'>
 								  	<ion-select [(ngModel)]="traveller.gender" name='gender' #gender="ngModel" required placeholder='Gender'>
 								  		<ion-option value="0">Male</ion-option>
@@ -205,6 +209,9 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 								<p ion-text [hidden]="traveller.gender != '' || travellerFormSubmitted == false " color="danger" padding-left>
 							        Select gender
 							    </p>
+							    	<br>
+
+
 						</ion-list>				
   				</div>
 			</ion-col>
@@ -212,10 +219,10 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 		<div class = "save-btn" >
 	        	<button ion-button color='primary' (click)='buttonSubmitPressed(ticketDetailsEntry)'>Submit Traveller Details</button>
 	    </div>	      
+		</form>
 	</ion-grid>
-	</form>
 
-	<ion-grid class='form-grid' [hidden]='!paymentView || !travellerInfoWindow'>
+	<ion-grid class='form-grid' [hidden]='statusForView != 3'>
 		<h5 class = "payment-title"> Please Enter Payment Details </h5>
 		<ion-row class = "form-row">
 			<ion-col class = "form-col">
@@ -258,19 +265,28 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 							</p>
 							<br>
 							<ion-item class='form-item'>
-								<ion-input [(ngModel)]="cardDetails.exp_month" #exp_month="ngModel"  name="mm" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* MM'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" ></ion-input>
+								<ion-input [(ngModel)]="cardDetails.exp_month" #exp_month="ngModel"  name="mm" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* MM'  InputText (keypress)="onlyNumberKey($event)" maxlength="2" max = "12" min = "1" ></ion-input>
 							</ion-item>
-							<p ion-text [hidden]="exp_month.valid || paymentFormSubmitted == false" color="danger" padding-left>
+
+							<p ion-text [hidden]="exp_month.valid || paymentFormSubmitted == false || exp_month < 12" color="danger" padding-left>
 								Expiry Month of card is required
 							</p>
 							<br>
 							<ion-item class='form-item'>
-								<ion-input [(ngModel)]="cardDetails.exp_year" #exp_year="ngModel" name="yy" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* YY'  pInputText (keypress)="onlyNumberKey($event)" maxlength="2" ></ion-input>
+								<ion-input [(ngModel)]="cardDetails.exp_year" #exp_year="ngModel" name="yy" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* YY'  InputText (keypress)="onlyNumberKey($event)" maxlength="2" ></ion-input>
 							</ion-item>
 							<p ion-text [hidden]="exp_year.valid || paymentFormSubmitted == false" color="danger" padding-left>
 								Expiry Year of card is required
 							</p>
-							<br>
+
+								<br>
+
+							    	<label>Select Date: </label>
+							<div  class="input-group">
+							    <input class="form-control" id="dtpkr" type="text"  />
+							    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+							</div>
+
 						</ion-list>
 
 						<p ion-text [hidden]="paymentErrortext == ''" color="danger" padding-left>
@@ -289,6 +305,7 @@ margin-bottom: -10px;" [hidden] = 'travellerInfoWindow '>Please fill the adult t
 	</ion-grid>
 	<page-bsc-footer></page-bsc-footer>
 </ion-content>
+
 
 
 

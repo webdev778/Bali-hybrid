@@ -18,6 +18,7 @@
 						    
 						    <ion-list no-lines>
 						      <p class = "response-text">{{profileText}}</p>
+						      <p class = "response-error-text">{{profileErrorText}}</p>
 						      <p class = "head-para">First Name</p>	
 						      <ion-item class="form-item">
 						        <ion-input [(ngModel)]="bundleOrder.first_name" name="first_name" type="text" #first_name="ngModel" spellcheck="false" autocapitalize="off" disabled = {{isDisabled}} required>
