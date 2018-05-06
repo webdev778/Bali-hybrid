@@ -50,16 +50,9 @@ export class MainRestProvider {
                   .catch(this.handleError);
     } 
 
-    fireGetServiceToDownloadImage(SERVICE_URL): Observable<{ }> {
+    fireGetServiceToDownloadImage(SERVICE_URL): Observable<Blob> {
 
-      let headers: HttpHeaders = new HttpHeaders();
-      headers.append('Content-Type', 'application/json');
-      headers.append('Access-Control-Request-Method', 'POST');
-      headers.append('Access-Control-Request-Headers', 'Content-Type');
-      
-      return this.http.get(SERVICE_URL)
-                  .map(this.extractData)
-                  .catch(this.handleError);
+      return this.http.get(SERVICE_URL, { responseType: 'blob' });
     } 
    
 

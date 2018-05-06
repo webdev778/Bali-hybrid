@@ -11,6 +11,9 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 
 import { IonicStorageModule } from '@ionic/storage';
 
+import {Ionic2MaskDirective} from "ionic2-mask-directive";
+
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AboutUsPage } from '../pages/about-us/about-us';
@@ -48,6 +51,7 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password'
 @NgModule({
   declarations: [
     MyApp,
+    Ionic2MaskDirective,
     HomePage,
     AboutUsPage,
     BuyTravelPassPage,

@@ -189,7 +189,7 @@
 						      <br>						  						    
 
 						      <ion-item class='form-item'>						     				
-                		        <ion-input placeholder="DATE OF BIRTH (dd/mm/yyyy)" class="textbox-n" type="text" onfocus="(this.type='date')" [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" value= ""></ion-input>
+                		        <ion-input placeholder="DATE OF BIRTH (dd/mm/yyyy)" class="textbox-n" type="text" mask="99-99-9999" [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" value= ""></ion-input>
 	                      	</ion-item>
 
 	                      	  <!-- <ion-item class='form-item' hideWhen = "core">			
@@ -209,7 +209,7 @@
 								<p ion-text [hidden]="traveller.gender != '' || travellerFormSubmitted == false " color="danger" padding-left>
 							        Select gender
 							    </p>
-							    	<br>
+							  <br>
 
 
 						</ion-list>				
@@ -280,12 +280,6 @@
 							</p>
 
 								<br>
-
-							    	<label>Select Date: </label>
-							<div  class="input-group">
-							    <input class="form-control" id="dtpkr" type="text"  />
-							    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-							</div>
 
 						</ion-list>
 

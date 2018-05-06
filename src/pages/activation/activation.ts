@@ -38,7 +38,7 @@ export class ActivationPage {
 
     sendAuthenticationRequest() {
         let loader = this.loadingController.create({
-            content: "Fetching Tickets ..."
+            content: "Verifying ..."
         });
 
         loader.present()

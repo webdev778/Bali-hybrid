@@ -145,23 +145,52 @@ export class ConstantsProvider {
 	constructor() {
 	}
 		
-	// presentServerAlert() {
- //        let alert = this.alertController.create({
- //            title: 'OOPS',
+	validateDate(date: string, type) {
+		let arrayDateString = date.split("-")
 
- //            subTitle: "There is some technical error, please try again later",
- //            buttons: [
- //            {
- //                text : 'Okay',
- //                handler: () => {
- //                    this.navCtrl.setRoot(LoginPage)
- //                }
- //            }
- //            ]
+		if (arrayDateString.length != 3)
+		{
+			return "Please enter a valid date (mm-dd-yyyy)"
+		}else if (Number(arrayDateString[0]) > 12 ||  Number(arrayDateString[1]) > 31)
+		{
+			return "Please enter a valid date (mm-dd-yyyy)"
+		}else
+		{
+			
+			if (new Date(date))
+			{
+				let enteredDate = new Date(date).getTime()
+				let currentDate = new Date().getTime()
 
- //        });
- //        alert.present()
- //    }
+				if (enteredDate > currentDate)
+				{
+					return "Please enter a valid date (mm-dd-yyyy)"
+				}else {
+					let years = (currentDate - enteredDate)/(1000*60*60*24*365.25)
+					if ( type == 'Adult')
+					{
+						if ( years < 18)
+						{
+							return "Adult age must be greater than 18 years"
+
+						}else{
+							return ""
+						}
+					}else{
+						if ( years > 18)
+						{
+							return "Child age must be leass than 18 years"
+
+						}else{
+							return ""
+						}
+					}
+				}
+			}else {
+				return "Please enter a valid date (mm-dd-yyyy)"
+			}
+		}
+	}
 }
 
 

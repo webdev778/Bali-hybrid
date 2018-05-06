@@ -16,6 +16,7 @@ export class TicketDetailsPage {
 	bundleTicketInfoData : { ticket_info:any }
 	bundleTicketDescription:any
 	requestBundle = {user_id: '', token: ''}
+	errorDateOfBirth = ""
 
 	userInfoBundle = { profileStatus: false ,firstName:'', lastName:'', dob:'',
 					  gender:'', address:'', email:'',mobile:'', emergencyContactName: '', 
@@ -115,11 +116,6 @@ export class TicketDetailsPage {
 	}
 
 	sendTicketsRequestToServer() {
-		let loader = this.loadingController.create({
-			content: "Sending ..."
-		});
-
-		loader.present()
 
 		let gender = 0
 
@@ -132,6 +128,21 @@ export class TicketDetailsPage {
 		else {
 			gender = null
 		}
+
+		if (this.userInfoBundle.dob != "")
+		{
+			this.errorDateOfBirth = this.constantProvider.validateDate(this.userInfoBundle.dob, this.ticketData.ticket_type)
+			if (this.errorDateOfBirth != "")
+			{
+				return
+			}
+		}
+
+		let loader = this.loadingController.create({
+			content: "Sending ..."
+		});
+
+		loader.present()
 		
 		let passInfo = {
 			user_id:this.requestBundle.user_id,
@@ -165,7 +176,7 @@ export class TicketDetailsPage {
 
 	checkStatus(bundle) {
 		if (bundle.status == 200) {
-			this.presentAlert('Success', bundle.order_id)
+			this.presentAlert('', bundle.api_message)
 		}else {
 			this.presentAlert('Error', bundle.api_message)
 		}
@@ -227,7 +238,7 @@ export class TicketDetailsPage {
 	}
 
 	convertArrayImageUrlToData(arrayImageUrl) {
-		var imageArray = []
+		var arrayImage = []
 
 		for(let imageUrl of arrayImageUrl){
 
@@ -236,18 +247,20 @@ export class TicketDetailsPage {
 			this.rest.downloadImageData(imageUrl)
 			.subscribe(
 	             data => blob = data,
-	             err => console.log(err),
+	             err => console.log("Error while getting Image Data : "+err),
 	             () => {
 				    var reader = new FileReader();
 				 	reader.readAsDataURL(blob); 
 				 	reader.onloadend = function() {
-				 		imageArray.push(reader.result)
+				 		arrayImage.push(reader.result)
+
+				 		return arrayImage
 				 	} 
 	             }
 	           );
 		}
 
-		return imageArray
+		return arrayImage
 	}
 
 	presentAlert(title,message) {

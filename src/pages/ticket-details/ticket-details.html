@@ -1,6 +1,6 @@
-          <ion-header hideWhen="core">
-            <page-bsc-header ></page-bsc-header>
-        </ion-header>
+<ion-header hideWhen="core">
+  <page-bsc-header ></page-bsc-header>
+</ion-header>
 
         <ion-content>
             <page-bsc-header showWhen="core"></page-bsc-header>
@@ -32,10 +32,14 @@
 
                       <p class = "para-head" ion-text color = "dark" padding-left>Date of Birth </p>
                       <ion-item class='form-item'>
-                          <ion-input showWhen = "core" placeholder="dd/mm/yyyy" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="userInfoBundle.dob" disabled="{{userInfoBundle.profileStatus}}" name="dob" #dob="ngModel" value= ""></ion-input>
+                          <ion-input showWhen = "core" placeholder="mm-dd-yyyy" type="text" mask="99-99-9999" [(ngModel)]="userInfoBundle.dob" disabled="{{userInfoBundle.profileStatus}}" name="dob" #dob="ngModel" value= ""></ion-input>
 
-                          <ion-datetime  hideWhen = "core" displayFormat="DD/MMM/YYYY" min="1900-01-01" placeholder="" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="userInfoBundle.dob" disabled="{{userInfoBundle.profileStatus}}" name="dob" #dob="ngModel" value= ""></ion-datetime>
+                          <ion-datetime  hideWhen = "core" displayFormat="MM/DD/YYYY" min="01-01-1900" placeholder="" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="userInfoBundle.dob" disabled="{{userInfoBundle.profileStatus}}" name="dob" #dob="ngModel" value= ""></ion-datetime>
                       </ion-item>
+                      <p ion-text color="danger" padding-left>
+                              {{errorDateOfBirth}}
+                      </p>
+
                       <br>
                       <p class = "para-head" ion-text color = "dark" padding-left>Gender</p>
                       <ion-item class='form-item'>
@@ -96,9 +100,9 @@
                         <button [hidden] = "userInfoBundle.profileStatus" (click)="removeImage(image,dashboardImage.image)" icon-only class="custom-file-select" >Remove</button>  
                     </div>
 
+                    <br>
 
-
-                    <label class='custom-file-select' [hidden] = "userInfoBundle.profileStatus">Select Image
+                    <label class='custom-file-select' [hidden] = "userInfoBundle.profileStatus">Add Image
                         <ion-input multiple hidden name="name" type="file" accept="image/*" (change)='imageSelectedFromUser(dashboardImage, $event)'>
                         </ion-input>
                     </label>

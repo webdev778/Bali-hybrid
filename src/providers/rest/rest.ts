@@ -352,7 +352,7 @@ export class RestProvider {
 
    // Download Image From URL
 
-   downloadImageData(url): Observable<{ }> {
+   downloadImageData(url): Observable<Blob> {
      return this.mainRestProvider.fireGetServiceToDownloadImage(url);
    }
 
