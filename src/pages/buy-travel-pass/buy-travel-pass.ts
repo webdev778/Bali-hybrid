@@ -308,7 +308,6 @@ export class BuyTravelPassPage {
 
 	createTicketBundleForServer() {
 		this.bundleTicketsForServer = []
-		console.log(this.bundleSaveTickets)
 		for( let ticket of this.bundleSaveTickets) {
 			if( ticket.quantity > 0 ) {
 				this.bundleTicketsForServer.push(ticket)

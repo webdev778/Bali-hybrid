@@ -91,14 +91,14 @@
             <ion-col>
 
                 <button *ngIf="ticket.is_active" class="button-map-2" (click)="buttonProfilePressed(ticket)" >VIEW</button>
-                <button *ngIf="!ticket.is_active || !ticket.is_complete" class="button-map-2" (click)="buttonProfilePressed(ticket)">UPDATE</button><br>
+                <button *ngIf="!ticket.is_active" class="button-map-2" (click)="buttonProfilePressed(ticket)">UPDATE</button><br>
               
             </ion-col>
              <ion-col>
 
                     <button *ngIf = "ticket.is_complete && !ticket.is_active" class="button-activate-ticket"  (click)="activateTimer(ticket)">ACTIVATE TICKET</button>
 
-                    <p *ngIf = "!ticket.is_complete" class = "placeholder-text">please update profile</p>
+                    <p *ngIf = "!ticket.is_complete && !ticket.is_active" class = "placeholder-text">please update profile</p>
           <p *ngIf="ticket.is_active" [innerHTML]='ticket.timer_value'></p>
             </ion-col>
         </ion-row>

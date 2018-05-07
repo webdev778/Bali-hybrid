@@ -157,9 +157,10 @@ export class ConstantsProvider {
 		}else if (Number(arrayDateString[0]) > 12 ||  Number(arrayDateString[1]) > 31 || Number(arrayDateString[2]) < 1000)
 		{
 			return "Please enter a valid date (mm/dd/yyyy)"
-		}else
+		}else if ( type != 'Family')
 		{
-			
+			console.log(date)
+
 			if (new Date(date))
 			{
 				let enteredDate = new Date(date).getTime()
@@ -192,6 +193,8 @@ export class ConstantsProvider {
 			}else {
 				return "Please enter a valid date (mm/dd/yyyy)"
 			}
+		}else {
+			return ""
 		}
 	}
 }

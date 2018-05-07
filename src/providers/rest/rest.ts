@@ -353,7 +353,7 @@ export class RestProvider {
      loader.dismiss()
      let alert = this.alertCtrl.create({
       title: '',
-      subTitle: 'Please check your internet connection',
+      subTitle: 'There is some technical error, please try again later',
       buttons: ['Okay']
     });
     alert.present();

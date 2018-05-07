@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController,Content } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { RestProvider } from '../../providers/rest/rest';
@@ -22,10 +22,13 @@ export class TicketDetailsPage {
 	bundleTicketDescription:any
 	requestBundle = {user_id: '', token: ''}
 	errorDateOfBirth = ""
+	mandatoryErrorText = ""
+
+	isDisabled = true
 
 	userInfoBundle = { profileStatus: false ,firstName:'', lastName:'', dob:'',
 					  gender:'', address:'', email:'',mobile:'', emergencyContactName: '', 
-					  emergencyContactNumber: '', isActive: 0}
+					  emergencyContactNumber: '', isActive: 1}
 
 	arrayDashboardImages: Array<{title: string, image: Array<any>, errorMsg: string}> = [
 		{ title: 'Upload Passport Photograph', image: [], errorMsg: 'Select Passport Image' },
@@ -42,7 +45,8 @@ export class TicketDetailsPage {
 					private storage: Storage,
 					private constantProvider: ConstantsProvider,
 					public alertCtrl: AlertController,
-					public loadingController: LoadingController) {
+					public loadingController: LoadingController,
+					private cdr: ChangeDetectorRef) {
 
 		this.ticketData = JSON.parse(this.navParams.get('ticket'))
 	}
@@ -100,6 +104,14 @@ export class TicketDetailsPage {
 	}
 
 	buttonSubmitDetailsPressed(form: NgForm) {
+
+		if (this.userInfoBundle.firstName == null || this.userInfoBundle.lastName == null 
+			|| this.userInfoBundle.firstName == '' || this.userInfoBundle.lastName == '') {
+			this.mandatoryErrorText = "First Name and Last Name are mandatory"
+			this.scrollToTop()
+			return
+		}
+		
 		this.scrollToTop()
 		if (form.valid)  {
 			this.submittedDashboardDetails = false;
@@ -118,6 +130,8 @@ export class TicketDetailsPage {
 
 	sendTicketsRequestToServer() {
 
+		this.mandatoryErrorText = ""
+
 		let gender = 0
 
 		if (this.userInfoBundle.gender == 'Male') {
@@ -132,7 +146,6 @@ export class TicketDetailsPage {
 
 		if (this.userInfoBundle.dob != null)
 		{
-			console.log(this.userInfoBundle.dob)
 			this.errorDateOfBirth = this.constantProvider.validateDate(this.userInfoBundle.dob, this.ticketData.ticket_type)
 			if (this.errorDateOfBirth != "")
 			{
@@ -203,8 +216,9 @@ export class TicketDetailsPage {
 			responseData => this.bundleTicketInfoData = <{ticket_info : any}> responseData,
 			err => this.rest.alertServerError(loader),
 			() => {	
-					loader.dismiss()
-					this.bundleTicketDescription = <any> this.bundleTicketInfoData.ticket_info;
+					
+					this.bundleTicketDescription = <any> this.bundleTicketInfoData.ticket_info;	
+
 					this.userInfoBundle.firstName = this.bundleTicketDescription.first_name;
 					this.userInfoBundle.lastName = this.bundleTicketDescription.last_name;
 					this.userInfoBundle.dob = this.bundleTicketDescription.date_of_birth;
@@ -212,7 +226,14 @@ export class TicketDetailsPage {
 					this.userInfoBundle.emergencyContactNumber = this.bundleTicketDescription.emergency_contact_phone;
 					this.userInfoBundle.email = this.bundleTicketDescription.email;
 					this.userInfoBundle.mobile = this.bundleTicketDescription.phone;
-					this.userInfoBundle.isActive = this.bundleTicketDescription.is_active;
+
+					if (this.bundleTicketDescription.is_active == 1)
+					{
+						this.isDisabled = true
+					}else{
+						this.isDisabled = false
+					}
+
 ​					this.userInfoBundle.address = this.bundleTicketDescription.address;
 
 					this.arrayDashboardImages[0].image = this.convertArrayImageUrlToData(this.bundleTicketDescription.passports)
@@ -231,9 +252,12 @@ export class TicketDetailsPage {
 					}else {
 						this.userInfoBundle.gender = null
 					}
-
-
+					
+					this.cdr.detectChanges();
+					loader.dismiss()
 				   })
+		
+
 	}
 
 	convertArrayImageUrlToData(arrayImageUrl) {

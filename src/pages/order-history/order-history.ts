@@ -87,18 +87,15 @@ export class OrderHistoryPage {
 
 							for( let info of ticketInfo ) {
 								if (info.travel_passid == 1) {
-									tktInfo = tktInfo + info.quantity + "Adults "
+									tktInfo = tktInfo + info.quantity + " Adults "
 								}
 								if (info.travel_passid == 2) {
-									tktInfo = tktInfo + info.quantity + "Child "
+									tktInfo = tktInfo + info.quantity + " Child "
 								}
 								if (info.travel_passid == 3) {
-									tktInfo = tktInfo + info.quantity + "Family "
+									tktInfo = tktInfo + info.quantity + " Family "
 								}
 							}
-
-							let dateTime = (order.order_date.date.split('.'))[0]
-							dateTime = dateTime + " " + order.order_date.timezone
 
 							this.bundleOrderList.push(<OrderHistoryStructure> {
 																				order_id: order.order_id,
@@ -107,13 +104,11 @@ export class OrderHistoryPage {
 																			    amount: order.amount,
 																			    name: order.name,
 																			    transaction_id: order.transaction_id,
-																			    order_date: dateTime,
+																			    order_date: order.order_date,
 																			    ticket_info : tktInfo,
 																			    is_open : true
 																				})
 						}
-
-						console.log(this.bundleOrderList)
 
 				}
 		)

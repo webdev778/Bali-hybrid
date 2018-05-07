@@ -104,7 +104,6 @@ export class ViewProfilePage {
 	buttonUpdate(form: NgForm) {
 		this.submittedForm = true
 		this.scrollToTop()
-		console.log("buttonUpdate")
 		if (form.valid) { 	
 	      this.submittedForm = false
 	      this.updateProfileData()  
