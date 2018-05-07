@@ -154,7 +154,7 @@ export class ConstantsProvider {
 		if (arrayDateString.length != 3)
 		{
 			return "Please enter a valid date (mm/dd/yyyy)"
-		}else if (Number(arrayDateString[0]) > 12 ||  Number(arrayDateString[1]) > 31)
+		}else if (Number(arrayDateString[0]) > 12 ||  Number(arrayDateString[1]) > 31 || Number(arrayDateString[2]) < 1000)
 		{
 			return "Please enter a valid date (mm/dd/yyyy)"
 		}else

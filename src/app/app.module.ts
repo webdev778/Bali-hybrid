@@ -11,7 +11,7 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 
 import { IonicStorageModule } from '@ionic/storage';
 
-import {Ionic2MaskDirective} from "ionic2-mask-directive";
+import { BrMaskerModule } from 'brmasker-ionic-3';
 
 
 import { MyApp } from './app.component';
@@ -51,7 +51,6 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password'
 @NgModule({
   declarations: [
     MyApp,
-    Ionic2MaskDirective,
     HomePage,
     AboutUsPage,
     BuyTravelPassPage,
@@ -82,6 +81,7 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password'
   ],
   imports: [
     BrowserModule,
+    BrMaskerModule,
     IonicModule.forRoot(MyApp, {}, {
         links: [
           { component: HomePage, name: 'Home', segment: 'home' },
