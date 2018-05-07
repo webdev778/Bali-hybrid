@@ -13,7 +13,6 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { BrMaskerModule } from 'brmasker-ionic-3';
 
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AboutUsPage } from '../pages/about-us/about-us';
