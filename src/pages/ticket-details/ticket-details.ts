@@ -99,18 +99,14 @@ export class TicketDetailsPage {
 		arrayImage.splice(arrayImage.indexOf(image), 1)
 	}
 
-	buttonUpdateDetailsPressed(dashboardForm){
-		this.userInfoBundle.profileStatus = false;	
-	}
-
 	buttonSubmitDetailsPressed(form: NgForm) {
 		this.scrollToTop()
 		if (form.valid)  {
 			this.submittedDashboardDetails = false;
-			this.userInfoBundle.profileStatus = true;
 		}else {
 			this.submittedDashboardDetails = true;
 		}
+		this.errorDateOfBirth = ""
 		this.sendTicketsRequestToServer()
 	}
 
@@ -134,8 +130,9 @@ export class TicketDetailsPage {
 			gender = null
 		}
 
-		if (this.userInfoBundle.dob != "")
+		if (this.userInfoBundle.dob != null)
 		{
+			console.log(this.userInfoBundle.dob)
 			this.errorDateOfBirth = this.constantProvider.validateDate(this.userInfoBundle.dob, this.ticketData.ticket_type)
 			if (this.errorDateOfBirth != "")
 			{
@@ -190,8 +187,10 @@ export class TicketDetailsPage {
 
 	getTicketInformationFromServer() {
 		let loader = this.loadingController.create({
-			content: "Fetching Tickets ..."
+			content: "Fetching Ticket Details ..."
 		});
+
+		loader.present()
 
 		let requestBundle = {
 			user_id: this.requestBundle.user_id,
@@ -203,7 +202,8 @@ export class TicketDetailsPage {
 		.subscribe(
 			responseData => this.bundleTicketInfoData = <{ticket_info : any}> responseData,
 			err => this.rest.alertServerError(loader),
-			() => {
+			() => {	
+					loader.dismiss()
 					this.bundleTicketDescription = <any> this.bundleTicketInfoData.ticket_info;
 					this.userInfoBundle.firstName = this.bundleTicketDescription.first_name;
 					this.userInfoBundle.lastName = this.bundleTicketDescription.last_name;
@@ -214,12 +214,6 @@ export class TicketDetailsPage {
 					this.userInfoBundle.mobile = this.bundleTicketDescription.phone;
 					this.userInfoBundle.isActive = this.bundleTicketDescription.is_active;
 ​					this.userInfoBundle.address = this.bundleTicketDescription.address;
-
-					if (this.bundleTicketDescription.is_complete == 1){
-						this.userInfoBundle.profileStatus = true
-					}else{
-						this.userInfoBundle.profileStatus = false
-					}
 
 					this.arrayDashboardImages[0].image = this.convertArrayImageUrlToData(this.bundleTicketDescription.passports)
 					this.arrayDashboardImages[1].image = this.convertArrayImageUrlToData(this.bundleTicketDescription.luggagess) 

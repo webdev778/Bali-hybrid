@@ -147,6 +147,8 @@ export class ConstantsProvider {
 	}
 		
 	validateDate(date: string, type) {
+		console.log(date)
+
 		let arrayDateString = date.split("/")
 
 		if (arrayDateString.length != 3)

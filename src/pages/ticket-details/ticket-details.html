@@ -114,7 +114,6 @@
             <ion-row responsive-sm>
                 <ion-col>
                   <button  class = "submit-button" *ngIf = "!userInfoBundle.profileStatus" (click)="buttonSubmitDetailsPressed(dashboardForm)" ion-button type="submit" full>SUBMIT DETAILS</button>
-                  <button class = "edit-button" *ngIf = "userInfoBundle.profileStatus && !userInfoBundle.isActive" (click)="buttonUpdateDetailsPressed(dashboardForm)" ion-button outline type="submit" >EDIT DETAILS</button>
               </ion-col>
           </ion-row>
 
