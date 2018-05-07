@@ -104,7 +104,7 @@ export class LoginPage {
       this.rest.signupUser(signup)
          .subscribe(
            	responseData => this.checkSignUpStatus(responseData),
-           	err => loader.dismiss(),
+           	err => this.rest.alertServerError(loader),
            	() => {
            		loader.dismiss()
            	}
@@ -150,7 +150,7 @@ export class LoginPage {
       this.rest.loginUser(login)
          .subscribe(
            	loginData => this.loginBundle = <{ data:'', user_data: '', status:'', api_message : ''}> loginData,
-           	err => loader.dismiss(),
+           	err => this.rest.alertServerError(loader),
            	() => {
            		loader.dismiss()
                this.checkStatusForLogin(this.loginBundle)
@@ -205,7 +205,7 @@ export class LoginPage {
       this.rest.resetPassord(this.emailForgetPassword)
          .subscribe(
              data => this.presentAlert( <any>data["api_message"]),
-             err => loader.dismiss(),
+             err => this.rest.alertServerError(loader),
              () => {
                loader.dismiss()
              }

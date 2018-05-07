@@ -71,13 +71,14 @@ export class ViewProfilePage {
 
 	requestProfileData() {
 		let loader = this.loadingController.create({
-			content: "Sending ..."
+			content: "Loading Profile ..."
 		});
+		loader.present()
 
 		this.rest.requestUserProfile(this.requestBundle)
 		.subscribe(
 			responseData => this.bundleData = <{data : any}> responseData, 
-			err => loader.dismiss(),
+			err => this.rest.alertServerError(loader),
 			() => {
 						this.bundleOrderDescription = <any[]> this.bundleData.data;
 						this.bundleOrder.first_name = this.bundleOrderDescription.first_name
@@ -135,7 +136,7 @@ export class ViewProfilePage {
 		this.rest.updateProfileRecord(passInfo)
 		.subscribe(
 			responseData => this.checkStatus(responseData),
-			err => loader.dismiss(),
+			err => this.rest.alertServerError(loader),
 			() => {
 				this.scrollToTop();
 				loader.dismiss()

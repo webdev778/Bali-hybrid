@@ -8,7 +8,9 @@
 	<h2 hideWhen='core' class="mobile-sub-header">ORDERS</h2>
   	<h2 showWhen='core' class="core-sub-header">ORDERS</h2>	
   	
-  	<ion-grid class='flexgrid-2' showWhen="core">
+    <h6 class="placeholder" [hidden]="bundleOrderList.length > 0 || !isListLoaded">No Orders Found</h6>
+
+  	<ion-grid class='flexgrid-2' showWhen="core" [hidden]="bundleOrderList.length == 0">
 
           <ion-row class = "flexgrid-row-head">
             

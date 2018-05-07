@@ -94,6 +94,7 @@ export interface TravellersInfoDS {
 	gender: string,
 	email: string,
 	ticket_type: string,
+	error_dob : string
 }
 
 export interface OrderHistoryStructure {
@@ -146,14 +147,14 @@ export class ConstantsProvider {
 	}
 		
 	validateDate(date: string, type) {
-		let arrayDateString = date.split("-")
+		let arrayDateString = date.split("/")
 
 		if (arrayDateString.length != 3)
 		{
-			return "Please enter a valid date (mm-dd-yyyy)"
+			return "Please enter a valid date (mm/dd/yyyy)"
 		}else if (Number(arrayDateString[0]) > 12 ||  Number(arrayDateString[1]) > 31)
 		{
-			return "Please enter a valid date (mm-dd-yyyy)"
+			return "Please enter a valid date (mm/dd/yyyy)"
 		}else
 		{
 			
@@ -164,7 +165,7 @@ export class ConstantsProvider {
 
 				if (enteredDate > currentDate)
 				{
-					return "Please enter a valid date (mm-dd-yyyy)"
+					return "Please enter a valid date (mm/dd/yyyy)"
 				}else {
 					let years = (currentDate - enteredDate)/(1000*60*60*24*365.25)
 					if ( type == 'Adult')
@@ -187,7 +188,7 @@ export class ConstantsProvider {
 					}
 				}
 			}else {
-				return "Please enter a valid date (mm-dd-yyyy)"
+				return "Please enter a valid date (mm/dd/yyyy)"
 			}
 		}
 	}

@@ -152,7 +152,7 @@
 
 	<ion-grid [hidden]='statusForView != 2'>
 	<form #ticketDetailsEntry="ngForm" novalidate>
-		<ion-row class='form-row' *ngFor='let traveller of arrayTravellers, let i = index'>
+		<ion-row class='form-row' *ngFor='let traveller of arrayTravellers, let i = index' >
 			<ion-col class='form-col'>
 				<div class="form-panel">
 					
@@ -188,16 +188,17 @@
 
 						      <br>						  						    
 
-						      <ion-item class='form-item'>						     				
-                		        <ion-input placeholder="DATE OF BIRTH (dd/mm/yyyy)" class="textbox-n" type="text" mask="99-99-9999" [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" value= ""></ion-input>
+						     <ion-item class='form-item'>						     				
+                		        <ion-input placeholder="DATE OF BIRTH (mm/dd/yyyy)" type="text" [(ngModel)]="traveller.date_of_birth" name="dob" value= ""></ion-input>
 	                      	</ion-item>
 
-	                      	  <!-- <ion-item class='form-item' hideWhen = "core">			
-                		      	<ion-datetime displayFormat="DD/MMM/YYYY" placeholder="Date Of Birth" class="textbox-n" type="text" onfocus="(this.type='date')"  id="date" [(ngModel)]="traveller.date_of_birth" name="dob" #dob="ngModel" value= "" max= "{{pickerDate}}"></ion-datetime>
-	                      	</ion-item> -->
-	                          <p ion-text [hidden]="traveller.date_of_birth != '' || travellerFormSubmitted == false" color="danger" padding-left>
-							        Enter date of birth
-						      </p>
+	                      	<p ion-text color="danger" padding-left>
+                              {{traveller.error_dob}}
+                      		</p>
+
+	                        <p ion-text [hidden]="traveller.date_of_birth != '' || travellerFormSubmitted == false" color="danger" padding-left>
+							    Enter date of birth
+						    </p>
 						      <br>
 							    <ion-item class='form-item'>
 								  	<ion-select [(ngModel)]="traveller.gender" name='gender' #gender="ngModel" required placeholder='Gender'>
@@ -215,11 +216,11 @@
 						</ion-list>				
   				</div>
 			</ion-col>
-		</ion-row>
-		<div class = "save-btn" >
-	        	<button ion-button color='primary' (click)='buttonSubmitPressed(ticketDetailsEntry)'>Submit Traveller Details</button>
-	    </div>	      
+		</ion-row>     
 		</form>
+			<div class = "save-btn" >
+	        	<button ion-button color='primary' (click)='buttonSubmitPressed(ticketDetailsEntry)'>Submit Traveller Details</button>
+	    </div>	 
 	</ion-grid>
 
 	<ion-grid class='form-grid' [hidden]='statusForView != 3'>
@@ -265,22 +266,21 @@
 							</p>
 							<br>
 							<ion-item class='form-item'>
-								<ion-input [(ngModel)]="cardDetails.exp_month" #exp_month="ngModel"  name="mm" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* MM'  InputText (keypress)="onlyNumberKey($event)" maxlength="2" max = "12" min = "1" ></ion-input>
+								<ion-input [(ngModel)]="cardDetails.exp_month" #exp_month="ngModel"  name="mm" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* MM'  InputText (keypress)="onlyNumberKey($event)" maxlength="2" pattern = "^(0?[1-9]|1[012])$" ></ion-input>
 							</ion-item>
 
-							<p ion-text [hidden]="exp_month.valid || paymentFormSubmitted == false || exp_month < 12" color="danger" padding-left>
-								Expiry Month of card is required
+							<p ion-text [hidden]="exp_month.valid || paymentFormSubmitted == false " color="danger" padding-left>
+								Enter valid expiry month
 							</p>
 							<br>
 							<ion-item class='form-item'>
-								<ion-input [(ngModel)]="cardDetails.exp_year" #exp_year="ngModel" name="yy" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* YY'  InputText (keypress)="onlyNumberKey($event)" maxlength="2" ></ion-input>
+								<ion-input [(ngModel)]="cardDetails.exp_year" #exp_year="ngModel" name="yy" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* YY'  InputText (keypress)="onlyNumberKey($event)" maxlength="2" pattern = "^([1-9][8-9]|[2-9][0-9])$"></ion-input>
 							</ion-item>
-							<p ion-text [hidden]="exp_year.valid || paymentFormSubmitted == false" color="danger" padding-left>
-								Expiry Year of card is required
+							<p ion-text [hidden]="exp_year.valid || paymentFormSubmitted == false || exp_year < 18" color="danger" padding-left>
+								Enter valid expiry year
 							</p>
 
-								<br>
-
+							<br>
 						</ion-list>
 
 						<p ion-text [hidden]="paymentErrortext == ''" color="danger" padding-left>

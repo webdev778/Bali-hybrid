@@ -22,6 +22,7 @@ export class OrderHistoryPage {
 	bundleData : {data : any};
  	bundleOrderDescription: any[] = [];
  	bundleOrderList: Array<OrderHistoryStructure> = []
+ 	isListLoaded = false
  	
 	constructor( 	
 		public navCtrl: NavController, 
@@ -66,18 +67,20 @@ export class OrderHistoryPage {
 
 	requestOrderList() {
 		let loader = this.loadingController.create({
-			content: "Sending ..."
+			content: "fetching orders ..."
 		});
+		loader.present()
 
 		this.rest.requestOrderHistory(this.requestBundle)
 		.subscribe(
 			responseData => this.bundleData = <{data : any}> responseData, 
-			err => loader.dismiss(),
-			() => {
+			err => this.rest.alertServerError(loader),
+			() => {		
+						loader.dismiss(),
 						this.bundleOrderDescription = <any[]> this.bundleData.data;
 						this.bundleOrderList = []
-					
-
+						this.isListLoaded = true
+						
 						for(let order of this.bundleOrderDescription) { 
 							var tktInfo = ''
 							let ticketInfo = order.ticket_info
@@ -110,7 +113,8 @@ export class OrderHistoryPage {
 																				})
 						}
 
-						
+						console.log(this.bundleOrderList)
+
 				}
 		)
 	}
