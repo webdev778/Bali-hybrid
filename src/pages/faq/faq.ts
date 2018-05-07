@@ -30,7 +30,7 @@ export class FaqPage {
   	this.rest.getFAQ()
          .subscribe(
             responseData => this.responseData = <{data: any}> responseData,
-            err => console.log(err),
+            err => console.log(),
             () => {
               this.bundleDataFAQ = this.responseData.data
             }

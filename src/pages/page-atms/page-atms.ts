@@ -39,7 +39,7 @@ export class PageAtmsPage {
   	this.rest.getAtms()
          .subscribe(
             responseData => this.bundleData = <{data : any}> responseData,
-            err => console.log(err),
+            err => console.log(),
             () => {
               this.isListLoaded = true
               this.arrayAtms = this.bundleData.data

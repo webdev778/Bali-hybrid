@@ -38,7 +38,7 @@ export class PageBankPage {
   	this.rest.getBanks()
          .subscribe(
             responseData => this.bundleData = <{data : any}> responseData,
-            err => console.log(err),
+            err => console.log(),
             () => {
               this.isListLoaded = true
               this.arrayBanks = this.bundleData.data

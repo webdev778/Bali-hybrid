@@ -10,30 +10,30 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
-@Component({
-  selector: 'page-service-details',
-  templateUrl: 'service-details.html',
-})
-export class ServiceDetailsPage {
+ @IonicPage()
+ @Component({
+     selector: 'page-service-details',
+     templateUrl: 'service-details.html',
+ })
+ export class ServiceDetailsPage {
 
-	serviceDetails = {image_name: '',title: '', description: ''};
+     serviceDetails = {image_name: '',title: '', description: ''};
 
-  constructor(	public navCtrl: NavController, 
-  				public navParams: NavParams) {
+     constructor(	public navCtrl: NavController, 
+         public navParams: NavParams) {
 
-    let passedData = JSON.parse(this.navParams.get('service'))
-  	this.serviceDetails.title = passedData.title
-  	this.serviceDetails.description = passedData.description
-  	this.serviceDetails.image_name = passedData.image_name
-  }
+         let passedData = JSON.parse(this.navParams.get('service'))
+         this.serviceDetails.title = passedData.title
+         this.serviceDetails.description = passedData.description
+         this.serviceDetails.image_name = passedData.image_name
+     }
 
-  ionViewDidLoad() {
-   
-  }
+     ionViewDidLoad() {
+         
+     }
 
-  buttonBackPressed() {
-    this.navCtrl.pop();
-  }
+     buttonBackPressed() {
+         this.navCtrl.pop();
+     }
 
-}
+ }

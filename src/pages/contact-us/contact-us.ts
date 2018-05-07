@@ -86,7 +86,7 @@ export class ContactUsPage {
     this.rest.sendQuery(query)
        .subscribe(
            responseData => this.checkStatus(responseData),
-           err => loader.dismiss(),
+           err => this.rest.alertServerError(loader),
            () => {
              loader.dismiss()
            }
@@ -96,20 +96,25 @@ export class ContactUsPage {
   checkStatus(bundle) {
       if (bundle.status == 200) {
         this.bundleEnquiry = { first_name: '', last_name: '', phone: '', email: '', subject: '', message: ''}
-        this.presentAlert('', bundle.api_message)
+        this.presentAlert( bundle.api_message)
       }else {
-        this.presentAlert('Error', bundle.api_message)
+        this.presentAlert(bundle.api_message)
       }
 
     }
 
-    presentAlert(titlemsg,subtitlemsg) {
+    presentAlert(subtitlemsg) {
       let alert = this.alertCtrl.create({
-        title: titlemsg,
+        title: '',
         subTitle: subtitlemsg,
         buttons: ['OK']
       });
       alert.present();
+    }
+
+    
+    onlyNumberKey(event) {
+      return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
     }
 
 }

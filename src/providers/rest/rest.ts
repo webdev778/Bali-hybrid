@@ -241,7 +241,6 @@ export class RestProvider {
    }
 
    updateProfileRecord(userInfo): Observable<{ }> {
-     console.log(userInfo)
      let header = PUBLIC_HEADER;
      return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_UPDATE_PROFILE, userInfo, header);
 

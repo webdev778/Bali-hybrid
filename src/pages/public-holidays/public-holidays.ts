@@ -37,7 +37,7 @@ export class PublicHolidaysPage {
   	this.rest.getHolidays()
          .subscribe(
             responseData => this.bundleData = <{data : any}> responseData,
-            err => console.log(err),
+            err => console.log(),
             () => {
               this.isListLoaded = true
               this.bundleHolidays = <any[]> this.bundleData.data;

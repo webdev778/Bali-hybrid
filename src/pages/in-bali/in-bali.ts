@@ -51,7 +51,7 @@ export class InBaliPage {
     this.rest.getBaliPages()
          .subscribe(
             responseData => this.pagesData = <{data:any}> responseData,
-            err => console.log(err),
+            err => console.log(),
             () => {
               this.cmsPages = this.pagesData.data
               for (let page of this.cmsPages) {

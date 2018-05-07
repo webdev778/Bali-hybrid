@@ -80,6 +80,10 @@ export class CommonMapPage {
 
   }
 
+  buttonBackPressed() {
+    this.navCtrl.pop()
+  }
+
   presentAlert(message) {
       let alert = this.alertCtrl.create({
         title: 'Error',

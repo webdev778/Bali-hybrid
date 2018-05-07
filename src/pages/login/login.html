@@ -102,7 +102,7 @@
 							<br>
 
 							<ion-item class='form-item'>
-								<ion-input [(ngModel)]="signupData.phone" name="phone" type="tel" #phone="ngModel" spellcheck="false" autocapitalize="off" required placeholder='Phone'>
+								<ion-input [(ngModel)]="signupData.phone" name="phone" type="tel" #phone="ngModel" spellcheck="false" autocapitalize="off" required placeholder='Phone' InputText (keypress)="onlyNumberKey($event)">
 								</ion-input>
 							</ion-item>
 							<p ion-text [hidden]="phone.valid || submittedSignup == false" color="danger" padding-left>
@@ -119,7 +119,7 @@
 								Enter a valid email
 							</p>
 
-							<br>
+							<br> 
 
 							<ion-item class='form-item'>
 								<ion-input [(ngModel)]="signupData.password" name="password" type="password" #password="ngModel" required placeholder='Password'>
@@ -135,7 +135,7 @@
 								<ion-input [(ngModel)]="signupData.confirm_password" name="confirm_password" type="password" #confirm_password="ngModel" required placeholder='Confirm Password'>
 								</ion-input>
 							</ion-item>
-							<p ion-text [hidden]="passwordMatched == true || submittedSignup == false " color="danger" padding-left>
+							<p ion-text [hidden]="signupData.password == signupData.confirm_password || submittedSignup == false " color="danger" padding-left>
 								Password does not match
 							</p>
 

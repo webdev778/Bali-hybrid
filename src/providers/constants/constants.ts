@@ -147,8 +147,6 @@ export class ConstantsProvider {
 	}
 		
 	validateDate(date: string, type) {
-		console.log(date)
-
 		let arrayDateString = date.split("/")
 
 		if (arrayDateString.length != 3)
@@ -159,8 +157,6 @@ export class ConstantsProvider {
 			return "Please enter a valid date (mm/dd/yyyy)"
 		}else if ( type != 'Family')
 		{
-			console.log(date)
-
 			if (new Date(date))
 			{
 				let enteredDate = new Date(date).getTime()

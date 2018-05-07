@@ -30,7 +30,6 @@ export class LoginPage {
                password: '', confirm_password: '',gender: ''};
 	submittedLogin = false;
 	submittedSignup = false;
-	passwordMatched = false;
   isLogIn = false
 
   emailForgetPassword = ""
@@ -80,15 +79,10 @@ export class LoginPage {
 		this.submittedSignup = true
 
 		if (this.signupData.password == this.signupData.confirm_password) {
-			this.passwordMatched = true
-
 			if (form.valid) {
 				this.submittedSignup = false
 				this.signupAction(this.signupData)
 			}
-
-		}else {
-			this.passwordMatched = false
 
 		}
 	}
@@ -236,6 +230,10 @@ export class LoginPage {
 
     });
     alert.present()
+  }
+   
+  onlyNumberKey(event) {
+    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
   }
 
 }

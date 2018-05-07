@@ -179,7 +179,7 @@
 						      <br>
 
 						      <ion-item class='form-item'>
-						        <ion-input [(ngModel)]="traveller.email" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email placeholder='Email'>
+						        <ion-input [(ngModel)]="traveller.email" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email placeholder='Email' pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})">
 						        </ion-input>
 						      </ion-item>
 						      <p ion-text [hidden]="email.valid || travellerFormSubmitted == false" color="danger" padding-left>
@@ -259,7 +259,7 @@
 							</p>
 							<br>
 							<ion-item class='form-item'>
-								<ion-input [(ngModel)]="cardDetails.cvc" #cvc="ngModel"  pInputText (keypress)="onlyNumberKey($event)" maxlength="4" name="cvc" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CVC'></ion-input>
+								<ion-input [(ngModel)]="cardDetails.cvc" #cvc="ngModel"  InputText (keypress)="onlyNumberKey($event)" maxlength="4" name="cvc" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CVC'></ion-input>
 							</ion-item>
 							<p ion-text [hidden]="cvc.valid || paymentFormSubmitted == false" color="danger" padding-left>
 								CVC number is required

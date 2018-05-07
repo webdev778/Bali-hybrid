@@ -20,7 +20,6 @@ export class PaymentStatusPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
       this.orderDetails = JSON.parse(navParams.get('order-details'))
-      console.log(this.orderDetails)
   }
 
   ionViewDidLoad() {

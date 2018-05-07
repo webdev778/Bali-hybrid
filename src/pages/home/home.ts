@@ -30,7 +30,7 @@ export class HomePage {
   	this.rest.getServices()
          .subscribe(
             responseData => this.bundleData = <{data : any}> responseData,
-            err => console.log(err),
+            err => console.log(),
             () => {
               this.bundleServices = <any[]> this.bundleData.data;
             }

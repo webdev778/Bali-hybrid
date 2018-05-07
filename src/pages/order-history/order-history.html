@@ -49,14 +49,14 @@
             </ion-col>
            
             <ion-col>
-               <p>{{order.name}}</p>
+               <p>{{order.name | uppercase}}</p>
             </ion-col>
              
              <ion-col>
                   <p>{{order.order_date}} {{order.order_date.timezone}}</p>
             </ion-col>
             <ion-col>
-              <p>{{order.ticket_info}}</p>
+              <p>{{order.ticket_info | uppercase}}</p>
            </ion-col>
             <ion-col>
               <p>{{order.amount}}</p>
@@ -89,7 +89,7 @@
                   <p class = "mobile-text"><b>ORDER DATE :</b>{{order.order_date}}</p>
                 </ion-row>
                 <ion-row>  
-                 <p class = "mobile-text"><b>TICKETS PURCHASED :</b>{{order.ticket_info }}</p>
+                 <p class = "mobile-text"><b>TICKETS PURCHASED :</b>{{order.ticket_info | uppercase}}</p>
                 </ion-row>
                 <ion-row>
                   <p class = "mobile-text"><b>AMOUNT :</b>{{order.amount}}</p>
