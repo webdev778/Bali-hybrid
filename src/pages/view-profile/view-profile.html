@@ -56,7 +56,7 @@
 							    <br>
 							      <p class = "head-para">Contact Number</p>	
 							       <ion-item class="form-item">
-							        <ion-input [(ngModel)]="bundleOrder.phone" name="phone" type="text" #phone="ngModel" spellcheck="false" autocapitalize="off" required ngModel disabled = {{isDisabled}} > 
+							        <ion-input [(ngModel)]="bundleOrder.phone" name="phone" type="tel" #phone="ngModel" spellcheck="false" autocapitalize="off" required ngModel disabled = {{isDisabled}} InputText (keypress)="onlyNumberKey($event)" > 
 							        </ion-input>
 							      </ion-item>
 							      <p ion-text [hidden]="phone.valid || submittedForm == false" color="danger" padding-left>
@@ -66,21 +66,21 @@
 							     <br>
 							      <p class = "head-para">Address</p>	
 							      <ion-item class="form-item">
-							        <ion-input [(ngModel)]="bundleOrder.address" name="address" type="text" #address="ngModel" spellcheck="false" autocapitalize="off" required ngModel disabled = {{isDisabled}} placeholder = "update your address" >
+							        <ion-input [(ngModel)]="bundleOrder.address" name="address" type="text" #address="ngModel" spellcheck="false" autocapitalize="off"  ngModel disabled = {{isDisabled}} placeholder = "update your address" >
 							        </ion-input>
 							      </ion-item>
 							   
 							      <br>
 							       <p class = "head-para">City</p>	
 							      <ion-item class="form-item">
-							        <ion-input [(ngModel)]="bundleOrder.city" name="city" type="text" #city="ngModel" spellcheck="false" autocapitalize="off" required ngModel disabled = {{isDisabled}} placeholder = "update your city">
+							        <ion-input [(ngModel)]="bundleOrder.city" name="city" type="text" #city="ngModel" spellcheck="false" autocapitalize="off"  ngModel disabled = {{isDisabled}} placeholder = "update your city">
 							        </ion-input>
 							      </ion-item>
 							    
 							      <br>
 							      <p class = "head-para">Zip Code</p>	
 							      <ion-item class="form-item">
-							        <ion-input [(ngModel)]="bundleOrder.zip_code" name="zip_code" type="number" #zip_code="ngModel" spellcheck="false" autocapitalize="off" required ngModel disabled = {{isDisabled}} placeholder = "update your zipcode" >
+							        <ion-input [(ngModel)]="bundleOrder.zip_code" name="zip_code" type="number" #zip_code="ngModel" spellcheck="false" autocapitalize="off"  ngModel disabled = {{isDisabled}} placeholder = "update your zipcode" >
 							        </ion-input>
 							      </ion-item>
 							</ion-list >

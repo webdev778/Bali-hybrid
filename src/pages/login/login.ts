@@ -120,7 +120,7 @@ export class LoginPage {
 
 		if (form.valid) {
 			this.submittedLogin = false
-			this.loginAction(this.loginData)
+			this.loginAction(this.loginData) 
 		}
 	}
 

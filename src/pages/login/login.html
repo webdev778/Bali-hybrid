@@ -15,20 +15,20 @@
 					<form #loginForm="ngForm" novalidate>
 					    <ion-list no-lines>
 					      <ion-item class='form-item'>
-					        <ion-input [(ngModel)]="loginData.email" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email placeholder='Email' pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})">
+					        <ion-input [(ngModel)]="loginData.email" name="email" type="email" #email_login="ngModel" spellcheck="false" autocapitalize="off" required ngModel email placeholder='Email' pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})">
 					        </ion-input>
 					      </ion-item>
-					      <p ion-text [hidden]="email.valid || submittedLogin == false" color="danger" padding-left>
+					      <p ion-text [hidden]="email_login.valid || submittedLogin == false" color="danger" padding-left>
 					        Enter a valid email
 					      </p>
 
 					      <br>
 
 					      <ion-item class='form-item'>
-					        <ion-input [(ngModel)]="loginData.password" name="password" type="password" #password="ngModel" required placeholder='Password'>
+					        <ion-input [(ngModel)]="loginData.password" name="password" type="password" #password_login="ngModel" required placeholder='Password'>
 					        </ion-input>
 					      </ion-item>
-					      <p ion-text [hidden]="password.valid || submittedLogin == false" color="danger" padding-left>
+					      <p ion-text [hidden]="password_login.valid || submittedLogin == false" color="danger" padding-left>
 					        Password is required
 					      </p>
 					    </ion-list>

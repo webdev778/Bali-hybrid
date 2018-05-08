@@ -113,6 +113,22 @@ page-ticket-details {
 			margin-top: 5px;
 			margin-bottom: 10px;
 		}
+
+		.custom-file-select-add {
+			cursor: pointer;
+			font-size: 13px;
+			border:1pt solid gray;
+			padding-left: 5px;
+			padding-right: 5px;
+			padding-top: 3px;
+			padding-bottom: 3px;
+			color: solid gray;
+			margin-top: 5px;
+			margin-bottom: 40px;
+		 	background-color: #63a722;
+    		color: white;
+    		border: solid 1px #bcd2a2;
+		}
 	}
 
 	.logout-button {

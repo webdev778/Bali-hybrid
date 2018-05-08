@@ -103,7 +103,6 @@ export class ViewProfilePage {
 
 	buttonUpdate(form: NgForm) {
 		this.submittedForm = true
-		this.scrollToTop()
 		if (form.valid) { 	
 	      this.submittedForm = false
 	      this.updateProfileData()  
@@ -151,6 +150,10 @@ export class ViewProfilePage {
 			 this.profileErrorText = bundle.api_message
 		}
 
+	}
+
+	onlyNumberKey(event) {
+		return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
 	}
 
 	buttonBackPressed() {

@@ -33,22 +33,22 @@
                 </ion-row>
 
                 <ion-row *ngIf="ticket.is_active">
-                  <ion-col>
-                    <p class="normal-text" *ngIf="ticket.is_active" [innerHTML]='ticket.timer_value'></p>
+                  <ion-col col-12>
+                    <p class="timer-text" *ngIf="ticket.is_active" [innerHTML]='ticket.timer_value'></p>
                   </ion-col>
 
-                  <ion-col>
+                  <ion-col col-12>
                     <button  class="button-map" (click)="buttonProfilePressed(ticket)" ion-button color='primary' >VIEW PROFILE</button><br>
                   </ion-col>
                 </ion-row>
 
                 <ion-row> 
-                  <ion-col>
+                  <ion-col col-12>
                     <p *ngIf = "!ticket.is_complete" class = "normal-text">please update profile</p>
                     <button *ngIf = "ticket.is_complete && !ticket.is_active" class="button-map" ion-button color='primary'  (click)="activateTimer(ticket)">ACTIVATE TICKET</button>
                   </ion-col>
 
-                  <ion-col>
+                  <ion-col col-12>
                     <button *ngIf="!ticket.is_active || !ticket.is_complete" class="button-map" (click)="buttonProfilePressed(ticket)" color='primary'  ion-button>UPDATE PROFILE</button>
                   </ion-col>
                 </ion-row>                

@@ -96,12 +96,13 @@
 
                       <div *ngFor="let image of dashboardImage.image">
                         <img class="dashboard-image" [src]="image"/>
+                        <br>
                         <button [hidden] = "isDisabled" (click)="removeImage(image,dashboardImage.image)" icon-only class="custom-file-select" >Remove</button>  
                     </div>
 
                     <br>
 
-                    <label class='custom-file-select' [hidden] = "isDisabled">Add Image
+                    <label class='custom-file-select-add' [hidden] = "isDisabled">Add Image
                         <ion-input multiple hidden name="name" type="file" accept="image/*" (change)='imageSelectedFromUser(dashboardImage, $event)'>
                         </ion-input>
                     </label>
