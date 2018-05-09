@@ -20,7 +20,7 @@
   <!-- <script src="cordova.js"></script> -->
 
   <!-- un-comment this code to enable service worker -->
-  <script>
+<script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
       .then(() => console.log('service worker installed'))
@@ -31,11 +31,18 @@
 <!-- Google Map API -->
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyCecgk4WWZR2HgSmSczljuNDqQaJyd8psg"></script>
 
+<!-- Firebase Helper -->
+<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-auth.js"></script>
+<script src="assets/javascript/helperfirebase.js"></script>
+
+
 <link href="build/main.css" rel="stylesheet">
+
 </head>
 
 <body>
-
   <!-- Ionic's root component and where the app will load -->
   <ion-app></ion-app>
 
@@ -48,5 +55,5 @@
    <!-- The main bundle js is generated during the build process -->
    <script src="build/main.js"></script>
 
- </body>
- </html>
+</body>
+</html>

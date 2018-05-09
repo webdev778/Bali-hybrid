@@ -10,6 +10,7 @@
 		<h5 class="form-header">{{headerText}}</h5>
 
 		<ion-row class='form-row' [hidden]='statusForView != 0'>
+
 			<ion-col class='form-col'>
 				<div class="form-panel">
 					<form #loginForm="ngForm" novalidate>
@@ -45,6 +46,20 @@
 					        {{loginErrorMessaage}}
 					    </p>
 	  				</form>
+
+	  				<ion-row>
+	  					<ion-col>
+		  					<div style="text-align: center;">
+		  						<button ion-button icon-only onclick="javascript:facebookLogin();">   
+				        			<ion-icon name="logo-facebook"></ion-icon>
+				    			</button>
+				    			<button ion-button icon-only onclick="javascript:googleLogin();">   
+					      		  	<ion-icon name="logo-google"></ion-icon>
+					    		</button>
+		  					</div>
+		  				</ion-col>
+	  				</ion-row>
+
 	  			</div>
   				<h6>No Account? <span class="sub-button" (click)='createAccountPressed()'>Create One!</span></h6>
 			</ion-col>
