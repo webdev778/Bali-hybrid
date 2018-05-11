@@ -15,7 +15,8 @@
 				<div class="form-panel">
 					<br>
 					<form #profileForm="ngForm" novalidate>
-						
+						<button class = "edit-btn" *ngIf = "isDisabled"  (click)="buttonEdit()" type="submit" >EDIT PROFILE</button>
+						<br>
 						<ion-list no-lines>
 							<p class = "response-text">{{profileText}}</p>
 							<p class = "response-error-text">{{profileErrorText}}</p>
@@ -87,7 +88,6 @@
 
 						<ion-row responsive-sm>
 							<ion-col>
-								<button class = "edit-btn" *ngIf = "isDisabled"  (click)="buttonEdit()" type="submit" >EDIT PROFILE</button>
 								<button *ngIf = "!isDisabled" ion-button (click)="buttonUpdate(profileForm)" type="submit" block> UPDATE PROFILE</button>
 							</ion-col>
 						</ion-row>

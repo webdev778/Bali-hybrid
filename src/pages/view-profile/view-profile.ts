@@ -95,7 +95,6 @@ export class ViewProfilePage {
     }
 
     buttonEdit() {
-        this.scrollToTop()
         this.isDisabled = false
         this.profileText = ''
         this.profileErrorText = ''
@@ -136,7 +135,6 @@ export class ViewProfilePage {
             responseData => this.checkStatus(responseData),
             err => this.rest.alertServerError(err,loader),
             () => {
-                this.scrollToTop();
                 loader.dismiss()
             }
             );
@@ -145,8 +143,10 @@ export class ViewProfilePage {
     checkStatus(bundle) {
         if (bundle.status == 200) {
             this.isDisabled = true
+            this.scrollToTop();
             this.profileText = bundle.api_message
         }else {
+            this.scrollToTop();
             this.profileErrorText = bundle.api_message
         }
 

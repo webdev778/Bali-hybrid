@@ -175,15 +175,6 @@ export class BuyTravelPassPage {
 		})
 	}
 
-	// resetValues() {
-	// 	for (let ticket of this.bundleSaveTickets) 
-	// 	{
-	// 		ticket = <TicketStructure> {}
-	// 	}
-
-	// 	this.finalCost = 0
-	// }
-
 	presentAlertNoTickets() {
 		let alert = this.alertCtrl.create({
 			subTitle: 'Please select a ticket to continue',
@@ -264,90 +255,90 @@ export class BuyTravelPassPage {
 		}
 	}
 
-addAdultInformation() {
-	let adultTicket = this.bundleSaveTickets[ this.bundleSaveTickets.findIndex(obj=> obj.ticket_id === 1) ]
-	adultTicket.ticket_details = this.arrayTravellers
-}
-
-makePayment(form: NgForm) {
-	this.paymentFormSubmitted = true
-
-	if(form.valid){
-		this.paymentFormSubmitted = false
-		this.sendPaymentDetailsToServer()	
-	}
-}
-
-sendTicketDetailsToServer() {
-	let loader = this.loadingController.create({
-		content: "Please Wait ..."
-	});
-
-	this.createTicketBundleForServer()
-
-	loader.present()
-
-	let passInfo = {
-		user_id:this.requestBundle.user_id,
-		token: this.requestBundle.token,
-		ticket_bundle: this.bundleTicketsForServer, 
-		total_cost: this.finalCost 
+	addAdultInformation() {
+		let adultTicket = this.bundleSaveTickets[ this.bundleSaveTickets.findIndex(obj=> obj.ticket_id === 1) ]
+		adultTicket.ticket_details = this.arrayTravellers
 	}
 
-	this.rest.purchaseTravelPass(passInfo)
-	.subscribe(
-		responseData => this.checkTicketStatus(responseData),
-		err => this.rest.alertServerError(err,loader),
-		() => {
-			loader.dismiss()
-		}
-		);
-}
+	makePayment(form: NgForm) {
+		this.paymentFormSubmitted = true
 
-createTicketBundleForServer() {
-	this.bundleTicketsForServer = []
-	for( let ticket of this.bundleSaveTickets) {
-		if( ticket.quantity > 0 ) {
-			this.bundleTicketsForServer.push(ticket)
+		if(form.valid){
+			this.paymentFormSubmitted = false
+			this.sendPaymentDetailsToServer()	
 		}
 	}
-}
 
-checkTicketStatus(bundle) {
-	if (bundle.status == 200) {
-		this.orderId = bundle.order_id
-		this.statusForView = 3
-		this.scrollToTop()
-	}else {
-		this.presentAlert('Something Went Wrong', bundle.api_message)
-	}
-}
+	sendTicketDetailsToServer() {
+		let loader = this.loadingController.create({
+			content: "Please Wait ..."
+		});
 
-sendPaymentDetailsToServer(){
-	let loader = this.loadingController.create({
-		content: "Making Payment ..."
-	});
+		this.createTicketBundleForServer()
 
-	loader.present();
+		loader.present()
 
-	this.paymentErrortext = ""
-
-	let paymentInfo = {
-		user_id:this.requestBundle.user_id,
-		order_id: this.orderId,
-		token: this.requestBundle.token,
-		billing_info: this.bundlePaymentData, 
-		card_details: this.cardDetails 
-	}
-
-	this.rest.makeTravelPassPayment(paymentInfo)
-	.subscribe(
-		responseData => this.checkPaymentStatus(responseData),
-		err => this.rest.alertServerError(err,loader),
-		() => {
-			loader.dismiss()
+		let passInfo = {
+			user_id:this.requestBundle.user_id,
+			token: this.requestBundle.token,
+			ticket_bundle: this.bundleTicketsForServer, 
+			total_cost: this.finalCost 
 		}
-		);
+
+		this.rest.purchaseTravelPass(passInfo)
+		.subscribe(
+			responseData => this.checkTicketStatus(responseData),
+			err => this.rest.alertServerError(err,loader),
+			() => {
+				loader.dismiss()
+			}
+			);
+	}
+
+	createTicketBundleForServer() {
+		this.bundleTicketsForServer = []
+		for( let ticket of this.bundleSaveTickets) {
+			if( ticket.quantity > 0 ) {
+				this.bundleTicketsForServer.push(ticket)
+			}
+		}
+	}
+
+	checkTicketStatus(bundle) {
+		if (bundle.status == 200) {
+			this.orderId = bundle.order_id
+			this.statusForView = 3
+			this.scrollToTop()
+		}else {
+			this.presentAlert('Something Went Wrong', bundle.api_message)
+		}
+	}
+
+	sendPaymentDetailsToServer(){
+		let loader = this.loadingController.create({
+			content: "Making Payment ..."
+		});
+
+		loader.present();
+
+		this.paymentErrortext = ""
+
+		let paymentInfo = {
+			user_id:this.requestBundle.user_id,
+			order_id: this.orderId,
+			token: this.requestBundle.token,
+			billing_info: this.bundlePaymentData, 
+			card_details: this.cardDetails 
+		}
+
+		this.rest.makeTravelPassPayment(paymentInfo)
+		.subscribe(
+			responseData => this.checkPaymentStatus(responseData),
+			err => this.rest.alertServerError(err,loader),
+			() => {
+				loader.dismiss()
+			}
+			);
 	}
 
 	checkPaymentStatus(bundle) {
