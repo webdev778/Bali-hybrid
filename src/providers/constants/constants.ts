@@ -1,5 +1,3 @@
-
-
 import { Injectable } from '@angular/core';
 // import{ AlertController,NavController } from 'ionic-angular';
 // import { LoginPage } from '../../pages/login/login'
@@ -18,7 +16,7 @@ export let PUBLIC_HEADER = {
 
 // Constants for Web Services
 
-// export let BASE_URL = "http://192.168.0.34/BaliTours/public/api/";
+// export let BASE_URL = "http://192.168.0.6/BaliTours/public/api/";
 export let BASE_URL = "http://admin.balisupport.tk/api/";
 
 //Authenticate User
@@ -27,8 +25,10 @@ export let SERVICE_URL_AUTHENTICATE_USER = BASE_URL + "authenticateUser"
 
 // Login Page
 export let SERVICE_URL_LOGIN = BASE_URL+"login";
+export let SERVICE_URL_SOCIAL_LOGIN = BASE_URL + "socialMediaRegister"
 export let SERVICE_URL_SIGNUP = BASE_URL+"signup";
-export let SERVICE_URL_FORGET_PASSWORD = BASE_URL+"forgetPassword"
+export let SERVICE_URL_FORGET_PASSWORD = BASE_URL+ "forgetPassword"
+export let SERVICE_URL_LOGOUT = BASE_URL + "logout"
 
 // BSC Footer
 export let SERVICE_URL_SOCIAL_LINK = BASE_URL+"getSocialLinks";
@@ -62,9 +62,7 @@ export let SERVICE_URL_SAVE_TRAVEL_PASS = BASE_URL+"addToCart";
 export let SERVICE_URL_MAKE_PAYMENT= BASE_URL+"makepayment";
 export let SERVICE_URL_PLACE_ORDER= BASE_URL+"placeorder";
 
-
 // Dashboard
-export let SERVICE_URL_UPDATE_DASHBOARD = BASE_URL+"updateDashboard";
 export let SERVICE_URL_GET_TICKETS = BASE_URL + "gettickets";
 export let SERVICE_URL_UPDATE_TICKET_PROFILE = BASE_URL + "updateTicketInfo";
 export let SERVICE_URL_GET_TICKET_INFORMATION = BASE_URL + "getTicketInformation";
@@ -73,11 +71,6 @@ export let SERVICE_URL_VIEW_ORDER_HISTORY = BASE_URL + "viewOrderHistory";
 export let SERVICE_URL_VIEW_PROFILE = BASE_URL + "viewProfile";
 export let SERVICE_URL_UPDATE_PROFILE = BASE_URL + "updateProfile";
 export let SERVICE_URL_UPDATE_PASSWORD = BASE_URL + "updatePassword";
-
-
-
-export let API_HEADER = { 	
-							};
 
 export interface TicketStructure { 
 	ticket_id: number, 
@@ -99,14 +92,14 @@ export interface TravellersInfoDS {
 
 export interface OrderHistoryStructure {
 	"order_id": string,
-    "order_no": string,
-    "user_id": number,
-    "amount": number,
-    "name": string,
-    "transaction_id": string,
-    "order_date": any
-    "ticket_info" : any
-    "is_open":boolean
+	"order_no": string,
+	"user_id": number,
+	"amount": number,
+	"name": string,
+	"transaction_id": string,
+	"order_date": any
+	"ticket_info" : any
+	"is_open":boolean
 }
 
 export interface UserDetailsDS { 
@@ -142,10 +135,12 @@ export class ConstantsProvider {
 	loginTitle = 'LOGIN'
 	loginPage : any = 'LoginPage'
 	isLogin = false
+
+	authToken = ""
 	
 	constructor() {
 	}
-		
+	
 	validateDate(date: string, type) {
 		let arrayDateString = date.split("/")
 
@@ -194,8 +189,3 @@ export class ConstantsProvider {
 		}
 	}
 }
-
-
-
-
-	

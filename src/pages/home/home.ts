@@ -18,7 +18,6 @@ export class HomePage {
                 public navParams: NavParams, 
                 public rest: RestProvider, 
                 public loadingController: LoadingController) {
-
     
   }
 
@@ -42,6 +41,4 @@ export class HomePage {
         'service': JSON.stringify(service),
       })
    }
-  
-
 }

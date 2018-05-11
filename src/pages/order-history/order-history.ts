@@ -74,7 +74,7 @@ export class OrderHistoryPage {
 		this.rest.requestOrderHistory(this.requestBundle)
 		.subscribe(
 			responseData => this.bundleData = <{data : any}> responseData, 
-			err => this.rest.alertServerError(loader),
+			err => this.rest.alertServerError(err,loader),
 			() => {		
 						loader.dismiss(),
 						this.bundleOrderDescription = <any[]> this.bundleData.data;
@@ -87,7 +87,7 @@ export class OrderHistoryPage {
 
 							for( let info of ticketInfo ) {
 								if (info.travel_passid == 1) {
-									tktInfo = tktInfo + info.quantity + " Adults "
+									tktInfo = tktInfo + info.quantity + " Adult "
 								}
 								if (info.travel_passid == 2) {
 									tktInfo = tktInfo + info.quantity + " Child "
@@ -109,7 +109,6 @@ export class OrderHistoryPage {
 																			    is_open : true
 																				})
 						}
-
 				}
 		)
 	}

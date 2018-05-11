@@ -11,12 +11,12 @@ import { LoginPage } from '../login/login';
  * Ionic pages and navigation.
  */
 
- @IonicPage()
- @Component({
- 	selector: 'page-reset-password',
- 	templateUrl: 'reset-password.html',
- })
- export class ResetPasswordPage {
+@IonicPage()
+@Component({
+	selector: 'page-reset-password',
+	templateUrl: 'reset-password.html',
+})
+export class ResetPasswordPage {
 
  	resetPasswordBundle = { password:'', confirmPassword: ''}
  	submittedPassword = false
@@ -78,7 +78,7 @@ import { LoginPage } from '../login/login';
         this.rest.sendChangePassWord(passInfo)
         .subscribe(
             responseData => this.checkStatus(responseData),
-            err => this.rest.alertServerError(loader),
+            err => this.rest.alertServerError(err,loader),
             () => {
                 loader.dismiss()
 

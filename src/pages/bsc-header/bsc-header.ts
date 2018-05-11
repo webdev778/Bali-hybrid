@@ -104,8 +104,33 @@ export class BscHeaderPage {
     }
 
     logoutPressed() {
-    this.moveToLoginPage()
+         let requestBundle = {user_id:'', token: ''}
+          this.storage.get('user_data').then((user_data) => {
+                      requestBundle.user_id = JSON.parse(user_data).id;
+                        this.storage.get('auth_token').then((authToken) => {
+                         requestBundle.token = authToken;
+                         this.logoutUser(requestBundle)
+                    });
+                });
     }
+
+    logoutUser(requestBundle) {
+        let loader = this.loadingController.create({
+            content: "Logging Out ..."
+        });
+
+        loader.present();
+
+        this.rest.logoutRequest(requestBundle)
+        .subscribe(
+        responseData =>{},
+        err => this.rest.alertServerError(err,loader),
+        () => { 
+            loader.dismiss()
+            this.moveToLoginPage()
+        })
+    }
+          
 
 
     presentAlertNotLoggedIn(){

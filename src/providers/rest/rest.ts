@@ -3,46 +3,49 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AlertController } from 'ionic-angular'
 import { MainRestProvider } from './mainrest';
+import { App,NavController } from "ionic-angular";
+import { Storage } from '@ionic/storage';
 
-import { PUBLIC_HEADER,
-         SERVICE_URL_LOGIN,
-         SERVICE_URL_SIGNUP,
-         SERVICE_URL_SOCIAL_LINK, 
-         SERVICE_URL_SERVICES, 
-         SERVICE_URL_FAQ,
-         SERVICE_URL_CONTACT_US,
-         SERVICE_URL_PAGES,
-         SERVICE_URL_PAGE_CONTENT,
-         SERVICE_URL_PUT_QUERY,
-         SERVICE_URL_VOLCANO_STATUS,
-         SERVICE_URL_HOSPITALS,
-         SERVICE_URL_IN_BALI_PAGES,
-         SERVICE_URL_BANKS,
-         SERVICE_URL_ATMS,
-         SERVICE_URL_HOLIDAYS,
-         SERVICE_URL_GET_ALERTS,
-         SERVICE_URL_GET_TRAVEL_PASS,
-         SERVICE_URL_PLACE_ORDER,
-         SERVICE_URL_UPDATE_DASHBOARD,
-         SERVICE_URL_MAKE_PAYMENT,
-         SERVICE_URL_GET_TICKETS,
-         SERVICE_URL_UPDATE_TICKET_PROFILE,
-         SERVICE_URL_GET_TICKET_INFORMATION,
-         SERVICE_URL_ACTIVATE_TICKET,
-         SERVICE_URL_AUTHENTICATE_USER,
-         SERVICE_URL_VIEW_ORDER_HISTORY,
-         SERVICE_URL_VIEW_PROFILE,
-         SERVICE_URL_UPDATE_PROFILE,
-         SERVICE_URL_FORGET_PASSWORD,
-         SERVICE_URL_UPDATE_PASSWORD } from '../constants/constants';
+import {
+  SERVICE_URL_LOGIN,
+  SERVICE_URL_SIGNUP,
+  SERVICE_URL_SOCIAL_LINK, 
+  SERVICE_URL_SERVICES, 
+  SERVICE_URL_FAQ,
+  SERVICE_URL_CONTACT_US,
+  SERVICE_URL_PAGES,
+  SERVICE_URL_PAGE_CONTENT,
+  SERVICE_URL_PUT_QUERY,
+  SERVICE_URL_VOLCANO_STATUS,
+  SERVICE_URL_HOSPITALS,
+  SERVICE_URL_IN_BALI_PAGES,
+  SERVICE_URL_BANKS,
+  SERVICE_URL_ATMS,
+  SERVICE_URL_HOLIDAYS,
+  SERVICE_URL_GET_ALERTS,
+  SERVICE_URL_GET_TRAVEL_PASS,
+  SERVICE_URL_PLACE_ORDER,
+  SERVICE_URL_MAKE_PAYMENT,
+  SERVICE_URL_GET_TICKETS,
+  SERVICE_URL_UPDATE_TICKET_PROFILE,
+  SERVICE_URL_GET_TICKET_INFORMATION,
+  SERVICE_URL_ACTIVATE_TICKET,
+  SERVICE_URL_AUTHENTICATE_USER,
+  SERVICE_URL_VIEW_ORDER_HISTORY,
+  SERVICE_URL_VIEW_PROFILE,
+  SERVICE_URL_UPDATE_PROFILE,
+  SERVICE_URL_FORGET_PASSWORD,
+  SERVICE_URL_UPDATE_PASSWORD,
+  SERVICE_URL_SOCIAL_LOGIN,
+  SERVICE_URL_LOGOUT,
+  ConstantsProvider } from '../constants/constants';
 
 
+  @Injectable()
+  export class RestProvider {
 
-
-@Injectable()
-export class RestProvider {
-
-  	constructor(private mainRestProvider: MainRestProvider,public alertCtrl: AlertController) {
+  	constructor(private mainRestProvider: MainRestProvider,public alertCtrl: AlertController,private app:App,
+      public constantProvider: ConstantsProvider, private storage: Storage) {
   	}
 
     // Login Page
@@ -55,6 +58,19 @@ export class RestProvider {
       }
 
       return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_LOGIN, data);
+    }
+
+    socialLoginUser(socialData): Observable<{ }> {
+
+      let data = {
+        "email" : socialData.email,
+        "first_name" : socialData.first_name,
+        "last_name" : socialData.last_name,
+        "fb_id" : socialData.fb_id,
+        "gmail_id": socialData.gmail_id
+      }
+
+      return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_SOCIAL_LOGIN, data);
     }
 
     resetPassord(email) {
@@ -76,55 +92,53 @@ export class RestProvider {
         "password" : signupData.password,
       }
 
-      let header = PUBLIC_HEADER;
-
-      return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_SIGNUP, data ,header);
+      return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_SIGNUP, data );
     }
 
     // BSC Footer Page
 
-  	getSocialLink(): Observable<{ }> {
+    getSocialLink(): Observable<{ }> {
 
-  		return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_SOCIAL_LINK);
-	 }
+      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_SOCIAL_LINK);
+    }
 
    // BSC Header Page
 
    getCMSPages(): Observable<{ }> {
 
-      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_PAGES);
+     return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_PAGES);
    }
 
    // CMS Details Page
 
    getPageContent(page): Observable<{ }> {
 
-   let data = {
-     'id' : page.id
-   }
+     let data = {
+       'id' : page.id
+     }
 
-    return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_PAGE_CONTENT, data);
+     return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_PAGE_CONTENT, data);
    }
 
    // FAQ Page
 
-    getFAQ(): Observable<{ }> {
+   getFAQ(): Observable<{ }> {
 
-      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_FAQ);
-    }
+     return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_FAQ);
+   }
    
    // Our Services Page
 
-    getServices(): Observable<{ }> {
+   getServices(): Observable<{ }> {
 
-      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_SERVICES);
+     return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_SERVICES);
    }
 
    // Contact Us Page
 
    getContactUsInfo(): Observable<{ }> {
 
-      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_CONTACT_US);
+     return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_CONTACT_US);
    }
 
    sendQuery(queryData): Observable<{ }> {
@@ -138,58 +152,56 @@ export class RestProvider {
        'subject': queryData.subject
      };
 
-     let header = PUBLIC_HEADER;
-
-      return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_PUT_QUERY, data, header);
+     return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_PUT_QUERY, data);
    }
 
    // Today In Bali Page
 
    getExchangeRatesCurrencies() {
-     
+
      return this.mainRestProvider.fireGetServiceWithoutHeader('http://data.fixer.io/api/latest?access_key=c8e973e6c47c130e32f8a28d1629fef7');
    }
 
    getBaliPages(): Observable<{ }> {
 
-      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_IN_BALI_PAGES);
+     return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_IN_BALI_PAGES);
    }
 
    getAtms(): Observable<{ }> {
 
-      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_ATMS);
+     return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_ATMS);
    }
 
    getBanks(): Observable<{ }> {
 
-      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_BANKS);
+     return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_BANKS);
    }
 
    getVolcanoStatus(): Observable<{ }> {
 
-      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_VOLCANO_STATUS);
+     return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_VOLCANO_STATUS);
    }
 
    getHolidays(): Observable<{ }> {
 
-      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_HOLIDAYS);
+     return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_HOLIDAYS);
    }
 
    getAlerts(): Observable<{ }> {
 
-      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_GET_ALERTS);
+     return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_GET_ALERTS);
    }
 
    getHospitals(): Observable<{ }> {
 
-      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_HOSPITALS);
+     return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_HOSPITALS);
    }
 
    // By Travle Pass Page
 
    getTravelPass(): Observable<{ }> {
 
-      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_GET_TRAVEL_PASS);
+     return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_GET_TRAVEL_PASS);
    }
 
    purchaseTravelPass(passInfo): Observable<{ }> {
@@ -202,9 +214,7 @@ export class RestProvider {
 
      };
 
-     let header = PUBLIC_HEADER;
-
-      return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_PLACE_ORDER, data, header);
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_PLACE_ORDER, data, data.token);
    }
 
    getTicketsForDashboard(userInfo): Observable<{ }>  {
@@ -213,9 +223,7 @@ export class RestProvider {
        'token' : userInfo.token
      };
 
-     let header = PUBLIC_HEADER;
-
-     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_GET_TICKETS, data, header);
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_GET_TICKETS, data, data.token);
    }
 
    requestOrderHistory(userInfo): Observable<{ }>  {
@@ -224,9 +232,7 @@ export class RestProvider {
        'token' : userInfo.token
      };
 
-     let header = PUBLIC_HEADER;
-
-     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_VIEW_ORDER_HISTORY, data, header);
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_VIEW_ORDER_HISTORY, data, data.token);
    }
 
    requestUserProfile(userInfo): Observable<{ }>  {
@@ -235,21 +241,16 @@ export class RestProvider {
        'token' : userInfo.token
      };
 
-     let header = PUBLIC_HEADER;
-
-     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_VIEW_PROFILE, data, header);
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_VIEW_PROFILE, data, data.token);
    }
 
    updateProfileRecord(userInfo): Observable<{ }> {
-     let header = PUBLIC_HEADER;
-     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_UPDATE_PROFILE, userInfo, header);
-
-
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_UPDATE_PROFILE, userInfo, userInfo.token);
    }
 
    makeTravelPassPayment(paymentInfo): Observable<{ }> {
 
-      let data = {
+     let data = {
        'user_id': paymentInfo.user_id,
        'token' : paymentInfo.token,
        'order_id': paymentInfo.order_id,
@@ -258,9 +259,7 @@ export class RestProvider {
 
      };
 
-     let header = PUBLIC_HEADER;
-
-     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_MAKE_PAYMENT, data, header);
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_MAKE_PAYMENT, data, data.token);
    }
 
 
@@ -268,96 +267,103 @@ export class RestProvider {
 
    updateTicketInfo(ticketInfo): Observable<{ }> {
 
-      let data = {
-        'user_id':ticketInfo.user_id,
-        'token': ticketInfo.token,
-        'ticket_id': ticketInfo.ticket_id,
-        'first_name':  ticketInfo.first_name,
-        'last_name': ticketInfo.last_name,
-        'date_of_birth': ticketInfo.date_of_birth,
-        'email': ticketInfo.email,
-        'phone': ticketInfo.phone,
-        'address': ticketInfo.address,
-        'gender': ticketInfo.gender,
-        'emergency_contact_name': ticketInfo.emergency_contact_name,
-        'emergency_contact_phone': ticketInfo.emergency_contact_phone,
-        'passports': ticketInfo.passports,
-        'luggagess': ticketInfo.luggagess,
-        'insuarance': ticketInfo.insuarance,
-        'doctors_letter': ticketInfo.doctors_letter
+     let data = {
+       'user_id':ticketInfo.user_id,
+       'token': ticketInfo.token,
+       'ticket_id': ticketInfo.ticket_id,
+       'first_name':  ticketInfo.first_name,
+       'last_name': ticketInfo.last_name,
+       'date_of_birth': ticketInfo.date_of_birth,
+       'email': ticketInfo.email,
+       'phone': ticketInfo.phone,
+       'address': ticketInfo.address,
+       'gender': ticketInfo.gender,
+       'emergency_contact_name': ticketInfo.emergency_contact_name,
+       'emergency_contact_phone': ticketInfo.emergency_contact_phone,
+       'passports': ticketInfo.passports,
+       'luggagess': ticketInfo.luggagess,
+       'insuarance': ticketInfo.insuarance,
+       'doctors_letter': ticketInfo.doctors_letter
 
      };
      
-     let header = PUBLIC_HEADER;
-
-     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_UPDATE_TICKET_PROFILE, data, header);
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_UPDATE_TICKET_PROFILE, data, data.token);
    }
-
 
    sendAuthRequest(info): Observable<{ }> {
      let data = {
        'user_id' : info.user_id,
        'signupcode' : info.signupcode
      } 
-     
-     let header = PUBLIC_HEADER;
 
-     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_AUTHENTICATE_USER, data, header);
-
+     return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_AUTHENTICATE_USER, data);
    }
 
    getTicketInformation(ticketInfo): Observable<{ }> {
-         
-      let data = {
-        'user_id': ticketInfo.user_id,
-        'token': ticketInfo.token,
-        'ticket_id': ticketInfo.ticket_id,
-    };
 
-     let header = PUBLIC_HEADER;
+     let data = {
+       'user_id': ticketInfo.user_id,
+       'token': ticketInfo.token,
+       'ticket_id': ticketInfo.ticket_id,
+     };
 
-     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_GET_TICKET_INFORMATION, data, header);
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_GET_TICKET_INFORMATION, data, data.token);
+   }
+
+   logoutRequest(logoutData): Observable<{ }> {
+
+     let data = {
+       'user_id': logoutData.user_id,
+       'token': logoutData.token     
+     };
+     
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_LOGOUT, data, data.token);
    }
 
    getExpiryTime(requestBundle): Observable<{ }> {
 
      let data = {
-        'user_id': requestBundle.user_id,
-        'token': requestBundle.token,
-        'ticket_id': requestBundle.ticket_id,
-    };
+       'user_id': requestBundle.user_id,
+       'token': requestBundle.token,
+       'ticket_id': requestBundle.ticket_id,
+     };
 
-     let header = PUBLIC_HEADER;
-     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_ACTIVATE_TICKET, data, header);
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_ACTIVATE_TICKET, data, data.token);
    }
    
    sendChangePassWord(passwordInfo): Observable<{ }> {
-     let header = PUBLIC_HEADER;
-     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_UPDATE_PASSWORD, passwordInfo, header);
+     return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_UPDATE_PASSWORD, passwordInfo);
    }
-
-
-   updateUserDashboard(userInfo): Observable<{ }> {
-
-     let data = {
-       'user_id': userInfo.user_id,
-     };
-
-     let header = PUBLIC_HEADER;
-
-      return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_UPDATE_DASHBOARD, data, header);
-   }
-
-    alertServerError(loader) {
+   
+   alertServerError(err,loader) {
      loader.dismiss()
-     let alert = this.alertCtrl.create({
-      title: '',
-      subTitle: 'There is some technical error, please try again later',
-      buttons: ['Okay']
-    });
-    alert.present();
+     if (!(err.status == 400 || err.status == 401 || err.status == 402 || err.status == 403)) {
+       let alert = this.alertCtrl.create({
+         title: '',
+         subTitle: 'There is some technical error, please try again later',
+         buttons: ['Okay']
+       });
+       alert.present();
+     }
+     else {
+       this.setRootLoginPage(err)
+     }
+   }
 
-    }
+   setRootLoginPage(response) {
+     if( response.status == 400 || response.status == 401 || response.status == 402 || response.status == 403 ) {
+       this.storage.remove('user_data');
+       this.storage.remove('auth_token');
+       this.storage.set('is_login', false);
+
+       this.constantProvider.loginTitle = 'LOGIN';
+       this.constantProvider.loginPage = 'LoginPage'
+       this.constantProvider.isLogin = false;
+
+       (this.app.getRootNav() as NavController).setRoot('LoginPage')
+     }
+     
+   }
 
    // Download Image From URL
 
@@ -365,4 +371,4 @@ export class RestProvider {
      return this.mainRestProvider.fireGetServiceToDownloadImage(url);
    }
 
-  }
+ }

@@ -56,12 +56,6 @@ import { ConstantsProvider } from '../../providers/constants/constants'
 
          this.navCtrl.setRoot('LoginPage')
      }
-
-     // buttonLogoutPressed() {
-     //     this.moveToLoginPage()
-     // }
-
-
  }
 
 

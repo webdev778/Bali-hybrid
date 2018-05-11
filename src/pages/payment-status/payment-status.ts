@@ -11,23 +11,18 @@ import { DashboardPage } from '../dashboard/dashboard'
 
 @IonicPage()
 @Component({
-  selector: 'page-payment-status',
-  templateUrl: 'payment-status.html',
+    selector: 'page-payment-status',
+    templateUrl: 'payment-status.html',
 })
 export class PaymentStatusPage {
 
-  orderDetails: {order_no: '' ,transaction_id: ''}
+    orderDetails: {order_no: '' ,transaction_id: ''}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-      this.orderDetails = JSON.parse(navParams.get('order-details'))
-  }
+    constructor(public navCtrl: NavController, public navParams: NavParams) {
+        this.orderDetails = JSON.parse(navParams.get('order-details'))
+    }
 
-  ionViewDidLoad() {
-    
-  }
-
-  moveToDashboard(){
-  	this.navCtrl.push(DashboardPage)
-  }
-
+    moveToDashboard(){
+        this.navCtrl.push(DashboardPage)
+    }
 }

@@ -40,7 +40,7 @@ export class VolcanoStatusPage {
   	this.rest.getVolcanoStatus()
          .subscribe(
             responseData => this.bundleData = <{data : any}> responseData,
-            err => console.log(err),
+            err => console.log(''),
             () => {
               this.bundleStatus = <any[]> this.bundleData.data;
               

@@ -59,12 +59,17 @@ export class MyApp {
   checkForLogin() {
      this.storage.get('is_login').then((isLogin) => {
        if (isLogin) {
+         this.constantProvider.isLogin = true  
+         
           this.storage.get('user_data').then((userData) => {
-          this.constantProvider.isLogin = true  
-          this.constantProvider.loginTitle = "Dashboard"
-          this.constantProvider.loginPage = DashboardPage
-        })
-       }
+            this.constantProvider.loginTitle = "Dashboard"
+            this.constantProvider.loginPage = DashboardPage
+          })
+
+          this.storage.get('auth_token').then((token) => {
+            this.constantProvider.authToken = token
+          })
+        }
      })
     
   }

@@ -13,18 +13,17 @@ import { PaymentStatusPage } from '../payment-status/payment-status';
 	templateUrl: 'buy-travel-pass.html',
 })
 
-
 export class BuyTravelPassPage {
 
-  @ViewChild(Content) content: Content;
+	@ViewChild(Content) content: Content;
 
-  scrollToTop() {
-    this.content.scrollToTop(400);
-  }
-    
+	scrollToTop() {
+		this.content.scrollToTop(400);
+	}
+	
 	travellerFormSubmitted = false
 	paymentFormSubmitted = false	
-    statusForView = 0	
+	statusForView = 0	
 
 	cardType = ''
 	finalCost = 0
@@ -49,15 +48,15 @@ export class BuyTravelPassPage {
 	pickerDate = ""
 
 	constructor(	public navCtrl: NavController, 
-					public navParams: NavParams,
-					private alertCtrl: AlertController,
-					public rest: RestProvider,
-					public loadingController: LoadingController,
-					private storage: Storage,
-					private constantProider : ConstantsProvider) {
+		public navParams: NavParams,
+		private alertCtrl: AlertController,
+		public rest: RestProvider,
+		public loadingController: LoadingController,
+		private storage: Storage,
+		private constantProider : ConstantsProvider) {
 		
-		 this.dateForPicker = this.dateForPicker -  (31536000000*17);
-		 this.pickerDate =  new Date(this.dateForPicker).getFullYear() + ""
+		this.dateForPicker = this.dateForPicker -  (31536000000*17);
+		this.pickerDate =  new Date(this.dateForPicker).getFullYear() + ""
 	}
 
 	ionViewDidLoad() {
@@ -86,7 +85,6 @@ export class BuyTravelPassPage {
 	}
 
 	initialiseBundle() {
-
 		for (var count = 0 ; count < this.bundleSaveTickets.length; count++) {
 			this.bundleSaveTickets[count].ticket_id = this.bundleViewDescription[count].id
 			this.bundleSaveTickets[count].quantity = this.bundleViewDescription[count].quantity
@@ -158,13 +156,13 @@ export class BuyTravelPassPage {
 
 		for(var count =1 ; count <= adultTicket.quantity ; count ++){
 			this.arrayTravellers.push(<TravellersInfoDS> {  first_name:'', 
-															last_name:'', 
-															gender:'', 
-															email:'', 
-															date_of_birth: '',
-															ticket_type: this.bundleSaveTickets[adultIndex].ticket_type,
-															error_dob : ''
-														})
+				last_name:'', 
+				gender:'', 
+				email:'', 
+				date_of_birth: '',
+				ticket_type: this.bundleSaveTickets[adultIndex].ticket_type,
+				error_dob : ''
+			})
 		}
 
 		this.statusForView = 2
@@ -173,8 +171,8 @@ export class BuyTravelPassPage {
 
 	moveToLoginPage() {
 		this.navCtrl.push('LoginPage',{
-        'lastPage': 'buyTravelPassPage'
-      })
+			'lastPage': 'buyTravelPassPage'
+		})
 	}
 
 	// resetValues() {
@@ -221,7 +219,7 @@ export class BuyTravelPassPage {
 		this.rest.getTravelPass()
 		.subscribe(
 			responseData => this.bundleData = <{data : any}> responseData,
-			err => this.rest.alertServerError(loader),
+			err => this.rest.alertServerError(err,loader),
 			() => {
 				loader.dismiss()
 				this.bundleViewDescription = <any[]> this.bundleData.data;
@@ -246,7 +244,7 @@ export class BuyTravelPassPage {
 			}
 
 			if(traveller.date_of_birth == '' || traveller.email == '' || traveller.first_name == '' ||
-			  traveller.last_name == '' || traveller.gender == '') {
+				traveller.last_name == '' || traveller.gender == '') {
 				
 				this.travellerFormSubmitted = true
 			}
@@ -266,91 +264,90 @@ export class BuyTravelPassPage {
 		}
 	}
 
-	addAdultInformation() {
-		let adultTicket = this.bundleSaveTickets[ this.bundleSaveTickets.findIndex(obj=> obj.ticket_id === 1) ]
-		adultTicket.ticket_details = this.arrayTravellers
+addAdultInformation() {
+	let adultTicket = this.bundleSaveTickets[ this.bundleSaveTickets.findIndex(obj=> obj.ticket_id === 1) ]
+	adultTicket.ticket_details = this.arrayTravellers
+}
+
+makePayment(form: NgForm) {
+	this.paymentFormSubmitted = true
+
+	if(form.valid){
+		this.paymentFormSubmitted = false
+		this.sendPaymentDetailsToServer()	
+	}
+}
+
+sendTicketDetailsToServer() {
+	let loader = this.loadingController.create({
+		content: "Please Wait ..."
+	});
+
+	this.createTicketBundleForServer()
+
+	loader.present()
+
+	let passInfo = {
+		user_id:this.requestBundle.user_id,
+		token: this.requestBundle.token,
+		ticket_bundle: this.bundleTicketsForServer, 
+		total_cost: this.finalCost 
 	}
 
-	makePayment(form: NgForm) {
-		this.paymentFormSubmitted = true
-		
-		if(form.valid){
-			this.paymentFormSubmitted = false
-			this.sendPaymentDetailsToServer()	
+	this.rest.purchaseTravelPass(passInfo)
+	.subscribe(
+		responseData => this.checkTicketStatus(responseData),
+		err => this.rest.alertServerError(err,loader),
+		() => {
+			loader.dismiss()
+		}
+		);
+}
+
+createTicketBundleForServer() {
+	this.bundleTicketsForServer = []
+	for( let ticket of this.bundleSaveTickets) {
+		if( ticket.quantity > 0 ) {
+			this.bundleTicketsForServer.push(ticket)
 		}
 	}
+}
 
-	sendTicketDetailsToServer() {
-		let loader = this.loadingController.create({
-			content: "Please Wait ..."
-		});
+checkTicketStatus(bundle) {
+	if (bundle.status == 200) {
+		this.orderId = bundle.order_id
+		this.statusForView = 3
+		this.scrollToTop()
+	}else {
+		this.presentAlert('Something Went Wrong', bundle.api_message)
+	}
+}
 
-		this.createTicketBundleForServer()
+sendPaymentDetailsToServer(){
+	let loader = this.loadingController.create({
+		content: "Making Payment ..."
+	});
 
-		loader.present()
+	loader.present();
 
-		let passInfo = {
-			user_id:this.requestBundle.user_id,
-			token: this.requestBundle.token,
-			ticket_bundle: this.bundleTicketsForServer, 
-			total_cost: this.finalCost 
-		}
+	this.paymentErrortext = ""
 
-		this.rest.purchaseTravelPass(passInfo)
-		.subscribe(
-			responseData => this.checkTicketStatus(responseData),
-			err => this.rest.alertServerError(loader),
-			() => {
-				loader.dismiss()
-			}
-			);
+	let paymentInfo = {
+		user_id:this.requestBundle.user_id,
+		order_id: this.orderId,
+		token: this.requestBundle.token,
+		billing_info: this.bundlePaymentData, 
+		card_details: this.cardDetails 
 	}
 
-	createTicketBundleForServer() {
-		this.bundleTicketsForServer = []
-		for( let ticket of this.bundleSaveTickets) {
-			if( ticket.quantity > 0 ) {
-				this.bundleTicketsForServer.push(ticket)
-			}
+	this.rest.makeTravelPassPayment(paymentInfo)
+	.subscribe(
+		responseData => this.checkPaymentStatus(responseData),
+		err => this.rest.alertServerError(err,loader),
+		() => {
+			loader.dismiss()
 		}
-	}
-
-	checkTicketStatus(bundle) {
-		if (bundle.status == 200) {
-			this.orderId = bundle.order_id
-			this.statusForView = 3
-			this.scrollToTop()
-		}else {
-			this.presentAlert('Something Went Wrong', bundle.api_message)
-		}
-
-	}
-
-	sendPaymentDetailsToServer(){
-		let loader = this.loadingController.create({
-			content: "Making Payment ..."
-		});
-
-		loader.present();
-
-		this.paymentErrortext = ""
-
-		let paymentInfo = {
-			user_id:this.requestBundle.user_id,
-			order_id: this.orderId,
-			token: this.requestBundle.token,
-			billing_info: this.bundlePaymentData, 
-			card_details: this.cardDetails 
-		}
-
-		this.rest.makeTravelPassPayment(paymentInfo)
-		.subscribe(
-			responseData => this.checkPaymentStatus(responseData),
-			err => this.rest.alertServerError(loader),
-			() => {
-				loader.dismiss()
-			}
-			);
+		);
 	}
 
 	checkPaymentStatus(bundle) {
@@ -381,15 +378,12 @@ export class BuyTravelPassPage {
 			title: title,
 			subTitle: message,
 			buttons: [
-						{
-							text : 'Okay',
-						}
-					]
-			
+			{
+				text : 'Okay',
+			}
+			]
+
 		});
 		alert.present();
 	}
-
-
-
 }

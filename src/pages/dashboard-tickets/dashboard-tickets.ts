@@ -147,7 +147,7 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 		this.rest.getExpiryTime(requestBundle)
 		.subscribe(
 			responseData => this.expiryDate = <{expiry_date : any}> responseData,
-			err => this.rest.alertServerError(loader),
+			err => this.rest.alertServerError(err,loader),
 			() => {
 				let expDate = <any> this.expiryDate.expiry_date;
 				this.timerView = true
@@ -182,7 +182,6 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 		this.navCtrl.push(TicketDetailsPage,{'ticket': JSON.stringify(ticketData)})
 	}
 
-
 	convertUnixTimestampToDate(timestamp) {
 		return new Date(timestamp*1000).toUTCString()
 	}
@@ -196,7 +195,7 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 		this.rest.getTicketsForDashboard(this.requestBundle)
 		.subscribe(
 			responseData => this.bundleData = <{ticket_info : any}> responseData,
-			err => this.rest.alertServerError(loader),
+			err => this.rest.alertServerError(err,loader),
 			() => {
 				loader.dismiss(),
 				this.isListLoaded = true
@@ -255,6 +254,4 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 	toggleSection(ticket) {
 		ticket.is_open = !ticket.is_open
 	}
-
-
 }

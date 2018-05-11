@@ -25,13 +25,17 @@
       navigator.serviceWorker.register('service-worker.js')
       .then(() => console.log('service worker installed'))
       .catch(err => console.error('Error', err));
-  }
-</script>
+    }
+  </script>
 
-<!-- Google Map API -->
-<script src="https://maps.google.com/maps/api/js?key=AIzaSyCecgk4WWZR2HgSmSczljuNDqQaJyd8psg"></script>
+  <!-- Google Map API -->
+  <script type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <!-- facebook login API -->
+  <script src="https://maps.google.com/maps/api/js?key=AIzaSyCecgk4WWZR2HgSmSczljuNDqQaJyd8psg"></script>
+  <!-- google login API -->
+  <script src="https://apis.google.com/js/platform.js"></script>
 
-<link href="build/main.css" rel="stylesheet">
+  <link href="build/main.css" rel="stylesheet">
 </head>
 
 <body>
@@ -43,10 +47,10 @@
   <script src="build/polyfills.js"></script>
 
   <!-- The vendor js is generated during the build process It contains all of the dependencies in node_modules -->
-   <script src="build/vendor.js"></script>
+  <script src="build/vendor.js"></script>
 
-   <!-- The main bundle js is generated during the build process -->
-   <script src="build/main.js"></script>
+  <!-- The main bundle js is generated during the build process -->
+  <script src="build/main.js"></script>
 
- </body>
- </html>
+</body>
+</html>

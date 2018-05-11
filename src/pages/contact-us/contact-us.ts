@@ -86,7 +86,7 @@ export class ContactUsPage {
     this.rest.sendQuery(query)
        .subscribe(
            responseData => this.checkStatus(responseData),
-           err => this.rest.alertServerError(loader),
+           err => this.rest.alertServerError(err,loader),
            () => {
              loader.dismiss()
            }

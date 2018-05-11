@@ -13,6 +13,8 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { BrMaskerModule } from 'brmasker-ionic-3';
 
+import { FacebookModule } from 'ngx-facebook';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AboutUsPage } from '../pages/about-us/about-us';
@@ -81,6 +83,7 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password'
   imports: [
     BrowserModule,
     BrMaskerModule,
+    FacebookModule.forRoot(),
     IonicModule.forRoot(MyApp, {}, {
         links: [
           { component: HomePage, name: 'Home', segment: 'home' },
@@ -151,6 +154,7 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password'
     RestProvider,
     MainRestProvider,
     ConstantsProvider,
-  ]
+   
+   ]
 })
 export class AppModule {}

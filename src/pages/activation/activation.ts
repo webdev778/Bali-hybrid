@@ -51,7 +51,7 @@ export class ActivationPage {
         this.rest.sendAuthRequest(passInfo)
         .subscribe(
             responseData => this.checkStatus(responseData),
-            err => this.rest.alertServerError(loader),
+            err => this.rest.alertServerError(err,loader),
             () => {
                 loader.dismiss()
 
