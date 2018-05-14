@@ -7,55 +7,55 @@ import { Storage } from '@ionic/storage';
 import { ConstantsProvider } from '../../providers/constants/constants'
 
 /**
- * Generated class for the DashboardPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+* Generated class for the DashboardPage page.
+*
+* See https://ionicframework.com/docs/components/#navigation for more info on
+* Ionic pages and navigation.
+*/
 
- @IonicPage()
- @Component({
-     selector: 'page-dashboard',
-     templateUrl: 'dashboard.html',
- })
- export class DashboardPage {
-     
-     dashoboardSubPages: Array<{name: string, icon: any, page: any}>;
+@IonicPage()
+@Component({
+    selector: 'page-dashboard',
+    templateUrl: 'dashboard.html',
+})
+export class DashboardPage {
 
-     constructor(	public navCtrl: NavController, public navParams: NavParams, 
-         private storage: Storage,private constantProvider: ConstantsProvider) {
-         this.dashoboardSubPages = [
-                                         {name: 'View Tickets', icon: '', page: DashboardTicketsPage},
-                                         {name: 'View Order History', icon: '', page: OrderHistoryPage},
-                                         {name: 'View Profile', icon: '', page: ViewProfilePage},
-                                    ];
+    dashoboardSubPages: Array<{name: string, icon: any, page: any}>;
 
-         this.checkForLogin()
-     }
+    constructor(	public navCtrl: NavController, public navParams: NavParams, 
+        private storage: Storage,private constantProvider: ConstantsProvider) {
+        this.dashoboardSubPages = [
+                                    {name: 'View Tickets', icon: '', page: DashboardTicketsPage},
+                                    {name: 'View Order History', icon: '', page: OrderHistoryPage},
+                                    {name: 'View Profile', icon: '', page: ViewProfilePage},
+                                  ];
 
-     checkForLogin() {
-         this.storage.get('is_login').then((isLogin) => {
-             if (!isLogin) {
-                 this.moveToLoginPage()
-             }
-         })
-     }
+        this.checkForLogin()
+    }
 
-     moveToPage(dashboardSubPage) {
-         this.navCtrl.push(dashboardSubPage.page)
-         
-     }
+    checkForLogin() {
+        this.storage.get('is_login').then((isLogin) => {
+            if (!isLogin) {
+                this.moveToLoginPage()
+            }
+        })
+    }
 
-     moveToLoginPage() {
-         this.storage.remove('user_data');
-         this.storage.remove('auth_token');
-         this.storage.set('is_login', false);
+    moveToPage(dashboardSubPage) {
+        this.navCtrl.push(dashboardSubPage.page)
 
-         this.constantProvider.loginTitle = 'LOGIN';
-         this.constantProvider.loginPage = 'LoginPage'
+    }
 
-         this.navCtrl.setRoot('LoginPage')
-     }
- }
+    moveToLoginPage() {
+        this.storage.remove('user_data');
+        this.storage.remove('auth_token');
+        this.storage.set('is_login', false);
+
+        this.constantProvider.loginTitle = 'LOGIN';
+        this.constantProvider.loginPage = 'LoginPage'
+
+        this.navCtrl.setRoot('LoginPage')
+    }
+}
 
 

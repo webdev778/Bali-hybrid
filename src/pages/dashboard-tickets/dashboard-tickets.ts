@@ -53,8 +53,7 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 	ionViewDidLeave() {
 		if ( this.timerSubscription ) {
 			this.timerSubscription.unsubscribe();
-		}
-		
+		}		
 	}
 
 	initialiseArrayActivatedTickets() {
@@ -178,7 +177,6 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 
 	buttonProfilePressed(ticket) {
 		let ticketData = {ticket_type: ticket.ticket_type,ticket_id: ticket.ticket_id}
-
 		this.navCtrl.push(TicketDetailsPage,{'ticket': JSON.stringify(ticketData)})
 	}
 

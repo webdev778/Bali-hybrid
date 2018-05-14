@@ -72,7 +72,6 @@ export class LoginPage {
         this.googleAuthentication.attachClickHandler(element, {},
             (googleUser) => {
                 let profile = googleUser.getBasicProfile();  
-                console.log(googleUser)            
                 this.socialLoginData.gmail_id =  profile.getId()
                 this.socialLoginData.email = profile.getEmail()
                 let name = profile.getName().split(' ')
