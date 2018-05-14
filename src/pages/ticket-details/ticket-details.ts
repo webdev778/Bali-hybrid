@@ -48,7 +48,9 @@ export class TicketDetailsPage {
         public loadingController: LoadingController,
         private cdr: ChangeDetectorRef) {
 
-        this.ticketData = JSON.parse(this.navParams.get('ticket'))
+        let ticketDataArray = JSON.parse(this.navParams.get('ticket'))
+
+        this.ticketData = {ticket_type: ticketDataArray[0],ticket_id: ticketDataArray[1]}
     }
 
     ionViewWillEnter() {

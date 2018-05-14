@@ -16,7 +16,7 @@ export let PUBLIC_HEADER = {
 
 // Constants for Web Services
 
-// export let BASE_URL = "http://192.168.0.6/BaliTours/public/api/";
+// export let BASE_URL = "http://192.168.0.34/BaliTours/public/api/";
 export let BASE_URL = "http://admin.balisupport.tk/api/";
 
 //Authenticate User
@@ -70,6 +70,7 @@ export let SERVICE_URL_ACTIVATE_TICKET = BASE_URL + "activateTicket";
 export let SERVICE_URL_VIEW_ORDER_HISTORY = BASE_URL + "viewOrderHistory";
 export let SERVICE_URL_VIEW_PROFILE = BASE_URL + "viewProfile";
 export let SERVICE_URL_UPDATE_PROFILE = BASE_URL + "updateProfile";
+export let SERVICE_URL_GET_SERVICE_CONTENT = BASE_URL + "getServiceContent";
 export let SERVICE_URL_UPDATE_PASSWORD = BASE_URL + "updatePassword";
 
 export interface TicketStructure { 
@@ -174,7 +175,7 @@ export class ConstantsProvider {
 					}else{
 						if ( years > 18)
 						{
-							return "Child age must be leass than 18 years"
+							return "Child age must be less than 18 years"
 
 						}else{
 							return ""

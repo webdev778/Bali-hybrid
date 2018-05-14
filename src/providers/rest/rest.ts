@@ -38,6 +38,7 @@ import {
   SERVICE_URL_UPDATE_PASSWORD,
   SERVICE_URL_SOCIAL_LOGIN,
   SERVICE_URL_LOGOUT,
+  SERVICE_URL_GET_SERVICE_CONTENT,
   ConstantsProvider } from '../constants/constants';
 
 
@@ -195,6 +196,14 @@ import {
    getHospitals(): Observable<{ }> {
 
      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_HOSPITALS);
+   }
+
+   requestServices(passInfo): Observable<{ }> {
+     let data = {
+        'service_id': passInfo
+     };
+
+     return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_GET_SERVICE_CONTENT, data);
    }
 
    // By Travle Pass Page

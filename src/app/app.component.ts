@@ -37,8 +37,6 @@ export class MyApp {
               public constantProvider: ConstantsProvider,
               public storage: Storage) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
     this.pages = [
             {title: 'Home', icon: 'home', page: HomePage},
             {title: 'Today In Bali', icon: 'today_in_bali', page: InBaliPage},
@@ -53,7 +51,6 @@ export class MyApp {
 
     this.loginPage = [{title: constantProvider.loginTitle, icon: 'log_in', page: 'LoginPage'}];
     this.checkForLogin()
-
   }
 
   checkForLogin() {
@@ -70,8 +67,7 @@ export class MyApp {
             this.constantProvider.authToken = token
           })
         }
-     })
-    
+     })   
   }
 
   getCMSPages() {
@@ -130,12 +126,10 @@ export class MyApp {
     this.constantProvider.loginTitle = 'LOGIN';
     this.constantProvider.loginPage = 'LoginPage'
     this.isLogin = false
-    this.nav.setRoot('LoginPage')
-   
+    this.nav.setRoot('LoginPage') 
   }
 
-  logoutPressed() {
-    
+  logoutPressed() {    
     this.moveToLoginPage()
-}
+  }
 }

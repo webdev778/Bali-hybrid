@@ -117,7 +117,7 @@ export class ViewProfilePage {
         loader.present()
         
         let passInfo = {
-            user_id:this.requestBundle.user_id,
+            user_id: this.requestBundle.user_id,
             token: this.requestBundle.token,
             first_name: this.bundleOrder.first_name,
             last_name: this.bundleOrder.last_name, 

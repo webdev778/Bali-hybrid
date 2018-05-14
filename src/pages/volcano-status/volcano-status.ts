@@ -19,18 +19,15 @@ export class VolcanoStatusPage {
 	bundleData : {data: any};
   bundleStatus : any[] = [];
 
-
-
   constructor(	public navCtrl: NavController, 
   				public navParams: NavParams,
   				public rest: RestProvider,) {
 
   }
-
+  
   ionViewDidLoad() {
     this.getVolcanoStatus()
-
-    }
+  }
 
   buttonBackPressed() {
     this.navCtrl.pop();

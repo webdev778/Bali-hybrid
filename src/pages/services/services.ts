@@ -34,7 +34,7 @@ export class ServicesPage {
 
   moveToServiceDetails(service) {
   		this.navCtrl.push(ServiceDetailsPage, {
-        'service': JSON.stringify(service),
+        'service': JSON.stringify(service.id),
       })
  	}
 
