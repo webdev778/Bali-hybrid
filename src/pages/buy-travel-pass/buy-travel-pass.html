@@ -189,7 +189,7 @@
 						      <br>						  						    
 
 						     <ion-item class='form-item'>						     				
-                		        <ion-input placeholder="DATE OF BIRTH (mm/dd/yyyy)" type="text" [brmasker]="{mask:'00/00/0000', len:10, type:'num'}" [(ngModel)]="traveller.date_of_birth" name="dob" value= ""></ion-input>
+                		        <ion-input placeholder="DATE OF BIRTH (mm/dd/yyyy)" type="text" [brmasker]="{mask:'00/00/0000', len:10, type:'num'}" [(ngModel)]="traveller.date_of_birth" InputText (keypress)="onlyNumberKey($event)" name="dob" value= ""></ion-input>
 	                      	</ion-item>
 
 	                      	<p ion-text color="danger" padding-left>
@@ -238,7 +238,7 @@
 							</p>
 							<br>
 							<ion-item class='form-item'>
-								<ion-input [(ngModel)]="bundlePaymentData.phone" #phone="ngModel" pInputText (keypress)="validateCard($event)" maxlength="19" name="contact" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CONTACT NUMBER'></ion-input>
+								<ion-input [(ngModel)]="bundlePaymentData.phone" #phone="ngModel" InputText (keypress)="validateCard($event)" maxlength="19" name="contact" type="tel" spellcheck="false" autocapitalize="off" required ngModel placeholder='* CONTACT NUMBER'></ion-input>
 							</ion-item>
 							<p ion-text [hidden]="phone.valid || paymentFormSubmitted == false" color="danger" padding-left>
 								Contact Number is required
@@ -252,7 +252,7 @@
 							</p>
 							<br>
 							<ion-item class='form-item'>
-								<ion-input [(ngModel)]="cardDetails.number" #number="ngModel" name="cardNumber" type="tel" spellcheck="false"  pInputText (keypress)="validateCard($event)" maxlength="19"  autocapitalize="off" required ngModel placeholder='* CARD NUMBER'></ion-input>
+								<ion-input [(ngModel)]="cardDetails.number" #number="ngModel" name="cardNumber" type="tel" spellcheck="false"  InputText (keypress)="validateCard($event)" maxlength="19"  autocapitalize="off" required ngModel placeholder='* CARD NUMBER'></ion-input>
 							</ion-item>
 							<p ion-text [hidden]="number.valid || paymentFormSubmitted == false" color="danger" padding-left>
 								Card Number is required

@@ -15,9 +15,10 @@
 				<div class="form-panel">
 					<br>
 					<form #profileForm="ngForm" novalidate>
-						<button class = "edit-btn" *ngIf = "isDisabled"  (click)="buttonEdit()" type="submit" >EDIT PROFILE</button>
-						<br>
 						<ion-list no-lines>
+								
+						    <button class = "edit-btn" *ngIf = "isDisabled"  (click)="buttonEdit()" type="submit" >EDIT PROFILE</button>
+							<br>
 							<p class = "response-text">{{profileText}}</p>
 							<p class = "response-error-text">{{profileErrorText}}</p>
 							<p class = "head-para">First Name</p>	
@@ -84,6 +85,8 @@
 								<ion-input [(ngModel)]="bundleOrder.zip_code" name="zip_code" type="number" #zip_code="ngModel" spellcheck="false" autocapitalize="off"  ngModel disabled = {{isDisabled}} placeholder = "update your zipcode" >
 								</ion-input>
 							</ion-item>
+							<br>
+								<button class = "btn-updatepwd" *ngIf = "isDisabled"  (click)="updatePassword()" type="submit" >UPDATE PASSWORD</button>
 						</ion-list >
 
 						<ion-row responsive-sm>
@@ -95,7 +98,9 @@
 				</div>
 			</ion-col>
 		</ion-row>
+
 	</ion-grid>
+
 
 	<div style="text-align: center; margin-bottom: 20px; margin-top: 5px">
 		<button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>

@@ -4,6 +4,7 @@ import { RestProvider } from '../../providers/rest/rest';
 import { ConstantsProvider } from '../../providers/constants/constants';
 import { Storage } from '@ionic/storage';
 import { NgForm } from '@angular/forms';
+import { UpdatePasswordPage } from '../update-password/update-password'
 
 @IonicPage()
 @Component({
@@ -21,7 +22,7 @@ export class ViewProfilePage {
     bundleData : {data : any};
     bundleOrderDescription: any;
     bundleOrder = {first_name: '',last_name: '', username: '', phone: '', email: '', gender: '', 
-    address: '', city:'', zip_code:'' };
+                   address: '', city:'', zip_code:'' };
     profileText = ''
     profileErrorText = ''
     
@@ -159,4 +160,8 @@ export class ViewProfilePage {
     buttonBackPressed() {
         this.navCtrl.pop()
     } 
+
+    updatePassword() {
+        this.navCtrl.push(UpdatePasswordPage)
+    }
 }

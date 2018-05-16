@@ -30,7 +30,7 @@ export class TicketDetailsPage {
     gender:'', address:'', email:'',mobile:'', emergencyContactName: '', 
     emergencyContactNumber: '', isActive: 1}
 
-    arrayDashboardImages: Array<{title: string, image: Array<any>, errorMsg: string}> = [
+    arrayDashboardImages: Array<{title: string, image: Array<{file:'',extension:''}>, errorMsg: string}> = [
     { title: 'Upload Passport Photograph', image: [], errorMsg: 'Select Passport Image' },
     { title: 'Upload Luggage Photograph', image: [], errorMsg: 'Select Luggage Image' },
     { title: 'Upload Travel Insurance Photograph', image: [], errorMsg: 'Select Travel Insurance Image' },
@@ -92,7 +92,15 @@ export class TicketDetailsPage {
         for (var count = 0; count < $event.target.files.length; count++) {
             let reader = new FileReader();
             reader.onload = (event:any) => {
-                dashBoardImage.image.push(event.target.result)
+                let extentionData = (event.target.result).split(';')[0]
+                let docExtention = extentionData.split('/')[1]
+                
+                if (docExtention == 'msword') {
+                    dashBoardImage.image.push({"file": event.target.result, "extension": 'docs'})
+                }
+                else {
+                    dashBoardImage.image.push({"file": event.target.result, "extension": docExtention})
+                }
             }
 
             reader.readAsDataURL($event.target.files[count]);
@@ -104,7 +112,6 @@ export class TicketDetailsPage {
     }
 
     buttonSubmitDetailsPressed(form: NgForm) {
-
         if (this.userInfoBundle.firstName == null || this.userInfoBundle.lastName == null 
             || this.userInfoBundle.firstName == '' || this.userInfoBundle.lastName == '') {
             this.mandatoryErrorText = "First Name and Last Name are mandatory"
@@ -174,7 +181,6 @@ export class TicketDetailsPage {
             luggagess: this.arrayDashboardImages[1].image,
             insuarance: this.arrayDashboardImages[2].image,
             doctors_letter: this.arrayDashboardImages[3].image,
-
         }
         
         this.rest.updateTicketInfo(passInfo)
@@ -256,14 +262,14 @@ export class TicketDetailsPage {
             })
     }
 
-    convertArrayImageUrlToData(arrayImageUrl) {
-        var arrayImage = []
+    convertArrayImageUrlToData(document) {
+        var uploadDoc: Array<{file:'',extension:''}> = []
 
-        for(let imageUrl of arrayImageUrl){
+        for(let imageUrl of document){
 
             var blob : any
-
-            this.rest.downloadImageData(imageUrl)
+    
+            this.rest.downloadImageData(imageUrl.file)
             .subscribe(
                 data => blob = data,
                 err => console.log("Error while getting Image Data : "+err),
@@ -271,14 +277,31 @@ export class TicketDetailsPage {
                     var reader = new FileReader();
                     reader.readAsDataURL(blob); 
                     reader.onloadend = function() {
-                        arrayImage.push(reader.result)
-
-                        return arrayImage
-                    } 
+                    uploadDoc.push({"file":reader.result, "extension": imageUrl.extension})
+                    return uploadDoc
+                   } 
                 }
                 );
         }
-        return arrayImage
+        return uploadDoc
+    }
+
+    openPDF(document) {
+        let pdfWindow = window.open("")
+        pdfWindow.document.write("<iframe width='100%' height='100%' src='data:application/pdf; " +
+                                 encodeURI(document.file)+"'></iframe>")
+    }
+
+    openDOC(document) {
+        let pdfWindow = window.open("")
+        pdfWindow.document.write("<iframe width='100%' height='100%' src='data:application/msword; " +
+                                 encodeURI(document.file)+"'></iframe>")
+    }
+
+    openImage(document) {
+        let imageWindow = window.open("")
+        imageWindow.document.write("<iframe width='100%' height='100%' src='data:image/png; " +
+                                 encodeURI(document.file)+"'></iframe>")
     }
 
     presentAlert(message) {

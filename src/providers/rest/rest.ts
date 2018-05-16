@@ -39,6 +39,7 @@ import {
   SERVICE_URL_SOCIAL_LOGIN,
   SERVICE_URL_LOGOUT,
   SERVICE_URL_GET_SERVICE_CONTENT,
+  SERVICE_URL_CHANGE_PASSWORD,
   ConstantsProvider } from '../constants/constants';
 
 
@@ -244,6 +245,11 @@ import {
      return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_VIEW_ORDER_HISTORY, data, data.token);
    }
 
+
+   updatePassword(requestBundle): Observable<{ }> {     
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_CHANGE_PASSWORD, requestBundle, requestBundle.token);
+   }
+
    requestUserProfile(userInfo): Observable<{ }>  {
      let data = {
        'user_id': userInfo.user_id,
@@ -368,7 +374,6 @@ import {
        this.constantProvider.loginTitle = 'LOGIN';
        this.constantProvider.loginPage = 'LoginPage'
        this.constantProvider.isLogin = false;
-
        (this.app.getRootNav() as NavController).setRoot('LoginPage')
      }
      

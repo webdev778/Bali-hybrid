@@ -48,7 +48,8 @@ import { PaymentStatusPage } from '../pages/payment-status/payment-status'
 import { OrderHistoryPage } from '../pages/order-history/order-history'
 import { ViewProfilePage } from '../pages/view-profile/view-profile'
 import { ResetPasswordPage } from '../pages/reset-password/reset-password'
-
+import { UpdatePasswordPage } from '../pages/update-password/update-password'
+ 
 @NgModule({
   declarations: [
     MyApp,
@@ -78,7 +79,8 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password'
     DashboardTicketsPage,
     PaymentStatusPage,
     ViewProfilePage,
-    OrderHistoryPage
+    OrderHistoryPage,
+    UpdatePasswordPage
   ],
   imports: [
     BrowserModule,
@@ -109,7 +111,8 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password'
           { component: DashboardTicketsPage , name: 'DashboardTicketsPage', segment: 'dashboard/dashboardtickets', defaultHistory: [DashboardPage]},
           { component: ViewProfilePage , name: 'ViewProfilePage', segment: 'dashboard/viewprofile', defaultHistory: [DashboardPage]},
           { component: OrderHistoryPage , name: 'OrderHistoryPage', segment: 'dashboard/orderhistory', defaultHistory: [DashboardPage]},
-          { component: TicketDetailsPage , name: 'TicketDetailsPage', segment: 'dashboard/dashboardtickets/ticketdetails/:ticket', defaultHistory: [DashboardPage,DashboardTicketsPage]}
+          { component: TicketDetailsPage , name: 'TicketDetailsPage', segment: 'dashboard/dashboardtickets/ticketdetails/:ticket', defaultHistory: [DashboardPage,DashboardTicketsPage]},
+          { component: UpdatePasswordPage , name: 'UpdatePasswordPage', segment: 'dashboard/viewprofile/update-password', defaultHistory: [DashboardPage,ViewProfilePage]}
     ]}),
     HttpModule,
     HttpClientModule,
@@ -145,6 +148,7 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password'
     PaymentStatusPage,
     ViewProfilePage,
     OrderHistoryPage,
+    UpdatePasswordPage
   ],
   providers: [
     StatusBar,

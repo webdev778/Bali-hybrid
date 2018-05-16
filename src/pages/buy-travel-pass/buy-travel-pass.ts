@@ -44,19 +44,13 @@ export class BuyTravelPassPage {
 
 	errorDateOfBirth = ""
 
-	dateForPicker = new Date().getTime();
-	pickerDate = ""
-
 	constructor(	public navCtrl: NavController, 
-		public navParams: NavParams,
-		private alertCtrl: AlertController,
-		public rest: RestProvider,
-		public loadingController: LoadingController,
-		private storage: Storage,
-		private constantProider : ConstantsProvider) {
-		
-		this.dateForPicker = this.dateForPicker -  (31536000000*17);
-		this.pickerDate =  new Date(this.dateForPicker).getFullYear() + ""
+					public navParams: NavParams,
+					private alertCtrl: AlertController,
+					public rest: RestProvider,
+					public loadingController: LoadingController,
+					private storage: Storage,
+					private constantProider : ConstantsProvider) {
 	}
 
 	ionViewDidLoad() {
@@ -126,9 +120,7 @@ export class BuyTravelPassPage {
 				this.storage.get('user_data').then((user_data) => {
 					this.requestBundle.user_id = JSON.parse(user_data).id;
 					this.storage.get('auth_token').then((authToken) => {
-						this.requestBundle.token = authToken;
-
-						
+						this.requestBundle.token = authToken;	
 					});
 				});
 
@@ -140,9 +132,7 @@ export class BuyTravelPassPage {
 						return
 					}
 				}
-
-				this.noTicketChosen = true
-				
+				this.noTicketChosen = true				
 			}
 		})
 	}
@@ -348,7 +338,6 @@ export class BuyTravelPassPage {
 		}else {
 			this.paymentErrortext =  bundle.api_message
 		}
-
 	}
 
 	validateCard(event) {

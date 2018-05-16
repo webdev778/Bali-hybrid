@@ -2,7 +2,7 @@
   <page-bsc-header ></page-bsc-header>
 </ion-header>
 
-        <ion-content>
+        <ion-content> 
             <page-bsc-header showWhen="core"></page-bsc-header>
             <h2 hideWhen='core' class="mobile-sub-header">CUSTOMER DETAILS</h2>
             <h2 showWhen='core' class="core-sub-header">CUSTOMER DETAILS</h2>
@@ -33,7 +33,7 @@
 
                       <p class = "para-head" ion-text color = "dark" padding-left>Date of Birth </p>
                       <ion-item class='form-item'>
-                          <ion-input placeholder="mm/dd/yyyy" type="text" [brmasker]="{mask:'00/00/0000', len:10, type:'num'}" [(ngModel)]="userInfoBundle.dob" disabled={{isDisabled}} name="dob" value= ""></ion-input>
+                          <ion-input placeholder="mm/dd/yyyy" type="text" [brmasker]="{mask:'00/00/0000', len:10, type:'num'}" [(ngModel)]="userInfoBundle.dob" InputText (keypress)="onlyNumberKey($event)" disabled={{isDisabled}} name="dob" value= ""></ion-input>
                       </ion-item>
                       <p ion-text color="danger" padding-left>
                               {{errorDateOfBirth}}
@@ -95,7 +95,9 @@
                       <h5>{{dashboardImage.title}}</h5>
 
                       <div *ngFor="let image of dashboardImage.image">
-                        <img class="dashboard-image" [src]="image"/>
+                        <img *ngIf="image.extension == 'jpeg' || image.extension == 'png' " (click) = openImage(image) class="dashboard-image" [src]="image.file"/>
+                        <img *ngIf="image.extension == 'pdf' " (click) = openPDF(image) class="dashboard-doc" src="assets/imgs/imgPDF.jpg"/>
+                        <img *ngIf="image.extension == 'docs' " (click) = openDOC(image) class="dashboard-doc" src="assets/imgs/imgDOC.png"/>
                         <br>
                         <button [hidden] = "isDisabled" (click)="removeImage(image,dashboardImage.image)" icon-only class="custom-file-select" >Remove</button>  
                     </div>
@@ -103,7 +105,7 @@
                     <br>
 
                     <label class='custom-file-select-add' [hidden] = "isDisabled">Add Image
-                        <ion-input multiple hidden name="name" type="file" accept="image/*" (change)='imageSelectedFromUser(dashboardImage, $event)'>
+                        <ion-input multiple hidden name="name" type="file" (change)='imageSelectedFromUser(dashboardImage, $event)' accept=".pdf,.doc,.png,.jpeg,.jpg">
                         </ion-input>
                     </label>
 

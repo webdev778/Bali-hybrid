@@ -59,7 +59,7 @@
               <p>{{order.ticket_info | uppercase}}</p>
            </ion-col>
             <ion-col>
-              <p>{{order.amount}}</p>
+              <p>${{order.amount}}</p>
            </ion-col>
       </ion-row>
   </ion-grid>
@@ -80,19 +80,19 @@
          <ion-row [hidden]="order.is_open" class = "toggle-content">
               <ion-col>
                 <ion-row>
-                  <p class = "mobile-text"><b>ORDER ID :</b>{{order.order_id}}</p>
+                  <p class = "mobile-text"><b>ORDER ID : </b>{{order.order_id}}</p>
                 </ion-row>
                 <ion-row>
-                  <p class = "mobile-text"><b>ORDER NUMBER :</b>{{order.order_no}}</p>
+                  <p class = "mobile-text"><b>ORDER NUMBER : </b>{{order.order_no}}</p>
                 </ion-row>
                 <ion-row>    
-                  <p class = "mobile-text"><b>ORDER DATE :</b>{{order.order_date}}</p>
+                  <p class = "mobile-text"><b>ORDER DATE : </b>{{order.order_date}}</p>
                 </ion-row>
                 <ion-row>  
-                 <p class = "mobile-text"><b>TICKETS PURCHASED :</b>{{order.ticket_info | uppercase}}</p>
+                 <p class = "mobile-text"><b>TICKETS PURCHASED : </b>{{order.ticket_info | uppercase}}</p>
                 </ion-row>
                 <ion-row>
-                  <p class = "mobile-text"><b>AMOUNT :</b>{{order.amount}}</p>
+                  <p class = "mobile-text"><b>AMOUNT : </b>${{order.amount}}</p>
                 </ion-row>
               </ion-col>
         </ion-row>

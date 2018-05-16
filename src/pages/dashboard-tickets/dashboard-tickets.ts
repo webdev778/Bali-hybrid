@@ -128,7 +128,6 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 			]
 
 		});
-
 		alert.present();
 	}
 
