@@ -16,16 +16,16 @@ import { RestProvider } from '../../providers/rest/rest';
 })
 export class AboutUsPage {
 
-  page: {id:'', name:'', alias: ''};
-
-	bundleDetails: {data: any};
+  pageId
+	bundleDetails: {data: any,title:any};
   pageContents : any[];
   isPushed = false;
+  pageTitle = ''
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public rest: RestProvider) {
-    this.page = JSON.parse(this.navParams.get('data'))
+    this.pageId = JSON.parse(this.navParams.get('data'))
     this.isPushed = this.navParams.get('isPushed')
-    this.getPageContent(this.page);
+    this.getPageContent(this.pageId);
   }
 
   ionViewDidLoad() {
@@ -39,12 +39,13 @@ export class AboutUsPage {
   }
 
   getPageContent(page) {
-  	this.rest.getPageContent(page)
+  	this.rest.getPageContent(this.pageId)
          .subscribe(
-            responseData => this.bundleDetails = <{data: any}> responseData,
+            responseData => this.bundleDetails = <{data: any,title:any}> responseData,
             err => console.log(err),
             () => {
               this.pageContents = this.bundleDetails.data;
+              this.pageTitle = this.bundleDetails.title
             }
            );
   }

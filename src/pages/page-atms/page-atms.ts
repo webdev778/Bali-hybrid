@@ -55,7 +55,9 @@ export class PageAtmsPage {
     marker.longitude = atm.long
     marker.label = atm.bankname
 
-    markerArray.push(marker);
+    let markerString = marker.latitude + ',' + marker.longitude + ',' + marker.label
+    
+    markerArray.push(markerString);
 
     this.navCtrl.push(CommonMapPage, {
       'location': JSON.stringify(markerArray)

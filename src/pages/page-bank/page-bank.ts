@@ -54,7 +54,9 @@ export class PageBankPage {
     marker.longitude = bank.long
     marker.label = bank.bankname
 
-    markerArray.push(marker);
+    let markerString = marker.latitude + ',' + marker.longitude + ',' + marker.label
+
+    markerArray.push(markerString);
 
     this.navCtrl.push(CommonMapPage, {
       'location': JSON.stringify(markerArray)

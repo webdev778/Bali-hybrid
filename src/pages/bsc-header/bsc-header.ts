@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Component, Input } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Storage } from '@ionic/storage';
 
@@ -44,7 +44,7 @@ export class BscHeaderPage {
      public loadingController: LoadingController, 
      public constantProvider: ConstantsProvider,
      private storage: Storage,
-     private alertCtrl: AlertController) {
+     ) {
 
      this.getCMSPages()
 
@@ -69,7 +69,7 @@ export class BscHeaderPage {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if (page.page == undefined) {
-        this.navCtrl.setRoot(AboutUsPage, {'data': JSON.stringify(page), isPushed: false})
+        this.navCtrl.setRoot(AboutUsPage, {'data': JSON.stringify(page.id), isPushed: false})
     }else {
       // if (page.page == BuyTravelPassPage){
       //   this.checkForLogin(page)
@@ -83,7 +83,7 @@ export class BscHeaderPage {
     checkForLogin(page) {
     this.storage.get('is_login').then((isLogin) => {
         if (!isLogin) {
-            this.presentAlertNotLoggedIn()
+            this.moveToLoginPage()
         }
         else{
             this.navCtrl.setRoot(page.page)
@@ -92,15 +92,15 @@ export class BscHeaderPage {
     }
 
     moveToLoginPage() {
-    this.storage.remove('user_data');
-    this.storage.remove('auth_token');
-    this.storage.set('is_login', false);
+        this.storage.remove('user_data');
+        this.storage.remove('auth_token');
+        this.storage.set('is_login', false);
 
-    this.constantProvider.loginTitle = 'LOGIN';
-    this.constantProvider.loginPage = 'LoginPage'
-    this.constantProvider.isLogin = false;
+        this.constantProvider.loginTitle = 'LOGIN';
+        this.constantProvider.loginPage = 'LoginPage'
+        this.constantProvider.isLogin = false;
 
-    this.navCtrl.setRoot('LoginPage')
+        this.navCtrl.setRoot('LoginPage')
     }
 
     logoutPressed() {
@@ -133,19 +133,19 @@ export class BscHeaderPage {
           
 
 
-    presentAlertNotLoggedIn(){
-    let alert = this.alertCtrl.create({
-        title: 'Not Logged In',
+    // presentAlertNotLoggedIn(){
+    // let alert = this.alertCtrl.create({
+    //     title: 'Not Logged In',
 
-        subTitle: 'Please login to purchase travel pass',
-        buttons: [
-        {
-            text : 'Ok',
-        }
-        ]
+    //     subTitle: 'Please login to purchase travel pass',
+    //     buttons: [
+    //     {
+    //         text : 'Ok',
+    //     }
+    //     ]
 
-    });
-    alert.present();
-    }
+    // });
+    // alert.present();
+    // }
 
 }

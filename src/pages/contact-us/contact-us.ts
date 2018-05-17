@@ -56,9 +56,12 @@ export class ContactUsPage {
 
     marker.latitude = this.bundleDetails.office_latitude
     marker.longitude = this.bundleDetails.office_longitude
-    marker.label = 'Bali Support Centre'
+    marker.label = 'Bali_Support_Centre'
 
-    markerArray.push(marker);
+    let markerString = marker.latitude + ',' + marker.longitude + ',' + marker.label
+
+ 
+    markerArray.push(markerString);
 
     this.navCtrl.push(CommonMapPage, {
       'location': JSON.stringify(markerArray)

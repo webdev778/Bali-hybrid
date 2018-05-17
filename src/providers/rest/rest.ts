@@ -40,6 +40,7 @@ import {
   SERVICE_URL_LOGOUT,
   SERVICE_URL_GET_SERVICE_CONTENT,
   SERVICE_URL_CHANGE_PASSWORD,
+  SERVICE_URL_CHECK_FORGET_PASSWORD,
   ConstantsProvider } from '../constants/constants';
 
 
@@ -84,6 +85,10 @@ import {
       return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_FORGET_PASSWORD, data);
     }
 
+     checkForgetPassword(requestBundle): Observable<{ }> {     
+      return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_CHECK_FORGET_PASSWORD, requestBundle);
+     }
+
     signupUser(signupData) {
       let data = {
         "first_name" : signupData.first_name,
@@ -113,10 +118,10 @@ import {
 
    // CMS Details Page
 
-   getPageContent(page): Observable<{ }> {
+   getPageContent(id): Observable<{ }> {
 
      let data = {
-       'id' : page.id
+       'id' : id
      }
 
      return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_PAGE_CONTENT, data);

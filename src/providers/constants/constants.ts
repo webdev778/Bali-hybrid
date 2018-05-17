@@ -16,7 +16,7 @@ export let PUBLIC_HEADER = {
 
 // Constants for Web Services
 
-// export let BASE_URL = "http://192.168.0.34/balisupport2/public/api/";
+// export let BASE_URL = "http://192.168.0.34/bali-web/public/api/";
 export let BASE_URL = "http://admin.balisupport.tk/api/";
 
 //Authenticate User
@@ -28,7 +28,9 @@ export let SERVICE_URL_LOGIN = BASE_URL+"login";
 export let SERVICE_URL_SOCIAL_LOGIN = BASE_URL + "socialMediaRegister"
 export let SERVICE_URL_SIGNUP = BASE_URL+"signup";
 export let SERVICE_URL_FORGET_PASSWORD = BASE_URL+ "forgetPassword"
+export let SERVICE_URL_CHECK_FORGET_PASSWORD = BASE_URL+ "checkForgetPassword"
 export let SERVICE_URL_LOGOUT = BASE_URL + "logout"
+
 
 // BSC Footer
 export let SERVICE_URL_SOCIAL_LINK = BASE_URL+"getSocialLinks";

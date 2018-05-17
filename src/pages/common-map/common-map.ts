@@ -20,10 +20,21 @@ export class CommonMapPage {
 	@ViewChild('map') mapElement: ElementRef;
  	map: any;
 
- 	bundleMarker : Array<{latitude: '', longitude: '', label: ''}> = [];
+ 	bundleMarker : Array<{latitude: string, longitude: string, label: string}> = [];
+  bundleMarkerString : string[] =[]  
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController) {
-  	this.bundleMarker = JSON.parse(this.navParams.get('location'))
+  	this.bundleMarkerString = JSON.parse(this.navParams.get('location'))
+
+    for (let marker of this.bundleMarkerString) {
+      let splitMarkerBundle = marker.split(',',3)
+      let latitude = splitMarkerBundle[0]
+      let longitude = splitMarkerBundle[1]
+      let label = splitMarkerBundle[2]
+
+      this.bundleMarker.push({'latitude':latitude,'longitude':longitude,'label':label})
+    }
+
   }
 
   ionViewDidLoad() {

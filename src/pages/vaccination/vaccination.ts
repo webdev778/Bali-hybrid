@@ -43,9 +43,10 @@ export class VaccinationPage {
             () => {
               this.isListLoaded = true
               this.arrayHospitals = this.bundleData.data
+              console.log(this.arrayHospitals)
             }
            );
-  }
+  } 
 
   buttonShowOnMapPressed(hospital) {
     var markerArray : Array<any> = [];
@@ -55,7 +56,8 @@ export class VaccinationPage {
     marker.longitude = hospital.long
     marker.label = hospital.name
 
-    markerArray.push(marker);
+    let markerString = marker.latitude + ',' + marker.longitude + ',' + marker.label
+    markerArray.push(markerString);
 
     this.navCtrl.push(CommonMapPage, {
       'location': JSON.stringify(markerArray)

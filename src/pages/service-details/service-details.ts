@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
-
-
 /**
  * Generated class for the ServiceDetailsPage page.
  *
@@ -28,9 +26,6 @@ import { RestProvider } from '../../providers/rest/rest';
                     public rest: RestProvider,) {
 
           this.passedData = JSON.parse(this.navParams.get('service'))
-         // this.serviceDetails.title = passedData.title
-         // this.serviceDetails.description = passedData.description
-         // this.serviceDetails.image_name = passedData.image_name
      }
 
      ionViewDidLoad() {
@@ -58,7 +53,6 @@ import { RestProvider } from '../../providers/rest/rest';
             )
      }
   
-
      buttonBackPressed() {
          this.navCtrl.pop();
      }

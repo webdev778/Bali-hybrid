@@ -293,8 +293,8 @@ export class TicketDetailsPage {
     }
 
     openDOC(document) {
-        let pdfWindow = window.open("")
-        pdfWindow.document.write("<iframe width='100%' height='100%' src='data:application/msword; " +
+        let docWindow = window.open("")
+        docWindow.document.write("<iframe width='100%' height='100%' src='data:application/msword; " +
                                  encodeURI(document.file)+"'></iframe>")
     }
 

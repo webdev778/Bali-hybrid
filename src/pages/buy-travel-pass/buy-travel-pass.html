@@ -1,3 +1,4 @@
+
 <ion-header hideWhen="core">
 	<page-bsc-header ></page-bsc-header>
 </ion-header>
@@ -52,7 +53,7 @@
 					</ion-col>
 					<ion-col col-4 class = "static-ctext">
 						<p class = "unit-component">
-							<b>1 {{ticket.title}}: $</b>
+							<b>1 {{ticket.title}}: AU$</b>
 						</p>
 					</ion-col>
 					<ion-col col-4 class = "vertical">
@@ -120,7 +121,7 @@
 							</ion-col>
 
 							<ion-col>
-								<p>${{ticket.price}}</p>
+								<p>AU$ {{ticket.price}}</p>
 							</ion-col>
 						</ion-row>
 					</ion-col>
@@ -129,7 +130,7 @@
 				<ion-row>
 					<ion-col style = "margin-top: 25px;">
 						<p>
-							<b>TOTAL PRICE : <span class="green-text bold-text">${{finalCost}}</span></b>
+							<b>TOTAL PRICE : <span class="green-text bold-text">AU$ {{finalCost}}</span></b>
 						</p>
 					</ion-col>
 				</ion-row>

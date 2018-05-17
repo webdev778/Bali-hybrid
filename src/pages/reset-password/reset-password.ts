@@ -42,7 +42,41 @@ export class ResetPasswordPage {
 
         this.resetcode = resetcodetemp[1]
         this.id = idtemp[1]
+        this.checkLinkValidity()
  	}
+
+    checkLinkValidity() {
+        let loader = this.loadingController.create({
+            content: "Resetting Password..."
+        });
+
+        loader.present()
+
+        let passInfo = {
+            user_id: this.id,
+            resetcode: this.resetcode
+        }
+
+        console.log(passInfo)
+
+        this.rest.checkForgetPassword(passInfo)
+        .subscribe(
+            responseData => this.checkLinkStatus(responseData),
+            err => this.rest.alertServerError(err,loader),
+            () => {
+                loader.dismiss()
+            }
+            );
+    }
+
+    checkLinkStatus(bundle) {
+        if(bundle.status != 200) {
+            this.presentAlert(bundle.api_message)
+        }
+    }
+
+
+
 
  	buttonResetPasswordPressed(form: NgForm){
 		this.submittedPassword = true
@@ -72,6 +106,7 @@ export class ResetPasswordPage {
         let passInfo = {
             user_id: this.id,
             password: this.resetPasswordBundle.password,
+            resetcode: this.resetcode,
             confirm_password: this.resetPasswordBundle.confirmPassword
         }
 
@@ -87,10 +122,10 @@ export class ResetPasswordPage {
     }
 
     checkStatus(bundle) {
-        this.presentAlertSignUpSuccessful(bundle.api_message)
+        this.presentAlert(bundle.api_message)
     }
 
-    presentAlertSignUpSuccessful(message) {
+    presentAlert(message) {
         let alert = this.alertController.create({
             title: '',
 
