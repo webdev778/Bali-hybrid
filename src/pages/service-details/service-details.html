@@ -6,8 +6,8 @@
 
 	<page-bsc-header showWhen="core" header = "Our Services"></page-bsc-header>
 
-	<h2 [innerHTML]='serviceDetails.title' hideWhen='core' class='mobile-sub-header'></h2>
-	<h2 [innerHTML]='serviceDetails.title' showWhen='core' class="core-sub-header"></h2>
+	<h2 [innerHTML]='serviceDetails.title | uppercase' hideWhen='core' class='mobile-sub-header'></h2>
+	<h2 [innerHTML]='serviceDetails.title | uppercase' showWhen='core' class="core-sub-header"></h2>
 
 	<br>
 
@@ -22,7 +22,12 @@
 		</ion-row>
 	</ion-grid>
 
-	<div style="text-align: center;">
+	<div style="float: right;">
+		<button *ngIf = "helpButtonStatus" color='primary' class = "help-btn" (click)='buttonHelpPressed()'>Need Help? Contact Us</button>
+	</div>
+	<br>
+
+	<div style="text-align: center; margin-top: 50px">
 		<button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
 	</div>
 

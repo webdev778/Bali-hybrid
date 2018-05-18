@@ -1,0 +1,38 @@
+<ion-header hideWhen="core">
+  <page-bsc-header ></page-bsc-header>
+</ion-header>
+
+<ion-content>
+
+	<page-bsc-header showWhen="core" header="Today In Bali"></page-bsc-header>
+
+	<h2 hideWhen='core' class='mobile-sub-header'>{{title | uppercase}}</h2>
+    <h2 showWhen='core' class='core-sub-header'>{{title | uppercase}}</h2>
+
+	<br>
+
+	<ion-grid>
+        <ion-row class='flex-row' *ngFor="let content of bundleArrayContent">
+            <ion-col col-12 class="flexgrid" >
+                    <h2 [innerHTML]="content.bankname"></h2>
+                    <h5> <img src="assets/imgs/location-pin.png"> Address : {{content.address}}</h5>
+                    <h5> <img src="assets/imgs/telephone.png"> Phone : {{content.phone}}</h5>
+                     <h5> <img src="assets/imgs/telephone.png"> Email : {{content.email}}</h5>
+            </ion-col>
+            <ion-col col-12>
+                <button class="button-map" ion-button color='primary' full (click)='buttonShowOnMapPressed(content)'> <img src="assets/imgs/on-map.png" class="img-map"> Show On Map</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <br>
+
+	<div style="text-align: center;">
+		<button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
+	</div>
+
+    <br>
+
+	<page-bsc-footer></page-bsc-footer>
+
+</ion-content>

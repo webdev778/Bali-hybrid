@@ -47,6 +47,7 @@ export let SERVICE_URL_FAQ = BASE_URL+"getFaq";
 // CMS Pages
 export let SERVICE_URL_PAGES = BASE_URL+"getPages";
 export let SERVICE_URL_PAGE_CONTENT = BASE_URL+"getPageContent";
+export let SERVICE_URL_MEDICAL_PAGE_CONTENT = BASE_URL + "getMedicalAssistanceByType"
 
 // Contact Us Page
 export let SERVICE_URL_CONTACT_US = BASE_URL+"getContactUsInfo";
@@ -77,6 +78,10 @@ export let SERVICE_URL_VIEW_PROFILE = BASE_URL + "viewProfile";
 export let SERVICE_URL_UPDATE_PROFILE = BASE_URL + "updateProfile";
 export let SERVICE_URL_GET_SERVICE_CONTENT = BASE_URL + "getServiceContent";
 export let SERVICE_URL_UPDATE_PASSWORD = BASE_URL + "updatePassword";
+export let SERVICE_URL_CHECK_PURCHASE_STATUS = BASE_URL + "checkIsPurchased";
+export let SERVICE_URL_CHECK_REQUEST_HELP = BASE_URL + "helpRequest";
+export let SERVICE_URL_GET_MEDICAL_CONTENT = BASE_URL + "getMedicalAssistanceType";
+
 
 export interface TicketStructure { 
 	ticket_id: number, 

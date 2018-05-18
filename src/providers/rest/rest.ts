@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AlertController } from 'ionic-angular'
@@ -41,6 +40,10 @@ import {
   SERVICE_URL_GET_SERVICE_CONTENT,
   SERVICE_URL_CHANGE_PASSWORD,
   SERVICE_URL_CHECK_FORGET_PASSWORD,
+  SERVICE_URL_CHECK_PURCHASE_STATUS,
+  SERVICE_URL_CHECK_REQUEST_HELP,
+  SERVICE_URL_GET_MEDICAL_CONTENT,
+  SERVICE_URL_MEDICAL_PAGE_CONTENT,
   ConstantsProvider } from '../constants/constants';
 
 
@@ -127,6 +130,15 @@ import {
      return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_PAGE_CONTENT, data);
    }
 
+    getMedicalPageData(id): Observable<{ }> {
+
+     let data = {
+       'type_id' : id
+     }
+
+     return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_MEDICAL_PAGE_CONTENT, data);
+   }
+
    // FAQ Page
 
    getFAQ(): Observable<{ }> {
@@ -139,6 +151,12 @@ import {
    getServices(): Observable<{ }> {
 
      return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_SERVICES);
+   }
+
+   //Medical Assistance Page
+
+   getMedicalAssitancePageData(): Observable<{ }> {
+     return this.mainRestProvider.fireGetServiceWithoutHeader(SERVICE_URL_GET_MEDICAL_CONTENT);
    }
 
    // Contact Us Page
@@ -350,9 +368,26 @@ import {
 
      return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_ACTIVATE_TICKET, data, data.token);
    }
-   
+
+
+   requestHelp(requestBundle): Observable<{ }> {
+
+     let data = {
+       'user_id': requestBundle.user_id,
+       'service_id': requestBundle.id,
+       'message': requestBundle.message,
+       'title': requestBundle.title
+     };
+
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_CHECK_REQUEST_HELP, data, requestBundle.token);
+   }
+
    sendChangePassWord(passwordInfo): Observable<{ }> {
      return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_UPDATE_PASSWORD, passwordInfo);
+   }
+
+   checkPurchaseStatus(request): Observable<{ }> {
+     return this.mainRestProvider.firePostServiceWithHeader(SERVICE_URL_CHECK_PURCHASE_STATUS,request,request.token);
    }
    
    alertServerError(err,loader) {
@@ -371,16 +406,15 @@ import {
    }
 
    setRootLoginPage(response) {
-     if( response.status == 400 || response.status == 401 || response.status == 402 || response.status == 403 ) {
+     // if( response.status == 400 || response.status == 401 || response.status == 402 || response.status == 403 ) {
        this.storage.remove('user_data');
        this.storage.remove('auth_token');
-       this.storage.set('is_login', false);
-
+       this.storage.set('is_login', false).then(() => {
        this.constantProvider.loginTitle = 'LOGIN';
        this.constantProvider.loginPage = 'LoginPage'
        this.constantProvider.isLogin = false;
        (this.app.getRootNav() as NavController).setRoot('LoginPage')
-     }
+     })
      
    }
 

@@ -1,0 +1,60 @@
+
+<ion-header hideWhen="core">
+	<page-bsc-header ></page-bsc-header>
+</ion-header>
+
+<ion-content style = "
+    background-color: white">
+
+	<page-bsc-header showWhen="core"></page-bsc-header>
+
+	<h2 hideWhen='core' class="mobile-sub-header">HELP DESK</h2>
+	<h2 showWhen='core' class="core-sub-header">HELP DESK</h2>
+
+	<ion-grid class='help-grid'>
+		<ion-row class='help-row'>
+			<ion-col class='help-col'>
+                
+                 <div>
+                 <img src = "assets/imgs/help_desk.jpg">
+                 </div>
+		
+			</ion-col>
+
+			<ion-col class='help-col'>
+					<h6 class="form-header">{{responseBundle.title | uppercase}}</h6>
+					<div class="form-panel">
+						<br>
+						<form #helpDeskForm="ngForm" novalidate>
+						    <ion-list no-lines>
+						 	      <ion-item class="form-item">
+							        <ion-textarea [(ngModel)]="responseBundle.message" name="message" type="text" #message="ngModel" spellcheck="false" autocapitalize="off" required class="class-text-area" placeholder="* Describe here ...">
+							        </ion-textarea>
+							      </ion-item>
+							      <p ion-text [hidden]="message.valid || submittedDescription == false" color="danger" padding-left>
+							        Please provide a proper description
+							      </p>
+							</ion-list >
+
+						    <ion-row responsive-sm>
+						      <ion-col>
+						        <button ion-button (click)="buttonSendPressed(helpDeskForm)" type="submit" block>Send</button>
+						      </ion-col>
+						    </ion-row>
+						</form>
+					</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+
+  <div style="text-align: center; margin-bottom: 20px;">
+    <button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
+  </div>
+
+	<page-bsc-footer></page-bsc-footer>
+</ion-content>
+
+
+
+

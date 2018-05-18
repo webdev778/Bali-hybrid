@@ -49,6 +49,11 @@ import { OrderHistoryPage } from '../pages/order-history/order-history'
 import { ViewProfilePage } from '../pages/view-profile/view-profile'
 import { ResetPasswordPage } from '../pages/reset-password/reset-password'
 import { UpdatePasswordPage } from '../pages/update-password/update-password'
+import { HelpDeskPage } from '../pages/help-desk/help-desk'
+import { MedicalAssistancePage } from '../pages/medical-assistance/medical-assistance'
+import { MedicalDetailsPage } from '../pages/medical-details/medical-details'
+
+
  
 @NgModule({
   declarations: [
@@ -80,7 +85,10 @@ import { UpdatePasswordPage } from '../pages/update-password/update-password'
     PaymentStatusPage,
     ViewProfilePage,
     OrderHistoryPage,
-    UpdatePasswordPage
+    UpdatePasswordPage,
+    HelpDeskPage,
+    MedicalAssistancePage,
+    MedicalDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -112,8 +120,11 @@ import { UpdatePasswordPage } from '../pages/update-password/update-password'
           { component: ViewProfilePage , name: 'ViewProfilePage', segment: 'dashboard/viewprofile', defaultHistory: [DashboardPage]},
           { component: OrderHistoryPage , name: 'OrderHistoryPage', segment: 'dashboard/orderhistory', defaultHistory: [DashboardPage]},
           { component: TicketDetailsPage , name: 'TicketDetailsPage', segment: 'dashboard/dashboardtickets/ticketdetails/:ticket', defaultHistory: [DashboardPage,DashboardTicketsPage]},
-          { component: UpdatePasswordPage , name: 'UpdatePasswordPage', segment: 'dashboard/viewprofile/update-password', defaultHistory: [DashboardPage,ViewProfilePage]}
-    ]}),
+          { component: UpdatePasswordPage , name: 'UpdatePasswordPage', segment: 'dashboard/viewprofile/update-password', defaultHistory: [DashboardPage,ViewProfilePage]},
+          { component: HelpDeskPage , name: 'HelpDeskPage', segment: 'services/helpdesk/:id', defaultHistory: [ServicesPage]},
+          { component: MedicalAssistancePage , name: 'MedicalAssistancePage', segment: 'services/medical-assistance', defaultHistory: [ServicesPage]},
+          { component: MedicalDetailsPage , name: 'MedicalDetailsPage', segment: 'services/medical-assistance/:id', defaultHistory: [ServicesPage,MedicalAssistancePage]}
+]}),
     HttpModule,
     HttpClientModule,
     IonicStorageModule.forRoot()
@@ -148,7 +159,10 @@ import { UpdatePasswordPage } from '../pages/update-password/update-password'
     PaymentStatusPage,
     ViewProfilePage,
     OrderHistoryPage,
-    UpdatePasswordPage
+    UpdatePasswordPage,
+    HelpDeskPage,
+    MedicalAssistancePage,
+    MedicalDetailsPage
   ],
   providers: [
     StatusBar,

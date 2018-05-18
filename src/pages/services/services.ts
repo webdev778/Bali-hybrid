@@ -22,6 +22,20 @@ export class ServicesPage {
 	bundleServices : any[] = [];
   isListLoaded = false
 
+  medicalAssistancePage = {   created_at: '' ,
+                              deleted_at:'',
+                              description:'',
+                              id:null, 
+                              image_name:'assets/imgs/medical-img.jpg', 
+                              is_paid:'', 
+                              status:'',
+                              title:'Medical Assistance', updated_at:''
+                          } 
+ 
+
+ 
+
+
   constructor(	public navCtrl: NavController, 
   				public navParams: NavParams, 
   				public rest: RestProvider,
@@ -33,9 +47,13 @@ export class ServicesPage {
   }
 
   moveToServiceDetails(service) {
+    if(service.id != null) {
   		this.navCtrl.push(ServiceDetailsPage, {
         'service': JSON.stringify(service.id),
       })
+    }else {
+      this.navCtrl.push('MedicalAssistancePage')
+    }
  	}
 
   getServicesList() {
@@ -54,6 +72,8 @@ export class ServicesPage {
               loader.dismiss()
               this.isListLoaded = true
               this.bundleServices = <any[]> this.bundleData.data;
+              this.bundleServices.push(this.medicalAssistancePage)
+              
             }
            );
   }
