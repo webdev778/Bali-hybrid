@@ -47,4 +47,8 @@ import { RestProvider } from '../../providers/rest/rest';
       })
  	}
 
+ 	buttonBackPressed() {
+ 		this.navCtrl.pop()
+ 	}
+
  }

@@ -19,7 +19,9 @@ export class MedicalDetailsPage {
   passedData = ''		
   bundleData:any
   title = ''
-  bundleArrayContent:any
+  isListLoaded = false
+
+  bundleArrayContent:any[] = []
   constructor(		public navCtrl: NavController, 
 				  	public navParams: NavParams, 
 				  	public loadingController: LoadingController,
@@ -46,11 +48,33 @@ export class MedicalDetailsPage {
 			err => this.rest.alertServerError(err,loader),
 			() => {   
 			    loader.dismiss()
+			    this.isListLoaded = true
 			    this.bundleArrayContent = this.bundleData.data
 			    this.title = this.bundleData.title
+			    
 				}
-			)
+		)
+	}
+
+	showAllOnMapPressed() {
+		console.log(this.bundleArrayContent)
+		var markerArray : Array<string> =[]
+		for (let mapPoints of this.bundleArrayContent) {
+			var marker = {latitude: '', longitude: '', label: ''};
+
+			marker.latitude = mapPoints.lat
+			marker.longitude = mapPoints.long
+			marker.label = mapPoints.name
+
+			let markerString = marker.latitude + ',' + marker.longitude + ',' + marker.label
+			console.log('marker string : '+ markerString)
+	    	markerArray.push(markerString);
 		}
+		console.log(markerArray)
+		this.navCtrl.push('CommonMapPage', {
+	      		'location': JSON.stringify(markerArray)
+	    	});
+	}
 
 	buttonBackPressed() {
 		this.navCtrl.pop()

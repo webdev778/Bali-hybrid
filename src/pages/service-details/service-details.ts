@@ -68,9 +68,7 @@ import { Storage } from '@ionic/storage';
             responseData => this.bundleIsPurchased = responseData, 
             err => this.rest.alertServerError(err,loader),
             () => {
-                console.log(this.bundleIsPurchased)
                 this.helpButtonStatus = this.bundleIsPurchased.data
-                console.log(this.helpButtonStatus)
             }
         )
      }

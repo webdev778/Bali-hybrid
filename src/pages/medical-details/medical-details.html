@@ -11,10 +11,11 @@
 
 	<br>
 
+    <h6 class="placeholder" [hidden]="bundleArrayContent.length > 0 || !isListLoaded">No Record Found</h6>
 	<ion-grid>
         <ion-row class='flex-row' *ngFor="let content of bundleArrayContent">
             <ion-col col-12 class="flexgrid" >
-                    <h2 [innerHTML]="content.bankname"></h2>
+                    <h2 [innerHTML]="content.name"></h2>
                     <h5> <img src="assets/imgs/location-pin.png"> Address : {{content.address}}</h5>
                     <h5> <img src="assets/imgs/telephone.png"> Phone : {{content.phone}}</h5>
                      <h5> <img src="assets/imgs/telephone.png"> Email : {{content.email}}</h5>
@@ -26,6 +27,10 @@
     </ion-grid>
 
     <br>
+
+  <!--   <div style="text-align: center;">
+        <button ion-button color='primary' outline (click)='showAllOnMapPressed()'>SHOW ALl</button>
+    </div> -->
 
 	<div style="text-align: center;">
 		<button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>

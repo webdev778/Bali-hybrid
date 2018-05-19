@@ -68,7 +68,7 @@ export class HelpDeskPage {
 
 	raiseHelpRequest() {
 		let loader = this.loadingController.create({
-            content: "Loading Services ..."
+            content: "send request ..."
         });
 		loader.present()
         this.rest.requestHelp(this.responseBundle)

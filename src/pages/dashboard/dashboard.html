@@ -1,4 +1,4 @@
-<ion-header hideWhen="core">
+<!-- <ion-header hideWhen="core">
 	<page-bsc-header ></page-bsc-header>
 </ion-header>
 
@@ -28,6 +28,43 @@
 			</ion-col>
 		</ion-row>
 	</ion-grid>
+
+	<page-bsc-footer></page-bsc-footer>
+
+</ion-content> -->
+
+<ion-header hideWhen="core">
+	<page-bsc-header ></page-bsc-header>
+</ion-header>
+
+<ion-content>
+
+	<page-bsc-header header='dashboard' showWhen="core"></page-bsc-header>
+
+	<h2 hideWhen='core' class="mobile-sub-header">DASHBOARD</h2>
+	<h2 showWhen='core' class="core-sub-header">DASHBOARD</h2>
+
+	<br>
+
+	<ion-grid>
+        <ion-row showWhen="core" class='service-row'>
+            <ion-col col-4  class="flexgrid-core" *ngFor="let page of dashoboardSubPages">
+                  <div class="services-imgwrap"><img src={{page.image_name}} class="services-img"></div>
+                  <button class="service-btn" ion-button full (click)="moveToPage(page)">
+                    {{page.name | uppercase}}
+                  </button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row hideWhen="core" class='service-row'>
+            <ion-col class="flexgrid-mobile" *ngFor="let page of dashoboardSubPages">
+                  <div class="services-imgwrap"><img src={{page.image_name}} class="services-img"></div>
+                  <button class="service-btn" ion-button full (click)="moveToPage(page)">
+                    {{page.name | uppercase}}
+                  </button>
+            </ion-col>
+        </ion-row>
+  </ion-grid>
 
 	<page-bsc-footer></page-bsc-footer>
 

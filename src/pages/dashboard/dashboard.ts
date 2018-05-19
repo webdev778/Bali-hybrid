@@ -20,14 +20,14 @@ import { ConstantsProvider } from '../../providers/constants/constants'
 })
 export class DashboardPage {
 
-    dashoboardSubPages: Array<{name: string, icon: any, page: any}>;
+    dashoboardSubPages: Array<{name: string, icon: any, page: any, image_name:any}>;
 
     constructor(	public navCtrl: NavController, public navParams: NavParams, 
         private storage: Storage,private constantProvider: ConstantsProvider) {
         this.dashoboardSubPages = [
-                                    {name: 'View Tickets', icon: '', page: DashboardTicketsPage},
-                                    {name: 'View Order History', icon: '', page: OrderHistoryPage},
-                                    {name: 'View Profile', icon: '', page: ViewProfilePage},
+                                    {name: 'View Tickets', icon: '', page: DashboardTicketsPage, image_name:'assets/imgs/tickets.png'},
+                                    {name: 'View Orders', icon: '', page: OrderHistoryPage,image_name:'assets/imgs/order-history.png' },
+                                    {name: 'View Profile', icon: '', page: ViewProfilePage,image_name:'assets/imgs/view-profile.png'},
                                   ];
 
         this.checkForLogin()

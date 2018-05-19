@@ -4,7 +4,7 @@
 
 <ion-content>
 
-  <page-bsc-header *ngIf= "!isPushed" header={{pageTitle}} showWhen="core"></page-bsc-header>
+  <page-bsc-header *ngIf= "!isPushed" header='about us' showWhen="core"></page-bsc-header>
   <page-bsc-header *ngIf= "isPushed" header='Today In Bali' showWhen="core"></page-bsc-header>
 
   <h2 hideWhen='core' class="mobile-sub-header"[innerHTML]="pageTitle | uppercase"></h2>
