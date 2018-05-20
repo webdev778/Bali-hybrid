@@ -23,8 +23,8 @@
 <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
-      .then(() => console.log(''))
-      .catch(err => console.log('') );
+      .then(() => console.log('service worker installed successfully'))
+      .catch(err => console.log('service worker error : '+err) );
     }
   </script>
 
