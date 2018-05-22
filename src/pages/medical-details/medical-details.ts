@@ -41,7 +41,7 @@ export class MedicalDetailsPage {
 	let requestData = { type_id: type_id , location_id: location_id}
 
 	let loader = this.loadingController.create({
-	content: "Loading Services ..."
+	content: "Loading Medical Services..."
 	});
 	loader.present()
 
