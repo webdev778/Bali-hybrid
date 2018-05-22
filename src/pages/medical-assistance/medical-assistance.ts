@@ -42,7 +42,7 @@ import { RestProvider } from '../../providers/rest/rest';
 	}
 
  	medicalAssistanceButtonPressed(page) {
- 		this.navCtrl.push('MedicalDetailsPage', {
+ 		this.navCtrl.push('MedicalLocationPage', {
         'id': JSON.stringify(page.id),
       })
  	}

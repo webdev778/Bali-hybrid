@@ -52,6 +52,7 @@ import { UpdatePasswordPage } from '../pages/update-password/update-password'
 import { HelpDeskPage } from '../pages/help-desk/help-desk'
 import { MedicalAssistancePage } from '../pages/medical-assistance/medical-assistance'
 import { MedicalDetailsPage } from '../pages/medical-details/medical-details'
+import { MedicalLocationPage } from '../pages/medical-location/medical-location'
 
 
  
@@ -88,7 +89,8 @@ import { MedicalDetailsPage } from '../pages/medical-details/medical-details'
     UpdatePasswordPage,
     HelpDeskPage,
     MedicalAssistancePage,
-    MedicalDetailsPage
+    MedicalDetailsPage,
+    MedicalLocationPage
   ],
   imports: [
     BrowserModule,
@@ -123,7 +125,9 @@ import { MedicalDetailsPage } from '../pages/medical-details/medical-details'
           { component: UpdatePasswordPage , name: 'UpdatePasswordPage', segment: 'dashboard/viewprofile/update-password', defaultHistory: [DashboardPage,ViewProfilePage]},
           { component: HelpDeskPage , name: 'HelpDeskPage', segment: 'services/helpdesk/:id', defaultHistory: [ServicesPage]},
           { component: MedicalAssistancePage , name: 'MedicalAssistancePage', segment: 'services/medical-assistance', defaultHistory: [ServicesPage]},
-          { component: MedicalDetailsPage , name: 'MedicalDetailsPage', segment: 'services/medical-assistance/:id', defaultHistory: [ServicesPage,MedicalAssistancePage]}
+          { component: MedicalLocationPage , name: 'MedicalLocationPage', segment: 'services/medical-assistance/medical-location/:id', defaultHistory: [ServicesPage,MedicalAssistancePage]},
+          { component: MedicalDetailsPage , name: 'MedicalDetailsPage', segment: 'services/medical-assistance/medical-location/details/:id', defaultHistory: [ServicesPage,MedicalAssistancePage]},
+         
 ]}),
     HttpModule,
     HttpClientModule,
@@ -162,6 +166,7 @@ import { MedicalDetailsPage } from '../pages/medical-details/medical-details'
     UpdatePasswordPage,
     HelpDeskPage,
     MedicalAssistancePage,
+    MedicalLocationPage,
     MedicalDetailsPage
   ],
   providers: [

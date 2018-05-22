@@ -6,22 +6,24 @@
 
 	<page-bsc-header showWhen="core" header="Our Services"></page-bsc-header>
 
-	<h2 hideWhen='core' class="mobile-sub-header">MEDICAL ASSISTANCE</h2>
-	<h2 showWhen='core' class="core-sub-header">MEDICAL ASSISTANCE</h2>
-	
+	<h2 hideWhen='core' class="mobile-sub-header">{{medicalTitle | uppercase}}</h2>
+	<h2 showWhen='core' class="core-sub-header">{{medicalTitle|uppercase}}</h2>
+
+	<!-- <h6 class="form-header">MEDICAL ASSISTANCE</h6> -->
+
 	<ion-grid>
 			<ion-row showWhen="core" style="text-align: center; display: flex; justify-content: center;padding-left: 10%; padding-right: 10%">
-				<ion-col col-4  class="flexgrid-core" *ngFor="let page of medicalAssistanceSubPages">
-					<button ion-button full (click) = "medicalAssistanceButtonPressed(page)" >
-						{{page.title | uppercase}}
+				<ion-col col-4  class="flexgrid-core" *ngFor="let locationData of medicalLocations">
+					<button ion-button full (click) = "medicalLocationPressed(locationData)" >
+						{{locationData.location | uppercase}}
 					</button>
 				</ion-col>
 			</ion-row>
 
 			<ion-row hideWhen="core" style="display: flex; justify-content: center; text-align: center;">
-				<ion-col class="flexgrid-mobile" *ngFor="let page of medicalAssistanceSubPages">
-					<button ion-button full (click) = "medicalAssistanceButtonPressed(page)">
-						{{page.title | uppercase}}
+				<ion-col class="flexgrid-mobile" *ngFor="let locationData of medicalLocations">
+					<button ion-button full (click) = "medicalLocationPressed(locationData)">
+						{{locationData.location | uppercase}}
 					</button>
 				</ion-col>
 			</ion-row>

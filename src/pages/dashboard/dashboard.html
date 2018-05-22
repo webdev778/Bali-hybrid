@@ -49,7 +49,8 @@
 	<ion-grid>
         <ion-row showWhen="core" class='service-row'>
             <ion-col col-4  class="flexgrid-core" *ngFor="let page of dashoboardSubPages">
-                  <div class="services-imgwrap"><img src={{page.image_name}} class="services-img"></div>
+                  <div class="services-imgwrap" (click)="moveToPage(page)"><img src={{page.image_name}} class="services-img">
+                  </div>
                   <button class="service-btn" ion-button full (click)="moveToPage(page)">
                     {{page.name | uppercase}}
                   </button>
@@ -58,7 +59,7 @@
 
         <ion-row hideWhen="core" class='service-row'>
             <ion-col class="flexgrid-mobile" *ngFor="let page of dashoboardSubPages">
-                  <div class="services-imgwrap"><img src={{page.image_name}} class="services-img"></div>
+                  <div class="services-imgwrap" (click)="moveToPage(page)"><img src={{page.image_name}} class="services-img"></div>
                   <button class="service-btn" ion-button full (click)="moveToPage(page)">
                     {{page.name | uppercase}}
                   </button>

@@ -27,7 +27,6 @@ export class VaccinationPage {
   }
 
   ionViewDidLoad() {
-
     this.getHospitals()
   }
 

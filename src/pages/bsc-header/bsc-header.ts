@@ -98,21 +98,37 @@ export class BscHeaderPage {
 
         this.constantProvider.loginTitle = 'LOGIN';
         this.constantProvider.loginPage = 'LoginPage'
-        this.constantProvider.isLogin = false;
+        this.storage.get('is_login').then((is_login)=> { 
+        this.constantProvider.isLogin = is_login
+        });
 
         this.navCtrl.setRoot('LoginPage')
     }
 
     logoutPressed() {
-         let requestBundle = {user_id:'', token: ''}
-          this.storage.get('user_data').then((user_data) => {
+
+        this.storage.get('is_login').then((is_login)=> { 
+           
+           if ( is_login){
+            let requestBundle = {user_id:'', token: ''}
+                this.storage.get('user_data').then((user_data) => {
                       requestBundle.user_id = JSON.parse(user_data).id;
                         this.storage.get('auth_token').then((authToken) => {
                          requestBundle.token = authToken;
                          this.logoutUser(requestBundle)
                     });
                 });
+            }
+            else {
+                this.constantProvider.loginTitle = 'LOGIN';
+                this.constantProvider.loginPage = 'LoginPage'
+                this.constantProvider.isLogin = is_login
+                this.moveToLoginPage()
+            }    
+        })
+        
     }
+
 
     logoutUser(requestBundle) {
         let loader = this.loadingController.create({

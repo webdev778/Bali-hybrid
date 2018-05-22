@@ -38,6 +38,12 @@ export class DashboardPage {
             if (!isLogin) {
                 this.moveToLoginPage()
             }
+            else {
+                this.storage.set('is_login', true);
+                this.constantProvider.loginTitle = "Dashboard"
+                this.constantProvider.loginPage = DashboardPage
+                this.constantProvider.isLogin = true
+            }
         })
     }
 

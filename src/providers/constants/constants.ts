@@ -16,7 +16,7 @@ export let PUBLIC_HEADER = {
 
 // Constants for Web Services
 
-// export let BASE_URL = "http://192.168.0.34/bali-web/public/api/";
+// export let BASE_URL = "http://192.168.1.56/bali-web/public/api/";
 export let BASE_URL = "http://admin.develop-me.tk/api/";
 
 //Authenticate User
@@ -81,6 +81,8 @@ export let SERVICE_URL_UPDATE_PASSWORD = BASE_URL + "updatePassword";
 export let SERVICE_URL_CHECK_PURCHASE_STATUS = BASE_URL + "checkIsPurchased";
 export let SERVICE_URL_CHECK_REQUEST_HELP = BASE_URL + "helpRequest";
 export let SERVICE_URL_GET_MEDICAL_CONTENT = BASE_URL + "getMedicalAssistanceType";
+export let SERVICE_URL_MEDICAL_PAGE_LOCATIONS = BASE_URL + "getLocations";
+
 
 
 export interface TicketStructure { 

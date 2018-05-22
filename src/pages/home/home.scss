@@ -23,17 +23,14 @@ page-home {
   .services-imgwrap{
       height: 192px;
       width: 100%;
+      cursor: pointer;
        
       img {
     
       width: 100%;
       height: 100%;
       object-fit: cover;
-
-
     }
-
-
   }
 
   .flexgrid-type{
@@ -42,7 +39,7 @@ page-home {
     img {
       margin-top: 10px
     }
-
+    
   }
 
 

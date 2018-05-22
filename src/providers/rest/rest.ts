@@ -44,6 +44,7 @@ import {
   SERVICE_URL_CHECK_REQUEST_HELP,
   SERVICE_URL_GET_MEDICAL_CONTENT,
   SERVICE_URL_MEDICAL_PAGE_CONTENT,
+  SERVICE_URL_MEDICAL_PAGE_LOCATIONS,
   ConstantsProvider } from '../constants/constants';
 
 
@@ -88,9 +89,9 @@ import {
       return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_FORGET_PASSWORD, data);
     }
 
-     checkForgetPassword(requestBundle): Observable<{ }> {     
+    checkForgetPassword(requestBundle): Observable<{ }> {     
       return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_CHECK_FORGET_PASSWORD, requestBundle);
-     }
+    }
 
     signupUser(signupData) {
       let data = {
@@ -130,13 +131,17 @@ import {
      return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_PAGE_CONTENT, data);
    }
 
-    getMedicalPageData(id): Observable<{ }> {
+   getMedicalPageData(medicalData): Observable<{ }> {
+     return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_MEDICAL_PAGE_CONTENT, medicalData);
+   }
+
+   getMedicalLocation(id): Observable<{ }> {
 
      let data = {
        'type_id' : id
      }
 
-     return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_MEDICAL_PAGE_CONTENT, data);
+     return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_MEDICAL_PAGE_LOCATIONS, data);
    }
 
    // FAQ Page
@@ -224,7 +229,7 @@ import {
 
    requestServices(passInfo): Observable<{ }> {
      let data = {
-        'service_id': passInfo
+       'service_id': passInfo
      };
 
      return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_GET_SERVICE_CONTENT, data);
@@ -410,13 +415,13 @@ import {
        this.storage.remove('user_data');
        this.storage.remove('auth_token');
        this.storage.set('is_login', false).then(() => {
-       this.constantProvider.loginTitle = 'LOGIN';
-       this.constantProvider.loginPage = 'LoginPage'
-       this.constantProvider.isLogin = false;
-       (this.app.getRootNav() as NavController).setRoot('LoginPage')
-     })
-     
-   }
+         this.constantProvider.loginTitle = 'LOGIN';
+         this.constantProvider.loginPage = 'LoginPage'
+         this.constantProvider.isLogin = false;
+         (this.app.getRootNav() as NavController).setRoot('LoginPage')
+       })
+
+     }
 
    // Download Image From URL
 

@@ -23,6 +23,7 @@ export class TicketDetailsPage {
     requestBundle = {user_id: '', token: ''}
     errorDateOfBirth = ""
     mandatoryErrorText = ""
+    maxFileSize = 500
 
     isDisabled = true
 
@@ -92,15 +93,25 @@ export class TicketDetailsPage {
         for (var count = 0; count < $event.target.files.length; count++) {
             let reader = new FileReader();
             reader.onload = (event:any) => {
-                let extentionData = (event.target.result).split(';')[0]
-                let docExtention = extentionData.split('/')[1]
-                
-                if (docExtention == 'msword') {
-                    dashBoardImage.image.push({"file": event.target.result, "extension": 'docs'})
+                let file: string = event.target.result
+                let base64StringLength = file.length
+                let fileSize = 3*(base64StringLength/4)
+
+                if( fileSize < (this.maxFileSize*1024)) {
+                    let extentionData = (event.target.result).split(';')[0]
+                    let docExtention = extentionData.split('/')[1]
+                    
+                    if (docExtention == 'msword') {
+                        dashBoardImage.image.push({"file": event.target.result, "extension": 'docs'})
+                    }
+                    else {
+                        dashBoardImage.image.push({"file": event.target.result, "extension": docExtention})
+                    }
                 }
                 else {
-                    dashBoardImage.image.push({"file": event.target.result, "extension": docExtention})
-                }
+                    let message = 'File size must be less than or equal to 500 KB'
+                    this.presentAlert(message)
+                }    
             }
 
             reader.readAsDataURL($event.target.files[count]);

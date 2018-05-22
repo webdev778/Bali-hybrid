@@ -48,7 +48,7 @@ export class LoginPage {
         private storage: Storage,
         private constantProvider: ConstantsProvider,
         private fb: FacebookService
-        ) {
+    ) {
 
         this.checkForLogin()
     }
@@ -105,6 +105,15 @@ export class LoginPage {
         this.storage.get('is_login').then((isLogin) => {
             if (isLogin) {
                 this.moveToPage(DashboardPage)
+            }
+            else {
+                 this.storage.remove('user_data');
+                 this.storage.remove('auth_token');
+                 this.storage.set('is_login', false).then(() => {
+                 this.constantProvider.loginTitle = 'LOGIN';
+                 this.constantProvider.loginPage = 'LoginPage'
+                 this.constantProvider.isLogin = false;
+             })
             }
         })
     }
