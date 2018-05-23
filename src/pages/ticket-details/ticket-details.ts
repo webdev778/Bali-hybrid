@@ -24,6 +24,7 @@ export class TicketDetailsPage {
     errorDateOfBirth = ""
     mandatoryErrorText = ""
     maxFileSize = 500
+     
 
     isDisabled = true
 
@@ -90,6 +91,8 @@ export class TicketDetailsPage {
 
     imageSelectedFromUser(dashBoardImage,$event) {
 
+        var fileSizeExceededError = false
+
         for (var count = 0; count < $event.target.files.length; count++) {
             let reader = new FileReader();
             reader.onload = (event:any) => {
@@ -109,13 +112,21 @@ export class TicketDetailsPage {
                     }
                 }
                 else {
-                    let message = 'File size must be less than or equal to 500 KB'
-                    this.presentAlert(message)
+                    if (!fileSizeExceededError) {
+                        this.presentAlertSizeExceeded()
+                        fileSizeExceededError = true
+                    }                    
                 }    
             }
-
             reader.readAsDataURL($event.target.files[count]);
-        }           
+        } 
+
+        
+    }
+
+    presentAlertSizeExceeded() {
+        let message = 'File size must be less than or equal to 500 KB'
+        this.presentAlert(message)
     }
 
     removeImage(image,arrayImage) {
@@ -283,7 +294,7 @@ export class TicketDetailsPage {
             this.rest.downloadImageData(imageUrl.file)
             .subscribe(
                 data => blob = data,
-                err => console.log("Error while getting Image Data : "+err),
+                err => console.log(""),
                 () => {
                     var reader = new FileReader();
                     reader.readAsDataURL(blob); 
@@ -310,9 +321,11 @@ export class TicketDetailsPage {
     }
 
     openImage(document) {
-        let imageWindow = window.open("")
-        imageWindow.document.write("<iframe width='100%' height='100%' src='data:image/png; " +
-                                 encodeURI(document.file)+"'></iframe>")
+        var image = new Image();
+        image.src = 'data:image/png;' + encodeURI(document.file)
+
+        var newTab = window.open("");
+        newTab.document.write(image.outerHTML);
     }
 
     presentAlert(message) {

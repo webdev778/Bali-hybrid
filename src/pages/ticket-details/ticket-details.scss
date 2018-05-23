@@ -1,8 +1,8 @@
 page-ticket-details {
 
 	.toolbar-background {
-    	background-color: #547d88
- 	}
+		background-color: #547d88
+	}
 	.form-col {
 		min-width: 300px;
 		max-width: 700px;
@@ -13,15 +13,15 @@ page-ticket-details {
 	}
 
 	.user-imgwrap{
-      height: 192px;
-      width: 100%;
-       
-      img {    
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
+		height: 192px;
+		width: 100%;
+
+		img {    
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
 
 	.para-head{
 		color: #83838c;
@@ -38,7 +38,7 @@ page-ticket-details {
 	}
 
 	.text-input[disabled] {
-    opacity: .7;
+		opacity: .7;
 	}
 
 	.edit-button{
@@ -57,8 +57,8 @@ page-ticket-details {
 
 	.form-panel{
 		background-color: #fff;
-	    padding: 4rem;
-	    margin-bottom: 2rem ;
+		padding: 4rem;
+		margin-bottom: 2rem ;
 	}
 
 	.form-panel .form-item{
@@ -66,7 +66,7 @@ page-ticket-details {
 	}
 
 	input[type='file'] {
- 	 	color: transparent;
+		color: transparent;
 	}
 
 	.header{
@@ -95,6 +95,7 @@ page-ticket-details {
 			margin-top: 10px;
 			margin-bottom: 10px;
 			object-fit: cover;
+			cursor: pointer;
 		}
 
 		.dashboard-doc {
@@ -131,9 +132,9 @@ page-ticket-details {
 			color: solid gray;
 			margin-top: 5px;
 			margin-bottom: 40px;
-		 	background-color: #63a722;
-    		color: white;
-    		border: solid 1px #bcd2a2;
+			background-color: #63a722;
+			color: white;
+			border: solid 1px #bcd2a2;
 		}
 	}
 
@@ -181,7 +182,7 @@ ion-app.md [padding-left].text-md-danger{
 	padding-left: 0;
 	margin-left: 0px;
 	margin-top: 5px;
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 
@@ -189,7 +190,7 @@ ion-app.ios [padding-left] {
 	padding-left: 0px;
 	margin-left: 0px;
 	margin-top: 5px;
-    margin-bottom: 0px;
+	margin-bottom: 0px;
 }
 
 

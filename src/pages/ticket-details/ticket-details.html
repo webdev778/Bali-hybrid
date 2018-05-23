@@ -94,7 +94,7 @@
                   <div class="dashboard-image-div" *ngFor="let dashboardImage of arrayDashboardImages">
                       <h5>{{dashboardImage.title}} (Max size: {{maxFileSize}}KB)</h5>
 
-                      <div *ngFor="let image of dashboardImage.image">
+                      <div *ngFor="let image of dashboardImage.image" class = "div-file-upload">
                         <img *ngIf="image.extension == 'jpeg' || image.extension == 'png' " (click) = openImage(image) class="dashboard-image" [src]="image.file"/>
                         <img *ngIf="image.extension == 'pdf' " (click) = openPDF(image) class="dashboard-doc" src="assets/imgs/imgPDF.jpg"/>
                         <img *ngIf="image.extension == 'docs' " (click) = openDOC(image) class="dashboard-doc" src="assets/imgs/imgDOC.png"/>
