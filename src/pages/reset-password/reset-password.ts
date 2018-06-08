@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams , LoadingController, AlertController} from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { NgForm } from '@angular/forms';
-import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the ResetPasswordPage page.
@@ -134,7 +133,7 @@ export class ResetPasswordPage {
             {
                 text : 'Okay',
                 handler: () => {
-                    this.navCtrl.setRoot(LoginPage)
+                    this.navCtrl.setRoot('LoginPage')
                 }
             }
             ]

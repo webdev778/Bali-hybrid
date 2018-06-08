@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { DashboardTicketsPage } from '../dashboard-tickets/dashboard-tickets'
-import { OrderHistoryPage } from '../order-history/order-history'
-import { ViewProfilePage } from '../view-profile/view-profile'
 import { Storage } from '@ionic/storage';
 import { ConstantsProvider } from '../../providers/constants/constants'
 
@@ -25,9 +22,25 @@ export class DashboardPage {
     constructor(	public navCtrl: NavController, public navParams: NavParams, 
         private storage: Storage,private constantProvider: ConstantsProvider) {
         this.dashoboardSubPages = [
-                                    {name: 'View Tickets', icon: '', page: DashboardTicketsPage, image_name:'assets/imgs/tickets.png'},
-                                    {name: 'View Orders', icon: '', page: OrderHistoryPage,image_name:'assets/imgs/order-history.png' },
-                                    {name: 'View Profile', icon: '', page: ViewProfilePage,image_name:'assets/imgs/view-profile.png'},
+                                    {
+                                        name: 'View Tickets', icon: '', 
+                                        page: 'DashboardTicketsPage', 
+                                        image_name:'assets/imgs/tickets.png'
+                                    },
+
+                                    {
+                                        name: 'View Orders', icon: '', 
+                                        page: 'OrderHistoryPage',
+                                        image_name:'assets/imgs/order-history.png' 
+                                    },
+
+                                    {
+                                        name: 'View Profile', 
+                                        icon: '', 
+                                        page: 'ViewProfilePage',
+                                        image_name:'assets/imgs/view-profile.png'
+                                    },
+                                    
                                   ];
 
         this.checkForLogin()
@@ -41,9 +54,9 @@ export class DashboardPage {
             else {
                 this.storage.set('is_login', true);
                 this.constantProvider.loginTitle = "Dashboard"
-                this.constantProvider.loginPage = DashboardPage
+                this.constantProvider.loginPage = 'Dashboard'
                 this.constantProvider.isLogin = true
-            }
+             }
         })
     }
 

@@ -204,8 +204,7 @@ export class BuyTravelPassPage {
 			() => {
 				loader.dismiss()
 				this.bundleViewDescription = <any[]> this.bundleData.data;
-				for (let ticket of this.bundleViewDescription)
-				{
+				for (let ticket of this.bundleViewDescription) {
 					ticket['quantity'] = 0
 					
 					this.bundleSaveTickets.push(<TicketStructure> {ticket_type: ticket.title})

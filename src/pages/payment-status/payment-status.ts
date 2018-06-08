@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { DashboardPage } from '../dashboard/dashboard'
+
 
 /**
  * Generated class for the PaymentStatusPage page.
@@ -23,6 +23,6 @@ export class PaymentStatusPage {
     }
 
     moveToDashboard(){
-        this.navCtrl.push(DashboardPage)
+        this.navCtrl.push('Dashboard')
     }
 }

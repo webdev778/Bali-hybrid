@@ -71,6 +71,4 @@ export class MedicalLocationPage {
 	buttonBackPressed() {
 		this.navCtrl.pop()
 	}
-
-
 }

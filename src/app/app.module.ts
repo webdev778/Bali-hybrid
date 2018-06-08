@@ -98,7 +98,7 @@ import { MedicalLocationPage } from '../pages/medical-location/medical-location'
     FacebookModule.forRoot(),
     IonicModule.forRoot(MyApp, {}, {
         links: [
-          { component: HomePage, name: 'Home', segment: 'home' },
+          { component: HomePage, name: 'HomePage', segment: 'Home' },
           { component: DashboardPage, name: 'Dashboard', segment: 'dashboard' },
           { component: ServicesPage, name: 'ServicesPage', segment: 'services' },
           { component: ContactUsPage, name: 'ContactUsPage', segment: 'contactus' },

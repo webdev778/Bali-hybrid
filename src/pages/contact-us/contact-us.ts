@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { Platform } from 'ionic-angular';
-
 import { NgForm } from '@angular/forms';
 
-import { CommonMapPage } from '../common-map/common-map';
 
 
 /**
@@ -63,7 +61,7 @@ export class ContactUsPage {
  
     markerArray.push(markerString);
 
-    this.navCtrl.push(CommonMapPage, {
+    this.navCtrl.push('CommonMapPage', {
       'location': JSON.stringify(markerArray)
     });
   }

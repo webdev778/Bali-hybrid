@@ -1,15 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-import { ExchangeRatePage } from '../exchange-rate/exchange-rate';
-import { VolcanoStatusPage } from '../volcano-status/volcano-status';
-import { VaccinationPage } from '../vaccination/vaccination';
 import { RestProvider } from '../../providers/rest/rest';
-import { AboutUsPage } from '../about-us/about-us';
-import { PageBankPage } from '../page-bank/page-bank';
-import { PageAtmsPage } from '../page-atms/page-atms';
-import { PublicHolidaysPage } from '../public-holidays/public-holidays';
-import { TravelAlertPage } from '../travel-alert/travel-alert';
 
 /**
  * Generated class for the InBaliPage page.
@@ -34,13 +25,13 @@ export class InBaliPage {
                 public rest: RestProvider,) {
 
   	this.pages = [
-            {name: 'Exchange Rate', icon: 'exchange-rate', page: ExchangeRatePage},
-            {name: 'Volcano Status', icon: 'volcano-status', page: VolcanoStatusPage},
-            {name: 'Vaccinations', icon: 'vaccinations', page: VaccinationPage},
-            {name: 'Banks', icon: 'vaccinations', page: PageBankPage},
-            {name: 'ATMS', icon: 'vaccinations', page: PageAtmsPage},
-            {name: 'Bali Public Holidays', icon: 'public-holidays', page: PublicHolidaysPage},
-            {name: 'Travel Alerts', icon: 'travel-alerts', page: TravelAlertPage},
+            {name: 'Exchange Rate', icon: 'exchange-rate', page: 'ExchangeRatePage'},
+            {name: 'Volcano Status', icon: 'volcano-status', page: 'VolcanoStatusPage'},
+            {name: 'Vaccinations', icon: 'vaccinations', page: 'VaccinationPage'},
+            {name: 'Banks', icon: 'vaccinations', page: 'PageBankPage'},
+            {name: 'ATMS', icon: 'vaccinations', page: 'PageAtmsPage'},
+            {name: 'Bali Public Holidays', icon: 'public-holidays', page: 'PublicHolidaysPage'},
+            {name: 'Travel Alerts', icon: 'travel-alerts', page: 'TravelAlertPage'},
     ];
 
     this.getBaliCMSPages()
@@ -66,7 +57,7 @@ export class InBaliPage {
 
   moveToDetails(page) {
     if (page.page == undefined) {
-      this.navCtrl.push(AboutUsPage, {'data': JSON.stringify(page.id), isPushed: true})
+      this.navCtrl.push('AboutUsPage', {'data': JSON.stringify(page.id), isPushed: true})
     }else{
       this.navCtrl.push(page.page)
     }

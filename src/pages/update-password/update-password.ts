@@ -4,7 +4,6 @@ import { LoadingController, AlertController} from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { NgForm } from '@angular/forms';;
 import { Storage } from '@ionic/storage';
-import { DashboardPage } from '../dashboard/dashboard';
 
 /**
  * Generated class for the UpdatePasswordPage page.
@@ -68,7 +67,7 @@ export class UpdatePasswordPage {
     }
 
     moveToLoginPage() {
-       this.navCtrl.setRoot(DashboardPage)
+       this.navCtrl.setRoot('Dashboard')
     }
 
     updateUserPassword() {
@@ -85,8 +84,6 @@ export class UpdatePasswordPage {
             newpassword:this.updatePasswordBundle.newPassword,
             confirmnewpassword:this.updatePasswordBundle.confirmNewPassword
         }
-
-        console.log(requestBundle)
 
         this.rest.updatePassword(requestBundle)
         .subscribe(

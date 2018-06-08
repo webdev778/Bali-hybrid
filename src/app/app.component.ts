@@ -2,14 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform , LoadingController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { HomePage } from '../pages/home/home';
-import { AboutUsPage } from '../pages/about-us/about-us';
-import { BuyTravelPassPage } from '../pages/buy-travel-pass/buy-travel-pass';
-import { ContactUsPage } from '../pages/contact-us/contact-us';
-import { FaqPage } from '../pages/faq/faq';
-import { InBaliPage } from '../pages/in-bali/in-bali';
-import { ServicesPage } from '../pages/services/services';
-import { DashboardPage } from '../pages/dashboard/dashboard';
 import { RestProvider } from '../providers/rest/rest';
 import { SOCIAL_LINKS, ConstantsProvider,CMS_PAGES } from '../providers/constants/constants';
 import { Storage } from '@ionic/storage';
@@ -20,7 +12,7 @@ import { Storage } from '@ionic/storage';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = 'HomePage';
   isLogin:boolean;
   socialLinks: any;
 
@@ -39,12 +31,12 @@ export class MyApp {
     public loadingController: LoadingController) {
     this.initializeApp();
     this.pages = [
-    {title: 'Home', icon: 'home', page: HomePage},
-    {title: 'Today In Bali', icon: 'today_in_bali', page: InBaliPage},
-    {title: 'FAQ', icon: 'faq', page: FaqPage},
-    {title: 'Our Services', icon: 'our_services', page: ServicesPage},
-    {title: 'Buy Travel Pass', icon: 'buy_travel_pass', page: BuyTravelPassPage},
-    {title: 'Contact Us', icon: 'contact_us', page: ContactUsPage},
+    {title: 'Home', icon: 'home', page: 'HomePage'},
+    {title: 'Today In Bali', icon: 'today_in_bali', page: 'InBaliPage'},
+    {title: 'FAQ', icon: 'faq', page: 'FaqPage'},
+    {title: 'Our Services', icon: 'our_services', page: 'ServicesPage'},
+    {title: 'Buy Support Pass', icon: 'buy_travel_pass', page: 'BuyTravelPassPage'},
+    {title: 'Contact Us', icon: 'contact_us', page: 'ContactUsPage'},
     ];
 
     this.getCMSPages();
@@ -61,7 +53,7 @@ export class MyApp {
 
         this.storage.get('user_data').then((userData) => {
           this.constantProvider.loginTitle = "Dashboard"
-          this.constantProvider.loginPage = DashboardPage
+          this.constantProvider.loginPage = 'Dashboard'
         })
 
         this.storage.get('auth_token').then((token) => {
@@ -113,7 +105,7 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if (page.page == undefined) {
-      this.nav.setRoot(AboutUsPage, {'data': JSON.stringify(page), isPushed: false})
+      this.nav.setRoot('AboutUsPage', {'data': JSON.stringify(page), isPushed: false})
     }else {
       this.nav.setRoot(page.page)
     }

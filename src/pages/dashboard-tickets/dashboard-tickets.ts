@@ -4,8 +4,6 @@ import { RestProvider } from '../../providers/rest/rest';
 import { ConstantsProvider, TicketToShowStructure } from '../../providers/constants/constants'
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Rx';
-import { TicketDetailsPage} from '../ticket-details/ticket-details';
-
 
 /**
  * Generated class for the DashboardPage page.
@@ -176,7 +174,7 @@ import { TicketDetailsPage} from '../ticket-details/ticket-details';
 
 	buttonProfilePressed(ticket) {
 		let ticketDataArray = [ticket.ticket_type,ticket.ticket_id]
-		this.navCtrl.push(TicketDetailsPage,{'ticket': JSON.stringify(ticketDataArray)})
+		this.navCtrl.push('TicketDetailsPage',{'ticket': JSON.stringify(ticketDataArray)})
 	}
 
 	convertUnixTimestampToDate(timestamp) {

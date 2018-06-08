@@ -157,21 +157,17 @@ export class ConstantsProvider {
 	validateDate(date: string, type) {
 		let arrayDateString = date.split("/")
 
-		if (arrayDateString.length != 3)
-		{
+		if (arrayDateString.length != 3) {
 			return "Please enter a valid date (mm/dd/yyyy)"
-		}else if (Number(arrayDateString[0]) > 12 ||  Number(arrayDateString[1]) > 31 || Number(arrayDateString[2]) < 1000)
-		{
+		}else if (Number(arrayDateString[0]) > 12 ||  Number(arrayDateString[1]) > 31 || Number(arrayDateString[2]) < 1000) {
 			return "Please enter a valid date (mm/dd/yyyy)"
-		}else if ( type != 'Family')
-		{
+		}else if ( type != 'Family') {
 			if (new Date(date))
 			{
 				let enteredDate = new Date(date).getTime()
 				let currentDate = new Date().getTime()
 
-				if (enteredDate > currentDate)
-				{
+				if (enteredDate > currentDate) {
 					return "Please enter a valid date (mm/dd/yyyy)"
 				}else {
 					let years = (currentDate - enteredDate)/(1000*60*60*24*365.25)
@@ -185,8 +181,7 @@ export class ConstantsProvider {
 							return ""
 						}
 					}else{
-						if ( years > 18)
-						{
+						if ( years > 18) {
 							return "Child age must be less than 18 years"
 
 						}else{

@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { RestProvider } from '../../providers/rest/rest';
-import { DashboardPage } from '../dashboard/dashboard';
-import { BuyTravelPassPage } from '../buy-travel-pass/buy-travel-pass'
 import { Storage } from '@ionic/storage';
 import { ConstantsProvider, UserDetailsDS } from '../../providers/constants/constants'
 import { FacebookService, InitParams, LoginResponse } from 'ngx-facebook';
@@ -104,7 +102,7 @@ export class LoginPage {
     checkForLogin() {
         this.storage.get('is_login').then((isLogin) => {
             if (isLogin) {
-                this.moveToPage(DashboardPage)
+                this.moveToPage('Dashboard')
             }
             else {
                  this.storage.remove('user_data');
@@ -199,7 +197,7 @@ export class LoginPage {
         this.storage.set('is_login', true);
         this.navCtrl.setRoot(page)
         this.constantProvider.loginTitle = "Dashboard"
-        this.constantProvider.loginPage = DashboardPage
+        this.constantProvider.loginPage = 'Dashboard'
         this.constantProvider.isLogin = true
     }
 
@@ -230,10 +228,10 @@ export class LoginPage {
             this.constantProvider.authToken = this.loginBundle.data;
             
             if (this.navParams.get('lastPage') == 'buyTravelPassPage') {
-                this.moveToPage(BuyTravelPassPage)
+                this.moveToPage('BuyTravelPassPage')
             }
             else {
-                this.moveToPage(DashboardPage)
+                this.moveToPage('Dashboard')
             }
         }else {
             this.loginErrorMessaage = bundle.api_message

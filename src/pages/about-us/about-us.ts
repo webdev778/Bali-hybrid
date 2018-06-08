@@ -28,10 +28,6 @@ export class AboutUsPage {
     this.getPageContent(this.pageId);
   }
 
-  ionViewDidLoad() {
-    
-  }
-
   buttonBackPressed() {
     if (this.isPushed) {
       this.navCtrl.pop();

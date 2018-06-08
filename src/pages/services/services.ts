@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 
-import {ServiceDetailsPage} from '../service-details/service-details';
-
 /**
  * Generated class for the ServicesPage page.
  *
@@ -48,7 +46,7 @@ export class ServicesPage {
 
   moveToServiceDetails(service) {
     if(service.id != null) {
-  		this.navCtrl.push(ServiceDetailsPage, {
+  		this.navCtrl.push('ServiceDetailsPage', {
         'service': JSON.stringify(service.id),
       })
     }else {

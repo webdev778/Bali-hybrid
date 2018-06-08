@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-import { CommonMapPage } from '../common-map/common-map';
 
 /**
  * Generated class for the PageBankPage page.
@@ -58,7 +57,7 @@ export class PageBankPage {
 
     markerArray.push(markerString);
 
-    this.navCtrl.push(CommonMapPage, {
+    this.navCtrl.push('CommonMapPage', {
       'location': JSON.stringify(markerArray)
     });
   }
