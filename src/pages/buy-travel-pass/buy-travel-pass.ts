@@ -165,32 +165,6 @@ export class BuyTravelPassPage {
 		})
 	}
 
-	presentAlertNoTickets() {
-		let alert = this.alertCtrl.create({
-			subTitle: 'Please select a ticket to continue',
-			buttons: ['Okay']
-		});
-		alert.present();
-	}
-
-	presentAlertNotLoggedIn() {
-		let alert = this.alertCtrl.create({
-			title: '',
-
-			subTitle: 'Please login to purchase travel pass',
-			buttons: [
-			{
-				text : 'Login',
-				handler: () => {
-					this.moveToLoginPage()
-				}
-			}
-			]
-
-		});
-		alert.present()
-	}
-
 	getTravelPassData() {
 		let loader = this.loadingController.create({
 			content: "Loading Travel Passes ..."

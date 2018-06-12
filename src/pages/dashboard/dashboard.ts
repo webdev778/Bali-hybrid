@@ -72,6 +72,7 @@ export class DashboardPage {
 
         this.constantProvider.loginTitle = 'LOGIN';
         this.constantProvider.loginPage = 'LoginPage'
+        this.constantProvider.isLogin = false;
 
         this.navCtrl.setRoot('LoginPage')
     }
