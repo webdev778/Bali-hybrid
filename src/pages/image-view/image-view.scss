@@ -12,10 +12,13 @@ page-image-view {
 
 
 	}
+
 	.header-logo {
-		margin-top: 9px; height: 6vmin;
-		max-height: 30px;
-	}
+   		margin-top: 9px; height: 6vmin;
+   		max-height: 30px;
+   		// margin-left: -60px;
+  	}
+
 	.toolbar-background {
 		background-color: #547d88
 	}
@@ -27,6 +30,7 @@ page-image-view {
 	.map-header {
 		display: flex; 
 		justify-content: center;
+		height: 30px;
 	}
 
 	.image-grid {

@@ -7,29 +7,24 @@
 
 <ion-header>
     <ion-navbar>
-          <ion-grid>
-            <ion-row class='map-header' >
-              <ion-col col-1>
-                  <button ion-button menuToggle>
-                    <ion-icon name="menu"></ion-icon>
-                   </button>
-              </ion-col>
-              <ion-col col-12 class='img-col'>
-                <div>
-                  <img src="assets/imgs/logo.png"  />
-                </div>
-              </ion-col>
-            </ion-row>
-           </ion-grid>
+      <ion-title>
+       <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+
+      <div style="text-align: center;">
+        <img src="assets/imgs/logo.png" class = "header-logo" />
+      </div>
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content style = "background-color: #f0f0f0">
 
-<ion-grid class = "image-grid">
-	 <div class = "div-file-upload">
-	 	<img class="dashboard-image" [src]="image"/>
-	 </div>
-</ion-grid>
+  <ion-grid class = "image-grid">
+    <div class = "div-file-upload">
+     <img class="dashboard-image" [src]="image"/>
+   </div>
+ </ion-grid>
 
 </ion-content>
