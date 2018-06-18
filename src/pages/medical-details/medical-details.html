@@ -12,7 +12,9 @@
 	<br>
 
     <h6 class="placeholder" [hidden]="bundleArrayContent.length > 0 || !isListLoaded">No Record Found</h6>
-	<ion-grid>
+	
+    <ion-grid class = "grid-adjust">
+    <ion-grid>
         <ion-row class='flex-row' *ngFor="let content of bundleArrayContent">
             <ion-col col-12 class="flexgrid" >
                     <h2 [innerHTML]="content.name | uppercase"></h2>
@@ -37,6 +39,7 @@
 	</div>
 
     <br>
+    </ion-grid>
 
 	<page-bsc-footer></page-bsc-footer>
 

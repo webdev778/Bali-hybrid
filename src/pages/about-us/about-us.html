@@ -10,6 +10,7 @@
   <h2 hideWhen='core' class="mobile-sub-header"[innerHTML]="pageTitle | uppercase"></h2>
   <h2 showWhen='core' class="core-sub-header"[innerHTML]="pageTitle | uppercase"></h2>
 
+<ion-grid class = "grid-adjust" >
   <ion-grid class='about-us'>
   	<ion-row *ngFor="let content of pageContents">
   		<ion-col>
@@ -25,6 +26,7 @@
   </div>
 
   <br>
+</ion-grid>
 
   <page-bsc-footer></page-bsc-footer>
 

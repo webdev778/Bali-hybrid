@@ -12,7 +12,7 @@
 	<h6 class="placeholder" [hidden]="arrayAtms.length > 0 || !isListLoaded">No ATM Found</h6>
 
 	<br>
-
+    <ion-grid class = "grid-adjust">
 	<ion-grid>
         <ion-row class='flex-row' *ngFor="let atm of arrayAtms">
             <ion-col col-12 class="flexgrid" >
@@ -33,7 +33,7 @@
 	</div>
 
     <br>
-
+    </ion-grid>
 	<page-bsc-footer></page-bsc-footer>
 
 </ion-content>

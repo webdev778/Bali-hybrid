@@ -4,11 +4,14 @@
 
 <ion-content>
 
+
 	<page-bsc-header header='FAQ' showWhen="core"></page-bsc-header>
 
 	<h2 hideWhen='core' class="mobile-sub-header">FAQ</h2>
     <h2 showWhen='core' class="core-sub-header">FAQ</h2>
 
+
+<ion-grid class = "grid-adjust" >
 	<ion-list >
         <ion-grid class='faq-grid'>
             <ion-item no-lines *ngFor="let data of bundleDataFAQ" text-wrap>
@@ -36,7 +39,7 @@
             </ion-item>
         </ion-grid>
     </ion-list>
-
+</ion-grid>
 	<page-bsc-footer></page-bsc-footer>
 
 </ion-content>

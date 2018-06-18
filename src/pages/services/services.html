@@ -11,7 +11,7 @@
 
   <h6 class="placeholder" [hidden]="bundleServices.length > 0 || !isListLoaded">No Services Found</h6>
 
-	<ion-grid>
+	<ion-grid class = "grid-adjust">
         <ion-row showWhen="core" class='service-row'>
             <ion-col col-4  class="flexgrid-core" *ngFor="let data of bundleServices">
                   <div class="services-imgwrap" (click)="moveToServiceDetails(data)"><img src={{data.image_name}} class="services-img"></div>

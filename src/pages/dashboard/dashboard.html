@@ -11,7 +11,7 @@
 
 	<br>
 
-	<ion-grid>
+	<ion-grid class = "grid-adjust" >
         <ion-row showWhen="core" class='service-row'>
             <ion-col col-4  class="flexgrid-core" *ngFor="let page of dashoboardSubPages">
                   <div class="services-imgwrap" (click)="moveToPage(page)"><img src={{page.image_name}} class="services-img">

@@ -11,28 +11,32 @@
 
 	<br>
 
-	<ion-grid>
-		<ion-row class='details-row'>
-			<ion-col style='min-width: 300px;'>
-				<img src={{serviceDetails.image_name}} style="align-items: center; align-content: center;">
-			</ion-col>
-			<ion-col style='min-width: 300px;'>
-				<p class="details" [innerHTML]='serviceDetails.description'></p>
-			</ion-col>
-		</ion-row>
+	<ion-grid class = "grid-adjust">
+
+		<ion-grid>
+			<ion-row class='details-row'>
+				<ion-col style='min-width: 300px;'>
+					<img src={{serviceDetails.image_name}} style="align-items: center; align-content: center;">
+				</ion-col>
+				<ion-col style='min-width: 300px;'>
+					<p class="details" [innerHTML]='serviceDetails.description'></p>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+
+		<div style="text-align: right;">
+			<!-- <button *ngIf = "helpButtonStatus" color='primary' class = "help-btn" (click)='buttonHelpPressed()'>Need Help? Contact Us</button> -->
+			<img [hidden]="!helpButtonStatus"  src="assets/imgs/need-help.png" (click)="buttonHelpPressed()" class="img-help">
+		</div>
+		<br>
+
+		<div style="text-align: center; margin-top: 10px">
+			<button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
+		</div>
+
+		<br>
+
 	</ion-grid>
-
-	<div style="text-align: right;">
-		<!-- <button *ngIf = "helpButtonStatus" color='primary' class = "help-btn" (click)='buttonHelpPressed()'>Need Help? Contact Us</button> -->
-		<img [hidden]="!helpButtonStatus"  src="assets/imgs/need-help.png" (click)="buttonHelpPressed()" class="img-help">
-	</div>
-	<br>
-
-	<div style="text-align: center; margin-top: 10px">
-		<button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
-	</div>
-
-	<br>
 
 	<page-bsc-footer></page-bsc-footer>
 

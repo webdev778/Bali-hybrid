@@ -12,7 +12,7 @@
   <h6 class="placeholder" [hidden]="bundleHolidays.length > 0 || !isListLoaded">No Public Holidays</h6>
 
   <br>
-
+  <ion-grid class = "grid-adjust">
   <ion-grid>
         <ion-row class='flex-row' *ngFor="let holiday of bundleHolidays">
             <ion-col col-12 class="flexgrid" >
@@ -28,7 +28,7 @@
   <div style="text-align: center;">
     <button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
   </div>
-
+</ion-grid>
     <br>
 
   <page-bsc-footer></page-bsc-footer>

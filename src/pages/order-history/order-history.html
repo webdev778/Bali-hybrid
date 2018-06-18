@@ -10,6 +10,8 @@
   	
     <h6 class="placeholder" [hidden]="bundleOrderList.length > 0 || !isListLoaded">No Orders Found</h6>
 
+    <ion-grid class = "grid-adjust" >
+
   	<ion-grid class='flexgrid-2' showWhen="core" [hidden]="bundleOrderList.length == 0">
 
           <ion-row class = "flexgrid-row-head">
@@ -104,6 +106,7 @@
   <div style="text-align: center; margin-bottom: 20px;">
     <button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
   </div>
+</ion-grid>
 
 
 	<page-bsc-footer></page-bsc-footer>

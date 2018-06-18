@@ -1,0 +1,37 @@
+page-image-view {
+	.div-file-upload {
+		text-align: center;
+		height: 70%;
+		width: 100%;
+
+		img {
+			width: 98%;
+			height: 98%;
+			object-fit: contain;
+		}
+
+
+	}
+	.header-logo {
+		margin-top: 9px; height: 6vmin;
+		max-height: 30px;
+	}
+	.toolbar-background {
+		background-color: #547d88
+	}
+
+	.img-col {
+		text-align: center;
+	}
+
+	.map-header {
+		display: flex; 
+		justify-content: center;
+	}
+
+	.image-grid {
+		height: 100%;
+		margin-top: 5vh
+		// width: 100%;
+	}
+}

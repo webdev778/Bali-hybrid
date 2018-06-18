@@ -321,11 +321,7 @@ export class TicketDetailsPage {
     }
 
     openImage(document) {
-        var image = new Image();
-        image.src = 'data:image/png;' + encodeURI(document.file)
-
-        var newTab = window.open("");
-        newTab.document.write(image.outerHTML);
+        this.navCtrl.push('ImageViewPage', {image: document.file})
     }
 
     presentAlert(message) {
