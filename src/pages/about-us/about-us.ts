@@ -17,6 +17,7 @@ import { RestProvider } from '../../providers/rest/rest';
 export class AboutUsPage {
 
   pageId
+  pages: Array<{title: string, icon: any, page: any}>;
 	bundleDetails: {data: any,title:any};
   pageContents : any[];
   isPushed = false;
@@ -26,6 +27,11 @@ export class AboutUsPage {
     this.pageId = JSON.parse(this.navParams.get('data'))
     this.isPushed = this.navParams.get('isPushed')
     this.getPageContent(this.pageId);
+    this.pages =   [
+			{title: 'Account', icon: 'medical', page: 1},
+			{title: 'Documents', icon: 'lost_passport', page: 2},
+			{title: 'Contacts', icon: 'money', page: 3},
+		];
   }
 
   buttonBackPressed() {
@@ -46,4 +52,28 @@ export class AboutUsPage {
            );
   }
 
+  
+  openPage(page) {
+    if (page.page == undefined) {
+        this.navCtrl.setRoot('AboutUsPage', {'data': JSON.stringify(page.id), isPushed: false})
+    }else {
+          this.navCtrl.setRoot(page.page)
+    }
+  }
+
+	openService() {
+		this.navCtrl.setRoot('MedicalAssistancePage')
+	  }
+
+  openToday() {
+  this.navCtrl.setRoot('InBaliPage')
+  }
+
+  openFavourites() {
+    this.navCtrl.setRoot('FavouritesPage')
+  }
+
+  openMe() {
+    this.navCtrl.setRoot('AccountPage')
+  }
 }

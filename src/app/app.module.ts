@@ -21,6 +21,7 @@ import { AboutUsPage } from '../pages/about-us/about-us';
 import { BuyTravelPassPage } from '../pages/buy-travel-pass/buy-travel-pass';
 import { ContactUsPage } from '../pages/contact-us/contact-us';
 import { FaqPage } from '../pages/faq/faq';
+import { FavouritesPage } from '../pages/favourites/favourites';
 import { InBaliPage } from '../pages/in-bali/in-bali';
 import { LoginPage } from '../pages/login/login';
 import { ServicesPage } from '../pages/services/services';
@@ -33,6 +34,13 @@ import { PageBankPage } from '../pages/page-bank/page-bank';
 import { PageAtmsPage } from '../pages/page-atms/page-atms';
 import { PublicHolidaysPage } from '../pages/public-holidays/public-holidays';
 import { TravelAlertPage } from '../pages/travel-alert/travel-alert';
+import { WeatherPage } from '../pages/weather/weather';
+import { SimCardPage } from '../pages/simcard/simcard';
+import { AccountPage } from '../pages/account/account';
+import { DocumentPage } from '../pages/document/document';
+import { ContactPage } from '../pages/contact/contact';
+import { AtmBankLocationPage } from '../pages/atmbank-location/atmbank-location';
+//import { TravelAlertPage } from '../pages/travel-alert/travel-alert';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { TicketDetailsPage } from '../pages/ticket-details/ticket-details'
 import { BscHeaderPage } from '../pages/bsc-header/bsc-header';
@@ -64,6 +72,7 @@ import { ImageViewPage } from '../pages/image-view/image-view'
     BuyTravelPassPage,
     ContactUsPage,
     FaqPage,
+    FavouritesPage,
     InBaliPage,
     LoginPage,
     ServicesPage,
@@ -77,6 +86,12 @@ import { ImageViewPage } from '../pages/image-view/image-view'
     PageBankPage,
     PageAtmsPage,
     PublicHolidaysPage,
+    WeatherPage,
+    SimCardPage,
+    AccountPage,
+    DocumentPage,
+    ContactPage,
+    AtmBankLocationPage,
     TravelAlertPage,
     DashboardPage,
     TicketDetailsPage,
@@ -105,6 +120,7 @@ import { ImageViewPage } from '../pages/image-view/image-view'
           { component: ContactUsPage, name: 'ContactUsPage', segment: 'contactus' },
           { component: InBaliPage, name: 'InBaliPage', segment: 'todayinbali' },
           { component: FaqPage, name: 'FaqPage', segment: 'faq' },
+          { component: FavouritesPage, name: 'FavouritesPage', segment: 'favourites' },
           { component: BuyTravelPassPage, name: 'BuyTravelPassPage', segment: 'buytravelpass' },
           { component: LoginPage, name: 'LoginPage', segment: 'login'},
           { component: ServiceDetailsPage, name: 'ServiceDetailsPage', segment: 'services/details/:service' , defaultHistory:[ServicesPage]},
@@ -115,6 +131,12 @@ import { ImageViewPage } from '../pages/image-view/image-view'
           { component: VaccinationPage, name: 'VaccinationPage', segment: 'vaccination' , defaultHistory:[InBaliPage]},
           { component: PublicHolidaysPage, name: 'PublicHolidaysPage', segment: 'publicholidays' , defaultHistory:[InBaliPage]},
           { component: TravelAlertPage, name: 'TravelAlertPage', segment: 'travelalert' , defaultHistory:[InBaliPage]},
+          { component: WeatherPage, name: 'WeatherPage', segment: 'weather' , defaultHistory:[InBaliPage]},
+          { component: SimCardPage, name: 'SimCardPage', segment: 'simcard' , defaultHistory:[InBaliPage]},
+          { component: AccountPage, name: 'AccountPage', segment: 'account' },
+          { component: DocumentPage, name: 'DocumentPage', segment: 'document'},
+          { component: ContactPage, name: 'ContactPage', segment: 'contact' },
+          { component: AtmBankLocationPage, name: 'AtmBankLocationPage', segment: 'atmbank-location' , defaultHistory:[InBaliPage]},
           { component: AboutUsPage, name: 'AboutUsPage', segment: 'page/:data' , defaultHistory:[InBaliPage]},
           { component: CommonMapPage, name: 'CommonMapPage', segment: 'map/:location' , defaultHistory:[HomePage]},
           { component: ActivationPage, name: 'ActivationPage', segment: 'activation/:data'},
@@ -143,6 +165,7 @@ import { ImageViewPage } from '../pages/image-view/image-view'
     BuyTravelPassPage,
     ContactUsPage,
     FaqPage,
+    FavouritesPage,
     InBaliPage,
     LoginPage,
     ServicesPage,
@@ -156,6 +179,12 @@ import { ImageViewPage } from '../pages/image-view/image-view'
     PageBankPage,
     PageAtmsPage,
     PublicHolidaysPage,
+    WeatherPage,
+    SimCardPage,
+    AccountPage,
+    ContactPage,
+    DocumentPage,
+    AtmBankLocationPage,
     TravelAlertPage,
     DashboardPage,
     TicketDetailsPage,

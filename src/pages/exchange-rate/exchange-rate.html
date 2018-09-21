@@ -1,8 +1,80 @@
 <ion-header hideWhen="core">
   <page-bsc-header ></page-bsc-header>
+  <ion-grid class='bsc-header'>
+		<ion-row style="text-align: center; display: flex; justify-content: center;">
+		  <ion-col>
+			<ion-row>
+			  <ion-col *ngFor="let page of headerpages">
+	
+				<button *ngIf='header==page.title' ion-button class="header-button" color='primary' item-left full (click)="openPage(page)">{{page.title}}</button>
+	
+				<button *ngIf='header!=page.title' ion-button class="header-button" color='light' clear item-left full (click)="openPage(page)">{{page.title}}</button>
+	
+			  </ion-col>
+	
+			</ion-row>
+		  </ion-col>
+	
+		</ion-row>
+	</ion-grid>
 </ion-header>
 
-<ion-content>
+<ion-content hideWhen="core">
+
+	<ion-grid class = "grid-adjust">
+		<ion-grid>
+			<ion-row class='flex-row'>
+				<ion-col col-12 class="flexgrid" >
+						<h2>Bank of India Indonesia (KC) Denpasar Diponegoro</h2>
+						<h5> <img src="assets/imgs/location-pin.png"> Address : JI. Diponegoro, No. 135, Blok 27, Sesetan</h5>
+						<h5> <img src="assets/imgs/telephone.png"> Phone : +62-361-8424241</h5>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-grid>
+
+	<br>
+	<form>
+		<ion-item>
+			<ion-label>Date of Exchange Rate</ion-label>
+			<ion-datetime displayFormat="MMMM DD, YYYY" min="1900" max="2050-10-31"></ion-datetime>
+		</ion-item>
+	</form>
+	<ion-grid class = "grid-adjust">
+		<ion-grid class='exchange-grid'>
+			<ion-row class='exchange-row'>
+				<ion-col col-4>
+					<ion-input [(ngModel)]='basePrice' class='price-field' (ionChange)='convertCurrency()' name='basePrice' type="number" min='0' placeholder='Base Price'></ion-input>
+				</ion-col>
+				<ion-col col-8>
+					<ion-item class='currency-field' no-lines>
+						  <ion-select name='baseCurrency' placeholder='Currency' [(ngModel)]='baseCurrency' (ionChange)='convertCurrency()'>
+							  <ion-option *ngFor="let data of arrayCurrency" value={{data}}>{{data}}</ion-option>
+						</ion-select>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<ion-row class='exchange-row'>
+				<ion-col col-4>
+					<h5>{{convertedPrice}}</h5>
+				</ion-col>
+				<ion-col col-8>
+					<ion-item class='currency-field' no-lines>
+						  <ion-select name='convertedCurrency' placeholder='Currency' [(ngModel)]='convertedCurrency' (ionChange)='convertCurrency()'>
+							  <ion-option *ngFor="let data of arrayCurrency" value={{data}}>{{data}}</ion-option>
+						</ion-select>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	
+		
+		<br>
+
+	</ion-grid>
+</ion-content>
+
+<ion-content showWhen="core">
 
 	<page-bsc-header showWhen="core" header="Today In Bali"></page-bsc-header>
 
@@ -49,3 +121,40 @@
 	<page-bsc-footer></page-bsc-footer>
 
 </ion-content>
+
+<ion-footer hideWhen="core">
+	<ion-row>
+		<ion-col no-padding>
+			<button no-margin ion-button full color="light" (click)="openService()">
+			<div>
+				<ion-icon name="paper"></ion-icon><br>
+				<label>Services</label>
+			</div>
+			</button>
+		</ion-col>
+		<ion-col no-padding>
+			<button no-margin ion-button full color="light" (click)="openToday()">
+			<div>
+				<ion-icon name="partly-sunny"></ion-icon><br>
+				<label>Today</label>
+			</div>
+			</button>
+		</ion-col>
+		<ion-col no-padding>
+		<button no-margin ion-button full color="light" (click)="openFavourites()">
+			<div>
+			<ion-icon name="star"></ion-icon><br>
+			<label>Favourites</label>
+			</div>
+		</button>
+		</ion-col>
+		<ion-col no-padding>
+		<button no-margin ion-button full color="light" (click)="openMe()">
+			<div>
+			<ion-icon name="contact"></ion-icon><br>
+			<label>Me</label>
+			</div>
+		</button>
+		</ion-col>
+	</ion-row>
+</ion-footer>

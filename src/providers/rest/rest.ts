@@ -45,6 +45,7 @@ import {
   SERVICE_URL_GET_MEDICAL_CONTENT,
   SERVICE_URL_MEDICAL_PAGE_CONTENT,
   SERVICE_URL_MEDICAL_PAGE_LOCATIONS,
+  SERVICE_URL_ATMBANK_PAGE_LOCATIONS,
   ConstantsProvider } from '../constants/constants';
 
 
@@ -143,6 +144,15 @@ import {
 
      return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_MEDICAL_PAGE_LOCATIONS, data);
    }
+
+   getAtmbankLocation(id): Observable<{ }> {
+
+    let data = {
+      'type_id' : id
+    }
+
+    return this.mainRestProvider.firePostServiceWithoutHeader(SERVICE_URL_ATMBANK_PAGE_LOCATIONS, data);
+  }
 
    // FAQ Page
 

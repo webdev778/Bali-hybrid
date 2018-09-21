@@ -1,0 +1,233 @@
+<ion-header hideWhen="core">
+	<page-bsc-header ></page-bsc-header>
+	<ion-grid class='bsc-header'>
+    <ion-row style="text-align: center; display: flex; justify-content: center;">
+      <ion-col>
+        <ion-row>
+          <ion-col *ngFor="let page of pages">
+            <button *ngIf='header==page.title' ion-button class="header-button" color='primary' item-left full (click)="openPage(page)">{{page.title}}</button>
+            <button *ngIf='header!=page.title' ion-button class="header-button" color='light' clear item-left full (click)="openPage(page)">{{page.title}}</button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content hideWhen="core">
+	<h3 style="text-align: center!important; font-size: 30px; font-weight: 300">Emergency</h3><br>
+	<h5 style="text-align: center!important">Please contact the people in order below you can take a screenshot from your mobile phone contact list or enter details</h5><br>
+
+	<form #signForm="ngForm">
+		<ion-item>
+			<ion-label>My 1st Contact is</ion-label>
+			<ion-select name='contact' required>
+				<ion-option value="Address1">Address1</ion-option>
+				<ion-option value="Address2">Address2</ion-option>
+				<ion-option value="Address3">Address3</ion-option>
+			</ion-select>
+		</ion-item><br>
+
+		<ion-item>
+			<ion-label>And is located in</ion-label>
+			<ion-select name='location' required>
+				<ion-option value="Location1">Location1</ion-option>
+				<ion-option value="Location2">Location2</ion-option>
+				<ion-option value="Location3">Location3</ion-option>
+			</ion-select>
+		</ion-item><br>
+
+		<ion-row style="display: flex; justify-content: center; text-align: center;">
+			<ion-col no-padding>
+				<button ion-button>Add image screenshot</button>
+			</ion-col>
+		</ion-row><br>
+
+		<ion-row style="display: flex; justify-content: center; text-align: center;">
+			<p>--------------------------- OR ---------------------------</p>
+		</ion-row><br>
+
+		<ion-row style="display: flex; justify-content: center; text-align: center;">
+			<ion-col no-padding>
+				<ion-item>
+					<ion-label>First Name</ion-label>
+					<ion-input type="text" name="firstname" ngModel></ion-input>
+				</ion-item>				
+			</ion-col>
+
+			<ion-col no-padding>
+				<ion-item>
+					<ion-label>Last Name</ion-label>
+					<ion-input type="text" name="lastname" ngModel></ion-input>
+				</ion-item>				
+			</ion-col>
+		</ion-row><br>
+
+		<ion-row style="display: flex; justify-content: center; text-align: center;">
+			<ion-col no-padding>
+				<ion-item>
+					<ion-label>Mobile Number</ion-label>
+					<ion-input type="text" name="mobileno" ngModel></ion-input>
+				</ion-item>				
+			</ion-col>
+
+			<ion-col no-padding>
+				<ion-item>
+					<ion-label>Home or Work Number</ion-label>
+					<ion-input type="text" name="otherno" ngModel></ion-input>
+				</ion-item>				
+			</ion-col>
+		</ion-row><br>
+	</form>
+	<ion-row style="display: flex; justify-content: center; text-align: center;">
+		<ion-col no-padding>
+			<button ion-button round outline>Save Contact</button>				
+		</ion-col>
+
+		<ion-col no-padding>
+			<button ion-button round outline>Next Contact</button>
+		</ion-col>
+	</ion-row><br>
+</ion-content>
+	
+<ion-content showWhen="core" style='background-color: #f0f0f0; margin-top: 0px !important;'>
+
+	<page-bsc-header header='Contact Us' showWhen="core"></page-bsc-header>
+
+	<h2 hideWhen='core' class="mobile-sub-header">CONTACT US</h2>
+	<h2 showWhen='core' class="core-sub-header">CONTACT US</h2>
+	
+<ion-grid class = "grid-adjust">
+	<ion-grid class='contact-grid'>
+		<ion-row class='contact-row'>
+			<ion-col class='contact-col'>
+				<h5> <img src="assets/imgs/location-color.png" class="icon-image">OFFICE :</h5>
+				<p>{{bundleDetails.office_address}}</p>
+				<h5> <img src="assets/imgs/telephone-color.png" class="icon-image">CALL US :</h5>
+				<p>{{bundleDetails.phone}}</p>
+				<h5> <img src="assets/imgs/email-color.png" class="icon-image"> EMAIL US :</h5>
+				<p>{{bundleDetails.email}}</p>
+				<div style="text-align: center;">
+					<button class="button-map" ion-button color='primary' full (click)='buttonShowOnMapPressed()'> <img src="assets/imgs/on-map.png" class="img-map"> Show On Map</button>
+				</div>
+			</ion-col>
+
+			<ion-col class='contact-col'>
+					<h6 class="form-header">SEND ENQUIRY</h6>
+					<div class="form-panel">
+						<br>
+						<form #enquiryForm="ngForm" novalidate>
+						    <ion-list no-lines>
+						      <ion-item class="form-item">
+						        <ion-input [(ngModel)]="bundleEnquiry.first_name" name="first_name" type="text" #first_name="ngModel" spellcheck="false" autocapitalize="off" required placeholder="* First Name">
+						        </ion-input>
+						      </ion-item>
+						      <p ion-text [hidden]="first_name.valid || submittedEnquiry == false" color="danger" padding-left>
+						        Enter First Name
+						      </p>
+
+						      <br>
+
+						      <ion-item class="form-item">
+						        <ion-input [(ngModel)]="bundleEnquiry.last_name" name="last_name" type="text" #last_name="ngModel" spellcheck="false" autocapitalize="off" required placeholder="* Last Name">
+						        </ion-input>
+						      </ion-item>
+						      <p ion-text [hidden]="last_name.valid || submittedEnquiry == false" color="danger" padding-left>
+						        Enter Last Name
+						      </p>
+
+						      <br>
+
+						      	<ion-item class="form-item">
+							        <ion-input [(ngModel)]="bundleEnquiry.phone" name="phone" type="tel" #phone="ngModel" spellcheck="false" autocapitalize="off" required placeholder="* Phone" InputText (keypress)="onlyNumberKey($event)">
+							        </ion-input>
+						      	</ion-item>
+							      <p ion-text [hidden]="phone.valid || submittedEnquiry == false" color="danger" padding-left>
+							        Phone is required
+							      </p>
+
+							      <br>
+
+							      <ion-item class="form-item">
+							        <ion-input [(ngModel)]="bundleEnquiry.email" name="email" type="email" #email="ngModel" spellcheck="false" autocapitalize="off" required ngModel email placeholder="* Email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})">
+							        </ion-input>
+							      </ion-item>
+							      <p ion-text [hidden]="email.valid || submittedEnquiry == false" color="danger" padding-left>
+							        Enter a valid email
+							      </p>
+
+							      <br>
+
+							      <ion-item class="form-item">
+							        <ion-input [(ngModel)]="bundleEnquiry.subject" name="subject" type="text" #subject="ngModel" spellcheck="false" autocapitalize="off" required placeholder="* Subject">
+							        </ion-input>
+							      </ion-item>
+							      <p ion-text [hidden]="subject.valid || submittedEnquiry == false" color="danger" padding-left>
+							        Enter Subject
+							      </p>
+
+							      <br>
+
+							      <ion-item class="form-item">
+							        <ion-textarea [(ngModel)]="bundleEnquiry.message" name="message" type="text" #message="ngModel" spellcheck="false" autocapitalize="off" required class="class-text-area" placeholder="* Message">
+							        </ion-textarea>
+							      </ion-item>
+							      <p ion-text [hidden]="message.valid || submittedEnquiry == false" color="danger" padding-left>
+							        Enter Message
+							      </p>
+
+							      <p class="check-text">* All fields are mandatory</p>
+
+							</ion-list >
+
+						    <ion-row responsive-sm>
+						      <ion-col>
+						        <button ion-button (click)="buttonSendPressed(enquiryForm)" type="submit" block>Send</button>
+						      </ion-col>
+						    </ion-row>
+						</form>
+					</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-grid>
+	<page-bsc-footer></page-bsc-footer>
+
+</ion-content>
+
+<ion-footer hideWhen="core">
+  <ion-row>
+    <ion-col no-padding>
+        <button no-margin ion-button full color="light" (click)="openService()">
+          <div>
+            <ion-icon name="paper"></ion-icon><br>
+            <label>Services</label>
+          </div>
+        </button>
+    </ion-col>
+    <ion-col no-padding>
+        <button no-margin ion-button full color="light" (click)="openToday()">
+          <div>
+            <ion-icon name="partly-sunny"></ion-icon><br>
+            <label>Today</label>
+          </div>
+        </button>
+    </ion-col>
+    <ion-col no-padding>
+      <button no-margin ion-button full color="light" (click)="openFavourites()">
+        <div>
+          <ion-icon name="star"></ion-icon><br>
+          <label>Favourites</label>
+        </div>
+      </button>
+    </ion-col>
+    <ion-col no-padding>
+      <button no-margin ion-button full color="dark" (click)="openMe()">
+        <div>
+          <ion-icon name="contact"></ion-icon><br>
+          <label>Me</label>
+        </div>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

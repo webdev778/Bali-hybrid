@@ -17,6 +17,7 @@ import { Storage } from '@ionic/storage';
  })
  export class ServiceDetailsPage {
 
+    pages: Array<{title: string, icon: any, id: any}>;
      bundleData:any
      bundleIsPurchased:any
      serviceDetails = {image_name: '',title: '', description: ''};
@@ -32,6 +33,11 @@ import { Storage } from '@ionic/storage';
                     public rest: RestProvider,
                     private storage: Storage,) {
 
+        this.pages =   [
+            {title: 'Medical', icon: 'medical', id: null},
+            {title: 'Lost Passport', icon: 'lost_passport', id: 3},
+            {title: 'Money', icon: 'money', id: 5},
+        ];
           this.passedData = JSON.parse(this.navParams.get('service'))
           this.checkForLogin()
      }
@@ -107,4 +113,31 @@ import { Storage } from '@ionic/storage';
          this.navCtrl.pop();
      }
 
+     moveToServiceDetails(service) {
+        if(service.id != this.passedData) {
+              this.navCtrl.push('ServiceDetailsPage', {
+            'service': JSON.stringify(service.id),
+          })
+        }
+        if(service.id == null)
+        {
+          this.navCtrl.push('MedicalAssistancePage')
+        }
+    }
+
+    openService() {
+    this.navCtrl.setRoot('MedicalAssistancePage')
+    }
+
+    openToday() {
+    this.navCtrl.setRoot('InBaliPage')
+    }
+
+    openFavourites() {
+        this.navCtrl.setRoot('FavouritesPage')
+    }
+
+    openMe() {
+    this.navCtrl.setRoot('AccountPage')
+    }
  }

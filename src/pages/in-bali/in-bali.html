@@ -1,8 +1,57 @@
 <ion-header hideWhen="core">
   <page-bsc-header ></page-bsc-header>
+  <ion-grid class='bsc-header'>
+    <ion-row style="text-align: center; display: flex; justify-content: center;">
+      <ion-col>
+        <ion-row>
+          <ion-col *ngFor="let page of headerpages">
+
+            <button *ngIf='header==page.title' ion-button class="header-button" color='primary' item-left full (click)="openPage(page)">{{page.title}}</button>
+
+            <button *ngIf='header!=page.title' ion-button class="header-button" color='light' clear item-left full (click)="openPage(page)">{{page.title}}</button>
+
+          </ion-col>
+
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-header>
 
-<ion-content>
+<ion-content hideWhen="core">
+    <page-bsc-header header='Today In Bali' showWhen="core"></page-bsc-header>
+  
+    <h2 hideWhen='core' class="mobile-sub-header">TODAY IN BALI</h2>
+    <h2 showWhen='core' class="core-sub-header">TODAY IN BALI</h2>
+  
+    <br>
+  <ion-grid class = "grid-adjust" >
+  
+    <h6 >Your daily update on all the essential information for Bali Travellers</h6>
+  
+    <br>
+  
+      <ion-grid>
+          <ion-row showWhen="core" style="text-align: center; display: flex; justify-content: center;padding-left: 10%; padding-right: 10%">
+              <ion-col col-4  class="flexgrid-core" *ngFor="let page of pages">
+                    <button ion-button full (click)="moveToDetails(page)">
+                      {{page.name | uppercase}}
+                    </button>
+              </ion-col>
+          </ion-row>
+  
+          <ion-row hideWhen="core" style="display: flex; justify-content: center; text-align: center;">
+              <ion-col class="flexgrid-mobile" *ngFor="let page of pages">
+                    <button ion-button full (click)="moveToDetails(page)">
+                      {{page.name | uppercase}}
+                    </button>
+              </ion-col>
+          </ion-row>
+      </ion-grid>
+    </ion-grid>
+</ion-content>
+
+<ion-content showWhen="core">
 
   <page-bsc-header header='Today In Bali' showWhen="core"></page-bsc-header>
 
@@ -38,3 +87,40 @@
   <page-bsc-footer></page-bsc-footer>
 
 </ion-content>
+
+<ion-footer hideWhen="core">
+  <ion-row>
+    <ion-col no-padding>
+        <button no-margin ion-button full color="light" (click)="openService()">
+          <div>
+            <ion-icon name="paper"></ion-icon><br>
+            <label>Services</label>
+          </div>
+        </button>
+    </ion-col>
+    <ion-col no-padding>
+        <button no-margin ion-button full color="dark" (click)="openToday()">
+          <div>
+            <ion-icon name="partly-sunny"></ion-icon><br>
+            <label>Today</label>
+          </div>
+        </button>
+    </ion-col>
+    <ion-col no-padding>
+      <button no-margin ion-button full color="light" (click)="openFavourites()">
+        <div>
+          <ion-icon name="star"></ion-icon><br>
+          <label>Favourites</label>
+        </div>
+      </button>
+    </ion-col>
+    <ion-col no-padding>
+      <button no-margin ion-button full color="light" (click)="openMe()">
+        <div>
+          <ion-icon name="contact"></ion-icon><br>
+          <label>Me</label>
+        </div>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

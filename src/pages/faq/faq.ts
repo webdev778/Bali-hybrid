@@ -16,10 +16,16 @@ import { RestProvider } from '../../providers/rest/rest';
 })
 export class FaqPage {
 
+  pages: Array<{title: string, icon: any, page: any}>;
   responseData : {data: any} ;
 	bundleDataFAQ : Array<{question: string, answer: string, isOpen: Boolean}> = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public rest: RestProvider) {
+    this.pages =   [
+      {title: 'FAQ', icon: 'faq', page: 'FaqPage'},
+      {title: 'Buy Support', icon: 'buy_travel_pass', page: 'BuyTravelPassPage'},
+      {title: 'Contact Us', icon: 'contact_us', page: 'ContactUsPage'},
+    ];
   }
 
   ionViewDidLoad() {
@@ -42,4 +48,27 @@ export class FaqPage {
   	section.isOpen = !section.isOpen
   }
 
+  openPage(page) {
+    if (page.page == undefined) {
+      this.navCtrl.setRoot('AboutUsPage', {'data': JSON.stringify(page.id), isPushed: false})
+    }else {
+        this.navCtrl.setRoot(page.page)
+    }
+  }
+
+  openService() {
+    this.navCtrl.setRoot('MedicalAssistancePage')
+  }
+
+  openToday() {
+    this.navCtrl.setRoot('InBaliPage')
+  }
+
+  openFavourites() {
+    this.navCtrl.setRoot('FavouritesPage')
+  }
+
+  openMe() {
+    this.navCtrl.setRoot('AccountPage')
+  }
 }

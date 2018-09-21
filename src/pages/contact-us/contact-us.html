@@ -1,8 +1,89 @@
 <ion-header hideWhen="core">
-  <page-bsc-header ></page-bsc-header>
+	<page-bsc-header ></page-bsc-header>
+	<ion-grid class='bsc-header'>
+    <ion-row style="text-align: center; display: flex; justify-content: center;">
+      <ion-col>
+        <ion-row>
+          <ion-col *ngFor="let page of pages">
+
+            <button *ngIf='header==page.title' ion-button class="header-button" color='primary' item-left full (click)="openPage(page)">{{page.title}}</button>
+
+            <button *ngIf='header!=page.title' ion-button class="header-button" color='light' clear item-left full (click)="openPage(page)">{{page.title}}</button>
+
+          </ion-col>
+
+        </ion-row>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
 </ion-header>
 
-<ion-content style='background-color: #f0f0f0; margin-top: 0px !important;'>
+<ion-content hideWhen="core" style='background-color: #ffffff; margin-top: 0px !important;'>
+		
+	<ion-grid class = "grid-adjust">
+		<ion-grid class='contact-grid'>
+			<ion-row class='contact-row'>
+				<ion-col class='contact-col'>
+					<h5> <img src="assets/imgs/location-color.png" class="icon-image">OFFICE :</h5>
+					<p>{{bundleDetails.office_address}}</p>
+					<h5> <img src="assets/imgs/telephone-color.png" class="icon-image">CALL US :</h5>
+					<p>{{bundleDetails.phone}}</p>
+					<h5> <img src="assets/imgs/email-color.png" class="icon-image"> EMAIL US :</h5>
+					<p>{{bundleDetails.email}}</p>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-grid>
+
+	<ion-row style="display: flex; justify-content: center; text-align: center;">
+		<ion-col no-padding>
+			<ion-item>
+				<ion-input type="text" name="name" ngModel required placeholder="*Name"></ion-input>
+			</ion-item>				
+		</ion-col>
+
+		<ion-col no-padding>
+			<ion-item>
+				<ion-input type="email" name="email" ngModel required placeholder="*Email"></ion-input>
+			</ion-item>				
+		</ion-col>
+	</ion-row><br>
+	
+	<form>
+		<ion-list radio-group>
+			<ion-item>
+				<ion-label>Enquiries</ion-label>
+				<ion-radio value="enquiries"></ion-radio>
+			</ion-item>
+			<ion-item>
+				<ion-label>Group Booking</ion-label>
+				<ion-radio value="group_booking"></ion-radio>
+			</ion-item>
+			<ion-item>
+				<ion-label>Bar Services</ion-label>
+				<ion-radio value="bar_services"></ion-radio>
+			</ion-item>
+		</ion-list>
+		<ion-item>
+			<ion-input type="text" text-center></ion-input>
+		</ion-item>
+	</form><br>
+
+	<ion-row style="display: flex; justify-content: center; text-align: center;">
+		<ion-col no-padding>
+			<ion-item>
+				<ion-input type="text" name="contact"></ion-input>
+			</ion-item>				
+		</ion-col>
+
+		<ion-col no-padding>
+			<button ion-button color='primary' round outline>Submit</button>
+		</ion-col>
+	</ion-row><br>
+</ion-content>
+
+<ion-content showWhen="core" style='background-color: #f0f0f0; margin-top: 0px !important;'>
 
 	<page-bsc-header header='Contact Us' showWhen="core"></page-bsc-header>
 
@@ -13,20 +94,15 @@
 	<ion-grid class='contact-grid'>
 		<ion-row class='contact-row'>
 			<ion-col class='contact-col'>
-
 				<h5> <img src="assets/imgs/location-color.png" class="icon-image">OFFICE :</h5>
 				<p>{{bundleDetails.office_address}}</p>
-
 				<h5> <img src="assets/imgs/telephone-color.png" class="icon-image">CALL US :</h5>
 				<p>{{bundleDetails.phone}}</p>
-
 				<h5> <img src="assets/imgs/email-color.png" class="icon-image"> EMAIL US :</h5>
 				<p>{{bundleDetails.email}}</p>
-
 				<div style="text-align: center;">
 					<button class="button-map" ion-button color='primary' full (click)='buttonShowOnMapPressed()'> <img src="assets/imgs/on-map.png" class="img-map"> Show On Map</button>
 				</div>
-
 			</ion-col>
 
 			<ion-col class='contact-col'>
@@ -111,3 +187,40 @@
 	<page-bsc-footer></page-bsc-footer>
 
 </ion-content>
+
+<ion-footer hideWhen="core">
+  <ion-row>
+    <ion-col no-padding>
+        <button no-margin ion-button full color="light" (click)="openService()">
+          <div>
+            <ion-icon name="paper"></ion-icon><br>
+            <label>Services</label>
+          </div>
+        </button>
+    </ion-col>
+    <ion-col no-padding>
+        <button no-margin ion-button full color="light" (click)="openToday()">
+          <div>
+            <ion-icon name="partly-sunny"></ion-icon><br>
+            <label>Today</label>
+          </div>
+        </button>
+    </ion-col>
+    <ion-col no-padding>
+      <button no-margin ion-button full color="light" (click)="openFavourites()">
+        <div>
+          <ion-icon name="star"></ion-icon><br>
+          <label>Favourites</label>
+        </div>
+      </button>
+    </ion-col>
+    <ion-col no-padding>
+      <button no-margin ion-button full color="light" (click)="openMe()">
+        <div>
+          <ion-icon name="contact"></ion-icon><br>
+          <label>Me</label>
+        </div>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

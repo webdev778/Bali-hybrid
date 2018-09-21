@@ -16,11 +16,16 @@ import { RestProvider } from '../../providers/rest/rest';
  })
  export class MedicalAssistancePage {
 
+	pages: Array<{title: string, icon: any, id: any}>;
  	medicalAssistanceSubPages : Array<{id: string, title: any}> = [];
  	bundleData:any
 
  	constructor(public navCtrl: NavController, public navParams: NavParams,public rest: RestProvider) {
- 		
+		this.pages =   [
+			{title: 'Medical', icon: 'star', id: null},
+			{title: 'Lost Passport', icon: 'star', id: 3},
+			{title: 'Money', icon: 'star', id: 5},
+		];
  	}
 
  	ionViewDidLoad() {
@@ -49,6 +54,29 @@ import { RestProvider } from '../../providers/rest/rest';
 
  	buttonBackPressed() {
  		this.navCtrl.pop()
- 	}
+	 }
+	 
+	 moveToServiceDetails(page) {
+		if(page.id != null) {
+			  this.navCtrl.push('ServiceDetailsPage', {
+			'service': JSON.stringify(page.id),
+		  })
+		}
+	}
 
+	openService() {
+		this.navCtrl.setRoot('MedicalAssistancePage')
+	  }
+	
+	  openToday() {
+		this.navCtrl.setRoot('InBaliPage')
+	  }
+	
+	  openFavourites() {
+			this.navCtrl.setRoot('FavouritesPage')
+	  }
+	
+	  openMe() {
+		this.navCtrl.setRoot('AccountPage')
+	  }
  }

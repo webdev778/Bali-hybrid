@@ -51,18 +51,38 @@ page-services {
   }
 
 
-  	.service-row {
-  		text-align: center; 
-  		display: flex; 
-  		justify-content: center; 
-  		padding-left: 10%; 
-  		padding-right: 10%; 
-  		padding-top: 20px; 
-  		padding-bottom: 20px;
-  	}
+  .service-row {
+    text-align: center; 
+    display: flex; 
+    justify-content: center; 
+    padding-left: 10%; 
+    padding-right: 10%; 
+    padding-top: 20px; 
+    padding-bottom: 20px;
+  }
 
- 	 .customPara {
-  		color:#ffff;
-  		text-align: center
-  	}
+  .customPara {
+    color:#ffff;
+    text-align: center
+  }
+
+  .service-btn .button-inner{
+    white-space: nowrap; 
+    width: 150px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    display: block;
+    line-height: 2.6;
+    margin: 0 auto;
+  }
+
+  .bsc-header {
+    background:#62a830;
+  }
+
+  .selected {
+  	color: #62a830;
+  	clear: false
+  }
+  
 }

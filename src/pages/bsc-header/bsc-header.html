@@ -9,7 +9,6 @@
             <img src="assets/imgs/logo.png" class = "header-logo" />
           </div>
         </ion-title>
-
 </ion-navbar>
 
 <ion-grid showWhen="core" style="background:#547d88">
@@ -49,7 +48,6 @@
           <ion-row>
             <ion-col *ngFor="let page of loginPage">
               <button ion-button class="header-login" item-left full color='login' (click)="openPage({page:constantProvider.loginPage})">{{constantProvider.loginTitle}}</button>
-             
             </ion-col>
           </ion-row>
         </ion-col>

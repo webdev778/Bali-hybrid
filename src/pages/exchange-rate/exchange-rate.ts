@@ -22,6 +22,7 @@ export class ExchangeRatePage {
   baseCurrency = ''
   convertedCurrency = ''
 
+  headerpages: Array<{title: string, icon: any, page: any}>;
   exchangeResponse : {base:'', date : '', rates: any};
   currencies : any;
   arrayCurrency = [];
@@ -29,6 +30,11 @@ export class ExchangeRatePage {
   constructor(  public navCtrl: NavController, 
                 public navParams: NavParams,
                 public rest: RestProvider) {
+    this.headerpages =   [
+        {title: 'Today', icon: 'today', page: 'InBaliPage'},
+        {title: 'ATMs Banks', icon: 'vaccinations', page: 'PageAtmsPage'},
+        {title: 'Exchange Rate', icon: 'exchange-rate', page: 'ExchangeRatePage'},
+    ];
   }
 
   ionViewDidLoad() {
@@ -62,4 +68,27 @@ export class ExchangeRatePage {
            );
   }
 
+  openPage(page) {
+    if (page.page == undefined) {
+        this.navCtrl.setRoot('AboutUsPage', {'data': JSON.stringify(page.id), isPushed: false})
+    }else {
+          this.navCtrl.setRoot(page.page)
+    }
+  }
+
+  openService() {
+		this.navCtrl.setRoot('MedicalAssistancePage')
+	  }
+
+  openToday() {
+  this.navCtrl.setRoot('InBaliPage')
+  }
+
+  openFavourites() {
+    this.navCtrl.setRoot('FavouritesPage')
+  }
+
+  openMe() {
+    this.navCtrl.setRoot('AccountPage')
+  }
 }

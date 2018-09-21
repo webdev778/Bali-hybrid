@@ -16,7 +16,8 @@ import { RestProvider } from '../../providers/rest/rest';
 })
 export class InBaliPage {
 
-	pages: Array<{name: string, icon: any, page: any}>;
+  pages: Array<{name: string, icon: any, page: any}>;
+  headerpages: Array<{title: string, icon: any, page: any}>;
   pagesData : {data: any};
 	cmsPages : Array<any> = [];
 
@@ -32,6 +33,14 @@ export class InBaliPage {
             {name: 'ATMS', icon: 'vaccinations', page: 'PageAtmsPage'},
             {name: 'Bali Public Holidays', icon: 'public-holidays', page: 'PublicHolidaysPage'},
             {name: 'Travel Alerts', icon: 'travel-alerts', page: 'TravelAlertPage'},
+            {name: 'Weather', icon: 'travel-alerts', page: 'WeatherPage'},
+            {name: 'Sim Cards', icon: 'travel-alerts', page: 'SimCardPage'},
+    ];
+
+    this.headerpages =   [
+        {title: 'Today', icon: 'today', page: 'InBaliPage'},
+        {title: 'ATMs Banks', icon: 'vaccinations', page: 'PageAtmsPage'},
+        {title: 'Exchange Rate', icon: 'exchange-rate', page: 'ExchangeRatePage'},
     ];
 
     this.getBaliCMSPages()
@@ -63,4 +72,27 @@ export class InBaliPage {
     }
   }
 
+  openPage(page) {
+    if (page.page == undefined) {
+        this.navCtrl.setRoot('AboutUsPage', {'data': JSON.stringify(page.id), isPushed: false})
+    }else {
+          this.navCtrl.setRoot(page.page)
+    }
+  }
+  
+	openService() {
+		this.navCtrl.setRoot('MedicalAssistancePage')
+	  }
+
+  openToday() {
+  this.navCtrl.setRoot('InBaliPage')
+  }
+
+  openFavourites() {
+    this.navCtrl.setRoot('FavouritesPage')
+  }
+
+  openMe() {
+    this.navCtrl.setRoot('AccountPage')
+  }
 }

@@ -1,8 +1,63 @@
 <ion-header hideWhen="core">
   <page-bsc-header ></page-bsc-header>
+  <ion-grid class='bsc-header'>
+    <ion-row style="text-align: center; display: flex; justify-content: center;">
+      <ion-col>
+        <ion-row>
+          <ion-col *ngFor="let page of pages">
+
+            <button *ngIf='header==page.title' ion-button class="header-button" color='primary' item-left full (click)="moveToServiceDetails(page)">{{page.title}}</button>
+
+            <button *ngIf='header!=page.title' ion-button class="header-button" color='light' clear item-left full (click)="moveToServiceDetails(page)">{{page.title}}</button>
+
+          </ion-col>
+
+        </ion-row>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
 </ion-header>
 
-<ion-content>
+<ion-content hideWhen="core">
+
+    <br>
+  
+    <ion-grid class = "grid-adjust">
+  
+      <ion-grid>
+        <ion-row class='details-row'>
+          <ion-col style='min-width: 300px;'>
+            <img src={{serviceDetails.image_name}} style="align-items: center; align-content: center;">
+          </ion-col>
+          <ion-col style='min-width: 300px;'>
+            <p class="details" [innerHTML]='serviceDetails.description'></p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <div style="text-align: right;">
+        <!-- <button *ngIf = "helpButtonStatus" color='primary' class = "help-btn" (click)='buttonHelpPressed()'>Need Help? Contact Us</button> -->
+        <img [hidden]="!helpButtonStatus"  src="assets/imgs/need-help.png" (click)="buttonHelpPressed()" class="img-help">
+      </div>
+      <br>
+  
+      <ion-row style="display: flex; justify-content: center; text-align: center;">
+        <ion-col no-padding>
+          <button ion-button color='primary' style="width: 120px" (click)='buttonBackPressed()'>Call</button>
+        </ion-col>
+        <ion-col no-padding>
+          <button ion-button color='primary' style="width: 120px" block outline>Bali Office</button>
+        </ion-col>
+      </ion-row>
+  
+      <br>
+  
+    </ion-grid>
+    
+  </ion-content>
+
+<ion-content showWhen="core">
 
 	<page-bsc-header showWhen="core" header = "Our Services"></page-bsc-header>
 
@@ -41,3 +96,41 @@
 	<page-bsc-footer></page-bsc-footer>
 
 </ion-content>
+
+
+<ion-footer hideWhen="core">
+  <ion-row>
+    <ion-col no-padding>
+        <button no-margin ion-button full color="dark" (click)="openService()">
+          <div>
+            <ion-icon name="paper"></ion-icon><br>
+            <label>Services</label>
+          </div>
+        </button>
+    </ion-col>
+    <ion-col no-padding>
+        <button no-margin ion-button full color="light" (click)="openToday()">
+          <div>
+            <ion-icon name="partly-sunny"></ion-icon><br>
+            <label>Today</label>
+          </div>
+        </button>
+    </ion-col>
+    <ion-col no-padding>
+      <button no-margin ion-button full color="light" (click)="openFavourites()">
+        <div>
+          <ion-icon name="star"></ion-icon><br>
+          <label>Favourites</label>
+        </div>
+      </button>
+    </ion-col>
+    <ion-col no-padding>
+      <button no-margin ion-button full color="light" (click)="openMe()">
+        <div>
+          <ion-icon name="contact"></ion-icon><br>
+          <label>Me</label>
+        </div>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

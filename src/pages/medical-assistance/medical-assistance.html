@@ -1,8 +1,63 @@
 <ion-header hideWhen="core">
   <page-bsc-header ></page-bsc-header>
+  <ion-grid class='bsc-header'>
+    <ion-row style="text-align: center; display: flex; justify-content: center;">
+      <ion-col>
+        <ion-row>
+          <ion-col *ngFor="let page of pages">
+            <button *ngIf='header==page.title' ion-button class="header-button" color='primary' item-left full (click)="moveToServiceDetails(page)">{{page.title}}</button>
+            <button *ngIf='header!=page.title' ion-button class="header-button" color='light' clear item-left full (click)="moveToServiceDetails(page)">{{page.title}}</button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-header>
 
-<ion-content>
+<ion-content hideWhen="core">
+
+	<page-bsc-header showWhen="core" header="Our Services"></page-bsc-header>
+
+  <br>
+  <h4 style="text-align: center!important">All Doctors, Dentist and Hospitals are registered and approved providers.</h4>
+
+  <br><br>
+  <h6 style="text-align: center!important;">You can choose the medical service you need</h6>
+
+	<ion-grid class = "grid-adjust">
+		<ion-grid>
+				<ion-row showWhen="core" style="text-align: center; display: flex; justify-content: center;padding-left: 10%; padding-right: 10%">
+					<ion-col col-4  class="flexgrid-core" *ngFor="let page of medicalAssistanceSubPages">
+            <button ion-button full (click) = "medicalAssistanceButtonPressed(page)" >
+              {{page.title | uppercase}}
+            </button>
+					</ion-col>
+				</ion-row>
+				<ion-row hideWhen="core" style="display: flex; justify-content: center;">
+					<ion-col class="flexgrid-mobile" *ngFor="let page of medicalAssistanceSubPages">
+						<button ion-button full icon-end (click) = "medicalAssistanceButtonPressed(page)">
+              {{page.title | uppercase}}
+              <ion-icon name="star"></ion-icon>
+            </button>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+      <h5 style="text-align: center!important">For Life threatening Emergencies Contact us immediately 24 Hours a day</h5>
+      <br>
+      <ion-row style="display: flex; justify-content: center; text-align: center;">
+        <ion-col no-padding>
+          <button ion-button color='primary' style="width: 120px" (click)='buttonBackPressed()'>Call</button>
+        </ion-col>
+        <ion-col no-padding>
+          <button ion-button color='primary' style="width: 120px" block outline>Bali Office</button>
+        </ion-col>
+      </ion-row>
+      <br>
+	</ion-grid>
+
+</ion-content>
+
+<ion-content showWhen="core">
 
 	<page-bsc-header showWhen="core" header="Our Services"></page-bsc-header>
 
@@ -23,7 +78,7 @@
 					<ion-col class="flexgrid-mobile" *ngFor="let page of medicalAssistanceSubPages">
 						<button ion-button full (click) = "medicalAssistanceButtonPressed(page)">
 							{{page.title | uppercase}}
-						</button>
+            </button>
 					</ion-col>
 				</ion-row>
 			</ion-grid>
@@ -36,3 +91,40 @@
 	<page-bsc-footer></page-bsc-footer>
 
 </ion-content>
+
+<ion-footer hideWhen="core">
+  <ion-row>
+    <ion-col no-padding>
+        <button no-margin ion-button full color="dark" (click)="openService()">
+          <div>
+            <ion-icon name="paper"></ion-icon><br>
+            <label>Services</label>
+          </div>
+        </button>
+    </ion-col>
+    <ion-col no-padding>
+        <button no-margin ion-button full color="light" (click)="openToday()">
+          <div>
+            <ion-icon name="partly-sunny"></ion-icon><br>
+            <label>Today</label>
+          </div>
+        </button>
+    </ion-col>
+    <ion-col no-padding>
+      <button no-margin ion-button full color="light" (click)="openFavourites()">
+        <div>
+          <ion-icon name="star"></ion-icon><br>
+          <label>Favourites</label>
+        </div>
+      </button>
+    </ion-col>
+    <ion-col no-padding>
+      <button no-margin ion-button full color="light" (click)="openMe()">
+        <div>
+          <ion-icon name="contact"></ion-icon><br>
+          <label>Me</label>
+        </div>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

@@ -1,0 +1,154 @@
+<ion-header hideWhen="core">
+	<page-bsc-header ></page-bsc-header>
+	<ion-grid class='bsc-header'>
+    <ion-row style="text-align: center; display: flex; justify-content: center;">
+      <ion-col>
+        <ion-row>
+          <ion-col style='max-width:80%;' *ngFor="let page of pages">
+            <button *ngIf='header==page.title' ion-button class="header-button" color='primary' item-left full (click)="openPage(page)">{{page.title}}</button>
+            <button *ngIf='header!=page.title' ion-button class="header-button" color='light' clear item-left full (click)="openPage(page)">{{page.title}}</button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content hideWhen="core" style='background-color: #ffffff; margin-top: 0px !important;'>
+
+	<ion-grid class='contact-grid'>
+		<ion-row class='contact-row'>
+			<ion-col class='contact-col'>
+					<h6 class="form-header">Passport Information</h6>
+					<div class="form-panel">
+						<form #enquiryForm="ngForm" novalidate>
+							<ion-item>
+								<ion-label>Fullname</ion-label>
+								<ion-input [(ngModel)]="bundleEnquiry.fullname" name="fullname" type="text" #fullname="ngModel" spellcheck="false" autocapitalize="off" required>
+								</ion-input>
+							</ion-item>
+							<p ion-text [hidden]="fullname.valid || submittedEnquiry == false" color="danger" padding-left>
+								Enter FullName
+							</p>
+
+							<br>
+
+							<ion-item>
+								<ion-label>Passport Number</ion-label>
+								<ion-input [(ngModel)]="bundleEnquiry.passport" name="passport" type="text" #passport="ngModel" spellcheck="false" autocapitalize="off" required>
+								</ion-input>
+							</ion-item>
+							<p ion-text [hidden]="passport.valid || submittedEnquiry == false" color="danger" padding-left>
+								Enter Passport Number
+							</p>
+
+							<br>
+
+							<ion-item>
+								<ion-label>Date of Issue</ion-label>
+								<ion-input [(ngModel)]="bundleEnquiry.issuedate" name="issuedate" type="tel" #issuedate="ngModel" spellcheck="false" autocapitalize="off" required>
+								</ion-input>
+								<ion-datetime displayFormat="MM/DD/YYYY" min="1900" max="2050-10-31"></ion-datetime>
+							</ion-item>
+							<p ion-text [hidden]="issuedate.valid || submittedEnquiry == false" color="danger" padding-left>
+								Select Date of Issue
+							</p>
+
+							<br>
+
+							<ion-item>
+								<ion-label>Date of Expiry</ion-label>
+								<ion-input [(ngModel)]="bundleEnquiry.expirydate" name="expirydate" type="tel" #expirydate="ngModel" spellcheck="false" autocapitalize="off" required>
+								</ion-input>
+								<ion-datetime displayFormat="MM/DD/YYYY" min="1900" max="2050-10-31"></ion-datetime>
+							</ion-item>
+							<p ion-text [hidden]="expirydate.valid || submittedEnquiry == false" color="danger" padding-left>
+								Select Date of Expiry
+							</p>
+
+							<br>
+
+							<ion-item>
+								<ion-label>Issuing Authority</ion-label>
+								<ion-input [(ngModel)]="bundleEnquiry.authority" name="authority" type="text" #authority="ngModel" spellcheck="false" autocapitalize="off" required>
+								</ion-input>
+							</ion-item>
+							<p ion-text [hidden]="authority.valid || submittedEnquiry == false" color="danger" padding-left>
+								Enter Issuing Authority
+							</p>
+
+							<br>
+
+							<ion-item>
+								<ion-label>Date of Birth</ion-label>
+								<ion-input [(ngModel)]="bundleEnquiry.birthdate" name="birthdate" type="tel" #birthdate="ngModel" spellcheck="false" autocapitalize="off" required>
+								</ion-input>
+								<ion-datetime displayFormat="MM/DD/YYYY" min="1900" max="2050-10-31"></ion-datetime>
+							</ion-item>
+							<p ion-text [hidden]="birthdate.valid || submittedEnquiry == false" color="danger" padding-left>
+								Select Date of Birth
+							</p>
+
+							<br>
+							<ion-item>
+								<ion-label>Gender</ion-label>
+								<ion-select [multiple]="false" required>
+									<ion-option value="Male">Male</ion-option>
+									<ion-option value="Female">Female</ion-option>
+								</ion-select>			
+							</ion-item>
+
+						</form>
+
+						<ion-row style="display: flex; justify-content: center; text-align: center;">
+							<ion-col no-padding>
+									<button ion-button>Save</button>
+							</ion-col>
+			
+							<ion-col no-padding>
+									<button ion-button>Save and Continue</button>
+								</ion-col> 
+						</ion-row>
+					</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+</ion-content>
+
+<ion-footer hideWhen="core">
+  <ion-row>
+    <ion-col no-padding>
+        <button no-margin ion-button full color="light" (click)="openService()">
+          <div>
+            <ion-icon name="paper"></ion-icon><br>
+            <label>Services</label>
+          </div>
+        </button>
+    </ion-col>
+    <ion-col no-padding>
+        <button no-margin ion-button full color="light" (click)="openToday()">
+          <div>
+            <ion-icon name="partly-sunny"></ion-icon><br>
+            <label>Today</label>
+          </div>
+        </button>
+    </ion-col>
+    <ion-col no-padding>
+      <button no-margin ion-button full color="light" (click)="openFavourites()">
+        <div>
+          <ion-icon name="star"></ion-icon><br>
+          <label>Favourites</label>
+        </div>
+      </button>
+    </ion-col>
+    <ion-col no-padding>
+      <button no-margin ion-button full color="dark" (click)="openMe()">
+        <div>
+          <ion-icon name="contact"></ion-icon><br>
+          <label>Me</label>
+        </div>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

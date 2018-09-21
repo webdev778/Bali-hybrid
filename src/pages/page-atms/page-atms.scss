@@ -1,4 +1,13 @@
 page-page-atms {
+	.bsc-header {
+		background:#62a830;
+	}
+
+	.selected {
+		color: #62a830;
+		clear: false
+	}
+	
 	.flex-row {
 	    text-align: center; 
 	    display: flex; 

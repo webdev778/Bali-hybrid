@@ -26,12 +26,19 @@ export class ContactUsPage {
 
   submittedEnquiry = false;
 
+  pages: Array<{title: string, icon: any, page: any}>;
+
   constructor(  public navCtrl: NavController, 
                 public navParams: NavParams, 
                 public rest: RestProvider, 
                 public platform: Platform,
                 public loadingController: LoadingController,
                 public alertCtrl: AlertController) {
+    this.pages =   [
+      {title: 'FAQ', icon: 'faq', page: 'FaqPage'},
+      {title: 'Buy Support', icon: 'buy_travel_pass', page: 'BuyTravelPassPage'},
+      {title: 'Contact Us', icon: 'contact_us', page: 'ContactUsPage'},
+    ];
   }
 
   ionViewDidLoad() {
@@ -118,4 +125,27 @@ export class ContactUsPage {
       return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
     }
 
+    openPage(page) {
+      if (page.page == undefined) {
+        this.navCtrl.setRoot('AboutUsPage', {'data': JSON.stringify(page.id), isPushed: false})
+      }else {
+          this.navCtrl.setRoot(page.page)
+      }
+    }
+
+    openService() {
+      this.navCtrl.setRoot('MedicalAssistancePage')
+    }
+  
+    openToday() {
+      this.navCtrl.setRoot('InBaliPage')
+    }
+  
+    openFavourites() {
+      this.navCtrl.setRoot('FavouritesPage')
+    }
+  
+    openMe() {
+      this.navCtrl.setRoot('AccountPage')
+    }
 }

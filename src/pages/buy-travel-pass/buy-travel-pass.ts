@@ -29,6 +29,7 @@ export class BuyTravelPassPage {
 	finalCost = 0
 	orderId = 0
 
+	pages: Array<{title: string, icon: any, page: any}>;
 	requestBundle = {user_id: '', token: ''}
 	bundleTicketsForServer : Array<TicketStructure> = []
 	bundleSaveTickets : Array<TicketStructure> = []
@@ -51,6 +52,11 @@ export class BuyTravelPassPage {
 					public loadingController: LoadingController,
 					private storage: Storage,
 					private constantProider : ConstantsProvider) {
+		this.pages =   [
+			{title: 'FAQ', icon: 'faq', page: 'FaqPage'},
+			{title: 'Buy Support', icon: 'buy_travel_pass', page: 'BuyTravelPassPage'},
+			{title: 'Contact Us', icon: 'contact_us', page: 'ContactUsPage'},
+		];
 	}
 
 	ionViewDidLoad() {
@@ -338,5 +344,30 @@ export class BuyTravelPassPage {
 
 		});
 		alert.present();
+	}
+
+	openPage(page) {
+		if (page.page == undefined) {
+
+			this.navCtrl.setRoot('AboutUsPage', {'data': JSON.stringify(page.id), isPushed: false})
+		}else {
+			  this.navCtrl.setRoot(page.page)
+		}
+	}
+
+	openService() {
+		this.navCtrl.setRoot('MedicalAssistancePage')
+	}
+
+	openToday() {
+		this.navCtrl.setRoot('InBaliPage')
+	}
+
+	openFavourites() {
+		this.navCtrl.setRoot('FavouritesPage')
+	}
+
+	openMe() {
+		this.navCtrl.setRoot('AccountPage')
 	}
 }

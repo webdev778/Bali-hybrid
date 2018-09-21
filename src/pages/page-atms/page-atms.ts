@@ -16,6 +16,7 @@ import { RestProvider } from '../../providers/rest/rest';
 })
 export class PageAtmsPage {
 
+  headerpages: Array<{title: string, icon: any, page: any}>;
 	bundleData : {data: any};
 	arrayAtms : any[] = [];
   isListLoaded = false
@@ -25,6 +26,11 @@ export class PageAtmsPage {
   				public rest: RestProvider) {
 
     this.getAtms()
+    this.headerpages =   [
+      {title: 'Today', icon: 'today', page: 'InBaliPage'},
+      {title: 'ATMs Banks', icon: 'vaccinations', page: 'PageBankPage'},
+      {title: 'Exchange Rate', icon: 'exchange-rate', page: 'ExchangeRatePage'},
+    ];
   }
 
   ionViewDidLoad() {
@@ -63,4 +69,27 @@ export class PageAtmsPage {
     });
   }
 
+  openPage(page) {
+    if (page.page == undefined) {
+        this.navCtrl.setRoot('AboutUsPage', {'data': JSON.stringify(page.id), isPushed: false})
+    }else {
+          this.navCtrl.setRoot(page.page)
+    }
+  }
+
+  openService() {
+		this.navCtrl.setRoot('MedicalAssistancePage')
+	  }
+
+  openToday() {
+  this.navCtrl.setRoot('InBaliPage')
+  }
+
+  openFavourites() {
+    this.navCtrl.setRoot('FavouritesPage')
+  }
+
+  openMe() {
+    this.navCtrl.setRoot('AccountPage')
+  }
 }

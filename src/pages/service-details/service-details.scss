@@ -1,4 +1,12 @@
 page-service-details {
+	.bsc-header {
+		background:#62a830;
+	}
+
+	.selected {
+		color: #62a830;
+		clear: false
+	}
 	.details {
 		padding-left: 10px;
 		padding-right: 10px;

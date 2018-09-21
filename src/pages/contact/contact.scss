@@ -1,0 +1,116 @@
+page-contact {
+	.bsc-header {
+		background:#62a830;
+	}
+
+	.selected {
+		color: #62a830;
+		clear: false
+	}
+	.contact-row {
+
+		width: 90%;
+		margin-right: 5%;
+		margin-left: 5%;
+		text-align: left;
+
+
+
+		h5 {
+			color: #547d88;
+			padding-top: 10px;
+			padding-left: 20px;
+			margin-left: 20px;
+			font-size: 22px;
+
+			img {
+				max-height: 20px;
+				max-width: 20px;
+				margin-right: 10px;
+				margin-bottom: 0px;
+			}
+
+		}
+
+		p {
+			padding-left: 5px;
+			padding-right: 5px;
+			margin-top: 2px;
+			padding-left: 55px;
+			margin-left: 20px;
+			font-size: 15px;
+		}
+
+		.check-text {
+			padding-top: 10px;
+			margin-left: 0px;
+			padding-left: 0px;
+			color: #A3A3A3;
+			text-align: left;
+		}
+	}
+
+	.form-panel{
+		background-color: #fff;
+	    padding: 1rem;
+	    padding-top: 20px;
+	}
+	
+	.form-panel .form-item{
+		box-shadow: 0 0 0 1px #d2d1d1;
+	}
+
+	.contact-col {
+		margin-bottom: 10px;
+		min-width: 250px;
+	}
+
+	.button-map {
+	    width: 180px;
+	    height: 50px;
+	    margin-top: 20px;
+	    margin-bottom: 15px;
+	    display: inline-block;
+	 }
+
+	 .img-map {
+	    padding-top: 8px;
+	    padding-bottom: 8px;
+	 }
+
+	 .contact-grid {
+	 	display: flex; 
+	 	justify-content: center;
+	 	margin-top: 20px;
+	 }
+	
+	.form-header {
+		color: #547d88;
+		height: 60px;
+		text-align: center;
+		padding-top: 10px;
+		margin-right: 10%;
+		margin-left: 10%;
+		font-size: 25px;
+		margin-bottom: 0px;
+	}
+
+	form {
+		margin-right: 10%;
+		margin-left: 10%;
+		margin-bottom: 20px;
+	}
+	.bsc-header {
+		background:#62a830;
+	}
+	
+	.selected {
+		color: #62a830;
+		clear: false
+	}
+}
+
+ion-app.md [padding-left]{
+	padding-left: 0;
+}
+

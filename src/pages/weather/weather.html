@@ -1,0 +1,35 @@
+<ion-header hideWhen="core">
+  <page-bsc-header ></page-bsc-header>
+</ion-header>
+
+<ion-content>
+
+	<page-bsc-header showWhen="core" header="Today In Bali"></page-bsc-header>
+
+	<h2 hideWhen='core' class='mobile-sub-header'>WEATHER</h2>
+	<h2 showWhen='core' class='core-sub-header'>WEATHER</h2>
+
+	<h1 style = "text-align: center; color: blue" >Weather Service</h1>
+    <ion-grid class = "grid-adjust">
+        <ion-grid>
+            <ion-row class='flex-row' *ngFor="let status of bundleStatus">
+                <ion-col col-12 class="flexgrid" >
+                        <h2 [innerHTML]="status.title"></h2>
+                        <h5>From: {{status.start_date}}</h5>
+                        <h5>To: {{status.end_date}}</h5>
+                        <h5 [innerHTML]='status.description'></h5>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+    	
+    	<div style="text-align: center;">
+    		<button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
+    	</div>
+
+        <br>
+    </ion-grid>
+
+	<page-bsc-footer></page-bsc-footer>
+
+</ion-content>

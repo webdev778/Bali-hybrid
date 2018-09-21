@@ -1,0 +1,41 @@
+<ion-header hideWhen="core">
+  <page-bsc-header ></page-bsc-header>
+</ion-header>
+
+<ion-content>
+
+	<page-bsc-header showWhen="core" header="Our Services"></page-bsc-header>
+
+	<h2 hideWhen='core' class="mobile-sub-header">{{bankTitle | uppercase}}</h2>
+	<h2 showWhen='core' class="core-sub-header">{{bankTitle|uppercase}}</h2>
+
+	<!-- <h6 class="form-header">bank ASSISTANCE</h6> -->
+
+	<ion-grid class = "grid-adjust">
+	<ion-grid>
+			<ion-row showWhen="core" style="text-align: center; display: flex; justify-content: center;padding-left: 10%; padding-right: 10%">
+				<ion-col col-4  class="flexgrid-core" *ngFor="let locationData of bankLocations">
+					<button ion-button full (click) = "bankLocationPressed(locationData)" >
+						{{locationData.location | uppercase}}
+					</button>
+				</ion-col>
+			</ion-row>
+
+			<ion-row hideWhen="core" style="display: flex; justify-content: center; text-align: center;">
+				<ion-col class="flexgrid-mobile" *ngFor="let locationData of bankLocations">
+					<button ion-button full (click) = "bankLocationPressed(locationData)">
+						{{locationData.location | uppercase}}
+					</button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+
+		<div style="text-align: center; margin-bottom: 20px;">
+			<button ion-button color='primary' outline (click)='buttonBackPressed()'>Back</button>
+		</div>
+	</ion-grid>
+
+
+	<page-bsc-footer></page-bsc-footer>
+
+</ion-content>
